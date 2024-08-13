@@ -132,6 +132,7 @@ public:
   explicit GraphicsDateTimeWidget(QWidget* parent = nullptr);
 
   QDateTime currentDateTime() const { return _gt->currentDateTime(); }
+  QTimeZone currentTimeZone() const { return _gt->currentTimeZone(); }
   QString format() const { return _gt->format(); }
 
   bool flashSeparators() const { return _gt->flashSeparators(); }
@@ -142,6 +143,7 @@ public:
 
 public slots:
   void setDateTime(QDateTime dt);
+  void setTimeZone(QTimeZone tz);
   void setFormat(QString fmt);
 
   void setFlashSeparator(bool en);

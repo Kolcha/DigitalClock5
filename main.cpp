@@ -243,6 +243,7 @@ int main(int argc, char *argv[])
   dtw->setSkin(std::make_shared<FontSkin>(fnt));
   // dtw->setBackground(Qt::blue);
   dtw->setTexture(QColor(128, 0, 255, 224));
+  // dtw->setTimeZone(QTimeZone::utc());
   dtw->setFormat("hh:mm:ss");
 
   auto stw = new GraphicsTextWidget(&w);

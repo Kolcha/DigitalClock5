@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDateTime>
+#include <QTimeZone>
 
 #include "container.hpp"
 #include "skin.hpp"
@@ -135,6 +136,7 @@ public:
   explicit GraphicsDateTime(QDateTime dt = QDateTime::currentDateTime());
 
   QDateTime currentDateTime() const { return _dt; }
+  QTimeZone currentTimeZone() const { return _tz; }
   QString format() const { return _fmt; }
 
   bool flashSeparators() const { return _flash_seps; }
@@ -144,6 +146,7 @@ public:
   QString customSeparators() { return _custom_seps; }
 
   void setDateTime(QDateTime dt);
+  void setTimeZone(QTimeZone tz);
   void setFormat(QString fmt);
 
   void setFlashSeparator(bool en);
@@ -163,6 +166,7 @@ private:
 
 private:
   QDateTime _dt;
+  QTimeZone _tz;
   QString _fmt;
 
   QStringList _last_tokens;

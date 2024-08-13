@@ -155,6 +155,13 @@ void GraphicsDateTimeWidget::setDateTime(QDateTime dt)
   update();
 }
 
+void GraphicsDateTimeWidget::setTimeZone(QTimeZone tz)
+{
+  _gt->setTimeZone(std::move(tz));
+  updateGeometry();
+  update();
+}
+
 void GraphicsDateTimeWidget::setFormat(QString fmt)
 {
   _gt->setFormat(std::move(fmt));
