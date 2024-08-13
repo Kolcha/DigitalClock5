@@ -33,6 +33,9 @@ public:
 
   GraphicsDateTimeWidget* clock() const { return _clock; }
 
+  bool snapToEdge() const { return _snap_to_edge; }
+  int snapThreshold() const { return _snap_threshold; }
+
   void addPluginWidget(GraphicsWidgetBase* w, int row, int column,
                        int row_span = 1, int column_span = 1);
 
@@ -42,10 +45,18 @@ public:
 public slots:
   void setAnchorPoint(AnchorPoint ap);
 
+  void enableSnapToEdge() { setSnapToEdge(true, snapThreshold()); }
+  void disableSnapToEdge() { setSnapToEdge(false, snapThreshold()); }
+  void setSnapToEdge(bool enable, int threshold);
+  void setSnapThreshold(int thr) { setSnapToEdge(snapToEdge(), thr); }
+
 signals:
   void saveStateRequested();
 
 protected:
+  void mousePressEvent(QMouseEvent* event) override;
+  void mouseMoveEvent(QMouseEvent* event) override;
+  void mouseReleaseEvent(QMouseEvent* event) override;
   void paintEvent(QPaintEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
 
@@ -55,6 +66,12 @@ private:
 
   QGridLayout* _layout = nullptr;
   GraphicsDateTimeWidget* _clock = nullptr;
+
+  bool _is_dragging = false;
+  QPoint _drag_pos;
+
+  bool _snap_to_edge = true;
+  int _snap_threshold = 15;
 };
 
 
@@ -96,6 +113,66 @@ void MainWindow::setAnchorPoint(AnchorPoint ap)
   emit saveStateRequested();
 }
 
+void MainWindow::setSnapToEdge(bool enable, int threshold)
+{
+  _snap_to_edge = enable;
+  _snap_threshold = threshold;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+  if (event->button() == Qt::LeftButton) {
+    _drag_pos = event->globalPosition().toPoint() - frameGeometry().topLeft();
+    _is_dragging = true;
+    event->accept();
+  }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+  if (event->buttons() & Qt::LeftButton) {
+    QPoint target_pos = event->globalPosition().toPoint() - _drag_pos;
+    if (_snap_to_edge) {
+      QRect screen = window()->screen()->availableGeometry();
+      QRect widget = frameGeometry();
+      if (qAbs(target_pos.x() - screen.left()) <= _snap_threshold)
+        target_pos.setX(screen.left());
+      if (qAbs(target_pos.y() - screen.top()) <= _snap_threshold)
+        target_pos.setY(screen.top());
+      if (qAbs(screen.right() - (target_pos.x() + widget.width())) <= _snap_threshold)
+        target_pos.setX(screen.right() - widget.width());
+      if (qAbs(screen.bottom() - (target_pos.y() + widget.height())) <= _snap_threshold)
+        target_pos.setY(screen.bottom() - widget.height());
+    }
+    move(target_pos);
+    event->accept();
+  }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent* event)
+{
+  if (event->button() == Qt::LeftButton) {
+    auto curr_origin = _clock->mapToGlobal(_clock->origin());
+
+    switch (_anchor_point) {
+      case AnchorLeft:
+        _last_origin = curr_origin;
+        break;
+      case AnchorCenter:
+        _last_origin = curr_origin + QPoint(_clock->advance().x(), 0)/2;
+        break;
+      case AnchorRight:
+        _last_origin = curr_origin + QPoint(_clock->advance().x(), 0);
+        break;
+    }
+
+    emit saveStateRequested();
+
+    _is_dragging = false;
+    event->accept();
+  }
+}
+
 void MainWindow::paintEvent(QPaintEvent* event)
 {
   // TODO: draw frame when setting dialog is open
@@ -105,6 +182,9 @@ void MainWindow::paintEvent(QPaintEvent* event)
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
+
+  // do not apply anhoring logic during dragging
+  if (_is_dragging) return;
 
   // state restore must happen before the first resize event!
   // previous origin and correct anchor point must be known here
