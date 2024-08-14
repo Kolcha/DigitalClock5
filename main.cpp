@@ -253,6 +253,7 @@ int main(int argc, char *argv[])
   stw->setSkin(std::make_shared<FontSkin>(w.font()));
 
   w.addPluginWidget(stw, 1, 0);
+  // w.layout()->setAlignment(stw, Qt::AlignCenter);
 
   QTimer timer;
   QObject::connect(&timer, &QTimer::timeout, dtw, [&]() { dtw->setDateTime(QDateTime::currentDateTime()); });

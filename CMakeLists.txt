@@ -27,6 +27,13 @@ qt_add_executable(untitled
     graphics.cpp
     graphics_widgets.hpp
     graphics_widgets.cpp
+    config/settings_storage.hpp
+    config/settings_storage.cpp
+    config/custom_converters.hpp
+    config/config_sections.hpp
+    config/config_sections.cpp
+    config/app_config.hpp
+    config/app_config.cpp
 )
 
 target_link_libraries(untitled PRIVATE Qt::Widgets)
