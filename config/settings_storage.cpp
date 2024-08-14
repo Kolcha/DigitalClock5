@@ -92,3 +92,27 @@ void SettingsStorageClient::keysOperation(op_type op)
   for (const auto& k : std::as_const(_keys)) (_st.*op)(k);
   _keys.clear();
 }
+
+
+StateClient::StateClient(QString title, SettingsStorage& st)
+    : _st(st)
+    , _title(title)
+{
+}
+
+void StateClient::setValue(QString key, QVariant val)
+{
+  auto st_key = storageKey(key);
+  _st.setValue(st_key, std::move(val));
+  _st.commitValue(st_key);
+}
+
+QVariant StateClient::value(QString key, QVariant def) const
+{
+  return _st.value(storageKey(key), std::move(def));
+}
+
+QString StateClient::storageKey(QStringView key) const
+{
+  return QString("%1/%2").arg(_title, key);
+}

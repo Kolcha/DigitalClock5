@@ -82,3 +82,22 @@ private:
 
 #define CONFIG_OPTION_Q(type, name, def_value)    \
   CONFIG_OPTION(type, name, QLatin1String(#name), def_value)
+
+
+// state client doesn't assume discard operation,
+// all changes are stored permanently
+// state client is generic, only users know details
+class StateClient {
+public:
+  StateClient(QString title, SettingsStorage& st);
+
+  void setValue(QString key, QVariant val);
+  QVariant value(QString key, QVariant def) const;
+
+protected:
+  QString storageKey(QStringView key) const;
+
+private:
+  SettingsStorage& _st;
+  QString _title;
+};

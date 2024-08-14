@@ -3,6 +3,7 @@
 ConfigSlice::ConfigSlice(int id, SettingsStorage& st)
     : _id(id)
     , _appearance(title(u"appearance"), st)
+    , _state(title(u"state"), st)
 {
 }
 

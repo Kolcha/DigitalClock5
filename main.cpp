@@ -6,16 +6,39 @@
 #include <QPainter>
 #include <QResizeEvent>
 
+#include "config/app_config.hpp"
 #include "font_skin.hpp"
 #include "graphics_widgets.hpp"
 
 
 class State {
 public:
-  void setValue(QString key, QVariant val) {}
-  QVariant value(QString key, QVariant def) const { return {}; }
+  virtual ~State() = default;
+
+  virtual void setValue(QString key, QVariant val) = 0;
+  virtual QVariant value(QString key, QVariant def) const = 0;
 };
 
+
+// this is maybe overkill, but window should not know
+// about any config implementation details
+class StateImpl : public State {
+public:
+  explicit StateImpl(StateClient& scl) : _scl(scl) {}
+
+  void setValue(QString key, QVariant val) override
+  {
+    _scl.setValue(std::move(key), std::move(val));
+  }
+
+  QVariant value(QString key, QVariant def) const override
+  {
+    return _scl.value(std::move(key), std::move(def));
+  }
+
+public:
+  StateClient& _scl;
+};
 
 // =================== widgets ===================
 
@@ -231,7 +254,11 @@ int main(int argc, char *argv[])
   QObject::connect(&timer, &QTimer::timeout, &w, &GraphicsDateTimeWidget::updateSeparatorsState);
   timer.start(500);
 */
+  AppConfig cfg("test.ini");
+  StateImpl wnd_state(cfg.slice(0).state());
+
   MainWindow w;
+  w.loadState(wnd_state);
 
   w.setAnchorPoint(MainWindow::AnchorRight);
 
@@ -259,6 +286,8 @@ int main(int argc, char *argv[])
   QObject::connect(&timer, &QTimer::timeout, dtw, [&]() { dtw->setDateTime(QDateTime::currentDateTime()); });
   QObject::connect(&timer, &QTimer::timeout, dtw, &GraphicsDateTimeWidget::updateSeparatorsState);
   timer.start(500);
+
+  QObject::connect(&w, &MainWindow::saveStateRequested, &w, [&]() { w.saveState(wnd_state); });
 
   w.show();
   return a.exec();

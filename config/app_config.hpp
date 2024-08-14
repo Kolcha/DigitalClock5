@@ -10,7 +10,8 @@ public:
   auto& appearance() { return _appearance; }
   auto& appearance() const { return _appearance; }
 
-  // TODO: add state
+  auto& state() { return _state; }
+  auto& state() const { return _state; }
 
 private:
   QString title(QStringView t) const;
@@ -19,6 +20,7 @@ private:
   int _id;
 
   SectionAppearance _appearance;
+  StateClient _state;
 };
 
 
