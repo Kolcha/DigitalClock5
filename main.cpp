@@ -7,8 +7,8 @@
 #include <QResizeEvent>
 
 #include "config/app_config.hpp"
-#include "font_skin.hpp"
-#include "graphics_widgets.hpp"
+#include "skin/font_skin.hpp"
+#include "skin/graphics_widgets.hpp"
 
 
 class State {

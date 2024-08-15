@@ -14,19 +14,19 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_add_executable(untitled
     MANUAL_FINALIZATION
     main.cpp
-    glyph.hpp
-    container.hpp
-    skin.hpp
-    font_skin.hpp
-    container.cpp
-    font_skin.cpp
-    glyph.cpp
-    datetime_formatter.hpp
-    datetime_formatter.cpp
-    graphics.hpp
-    graphics.cpp
-    graphics_widgets.hpp
-    graphics_widgets.cpp
+    skin/glyph.hpp
+    skin/container.hpp
+    skin/skin.hpp
+    skin/font_skin.hpp
+    skin/container.cpp
+    skin/font_skin.cpp
+    skin/glyph.cpp
+    skin/datetime_formatter.hpp
+    skin/datetime_formatter.cpp
+    skin/graphics.hpp
+    skin/graphics.cpp
+    skin/graphics_widgets.hpp
+    skin/graphics_widgets.cpp
     config/settings_storage.hpp
     config/settings_storage.cpp
     config/custom_converters.hpp
