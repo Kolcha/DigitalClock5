@@ -75,7 +75,7 @@ class HLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;
-  void applyAlignment(const GlyphList& glyps) const override;
+  void applyAlignment(const GlyphList& glyphs) const override;
 };
 
 
@@ -83,7 +83,7 @@ class VLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;
-  void applyAlignment(const GlyphList& glyps) const override;
+  void applyAlignment(const GlyphList& glyphs) const override;
 };
 
 

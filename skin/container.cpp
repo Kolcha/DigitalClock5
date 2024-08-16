@@ -65,7 +65,7 @@ void HLayout::updateAdv(QPointF& adv, const Glyph& curr) const
   adv.ry() = std::max(adv.y(), curr.advance().y());
 }
 
-void HLayout::applyAlignment(const GlyphList& glyps) const
+void HLayout::applyAlignment(const GlyphList& glyphs) const
 {
   std::function<qreal(Glyph&)> ypos = [](auto& g) { return g.pos().y(); };
 
@@ -86,7 +86,7 @@ void HLayout::applyAlignment(const GlyphList& glyps) const
       break;
   }
 
-  std::ranges::for_each(glyps, [ypos](auto& g) { g->setPos({g->pos().x(), ypos(*g)}); });
+  for (auto& g : glyphs) { g->setPos({g->pos().x(), ypos(*g)}); }
 }
 
 
@@ -101,7 +101,7 @@ void VLayout::updateAdv(QPointF& adv, const Glyph& curr) const
   adv.rx() = std::max(adv.x(), curr.advance().x());
 }
 
-void VLayout::applyAlignment(const GlyphList& glyps) const
+void VLayout::applyAlignment(const GlyphList& glyphs) const
 {
   std::function<qreal(Glyph&)> xpos = [](auto& g) { return g.pos().x(); };
 
@@ -122,5 +122,5 @@ void VLayout::applyAlignment(const GlyphList& glyps) const
       break;
   }
 
-  std::ranges::for_each(glyps, [xpos](auto& g) { g->setPos({xpos(*g), g->pos().y()}); });
+  for (auto& g : glyphs) { g->setPos({xpos(*g), g->pos().y()}); }
 }
