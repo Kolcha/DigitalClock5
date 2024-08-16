@@ -49,9 +49,18 @@ qt_add_executable(${PROJECT_NAME}
     app/update_checker.cpp
     app/build_date.hpp
     app/build_date.cpp
+    app/logo_label.hpp
+    app/logo_label.cpp
+    app/about_dialog.ui
+    app/about_dialog.hpp
+    app/about_dialog.cpp
+    app/dialog_manager.hpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
+
+add_subdirectory(dist)
+add_subdirectory(res)
 
 configure_file(version.hpp.in version.hpp @ONLY)
 

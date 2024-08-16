@@ -1,0 +1,10 @@
+[Icon Theme]
+Name=Unicons Line
+Comment=builtin theme
+Directories=scalable
+
+[scalable]
+Size=24
+Type=Scalable
+MaxSize=512
+MinSize=16

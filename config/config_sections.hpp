@@ -61,7 +61,7 @@ public:
 
   CONFIG_OPTION_Q(QString, TimeFormat, QString("HH:mm"));
 
-  CONFIG_OPTION_Q(QBrush, Texture, QColor(128, 0, 255));
+  CONFIG_OPTION_Q(QBrush, Texture, QColor(112, 96, 240));
   CONFIG_OPTION_Q(bool, TextureStretch, false);
   CONFIG_OPTION_Q(bool, TexturePerCharacter, true);
 

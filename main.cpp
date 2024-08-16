@@ -12,6 +12,10 @@
 int main(int argc, char *argv[])
 {
   using namespace Qt::Literals::StringLiterals;
+  // set system icon theme as fallback
+  auto system_theme = QIcon::themeName();
+  QIcon::setThemeName(u"unicons-line"_s);
+  QIcon::setFallbackThemeName(system_theme);
 
   QApplication::setApplicationName(QString::fromLatin1(APP_PROJECT_NAME));
   QApplication::setApplicationDisplayName(u"Digital Clock 5"_s);

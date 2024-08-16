@@ -18,6 +18,7 @@
 
 #include "clock_tray_icon.hpp"
 #include "clock_window.hpp"
+#include "dialog_manager.hpp"
 #include "skin_manager.hpp"
 #include "update_checker.hpp"
 
@@ -56,5 +57,6 @@ private:
   QTimer _time_timer;
   QTimer _tick_timer;
   SkinManager _sm;
+  DialogManager<quint64> _dm;
   std::unique_ptr<UpdateChecker> _update_checker;
 };

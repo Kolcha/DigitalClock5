@@ -8,6 +8,8 @@
 
 #include <QDir>
 
+#include "about_dialog.hpp"
+
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
 {
@@ -193,5 +195,5 @@ void Application::showSettingsDialog()
 
 void Application::showAboutDialog()
 {
-  // TODO: implement
+  _dm.maybeCreateAndShowDialog<AboutDialog>(0x41697269);
 }

@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>skins/electronic/0.svg</file>
+        <file>skins/electronic/1.svg</file>
+        <file>skins/electronic/2.svg</file>
+        <file>skins/electronic/3.svg</file>
+        <file>skins/electronic/4.svg</file>
+        <file>skins/electronic/5.svg</file>
+        <file>skins/electronic/6.svg</file>
+        <file>skins/electronic/7.svg</file>
+        <file>skins/electronic/8.svg</file>
+        <file>skins/electronic/9.svg</file>
+        <file>skins/electronic/a.svg</file>
+        <file>skins/electronic/d.svg</file>
+        <file>skins/electronic/e.svg</file>
+        <file>skins/electronic/p.svg</file>
+        <file>skins/electronic/skin.ini</file>
+    </qresource>
+</RCC>

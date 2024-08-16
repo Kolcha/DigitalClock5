@@ -1,0 +1,4 @@
+<svg width="11.641" height="95.971" xmlns="http://www.w3.org/2000/svg">
+  <circle id="dp" fill="#2f2f2f" fill-opacity="0.1" cx="5.8203" cy="34.781" r="5.8203"/>
+  <use href="#dp" transform="translate(0 26.411)"/>
+</svg>
