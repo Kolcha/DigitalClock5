@@ -255,7 +255,7 @@ int main(int argc, char *argv[])
   timer.start(500);
 */
   AppConfig cfg("test.ini");
-  StateImpl wnd_state(cfg.slice(0).state());
+  StateImpl wnd_state(cfg.window(0).state());
 
   MainWindow w;
   w.loadState(wnd_state);

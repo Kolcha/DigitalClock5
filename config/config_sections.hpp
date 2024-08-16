@@ -11,6 +11,7 @@ public:
   using SettingsStorageClient::SettingsStorageClient;
 
   CONFIG_OPTION_Q(int, NumInstances, 1)
+  CONFIG_OPTION_Q(bool, AppearancePerInstance, false)
 };
 
 // per-window settings

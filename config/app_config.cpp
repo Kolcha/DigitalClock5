@@ -1,15 +1,28 @@
 #include "app_config.hpp"
 
-ConfigSlice::ConfigSlice(int id, SettingsStorage& st)
+WindowConfig::WindowConfig(int id, AppConfig& cfg)
     : _id(id)
-    , _appearance(title(u"appearance"), st)
-    , _state(title(u"state"), st)
+    , _cfg(cfg)
+    , _appearance(title(u"appearance"), cfg.storage())
+    , _state(title(u"state"), cfg.storage())
 {
 }
 
-QString ConfigSlice::title(QStringView t) const
+const SectionAppearance& WindowConfig::appearance() const
 {
-  return QString("%1/%2").arg(_id).arg(t);
+  if (!_cfg.global().getAppearancePerInstance())
+    return _cfg.window(0).appearance();
+  return _appearance;
+}
+
+SectionAppearance& WindowConfig::appearance()
+{
+  return const_cast<SectionAppearance&>(std::as_const(*this).appearance());
+}
+
+QString WindowConfig::title(QStringView t) const
+{
+  return QString("Window%1/%2").arg(_id).arg(t);
 }
 
 
@@ -30,5 +43,5 @@ AppConfig::AppConfig(const QString& filename)
 void AppConfig::initSlices()
 {
   for (int i = 0; i < _global.getNumInstances(); i++)
-    _slices.push_back(ConfigSlice(i, _st));
+    _windows.push_back(WindowConfig(i, *this));
 }

@@ -2,13 +2,15 @@
 
 #include "config_sections.hpp"
 
-// represents per-instance settings
-class ConfigSlice {
-public:
-  ConfigSlice(int id, SettingsStorage& st);
+class AppConfig;
 
-  auto& appearance() { return _appearance; }
-  auto& appearance() const { return _appearance; }
+// represents per-instance settings
+class WindowConfig {
+public:
+  WindowConfig(int id, AppConfig& cfg);
+
+  const SectionAppearance& appearance() const;
+  SectionAppearance& appearance();
 
   auto& state() { return _state; }
   auto& state() const { return _state; }
@@ -18,6 +20,7 @@ private:
 
 private:
   int _id;
+  AppConfig& _cfg;
 
   SectionAppearance _appearance;
   StateClient _state;
@@ -33,8 +36,8 @@ public:
   auto& global() { return _global; }
   auto& global() const { return _global; }
 
-  auto& slice(qsizetype i) { return _slices[i]; }
-  auto& slice(qsizetype i) const { return _slices[i]; }
+  auto& window(size_t i) { return _windows[i]; }
+  auto& window(size_t i) const { return _windows[i]; }
 
   auto& storage() { return _st; }
 
@@ -44,5 +47,5 @@ private:
 private:
   SettingsStorage _st;
   SectionAppGlobal _global;
-  std::vector<ConfigSlice> _slices;
+  std::vector<WindowConfig> _windows;
 };
