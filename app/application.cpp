@@ -24,15 +24,22 @@ void Application::configureWindow(size_t i)
 
   auto& wcfg = _cfg->window(i);
   auto& acfg = wcfg.appearance();
+  auto& gcfg = wcfg.generic();
 
   StateImpl wst(wcfg.state());
   wnd->loadState(wst);
 
+  wnd->setAnchorPoint(static_cast<ClockWindow::AnchorPoint>(gcfg.getAnchorPoint()));
+  wnd->setSnapToEdge(gcfg.getSnapToEdge(), gcfg.getSnapThreshold());
+
   wnd->setScaling(acfg.getScalingH()/100., acfg.getScalingV()/100.);
+  wnd->setWindowOpacity(acfg.getOpacity()/100.);
 
   auto clock = wnd->clock();
   clock->setCharSpacing(acfg.getSpacingH());
   clock->setLineSpacing(acfg.getSpacingV());
+
+  clock->setTimeZone(gcfg.getTimeZone());
 
   // load skin
   if (i == 0 || _cfg->global().getAppearancePerInstance()) {
@@ -86,6 +93,20 @@ void Application::createWindows()
 {
   for (int i = 0; i < _cfg->global().getNumInstances(); i++) {
     auto wnd = std::make_unique<ClockWindow>();
+
+    wnd->setWindowFlag(Qt::NoDropShadowWindowHint);
+    wnd->setWindowFlag(Qt::FramelessWindowHint);
+    wnd->setAttribute(Qt::WA_TranslucentBackground);
+
+    if (_cfg->global().getStayOnTop()) {
+      wnd->setWindowFlag(Qt::WindowStaysOnTopHint);
+      wnd->setWindowFlag(Qt::BypassWindowManagerHint);
+    }
+    if (_cfg->global().getTransparentForMouse())
+      wnd->setWindowFlag(Qt::WindowTransparentForInput);
+#ifdef Q_OS_WINDOWS
+    wnd->setWindowFlag(Qt::Tool);   // trick to hide app icon from taskbar (Windows only)
+#endif
 
     wnd->setWindowTitle(QString("%1 %2").arg(applicationDisplayName()).arg(i));
 

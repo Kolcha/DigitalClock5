@@ -4,6 +4,7 @@ WindowConfig::WindowConfig(int id, AppConfig& cfg)
     : _id(id)
     , _cfg(cfg)
     , _appearance(title(u"appearance"), cfg.storage())
+    , _generic(title(u"generic"), cfg.storage())
     , _state(title(u"state"), cfg.storage())
 {
 }

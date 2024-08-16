@@ -12,6 +12,9 @@ public:
   const SectionAppearance& appearance() const;
   SectionAppearance& appearance();
 
+  auto& generic() { return _generic; }
+  auto& generic() const { return _generic; }
+
   auto& state() { return _state; }
   auto& state() const { return _state; }
 
@@ -23,6 +26,7 @@ private:
   AppConfig& _cfg;
 
   SectionAppearance _appearance;
+  SectionGeneric _generic;
   StateClient _state;
 };
 
