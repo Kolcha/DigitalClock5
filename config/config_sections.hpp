@@ -17,6 +17,10 @@ public:
 
   CONFIG_OPTION_Q(bool, StayOnTop, true)
   CONFIG_OPTION_Q(bool, TransparentForMouse, false);
+
+  CONFIG_OPTION_Q(bool, CheckForUpdates, true)
+  CONFIG_OPTION_Q(bool, CheckForBetaVersion, true)
+  CONFIG_OPTION_Q(int, UpdatePeriodDays, 7)
 };
 
 

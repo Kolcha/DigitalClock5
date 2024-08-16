@@ -11,12 +11,15 @@
 #include <memory>
 #include <vector>
 
+#include <QMenu>
 #include <QTimer>
 
 #include "config/app_config.hpp"
 
+#include "clock_tray_icon.hpp"
 #include "clock_window.hpp"
 #include "skin_manager.hpp"
+#include "update_checker.hpp"
 
 class Application : public QApplication
 {
@@ -34,18 +37,24 @@ private:
   void initConfig();
   void initTray();
   void createWindows();
+  void initUpdater();
   void startTimers();
 
 private slots:
   void saveWindowState();
   void onTimer();
 
+  void showSettingsDialog();
+  void showAboutDialog();
+
 private:
   std::unique_ptr<AppConfig> _cfg;
-  // tray icon stuff
+  ClockTrayIcon _tray_icon;
+  std::unique_ptr<QMenu> _tray_menu;
   // QWidget seems to be non-movable type :(
   std::vector<std::unique_ptr<ClockWindow>> _windows;
   QTimer _time_timer;
   QTimer _tick_timer;
   SkinManager _sm;
+  std::unique_ptr<UpdateChecker> _update_checker;
 };

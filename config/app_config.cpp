@@ -41,6 +41,7 @@ AppConfig::AppConfig(std::unique_ptr<SettingsStorage> st)
     : _st(std::move(st))
     , _global("app_global", *_st)
     , _limits("limits", *_st)
+    , _state("state", *_st)
 {
   for (int i = 0; i < _global.getNumInstances(); i++)
     _windows.push_back(WindowConfig(i, *this));

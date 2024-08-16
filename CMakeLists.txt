@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 
-project(untitled VERSION 0.1 LANGUAGES CXX)
+project(DigitalClock5 VERSION 5.0.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -8,11 +8,11 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network)
 
-qt_add_executable(untitled
-    MANUAL_FINALIZATION
+qt_add_executable(${PROJECT_NAME}
     main.cpp
     skin/glyph.hpp
     skin/container.hpp
@@ -41,26 +41,31 @@ qt_add_executable(untitled
     app/application.cpp
     app/skin_manager.hpp
     app/skin_manager.cpp
+    app/clock_icon_engine.hpp
+    app/clock_icon_engine.cpp
+    app/clock_tray_icon.hpp
+    app/clock_tray_icon.cpp
+    app/update_checker.hpp
+    app/update_checker.cpp
+    app/build_date.hpp
+    app/build_date.cpp
 )
+
+set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
+
+configure_file(version.hpp.in version.hpp @ONLY)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(untitled PRIVATE Qt::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Widgets Qt::Network)
 
-set_target_properties(untitled PROPERTIES
-    ${BUNDLE_ID_OPTION}
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    MACOSX_BUNDLE_BUNDLE_NAME "Digital Clock"
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${APP_IDENTIFIER}
+    MACOSX_BUNDLE_COPYRIGHT "(c) 2013-2024 Nick Korotysh"
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
-
-include(GNUInstallDirs)
-install(TARGETS untitled
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-qt_finalize_executable(untitled)

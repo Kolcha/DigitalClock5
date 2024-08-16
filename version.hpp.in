@@ -1,0 +1,16 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Nick Korotysh <nick.korotysh@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#pragma once
+
+static constexpr const char* APP_PROJECT_NAME = "@PROJECT_NAME@";
+static constexpr const char* APP_IDENTIFIER = "@APP_IDENTIFIER@";
+
+static constexpr int APP_VERSION_MAJOR = @PROJECT_VERSION_MAJOR@;
+static constexpr int APP_VERSION_MINOR = @PROJECT_VERSION_MINOR@;
+static constexpr int APP_VERSION_PATCH = @PROJECT_VERSION_PATCH@;
+
+static constexpr const char* APP_VERSION = "@PROJECT_VERSION@";

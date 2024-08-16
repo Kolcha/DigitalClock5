@@ -48,6 +48,9 @@ public:
 
   auto& storage() { return *_st; }
 
+  auto& state() { return _state; }
+  auto& state() const { return _state; }
+
 private:
   AppConfig(std::unique_ptr<SettingsStorage> st);
 
@@ -57,4 +60,5 @@ private:
   SectionAppGlobal _global;
   SectionLimits _limits;
   std::vector<WindowConfig> _windows;
+  StateClient _state;
 };

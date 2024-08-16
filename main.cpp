@@ -7,12 +7,29 @@
 #include <QApplication>
 
 #include "app/application.hpp"
+#include "version.hpp"
 
 int main(int argc, char *argv[])
 {
-  Application app(argc, argv);
+  using namespace Qt::Literals::StringLiterals;
 
+  QApplication::setApplicationName(QString::fromLatin1(APP_PROJECT_NAME));
+  QApplication::setApplicationDisplayName(u"Digital Clock 5"_s);
+  QApplication::setApplicationVersion(QString::fromLatin1(APP_VERSION));
+  QApplication::setOrganizationName(u"NickKorotysh"_s);
+  QApplication::setOrganizationDomain(u"kolcha.github.com"_s);
+  QApplication::setDesktopFileName(QString::fromLatin1(APP_IDENTIFIER));
+  QApplication::setWindowIcon(QIcon::fromTheme("clock"));
+#ifdef Q_OS_MACOS
+  QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+#endif
   QApplication::setQuitOnLastWindowClosed(false);
+#ifdef Q_OS_WINDOWS
+  QApplication::setStyle(u"windowsvista"_s);
+#else
+  QApplication::setStyle(u"fusion"_s);
+#endif
 
+  Application app(argc, argv);
   return app.exec();
 }

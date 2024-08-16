@@ -14,6 +14,7 @@ Application::Application(int& argc, char** argv)
   initConfig();
   initTray();
   createWindows();
+  initUpdater();
   startTimers();
 }
 
@@ -86,7 +87,22 @@ void Application::initConfig()
 
 void Application::initTray()
 {
-  // TODO: implement
+  _tray_icon.setVisible(true);
+
+  _tray_menu = std::make_unique<QMenu>();
+  _tray_icon.setContextMenu(_tray_menu.get());
+
+  using namespace Qt::Literals::StringLiterals;
+  _tray_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
+                        this, &Application::showSettingsDialog);
+  _tray_menu->addSeparator();
+  _tray_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
+                        this, &Application::showAboutDialog);
+  _tray_menu->addSeparator();
+  _tray_menu->addAction(QIcon::fromTheme(u"application-exit"_s),
+                        tr("Quit"), this, &QApplication::quit);
+
+  _tray_icon.setToolTip(applicationDisplayName());
 }
 
 void Application::createWindows()
@@ -121,6 +137,31 @@ void Application::createWindows()
   std::ranges::for_each(_windows, [](auto& w) { w->show(); });
 }
 
+void Application::initUpdater()
+{
+  if (!_cfg->global().getCheckForUpdates())
+    return;
+
+  _update_checker = std::make_unique<UpdateChecker>();
+  _update_checker->setCheckForBeta(_cfg->global().getCheckForBetaVersion());
+
+  auto save_last_update = [this]() {
+    StateImpl app_state(_cfg->state());
+    app_state.setValue("LastUpdateCheck", QDateTime::currentDateTime());
+  };
+
+  connect(_update_checker.get(), &UpdateChecker::newVersion, this, save_last_update);
+  connect(_update_checker.get(), &UpdateChecker::upToDate, this, save_last_update);
+
+  const StateImpl app_state(_cfg->state());
+  const auto& last_update = app_state.value("LastUpdateCheck",
+                                            QDateTime(QDate(2013, 6, 18), QTime(11, 20, 5), QTimeZone::utc()))
+                                .toDateTime();
+  const auto update_period = _cfg->global().getUpdatePeriodDays();
+  if (last_update.daysTo(QDateTime::currentDateTime()) >= update_period)
+    _update_checker->checkForUpdates();
+}
+
 void Application::startTimers()
 {
   connect(&_time_timer, &QTimer::timeout, this, &Application::onTimer);
@@ -143,4 +184,14 @@ void Application::onTimer()
   auto now = QDateTime::currentDateTime();
   for (const auto& w : _windows)
     w->clock()->setDateTime(now);
+}
+
+void Application::showSettingsDialog()
+{
+  // TODO: implement
+}
+
+void Application::showAboutDialog()
+{
+  // TODO: implement
 }
