@@ -27,13 +27,16 @@ public:
   qreal charSpacing() const { return _gt->charSpacing(); }
   qreal lineSpacing() const { return _gt->lineSpacing(); }
 
+  qreal scalingX() const { return _sx; }
+  qreal scalingY() const { return _sy; }
+
   Qt::Alignment alignment() const { return _gt->alignment(); }
 
   // ---------------------
 
   QPoint origin() const;  // in widget coordinates
   QRectF graphicsRect() const { return _gt->rect(); }
-  QPointF advance() const { return _k * _gt->advance(); }
+  QPointF advance() const;
 
   // ---------------------
 
@@ -55,6 +58,10 @@ public slots:
 
   void setCharSpacing(qreal spacing);
   void setLineSpacing(qreal spacing);
+
+  void setScalingX(qreal sx) { setScaling(sx, scalingY()); }
+  void setScalingY(qreal sy) { setScaling(scalingX(), sy); }
+  void setScaling(qreal sx, qreal sy);
 
   void setAlignment(Qt::Alignment a);
 
@@ -101,6 +108,9 @@ private:
   std::shared_ptr<GraphicsBase> _gt;
   AutoResizePolicy _rp = None;
   qreal _k = 1.0;
+
+  qreal _sx = 1.0;
+  qreal _sy = 1.0;
 };
 
 

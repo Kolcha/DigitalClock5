@@ -27,20 +27,19 @@ QString WindowConfig::title(QStringView t) const
 
 
 AppConfig::AppConfig()
-    : _st()
-    , _global("app_global", _st)
+    : AppConfig(std::make_unique<SettingsStorage>())
 {
-  initSlices();
 }
 
 AppConfig::AppConfig(const QString& filename)
-    : _st(filename)
-    , _global("app_global", _st)
+    : AppConfig(std::make_unique<SettingsStorage>(filename))
 {
-  initSlices();
 }
 
-void AppConfig::initSlices()
+AppConfig::AppConfig(std::unique_ptr<SettingsStorage> st)
+    : _st(std::move(st))
+    , _global("app_global", *_st)
+    , _limits("limits", *_st)
 {
   for (int i = 0; i < _global.getNumInstances(); i++)
     _windows.push_back(WindowConfig(i, *this));

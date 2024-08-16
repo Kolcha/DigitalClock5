@@ -73,6 +73,8 @@ public slots:
   void setSnapToEdge(bool enable, int threshold);
   void setSnapThreshold(int thr) { setSnapToEdge(snapToEdge(), thr); }
 
+  void setScaling(qreal sx, qreal sy);
+
 signals:
   void saveStateRequested();
 
@@ -95,6 +97,9 @@ private:
 
   bool _snap_to_edge = true;
   int _snap_threshold = 15;
+
+  qreal _sx = 1.0;
+  qreal _sy = 1.0;
 };
 
 
@@ -113,6 +118,7 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::addPluginWidget(GraphicsWidgetBase* w, int row, int column,
                                  int row_span, int column_span)
 {
+  w->setScaling(_sx, _sy);
   _layout->addWidget(w, row, column, row_span, column_span);
 }
 
@@ -140,6 +146,18 @@ void MainWindow::setSnapToEdge(bool enable, int threshold)
 {
   _snap_to_edge = enable;
   _snap_threshold = threshold;
+}
+
+void MainWindow::setScaling(qreal sx, qreal sy)
+{
+  _sx = sx;
+  _sy = sy;
+  const auto& widgets = children();
+  for (auto o : widgets)
+    if (auto w = qobject_cast<GraphicsWidgetBase*>(o))
+      w->setScaling(_sx, _sy);
+  updateGeometry();
+  update();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
@@ -258,6 +276,7 @@ int main(int argc, char *argv[])
   StateImpl wnd_state(cfg.window(0).state());
 
   MainWindow w;
+  w.setScaling(1.5, 1.5);
   w.loadState(wnd_state);
 
   w.setAnchorPoint(MainWindow::AnchorRight);
@@ -272,6 +291,7 @@ int main(int argc, char *argv[])
   dtw->setTexture(QColor(128, 0, 255, 224));
   // dtw->setTimeZone(QTimeZone::utc());
   dtw->setFormat("hh:mm:ss");
+  // dtw->setScaling(1.5, 1.5);
 
   auto stw = new GraphicsTextWidget(&w);
 

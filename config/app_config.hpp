@@ -36,16 +36,21 @@ public:
   auto& global() { return _global; }
   auto& global() const { return _global; }
 
+  auto& limits() { return _limits; }
+  auto& limits() const { return _limits; }
+
   auto& window(size_t i) { return _windows[i]; }
   auto& window(size_t i) const { return _windows[i]; }
 
-  auto& storage() { return _st; }
+  auto& storage() { return *_st; }
 
 private:
-  void initSlices();
+  AppConfig(std::unique_ptr<SettingsStorage> st);
 
 private:
-  SettingsStorage _st;
+  // SettingsStorage is non-movable because of QSettings :(
+  std::unique_ptr<SettingsStorage> _st;
   SectionAppGlobal _global;
+  SectionLimits _limits;
   std::vector<WindowConfig> _windows;
 };

@@ -11,7 +11,8 @@ GraphicsWidgetBase::GraphicsWidgetBase(std::shared_ptr<GraphicsBase> gr, QWidget
 
 QSize GraphicsWidgetBase::sizeHint() const
 {
-  return (_gt->rect().size()*_k).toSize();
+  auto [w, h] = _k * _gt->rect().size();
+  return QSize(_sx * w, _sy * h);
 }
 
 QPoint GraphicsWidgetBase::origin() const
@@ -19,7 +20,13 @@ QPoint GraphicsWidgetBase::origin() const
   // keep in sync with paint transformations!
   const auto zp = QPoint(0, 0);
   const auto tl = -_gt->rect().topLeft();
-  return QTransform().scale(_k, _k).translate(tl.x(), tl.y()).map(zp);
+  return QTransform().scale(_k*_sx, _k*_sy).translate(tl.x(), tl.y()).map(zp);
+}
+
+QPointF GraphicsWidgetBase::advance() const
+{
+  auto [dx, dy] = _k * _gt->advance();
+  return {_sx * dx, _sy * dy};
 }
 
 void GraphicsWidgetBase::setSkin(std::shared_ptr<Skin> skin)
@@ -62,6 +69,14 @@ void GraphicsWidgetBase::setLineSpacing(qreal spacing)
   update();
 }
 
+void GraphicsWidgetBase::setScaling(qreal sx, qreal sy)
+{
+  _sx = sx;
+  _sy = sy;
+  updateGeometry();
+  update();
+}
+
 void GraphicsWidgetBase::setAlignment(Qt::Alignment a)
 {
   _gt->setAlignment(a);
@@ -93,15 +108,15 @@ void GraphicsWidgetBase::paintEvent(QPaintEvent* event)
       break;
 
     case KeepWidth:
-      if (width() != hint.width()) {
-        _k = width() / sz.width();
+      if (qAbs(width() - hint.width()) > 1) {
+        _k = width() / sz.width() / _sx;
         geometry_changed = true;
       }
       break;
 
     case KeepHeight:
-      if (height() != hint.height()) {
-        _k = height() / sz.height();
+      if (qAbs(height() - hint.height()) > 1) {
+        _k = height() / sz.height() / _sy;
         geometry_changed = true;
       }
       break;
@@ -116,7 +131,7 @@ void GraphicsWidgetBase::paintEvent(QPaintEvent* event)
   QWidget::paintEvent(event);
 
   QPainter p(this);
-  p.scale(_k, _k);
+  p.scale(_k*_sx, _k*_sy);
   p.setRenderHint(QPainter::Antialiasing);
   p.translate(-_gt->rect().topLeft());
   _gt->draw(&p);
