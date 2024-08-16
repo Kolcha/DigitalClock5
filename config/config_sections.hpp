@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QFont>
+
 #include "settings_storage.hpp"
 
 // even it may look as unnecessary and unused header,
@@ -39,4 +41,22 @@ public:
 
   CONFIG_OPTION_Q(int, SpacingH, 4)
   CONFIG_OPTION_Q(int, SpacingV, 4)
+
+  CONFIG_OPTION_Q(bool, UseFont, true);
+  CONFIG_OPTION_Q(QFont, Font, QFont("Comic Sans MS", 96));
+  CONFIG_OPTION_Q(QString, Skin, QString("electronic"));
+
+  CONFIG_OPTION_Q(bool, SeparatorFlashes, true);
+  CONFIG_OPTION_Q(bool, UseCustomSeparators, false);
+  CONFIG_OPTION_Q(QString, CustomSeparators, QString());
+
+  CONFIG_OPTION_Q(QString, TimeFormat, QString("HH:mm"));
+
+  CONFIG_OPTION_Q(QBrush, Texture, QColor(128, 0, 255));
+  CONFIG_OPTION_Q(bool, TextureStretch, false);
+  CONFIG_OPTION_Q(bool, TexturePerCharacter, true);
+
+  CONFIG_OPTION_Q(QBrush, Background, Qt::NoBrush);
+  CONFIG_OPTION_Q(bool, BackgroundStretch, false);
+  CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false);
 };

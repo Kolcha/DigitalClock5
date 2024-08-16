@@ -34,7 +34,17 @@ qt_add_executable(untitled
     config/config_sections.cpp
     config/app_config.hpp
     config/app_config.cpp
+    app/state.hpp
+    app/clock_window.hpp
+    app/clock_window.cpp
+    app/application.hpp
+    app/application.cpp
+    app/skin_manager.hpp
+    app/skin_manager.cpp
 )
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(untitled PRIVATE Qt::Widgets)
 

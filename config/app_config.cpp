@@ -10,7 +10,7 @@ WindowConfig::WindowConfig(int id, AppConfig& cfg)
 
 const SectionAppearance& WindowConfig::appearance() const
 {
-  if (!_cfg.global().getAppearancePerInstance())
+  if (!_cfg.global().getAppearancePerInstance() && this != &_cfg.window(0))
     return _cfg.window(0).appearance();
   return _appearance;
 }

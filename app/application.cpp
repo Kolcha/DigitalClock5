@@ -1,0 +1,125 @@
+/*
+ * SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#include "application.hpp"
+
+#include <QDir>
+
+Application::Application(int& argc, char** argv)
+    : QApplication(argc, argv)
+{
+  initConfig();
+  initTray();
+  createWindows();
+  startTimers();
+}
+
+void Application::configureWindow(size_t i)
+{
+  // set all window appearance settings
+  auto wnd = window(i);
+
+  auto& wcfg = _cfg->window(i);
+  auto& acfg = wcfg.appearance();
+
+  StateImpl wst(wcfg.state());
+  wnd->loadState(wst);
+
+  wnd->setScaling(acfg.getScalingH()/100., acfg.getScalingV()/100.);
+
+  auto clock = wnd->clock();
+  clock->setCharSpacing(acfg.getSpacingH());
+  clock->setLineSpacing(acfg.getSpacingV());
+
+  // load skin
+  if (i == 0 || _cfg->global().getAppearancePerInstance()) {
+    auto skin = acfg.getUseFont() ?
+                    _sm.loadSkin(acfg.getFont()) :
+                    _sm.loadSkin(acfg.getSkin());
+    clock->setSkin(std::move(skin));
+  } else {
+    // share skin
+    clock->setSkin(_windows[0]->clock()->skin());
+  }
+
+  clock->setFlashSeparator(acfg.getSeparatorFlashes());
+  clock->setUseCustomSeparators(acfg.getUseCustomSeparators());
+  clock->setCustomSeparators(acfg.getCustomSeparators());
+
+  clock->setFormat(acfg.getTimeFormat());
+
+  clock->setTexture(acfg.getTexture(),
+                    acfg.getTextureStretch(),
+                    acfg.getTexturePerCharacter());
+  clock->setBackground(acfg.getBackground(),
+                       acfg.getBackgroundStretch(),
+                       acfg.getBackgroundPerCharacter());
+}
+
+size_t Application::findWindow(ClockWindow* w) const
+{
+  for (size_t i = 0; i < _windows.size(); i++)
+    if (_windows[i].get() == w)
+      return i;
+  return 0;   // always return valid index
+}
+
+void Application::initConfig()
+{
+  using namespace Qt::Literals::StringLiterals;
+  QDir app_dir(QApplication::applicationDirPath());
+  if (app_dir.exists(u"portable.txt"_s) || app_dir.exists(u".portable"_s))
+    _cfg = std::make_unique<AppConfig>(app_dir.absoluteFilePath(u"settings.ini"_s));
+  else
+    _cfg = std::make_unique<AppConfig>();
+}
+
+void Application::initTray()
+{
+  // TODO: implement
+}
+
+void Application::createWindows()
+{
+  for (int i = 0; i < _cfg->global().getNumInstances(); i++) {
+    auto wnd = std::make_unique<ClockWindow>();
+
+    wnd->setWindowTitle(QString("%1 %2").arg(applicationDisplayName()).arg(i));
+
+    connect(wnd.get(), &ClockWindow::saveStateRequested, this, &Application::saveWindowState);
+    connect(&_tick_timer, &QTimer::timeout, wnd->clock(), &GraphicsDateTimeWidget::updateSeparatorsState);
+
+    _windows.push_back(std::move(wnd));
+
+    configureWindow(_windows.size() - 1);
+  }
+
+  std::ranges::for_each(_windows, [](auto& w) { w->show(); });
+}
+
+void Application::startTimers()
+{
+  connect(&_time_timer, &QTimer::timeout, this, &Application::onTimer);
+  _time_timer.start(500);
+  _tick_timer.start(500);
+}
+
+void Application::saveWindowState()
+{
+  auto wnd = qobject_cast<ClockWindow*>(sender());
+  Q_ASSERT(wnd);
+  auto idx = findWindow(wnd);
+
+  StateImpl wst(_cfg->window(idx).state());
+  wnd->saveState(wst);
+}
+
+void Application::onTimer()
+{
+  auto now = QDateTime::currentDateTime();
+  for (const auto& w : _windows)
+    w->clock()->setDateTime(now);
+}
