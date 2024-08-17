@@ -29,10 +29,15 @@ class Application : public QApplication
 public:
   Application(int& argc, char** argv);
 
+  AppConfig& config() { return *_cfg; }
+
   ClockWindow* window(size_t i) { return _windows[i].get(); }
   size_t findWindow(ClockWindow* w) const;
 
   void configureWindow(size_t i);
+  void configureWindows();
+
+  SkinManager& skinManager() { return _sm; }
 
 private:
   void initConfig();

@@ -74,6 +74,7 @@ class SectionGeneric : public SettingsStorageClient {
 public:
   using SettingsStorageClient::SettingsStorageClient;
 
+  CONFIG_OPTION_Q(bool, ShowLocalTime, true)
   CONFIG_OPTION_Q(QTimeZone, TimeZone, QTimeZone::systemTimeZone())
 
   CONFIG_OPTION_Q(int, AnchorPoint, 0)

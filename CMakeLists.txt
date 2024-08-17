@@ -55,6 +55,9 @@ qt_add_executable(${PROJECT_NAME}
     app/about_dialog.hpp
     app/about_dialog.cpp
     app/dialog_manager.hpp
+    app/settings_dialog.hpp
+    app/settings_dialog.cpp
+    app/settings_dialog.ui
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

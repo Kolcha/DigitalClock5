@@ -9,6 +9,7 @@
 #include <QDir>
 
 #include "about_dialog.hpp"
+#include "settings_dialog.hpp"
 
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
@@ -67,6 +68,11 @@ void Application::configureWindow(size_t i)
   clock->setBackground(acfg.getBackground(),
                        acfg.getBackgroundStretch(),
                        acfg.getBackgroundPerCharacter());
+}
+
+void Application::configureWindows()
+{
+  for (size_t i = 0; i < _windows.size(); i++) configureWindow(i);
 }
 
 size_t Application::findWindow(ClockWindow* w) const
@@ -190,7 +196,7 @@ void Application::onTimer()
 
 void Application::showSettingsDialog()
 {
-  // TODO: implement
+  _dm.maybeCreateAndShowDialog<SettingsDialog>(0xbd480f59, this);
 }
 
 void Application::showAboutDialog()
