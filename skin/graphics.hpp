@@ -147,6 +147,8 @@ public:
 
   QString customSeparators() { return _custom_seps; }
 
+  QTransform tokenTransform(QString token) const;
+
   void setDateTime(QDateTime dt);
   void setTimeZone(QTimeZone tz);
   void setFormat(QString fmt);
@@ -158,6 +160,10 @@ public:
   void setCustomSeparators(QString seps);
 
   void updateSeparatorsState();
+
+  void setTokenTransform(QString token, QTransform t);
+  void removeTokenTransform(QString token);
+  void clearTokenTransform();
 
 protected:
   void clearLayout() override;
@@ -185,4 +191,6 @@ private:
   bool _use_alt_sep = false;
   bool _use_cust_seps = false;
   bool _sep_visible = true;
+
+  QHash<QString, QTransform> _tt;
 };

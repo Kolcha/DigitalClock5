@@ -210,10 +210,10 @@
                <string notr="true">%</string>
               </property>
               <property name="minimum">
-               <number>30</number>
+               <number>25</number>
               </property>
               <property name="value">
-               <number>70</number>
+               <number>67</number>
               </property>
              </widget>
             </item>
@@ -336,12 +336,12 @@
        <item row="4" column="0" colspan="2">
         <layout class="QHBoxLayout" name="custom_seps_layout">
          <item>
-          <widget class="QLabel" name="custom_seps_label">
+          <widget class="QCheckBox" name="use_custom_seps">
            <property name="text">
-            <string>custom date/time separators (will be used instead of '&amp;:')</string>
+            <string>custom separators (will be used instead of '&amp;:')</string>
            </property>
-           <property name="buddy">
-            <cstring>custom_seps_edit</cstring>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1202,10 +1202,10 @@
    <hints>
     <hint type="sourcelabel">
      <x>87</x>
-     <y>245</y>
+     <y>248</y>
     </hint>
     <hint type="destinationlabel">
-     <x>134</x>
+     <x>315</x>
      <y>248</y>
     </hint>
    </hints>
@@ -1511,6 +1511,22 @@
     <hint type="destinationlabel">
      <x>342</x>
      <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>use_custom_seps</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>custom_seps_edit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>266</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>217</y>
     </hint>
    </hints>
   </connection>

@@ -225,9 +225,9 @@ void SettingsDialog::on_smaller_seconds_clicked(bool checked)
 
 void SettingsDialog::on_seconds_scale_factor_edit_valueChanged(int arg1)
 {
-  // qreal ssf = arg1 / 100.;
-  // impl->skin->setTokenTransform("ss", QTransform::fromScale(ssf, ssf));
-  // impl->scfg->setSecondsScaleFactor(arg1);
+  qreal ssf = arg1 / 100.;
+  applyClockOption(&GraphicsDateTimeWidget::setSecondsScaleFactor, ssf);
+  app->config().window(_curr_idx).appearance().setSecondsScaleFactor(arg1);
 }
 
 void SettingsDialog::on_use_custom_format_toggled(bool checked)
@@ -266,7 +266,7 @@ void SettingsDialog::on_format_help_btn_clicked()
 void SettingsDialog::on_format_apply_btn_clicked()
 {
   auto time_format = ui->format_edit->text();
-  app->window(_curr_idx)->clock()->setFormat(time_format);
+  applyClockOption(&GraphicsDateTimeWidget::setFormat, time_format);
   app->config().window(_curr_idx).appearance().setTimeFormat(time_format);
 }
 
@@ -281,9 +281,15 @@ void SettingsDialog::on_layout_cfg_help_btn_clicked()
   QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Multiple-lines"));
 }
 
+void SettingsDialog::on_use_custom_seps_clicked(bool checked)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setUseCustomSeparators, checked);
+  app->config().window(_curr_idx).appearance().setUseCustomSeparators(checked);
+}
+
 void SettingsDialog::on_custom_seps_edit_textEdited(const QString& arg1)
 {
-  app->window(_curr_idx)->clock()->setCustomSeparators(arg1);
+  applyClockOption(&GraphicsDateTimeWidget::setCustomSeparators, arg1);
   app->config().window(_curr_idx).appearance().setCustomSeparators(arg1);
 }
 
@@ -653,9 +659,9 @@ void SettingsDialog::initGeneralTab(int idx)
 
   QString time_format = acfg.getTimeFormat();
 
-  // ui->smaller_seconds->setChecked(impl->scfg->getSecondsScaleFactor() != 100);
-  // if (ui->smaller_seconds->isChecked())
-  //   ui->seconds_scale_factor_edit->setValue(impl->scfg->getSecondsScaleFactor());
+  ui->smaller_seconds->setChecked(acfg.getSecondsScaleFactor() < 100);
+  if (ui->smaller_seconds->isChecked())
+    ui->seconds_scale_factor_edit->setValue(acfg.getSecondsScaleFactor());
 
   ui->use_custom_format->setChecked(!standard_formats.contains(time_format));
   ui->format_edit->setText(time_format);
@@ -677,8 +683,9 @@ void SettingsDialog::initGeneralTab(int idx)
   // but the same logic should be triggered on initialization (regardless of the state)
   on_use_custom_format_toggled(ui->use_custom_format->isChecked());
 
-  // ui->custom_seps_label->setEnabled(impl->skin->supportsCustomSeparator());
-  // ui->custom_seps_edit->setEnabled(impl->skin->supportsCustomSeparator());
+  ui->use_custom_seps->setChecked(acfg.getUseCustomSeparators());
+  ui->use_custom_seps->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
+  ui->custom_seps_edit->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
   ui->custom_seps_edit->setText(acfg.getCustomSeparators());
 
   // ui->layout_cfg_edit->setText(impl->scfg->getLayoutConfig());

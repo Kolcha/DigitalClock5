@@ -64,6 +64,7 @@ public:
   CONFIG_OPTION_Q(QString, CustomSeparators, QString())
 
   CONFIG_OPTION_Q(QString, TimeFormat, QString("HH:mm"))
+  CONFIG_OPTION_Q(int, SecondsScaleFactor, 100)
 
   CONFIG_OPTION_Q(QBrush, Texture, QColor(112, 96, 240))
   CONFIG_OPTION_Q(bool, TextureStretch, false)

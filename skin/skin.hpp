@@ -12,6 +12,10 @@ class Skin {
 public:
   virtual ~Skin() = default;
 
+  // generic properties
+  virtual bool hasAlternateSeparator() const = 0;
+  virtual bool supportsCustomSeparator() const = 0;
+
   class Glyph {
   public:
     virtual ~Glyph() = default;

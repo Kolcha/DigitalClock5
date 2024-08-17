@@ -218,6 +218,32 @@ void GraphicsDateTimeWidget::updateSeparatorsState()
   update();
 }
 
+void GraphicsDateTimeWidget::setSecondsScaleFactor(qreal sf)
+{
+  setTokenTransform("ss", QTransform::fromScale(sf, sf));
+}
+
+void GraphicsDateTimeWidget::setTokenTransform(QString token, QTransform t)
+{
+  _gt->setTokenTransform(std::move(token), std::move(t));
+  updateGeometry();
+  update();
+}
+
+void GraphicsDateTimeWidget::removeTokenTransform(QString token)
+{
+  _gt->removeTokenTransform(std::move(token));
+  updateGeometry();
+  update();
+}
+
+void GraphicsDateTimeWidget::clearTokenTransform()
+{
+  _gt->clearTokenTransform();
+  updateGeometry();
+  update();
+}
+
 GraphicsDateTimeWidget::GraphicsDateTimeWidget(std::shared_ptr<GraphicsDateTime> gt, QWidget* parent)
     : GraphicsWidgetBase(gt, parent)
     , _gt(std::move(gt))

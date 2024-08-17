@@ -8,6 +8,9 @@ class FontSkin : public SkinBase {
 public:
   explicit FontSkin(QFont font);
 
+  bool hasAlternateSeparator() const override { return false; }
+  bool supportsCustomSeparator() const override { return true; }
+
   class CharGlyph : public Glyph {
   public:
     CharGlyph(char32_t c, const QFont& font);

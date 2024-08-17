@@ -151,6 +151,8 @@ public:
 
   QString customSeparators() { return _gt->customSeparators(); }
 
+  QTransform tokenTransform(QString token) const { return _gt->tokenTransform(token); }
+
 public slots:
   void setDateTime(QDateTime dt);
   void setTimeZone(QTimeZone tz);
@@ -163,6 +165,11 @@ public slots:
   void setCustomSeparators(QString seps);
 
   void updateSeparatorsState();
+
+  void setSecondsScaleFactor(qreal sf);
+  void setTokenTransform(QString token, QTransform t);
+  void removeTokenTransform(QString token);
+  void clearTokenTransform();
 
 private:
   GraphicsDateTimeWidget(std::shared_ptr<GraphicsDateTime> gt, QWidget* parent);

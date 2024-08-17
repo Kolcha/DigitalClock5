@@ -202,6 +202,12 @@ GraphicsDateTime::GraphicsDateTime(QDateTime dt)
   rebuild();
 }
 
+QTransform GraphicsDateTime::tokenTransform(QString token) const
+{
+  auto iter = _tt.find(token);
+  return iter != _tt.end() ? *iter : QTransform();
+}
+
 void GraphicsDateTime::setDateTime(QDateTime dt)
 {
   if (_dt == dt) return;
@@ -258,6 +264,24 @@ void GraphicsDateTime::updateSeparatorsState()
       s->setVisible(_sep_visible);
 }
 
+void GraphicsDateTime::setTokenTransform(QString token, QTransform t)
+{
+  _tt[token] = std::move(t);
+  rebuild();
+}
+
+void GraphicsDateTime::removeTokenTransform(QString token)
+{
+  _tt.remove(token);
+  rebuild();
+}
+
+void GraphicsDateTime::clearTokenTransform()
+{
+  _tt.clear();
+  rebuild();
+}
+
 void GraphicsDateTime::clearLayout()
 {
   _lines.clear();
@@ -283,7 +307,7 @@ void GraphicsDateTime::buildLayout()
   }
 
   // update separators
-  if (_use_alt_sep) {
+  if (_use_alt_sep && skin()->hasAlternateSeparator()) {
     for (auto& t : dt_tokens) {
       if (t.sep) {
         t.val.clear();
@@ -292,7 +316,7 @@ void GraphicsDateTime::buildLayout()
     }
   }
 
-  if (_use_cust_seps && !_custom_seps.isEmpty()) {
+  if (_use_cust_seps && skin()->supportsCustomSeparator()) {
     const auto custom_seps = _custom_seps.toUcs4();
     qsizetype sep_idx = 0;
     for (auto& t : dt_tokens) {
@@ -340,6 +364,9 @@ void GraphicsDateTime::rebuildLayout(const auto& dt_tokens)
       token_v.push_back(std::move(g));
     }
 
+    if (auto iter = _tt.find(t.key); iter != _tt.end())
+      token_c->transform()->setTransform(*iter);
+
     token_c->algorithm()->setSpacing(charSpacing());
     token_c->updateGeometry();
     line_c->addGlyph(std::move(token_c));
@@ -379,6 +406,8 @@ void GraphicsDateTime::updateLayout(const auto& dt_tokens)
         new_token->addGlyph(g);
         _lines[cl][ct].push_back(std::move(g));
       }
+      if (auto iter = _tt.find(t.key); iter != _tt.end())
+        new_token->transform()->setTransform(*iter);
       new_token->algorithm()->setSpacing(charSpacing());
       new_token->updateGeometry();
       curr_line[ct] = std::move(new_token);
@@ -388,6 +417,10 @@ void GraphicsDateTime::updateLayout(const auto& dt_tokens)
       for (qsizetype i = 0; i < t.val.size(); i++) {
         _lines[cl][ct][i]->setGlyph(skin()->glyph(t.val[i]));
       }
+      if (auto iter = _tt.find(t.key); iter != _tt.end())
+        curr_token.transform()->setTransform(*iter);
+      else
+        curr_token.transform()->setTransform(QTransform());
       curr_token.algorithm()->setSpacing(charSpacing());
       curr_token.updateGeometry();
     }
