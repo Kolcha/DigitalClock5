@@ -24,6 +24,7 @@ public:
   explicit ClockWindow(QWidget* parent = nullptr);
 
   AnchorPoint anchorPoint() const { return _anchor_point; }
+  QPoint originPoint() const { return _last_origin; }
 
   GraphicsDateTimeWidget* clock() const { return _clock; }
 
@@ -38,6 +39,7 @@ public:
 
 public slots:
   void setAnchorPoint(AnchorPoint ap);
+  void setOriginPoint(QPoint origin);
 
   void enableSnapToEdge() { setSnapToEdge(true, snapThreshold()); }
   void disableSnapToEdge() { setSnapToEdge(false, snapThreshold()); }
@@ -49,7 +51,12 @@ public slots:
 signals:
   void saveStateRequested();
 
+  void settingsDialogRequested();
+  void aboutDialogRequested();
+  void appExitRequested();
+
 protected:
+  void contextMenuEvent(QContextMenuEvent* event) override;
   void mousePressEvent(QMouseEvent* event) override;
   void mouseMoveEvent(QMouseEvent* event) override;
   void mouseReleaseEvent(QMouseEvent* event) override;
@@ -71,4 +78,6 @@ private:
 
   qreal _sx = 1.0;
   qreal _sy = 1.0;
+
+  QMenu* _ctx_menu;
 };

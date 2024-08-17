@@ -49,19 +49,21 @@ QFont actual_font(const QFont& fnt)
 
 } // namespace
 
-SettingsDialog::SettingsDialog(Application* app, QWidget* parent)
+SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
   : QDialog(parent)
   , ui(new Ui::SettingsDialog)
   , app(app)
-  , _curr_idx(0)
+  , _curr_idx(idx)
 {
   ui->setupUi(this);
 
-  // TODO: fill windows instances and set current
+  QSignalBlocker _(ui->windows_box);
+  for (int i = 0; i < app->config().global().getNumInstances(); i++)
+    ui->windows_box->addItem(tr("window %1").arg(i+1));
+  ui->windows_box->setCurrentIndex(_curr_idx);
   ui->windows_box->setVisible(app->config().global().getNumInstances() > 1);
 
   initAppGlobalTab();
-  // TODO: pass index to constructor
   initGeneralTab(_curr_idx);
   initAppearanceTab(_curr_idx);
   initPluginsTab();
@@ -88,6 +90,7 @@ void SettingsDialog::reject()
 void SettingsDialog::on_windows_box_currentIndexChanged(int index)
 {
   if (index < 0) return;
+  _curr_idx = index;
   initGeneralTab(index);
   initAppearanceTab(index);
 }

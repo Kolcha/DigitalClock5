@@ -19,7 +19,7 @@ class SettingsDialog : public QDialog
   Q_OBJECT
 
 public:
-  explicit SettingsDialog(Application* app, QWidget* parent = nullptr);
+  explicit SettingsDialog(Application* app, int idx, QWidget* parent = nullptr);
   ~SettingsDialog();
 
 public slots:
@@ -76,5 +76,5 @@ private:
 private:
   Ui::SettingsDialog* ui;
   Application* app;
-  int _curr_idx ;
+  int _curr_idx;
 };

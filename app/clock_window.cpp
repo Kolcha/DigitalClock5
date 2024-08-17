@@ -6,6 +6,9 @@
 
 #include "clock_window.hpp"
 
+#include <QMenu>
+
+#include <QContextMenuEvent>
 #include <QMouseEvent>
 
 ClockWindow::ClockWindow(QWidget* parent)
@@ -18,6 +21,17 @@ ClockWindow::ClockWindow(QWidget* parent)
   _layout->addWidget(_clock);
 
   setLayout(_layout);
+
+  using namespace Qt::Literals::StringLiterals;
+  _ctx_menu = new QMenu(this);
+  _ctx_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
+                       this, &ClockWindow::settingsDialogRequested);
+  _ctx_menu->addSeparator();
+  _ctx_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
+                       this, &ClockWindow::aboutDialogRequested);
+  _ctx_menu->addSeparator();
+  _ctx_menu->addAction(QIcon::fromTheme(u"application-exit"_s), tr("Quit"),
+                       this, &ClockWindow::appExitRequested);
 }
 
 void ClockWindow::addPluginWidget(GraphicsWidgetBase* w, int row, int column,
@@ -29,22 +43,27 @@ void ClockWindow::addPluginWidget(GraphicsWidgetBase* w, int row, int column,
 
 void ClockWindow::saveState(State& s) const
 {
-  s.setValue("state/origin", _last_origin);
-  s.setValue("state/anchor", (int)_anchor_point);
+  s.setValue("origin", _last_origin);
+  s.setValue("anchor", (int)_anchor_point);
 }
 
 void ClockWindow::loadState(const State& s)
 {
   // TODO: maybe set default point based on graphics size
   // as practice shown, it is better to avoid negative Y values :(
-  _last_origin = s.value("state/origin", QPoint(300, 300)).toPoint();
-  _anchor_point = (AnchorPoint)s.value("state/anchor", (int)AnchorLeft).toInt();
+  _last_origin = s.value("origin", _last_origin).toPoint();
+  _anchor_point = (AnchorPoint)s.value("anchor", (int)AnchorLeft).toInt();
 }
 
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
 {
   _anchor_point = ap;
   emit saveStateRequested();
+}
+
+void ClockWindow::setOriginPoint(QPoint origin)
+{
+  _last_origin = std::move(origin);
 }
 
 void ClockWindow::setSnapToEdge(bool enable, int threshold)
@@ -63,6 +82,12 @@ void ClockWindow::setScaling(qreal sx, qreal sy)
       w->setScaling(_sx, _sy);
   updateGeometry();
   update();
+}
+
+void ClockWindow::contextMenuEvent(QContextMenuEvent* event)
+{
+  _ctx_menu->popup(event->globalPos());
+  event->accept();
 }
 
 void ClockWindow::mousePressEvent(QMouseEvent* event)

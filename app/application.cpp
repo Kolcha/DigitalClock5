@@ -118,6 +118,8 @@ void Application::createWindows()
   for (int i = 0; i < _cfg->global().getNumInstances(); i++) {
     auto wnd = std::make_unique<ClockWindow>();
 
+    wnd->setOriginPoint(wnd->originPoint() + QPoint(i*15, i*15));
+
     wnd->setWindowFlag(Qt::NoDropShadowWindowHint);
     wnd->setWindowFlag(Qt::FramelessWindowHint);
     wnd->setAttribute(Qt::WA_TranslucentBackground);
@@ -135,6 +137,11 @@ void Application::createWindows()
     wnd->setWindowTitle(QString("%1 %2").arg(applicationDisplayName()).arg(i));
 
     connect(wnd.get(), &ClockWindow::saveStateRequested, this, &Application::saveWindowState);
+
+    connect(wnd.get(), &ClockWindow::settingsDialogRequested, this, &Application::showSettingsDialog);
+    connect(wnd.get(), &ClockWindow::aboutDialogRequested, this, &Application::showAboutDialog);
+    connect(wnd.get(), &ClockWindow::appExitRequested, this, &QApplication::quit);
+
     connect(&_tick_timer, &QTimer::timeout, wnd->clock(), &GraphicsDateTimeWidget::updateSeparatorsState);
 
     _windows.push_back(std::move(wnd));
@@ -196,7 +203,9 @@ void Application::onTimer()
 
 void Application::showSettingsDialog()
 {
-  _dm.maybeCreateAndShowDialog<SettingsDialog>(0xbd480f59, this);
+  auto wnd = qobject_cast<ClockWindow*>(sender());
+  int idx = wnd ? findWindow(wnd) : 0;
+  _dm.maybeCreateAndShowDialog<SettingsDialog>(0xbd480f59, this, idx);
 }
 
 void Application::showAboutDialog()
