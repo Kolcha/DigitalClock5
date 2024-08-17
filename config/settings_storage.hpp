@@ -89,6 +89,12 @@ private:
 // state client is generic, only users know details
 class StateClient {
 public:
+  template<typename T>
+  using toVariant = SettingsStorageClient::toVariant<T>;
+
+  template<typename T>
+  using fromVariant = SettingsStorageClient::fromVariant<T>;
+
   StateClient(QString title, SettingsStorage& st);
 
   void setValue(QString key, QVariant val);

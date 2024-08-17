@@ -9,9 +9,72 @@
 
 #include <QDesktopServices>
 
+#include <QColorDialog>
+#include <QFileDialog>
+#include <QFontDialog>
+
+#include <QGraphicsColorizeEffect>
+
+#include <QPainter>
+
+#include <gradient_dialog.h>
+
 #include "application.hpp"
+#include "state.hpp"
+#include "config/custom_converters.hpp"
 
 namespace {
+
+class SettingsDialogState : public StateImpl {
+public:
+  using StateImpl::StateImpl;
+
+  CONFIG_OPTION_Q(QColor, TextureColor, QColor(112, 96, 240))
+  CONFIG_OPTION_Q(QGradient, TextureGradient, sample_conical_gradient())
+  CONFIG_OPTION_Q(QPixmap, TexturePattern, sample_pattern())
+  CONFIG_OPTION_Q(QColor, BackgroundColor, QColor(0, 0, 0, 160))
+  CONFIG_OPTION_Q(QGradient, BackgroundGradient, sample_linear_gradient())
+  CONFIG_OPTION_Q(QPixmap, BackgroundPattern, sample_pattern())
+
+private:
+  static QGradient sample_conical_gradient();
+  static QGradient sample_linear_gradient();
+  static QPixmap sample_pattern();
+};
+
+QGradient SettingsDialogState::sample_conical_gradient()
+{
+  QConicalGradient g(0.5, 0.5, 45.0);
+  g.setStops({
+    {0.00, {170,   0,   0}},  // #aa0000
+    {0.20, {  0,  85, 255}},  // #0055ff
+    {0.45, {  0, 170,   0}},  // #00aa00
+    {0.65, {255, 255,   0}},  // #ffff00
+    {1.00, {170,   0,   0}},  // #aa0000
+  });
+  g.setCoordinateMode(QGradient::ObjectMode);
+  return g;
+}
+
+QGradient SettingsDialogState::sample_linear_gradient()
+{
+  QLinearGradient g(0., 0., 0., 1.);
+  g.setColorAt(0.0, Qt::transparent);
+  g.setColorAt(0.6, Qt::transparent);
+  g.setColorAt(1.0, QColor(85, 0, 255));
+  g.setCoordinateMode(QGradient::ObjectMode);
+  return g;
+}
+
+QPixmap SettingsDialogState::sample_pattern()
+{
+  QPixmap pxm(8, 8);
+  pxm.fill(QColor(160, 0, 160));
+  QPainter p(&pxm);
+  p.fillRect(0, 0, 4, 4, QColor(224, 0, 224));
+  p.fillRect(4, 4, 8, 8, QColor(224, 0, 224));
+  return pxm;
+}
 
 int setIndexByValue(QComboBox* box, const QVariant& value)
 {
@@ -258,6 +321,299 @@ void SettingsDialog::on_time_zone_edit_activated(int index)
   applyTimeZoneSettings();
 }
 
+void SettingsDialog::on_font_rbtn_clicked()
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getFont());
+  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  acfg.setUseFontInsteadOfSkin(true);
+}
+
+void SettingsDialog::on_select_font_btn_clicked()
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  bool ok = false;
+  QFont fnt = QFontDialog::getFont(&ok, actual_font(acfg.getFont()), this);
+  if (!ok) return;
+  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(fnt);
+  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  acfg.setFont(fnt);
+}
+
+void SettingsDialog::on_skin_rbtn_clicked()
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getSkin());
+  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  acfg.setUseFontInsteadOfSkin(false);
+}
+
+void SettingsDialog::on_skin_cbox_activated(int index)
+{
+  QString skin_name = ui->skin_cbox->itemData(index).toString();
+  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(skin_name);
+  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  app->config().window(_curr_idx).appearance().setSkin(skin_name);
+}
+
+void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setFlashSeparator, checked);
+  app->config().window(_curr_idx).appearance().setSeparatorFlashes(checked);
+}
+
+void SettingsDialog::on_scaling_x_edit_valueChanged(int arg1)
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  applyWindowOption(&ClockWindow::setScaling, arg1/100., acfg.getScalingV()/100.);
+  acfg.setScalingH(arg1);
+}
+
+void SettingsDialog::on_scaling_y_edit_valueChanged(int arg1)
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  applyWindowOption(&ClockWindow::setScaling, acfg.getScalingH()/100., arg1/100.);
+  acfg.setScalingV(arg1);
+}
+
+void SettingsDialog::on_scaling_same_btn_clicked(bool checked)
+{
+  if (checked) {
+    ui->scaling_y_edit->setValue(ui->scaling_x_edit->value());
+    connect(ui->scaling_x_edit, &QSpinBox::valueChanged, ui->scaling_y_edit, &QSpinBox::setValue);
+    connect(ui->scaling_y_edit, &QSpinBox::valueChanged, ui->scaling_x_edit, &QSpinBox::setValue);
+  } else {
+    disconnect(ui->scaling_x_edit, &QSpinBox::valueChanged, ui->scaling_y_edit, &QSpinBox::setValue);
+    disconnect(ui->scaling_y_edit, &QSpinBox::valueChanged, ui->scaling_x_edit, &QSpinBox::setValue);
+  }
+}
+
+void SettingsDialog::on_opacity_edit_valueChanged(int arg1)
+{
+  applyWindowOption(&ClockWindow::setWindowOpacity, arg1/100.);
+  app->config().window(_curr_idx).appearance().setOpacity(arg1);
+}
+
+void SettingsDialog::on_use_colorization_clicked(bool checked)
+{
+  if (checked) {
+    applyColorization();
+  } else {
+    applyWindowOption(&ClockWindow::setGraphicsEffect, nullptr);
+  }
+  app->config().window(_curr_idx).appearance().setApplyColorization(checked);
+}
+
+void SettingsDialog::on_select_colorization_color_clicked()
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  auto color = QColorDialog::getColor(acfg.getColorizationColor(),
+                                      this,
+                                      QString(),
+                                      QColorDialog::ShowAlphaChannel);
+  if (!color.isValid()) return;
+  acfg.setColorizationColor(color);
+  updateColorization();
+}
+
+void SettingsDialog::on_colorization_strength_edit_valueChanged(int arg1)
+{
+  app->config().window(_curr_idx).appearance().setColorizationStrength(arg1/100.);
+  updateColorization();
+}
+
+void SettingsDialog::on_texture_group_clicked(bool checked)
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+
+  QBrush brush(Qt::NoBrush);
+
+  if (checked) {
+    if (ui->tx_solid_color_rbtn->isChecked())
+      brush = QBrush(state.getTextureColor());
+
+    if (ui->tx_gradient_rbtn->isChecked())
+      brush = QBrush(state.getTextureGradient());
+
+    if (ui->tx_pattern_rbtn->isChecked())
+      brush = QBrush(state.getTexturePattern());
+  }
+
+  app->config().window(_curr_idx).appearance().setTexture(brush);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), brush);
+}
+
+void SettingsDialog::on_tx_solid_color_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setTexture(state.getTextureColor());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureColor());
+}
+
+void SettingsDialog::on_tx_select_color_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto color = QColorDialog::getColor(state.getTextureColor(),
+                                      this,
+                                      QString(),
+                                      QColorDialog::ShowAlphaChannel);
+  if (!color.isValid()) return;
+  app->config().window(_curr_idx).appearance().setTexture(color);
+  state.setTextureColor(color);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), color);
+}
+
+void SettingsDialog::on_tx_gradient_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setTexture(state.getTextureGradient());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureGradient());
+}
+
+void SettingsDialog::on_tx_select_gradient_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  bool ok = false;
+  auto gradient = GradientDialog::getGradient(&ok,
+                                              state.getTextureGradient(),
+                                              this);
+  if (!ok) return;
+  gradient.setCoordinateMode(QGradient::ObjectMode);
+  app->config().window(_curr_idx).appearance().setTexture(gradient);
+  state.setTextureGradient(gradient);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), gradient);
+}
+
+void SettingsDialog::on_tx_pattern_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setTexture(state.getTexturePattern());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTexturePattern());
+}
+
+void SettingsDialog::on_tx_select_pattern_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto file = QFileDialog::getOpenFileName(this,
+                                           QString(),
+                                           _last_path,
+                                           tr("Images (*.png *.bmp *.jpg)"));
+  if (file.isEmpty()) return;
+  _last_path = file;
+  QPixmap pxm(file);
+  app->config().window(_curr_idx).appearance().setTexture(pxm);
+  state.setTexturePattern(pxm);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), pxm);
+}
+
+void SettingsDialog::on_tx_pattern_stretch_clicked(bool checked)
+{
+  app->config().window(_curr_idx).appearance().setTextureStretch(checked);
+  applyClockOption(&GraphicsDateTimeWidget::setTextureStretch, checked);
+}
+
+void SettingsDialog::on_tx_per_element_cb_clicked(bool checked)
+{
+  app->config().window(_curr_idx).appearance().setTexturePerCharacter(checked);
+  applyClockOption(&GraphicsDateTimeWidget::setTexturePerChar, checked);
+}
+
+void SettingsDialog::on_background_group_clicked(bool checked)
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+
+  QBrush brush(Qt::NoBrush);
+
+  if (checked) {
+    if (ui->bg_solid_color_rbtn->isChecked())
+      brush = QBrush(state.getBackgroundColor());
+
+    if (ui->bg_gradient_rbtn->isChecked())
+      brush = QBrush(state.getBackgroundGradient());
+
+    if (ui->bg_pattern_rbtn->isChecked())
+      brush = QBrush(state.getBackgroundPattern());
+  }
+
+  app->config().window(_curr_idx).appearance().setBackground(brush);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), brush);
+}
+
+void SettingsDialog::on_bg_solid_color_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundColor());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundColor());
+}
+
+void SettingsDialog::on_bg_select_color_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto color = QColorDialog::getColor(state.getBackgroundColor(),
+                                      this,
+                                      QString(),
+                                      QColorDialog::ShowAlphaChannel);
+  if (!color.isValid()) return;
+  app->config().window(_curr_idx).appearance().setBackground(color);
+  state.setBackgroundColor(color);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), color);
+}
+
+void SettingsDialog::on_bg_gradient_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundGradient());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundGradient());
+}
+
+void SettingsDialog::on_bg_select_gradient_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  bool ok = false;
+  auto gradient = GradientDialog::getGradient(&ok,
+                                              state.getBackgroundGradient(),
+                                              this);
+  if (!ok) return;
+  gradient.setCoordinateMode(QGradient::ObjectMode);
+  app->config().window(_curr_idx).appearance().setBackground(gradient);
+  state.setBackgroundGradient(gradient);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), gradient);
+}
+
+void SettingsDialog::on_bg_pattern_rbtn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundPattern());
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundPattern());
+}
+
+void SettingsDialog::on_bg_select_pattern_btn_clicked()
+{
+  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto file = QFileDialog::getOpenFileName(this,
+                                           QString(),
+                                           _last_path,
+                                           tr("Images (*.png *.bmp *.jpg)"));
+  if (file.isEmpty()) return;
+  _last_path = file;
+  QPixmap pxm(file);
+  app->config().window(_curr_idx).appearance().setBackground(pxm);
+  state.setBackgroundPattern(pxm);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), pxm);
+}
+
+void SettingsDialog::on_bg_pattern_stretch_clicked(bool checked)
+{
+  app->config().window(_curr_idx).appearance().setBackgroundStretch(checked);
+  applyClockOption(&GraphicsDateTimeWidget::setBackgroundStretch, checked);
+}
+
+void SettingsDialog::on_bg_per_element_cb_clicked(bool checked)
+{
+  app->config().window(_curr_idx).appearance().setBackgroundPerCharacter(checked);
+  applyClockOption(&GraphicsDateTimeWidget::setBackgroundPerChar, checked);
+}
+
 void SettingsDialog::initAppGlobalTab()
 {
   // app global
@@ -353,6 +709,38 @@ void SettingsDialog::initGeneralTab(int idx)
 
 void SettingsDialog::initAppearanceTab(int idx)
 {
+  SectionAppearance& acfg = app->config().window(idx).appearance();
+
+  ui->font_rbtn->setChecked(acfg.getUseFontInsteadOfSkin());
+  ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
+  // ui->skin_cbox->addItems(impl->app->skin_manager()->availableSkins());
+  // ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
+  // ui->skin_cbox->setCurrentText(impl->wcfg->state().getLastUsedSkin());
+  ui->is_separator_flashes->setChecked(acfg.getSeparatorFlashes());
+  ui->scaling_x_edit->setValue(acfg.getScalingH());
+  ui->scaling_y_edit->setValue(acfg.getScalingV());
+  ui->opacity_edit->setValue(acfg.getOpacity());
+  ui->use_colorization->setChecked(acfg.getApplyColorization());
+  ui->colorization_strength_edit->setValue(qRound(acfg.getColorizationStrength() * 100));
+
+  ui->scaling_same_btn->setChecked(ui->scaling_x_edit->value() == ui->scaling_y_edit->value());
+  on_scaling_same_btn_clicked(ui->scaling_same_btn->isChecked());
+
+  auto tx = acfg.getTexture();
+  ui->texture_group->setChecked(tx.style() != Qt::NoBrush);
+  ui->tx_solid_color_rbtn->setChecked(tx.style() == Qt::SolidPattern);
+  ui->tx_gradient_rbtn->setChecked(tx.gradient() != nullptr);
+  ui->tx_pattern_rbtn->setChecked(tx.style() == Qt::TexturePattern);
+  ui->tx_pattern_stretch->setChecked(acfg.getTextureStretch());
+  ui->tx_per_element_cb->setChecked(acfg.getTexturePerCharacter());
+
+  auto bg = acfg.getBackground();
+  ui->background_group->setChecked(bg.style() != Qt::NoBrush);
+  ui->bg_solid_color_rbtn->setChecked(bg.style() == Qt::SolidPattern);
+  ui->bg_gradient_rbtn->setChecked(bg.gradient() != nullptr);
+  ui->bg_pattern_rbtn->setChecked(bg.style() == Qt::TexturePattern);
+  ui->bg_pattern_stretch->setChecked(acfg.getBackgroundStretch());
+  ui->bg_per_element_cb->setChecked(acfg.getBackgroundPerCharacter());
 }
 
 void SettingsDialog::initPluginsTab()
@@ -365,4 +753,65 @@ void SettingsDialog::applyTimeZoneSettings()
     app->window(_curr_idx)->clock()->setTimeZone(QDateTime::currentDateTime().timeZone());
   else
     app->window(_curr_idx)->clock()->setTimeZone(app->config().window(_curr_idx).generic().getTimeZone());
+}
+
+void SettingsDialog::applyColorization()
+{
+  auto create_effect = [this]() {
+    SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+    auto effect = new QGraphicsColorizeEffect;
+    effect->setColor(acfg.getColorizationColor());
+    effect->setStrength(acfg.getColorizationStrength());
+    return effect;
+  };
+
+  if (app->config().global().getAppearancePerInstance()) {
+    app->window(_curr_idx)->setGraphicsEffect(create_effect());
+  } else {
+    for (const auto& wnd : app->windows())
+      wnd->setGraphicsEffect(create_effect());
+  }
+}
+
+void SettingsDialog::updateColorization()
+{
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+
+  if (app->config().global().getAppearancePerInstance()) {
+    auto effect = qobject_cast<QGraphicsColorizeEffect*>(app->window(_curr_idx)->graphicsEffect());
+    if (!effect) return;
+    effect->setColor(acfg.getColorizationColor());
+    effect->setStrength(acfg.getColorizationStrength());
+  } else {
+    for (const auto& wnd : app->windows()) {
+      auto effect = qobject_cast<QGraphicsColorizeEffect*>(wnd->graphicsEffect());
+      if (!effect) continue;
+      effect->setColor(acfg.getColorizationColor());
+      effect->setStrength(acfg.getColorizationStrength());
+    }
+  }
+}
+
+template<typename Method, typename... Args>
+void SettingsDialog::applyWindowOption(Method method, Args&&... args)
+{
+  if (app->config().global().getAppearancePerInstance()) {
+    auto wnd = app->window(_curr_idx);
+    (*wnd.*method)(std::forward<Args>(args)...);
+  } else {
+    for (const auto& wnd : app->windows())
+      (*wnd.*method)(std::forward<Args>(args)...);
+  }
+}
+
+template<typename Method, typename... Args>
+void SettingsDialog::applyClockOption(Method method, Args&&... args)
+{
+  if (app->config().global().getAppearancePerInstance()) {
+    auto wnd = app->window(_curr_idx);
+    (*wnd->clock().*method)(std::forward<Args>(args)...);
+  } else {
+    for (const auto& wnd : app->windows())
+      (*wnd->clock().*method)(std::forward<Args>(args)...);
+  }
 }

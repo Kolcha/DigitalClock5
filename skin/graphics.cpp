@@ -66,9 +66,13 @@ void GraphicsBase::update()
 {
   _char_a->setBackground(_bg_pc ? _bg : Qt::NoBrush);
   _char_a->setTexture(_tx_pc ? _tx : Qt::NoBrush);
+  _char_a->setBackgroundStretch(_bg_pc && _bg_s);
+  _char_a->setTextureStretch(_tx_pc && _tx_s);
 
   _text_a->setBackground(_bg_pc ? Qt::NoBrush : _bg);
   _text_a->setTexture(_tx_pc ? Qt::NoBrush : _tx);
+  _text_a->setBackgroundStretch(!_bg_pc && _bg_s);
+  _text_a->setTextureStretch(!_tx_pc && _tx_s);
 }
 
 

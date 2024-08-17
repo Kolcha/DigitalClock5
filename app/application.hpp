@@ -34,6 +34,8 @@ public:
   ClockWindow* window(size_t i) { return _windows[i].get(); }
   size_t findWindow(ClockWindow* w) const;
 
+  auto& windows() const { return _windows; }
+
   void configureWindow(size_t i);
   void configureWindows();
 

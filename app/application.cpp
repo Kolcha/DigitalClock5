@@ -47,7 +47,7 @@ void Application::configureWindow(size_t i)
 
   // load skin
   if (i == 0 || _cfg->global().getAppearancePerInstance()) {
-    auto skin = acfg.getUseFont() ?
+    auto skin = acfg.getUseFontInsteadOfSkin() ?
                     _sm.loadSkin(acfg.getFont()) :
                     _sm.loadSkin(acfg.getSkin());
     clock->setSkin(std::move(skin));

@@ -62,6 +62,7 @@ qt_add_executable(${PROJECT_NAME}
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
 
+add_subdirectory(deps)
 add_subdirectory(dist)
 add_subdirectory(res)
 
@@ -70,6 +71,7 @@ configure_file(version.hpp.in version.hpp @ONLY)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
+target_link_libraries(${PROJECT_NAME} PRIVATE gradient_dialog)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Widgets Qt::Network)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -21,6 +21,12 @@ public:
 // about any config implementation details
 class StateImpl : public State {
 public:
+  template<typename T>
+  using toVariant = StateClient::toVariant<T>;
+
+  template<typename T>
+  using fromVariant = StateClient::fromVariant<T>;
+
   explicit StateImpl(StateClient& scl) : _scl(scl) {}
 
   void setValue(QString key, QVariant val) override

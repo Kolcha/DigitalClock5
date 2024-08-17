@@ -51,7 +51,11 @@ public:
 
   CONFIG_OPTION_Q(int, Opacity, 80)
 
-  CONFIG_OPTION_Q(bool, UseFont, true)
+  CONFIG_OPTION_Q(bool, ApplyColorization, false)
+  CONFIG_OPTION_Q(qreal, ColorizationStrength, 0.8)
+  CONFIG_OPTION_Q(QColor, ColorizationColor, QColor(0, 85, 255))
+
+  CONFIG_OPTION_Q(bool, UseFontInsteadOfSkin, true)
   CONFIG_OPTION_Q(QFont, Font, QFont("Comic Sans MS", 96))
   CONFIG_OPTION_Q(QString, Skin, QString("electronic"))
 
