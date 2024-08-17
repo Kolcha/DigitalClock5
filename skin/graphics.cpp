@@ -54,6 +54,7 @@ void GraphicsBase::rebuild()
 {
   if (!_skin) {
     _tg.clear();
+    clearLayout();
     return;
   }
 
@@ -88,6 +89,11 @@ void GraphicsText::setText(QString text)
   if (_text == text) return;
   _text = std::move(text);
   rebuild();
+}
+
+void GraphicsText::clearLayout()
+{
+  _lines.clear();
 }
 
 void GraphicsText::buildLayout()
@@ -250,6 +256,12 @@ void GraphicsDateTime::updateSeparatorsState()
   if (!_use_alt_sep)
     for (const auto& s : _seps)
       s->setVisible(_sep_visible);
+}
+
+void GraphicsDateTime::clearLayout()
+{
+  _lines.clear();
+  _seps.clear();
 }
 
 void GraphicsDateTime::buildLayout()

@@ -93,6 +93,7 @@ protected:
   void rebuild();
   void update();
 
+  virtual void clearLayout() = 0;
   virtual void buildLayout() = 0;
 
 private:
@@ -123,6 +124,7 @@ public:
   void setText(QString text);
 
 protected:
+  void clearLayout() override;
   void buildLayout() override;
 
 private:
@@ -158,6 +160,7 @@ public:
   void updateSeparatorsState();
 
 protected:
+  void clearLayout() override;
   void buildLayout() override;
 
 private:
