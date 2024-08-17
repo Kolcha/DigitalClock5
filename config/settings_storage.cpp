@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #include "settings_storage.hpp"
 
 SettingsStorage::SettingsStorage(const QString& filename)
