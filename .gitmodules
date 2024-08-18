@@ -1,4 +1,4 @@
 [submodule "GradientDialog"]
-	path = deps/GradientDialog
+	path = 3rdparty/GradientDialog
 	url = https://github.com/Kolcha/GradientDialog.git
 	branch = master
