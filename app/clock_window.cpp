@@ -11,6 +11,8 @@
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 
+#include <QPainter>
+
 ClockWindow::ClockWindow(QWidget* parent)
     : QWidget(parent)
 {
@@ -84,6 +86,12 @@ void ClockWindow::setScaling(qreal sx, qreal sy)
   update();
 }
 
+void ClockWindow::setFrameVisible(bool vis)
+{
+  _frame_visible = vis;
+  update();
+}
+
 void ClockWindow::contextMenuEvent(QContextMenuEvent* event)
 {
   _ctx_menu->popup(event->globalPos());
@@ -146,8 +154,13 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 
 void ClockWindow::paintEvent(QPaintEvent* event)
 {
-  // TODO: draw frame when setting dialog is open
   QWidget::paintEvent(event);
+
+  if (_frame_visible) {
+    QPainter p(this);
+    p.setPen(QPen(Qt::red, 2, Qt::DotLine, Qt::SquareCap, Qt::MiterJoin));
+    p.drawRect(rect().adjusted(1, 1, -1, -1));
+  }
 }
 
 void ClockWindow::resizeEvent(QResizeEvent* event)

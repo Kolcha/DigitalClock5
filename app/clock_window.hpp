@@ -31,6 +31,8 @@ public:
   bool snapToEdge() const { return _snap_to_edge; }
   int snapThreshold() const { return _snap_threshold; }
 
+  bool frameVisible() const { return _frame_visible; }
+
   void addPluginWidget(GraphicsWidgetBase* w, int row, int column,
                        int row_span = 1, int column_span = 1);
 
@@ -47,6 +49,10 @@ public slots:
   void setSnapThreshold(int thr) { setSnapToEdge(snapToEdge(), thr); }
 
   void setScaling(qreal sx, qreal sy);
+
+  void enableFrame() { setFrameVisible(true); }
+  void disableFrame() { setFrameVisible(false); }
+  void setFrameVisible(bool vis);
 
 signals:
   void saveStateRequested();
@@ -78,6 +84,8 @@ private:
 
   qreal _sx = 1.0;
   qreal _sy = 1.0;
+
+  bool _frame_visible = false;
 
   QMenu* _ctx_menu;
 };

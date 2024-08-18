@@ -120,6 +120,8 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
 {
   ui->setupUi(this);
 
+  app->window(_curr_idx)->enableFrame();
+
   QSignalBlocker _(ui->windows_box);
   for (int i = 0; i < app->config().global().getNumInstances(); i++)
     ui->windows_box->addItem(tr("window %1").arg(i+1));
@@ -134,6 +136,7 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
 
 SettingsDialog::~SettingsDialog()
 {
+  app->window(_curr_idx)->disableFrame();
   delete ui;
 }
 
@@ -153,7 +156,9 @@ void SettingsDialog::reject()
 void SettingsDialog::on_windows_box_currentIndexChanged(int index)
 {
   if (index < 0) return;
+  app->window(_curr_idx)->disableFrame();
   _curr_idx = index;
+  app->window(_curr_idx)->enableFrame();
   initGeneralTab(index);
   initAppearanceTab(index);
 }
