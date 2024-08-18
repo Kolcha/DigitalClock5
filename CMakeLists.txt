@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 cmake_minimum_required(VERSION 3.19)
 
 project(DigitalClock5 VERSION 5.0.0 LANGUAGES CXX)
@@ -10,7 +14,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network Svg)
 
 qt_add_executable(${PROJECT_NAME}
     main.cpp
@@ -58,6 +62,10 @@ qt_add_executable(${PROJECT_NAME}
     app/settings_dialog.hpp
     app/settings_dialog.cpp
     app/settings_dialog.ui
+    skin/image_glyph.hpp
+    skin/image_glyph.cpp
+    skin/legacy_skin.hpp
+    skin/legacy_skin.cpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
@@ -72,7 +80,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gradient_dialog)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Widgets Qt::Network)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Widgets Qt::Network Qt::Svg)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_BUNDLE_NAME "Digital Clock"

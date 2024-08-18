@@ -14,6 +14,19 @@
 
 class SkinManager {
 public:
+  SkinManager();
+  ~SkinManager();
+
   std::unique_ptr<Skin> loadSkin(const QFont& font) const;
   std::unique_ptr<Skin> loadSkin(const QString& id) const;
+
+  // returns list of ids, not titles
+  QStringList availableSkins() const;
+
+  using Metadata = QHash<QString, QString>;
+  Metadata metadata(const QString& id) const;
+
+private:
+  struct Impl;
+  std::unique_ptr<Impl> _impl;
 };

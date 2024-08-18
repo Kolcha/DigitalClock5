@@ -720,9 +720,15 @@ void SettingsDialog::initAppearanceTab(int idx)
 
   ui->font_rbtn->setChecked(acfg.getUseFontInsteadOfSkin());
   ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
-  // ui->skin_cbox->addItems(impl->app->skin_manager()->availableSkins());
-  // ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
-  // ui->skin_cbox->setCurrentText(impl->wcfg->state().getLastUsedSkin());
+
+  const auto avail_skins = app->skinManager().availableSkins();
+  for (const auto& s : avail_skins) {
+    auto t = app->skinManager().metadata(s)["name"];
+    ui->skin_cbox->addItem(t, s);
+  }
+  ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
+  ui->skin_cbox->setCurrentText(app->skinManager().metadata(acfg.getSkin())["name"]);
+
   ui->is_separator_flashes->setChecked(acfg.getSeparatorFlashes());
   ui->scaling_x_edit->setValue(acfg.getScalingH());
   ui->scaling_y_edit->setValue(acfg.getScalingV());
