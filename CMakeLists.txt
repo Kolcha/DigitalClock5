@@ -66,6 +66,7 @@ qt_add_executable(${PROJECT_NAME}
     skin/image_glyph.cpp
     skin/legacy_skin.hpp
     skin/legacy_skin.cpp
+    skin/observable.hpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

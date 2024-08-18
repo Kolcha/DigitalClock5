@@ -13,12 +13,21 @@ void Appearance::setBackground(QBrush b, bool stretch)
 {
   _bg = std::move(b);
   _bg_s = stretch;
+  notify(&AppearanceChangeListener::onAppearanceChanged);
 }
 
 void Appearance::setTexture(QBrush b, bool stretch)
 {
   _tx = std::move(b);
   _tx_s = stretch;
+  notify(&AppearanceChangeListener::onAppearanceChanged);
+}
+
+
+void Transform::setTransform(QTransform t)
+{
+  _t = std::move(t);
+  notify(&AppearanceChangeListener::onAppearanceChanged);
 }
 
 
@@ -27,7 +36,15 @@ Glyph::Glyph(std::shared_ptr<Skin::Glyph> g)
     , _t(std::make_shared<Transform>())
     , _a(std::make_shared<Appearance>())
 {
+  _t->subscribe(this);
+  _a->subscribe(this);
   updateGeometry();
+}
+
+Glyph::~Glyph()
+{
+  _a->unsubscribe(this);
+  _t->unsubscribe(this);
 }
 
 void Glyph::setGlyph(std::shared_ptr<Skin::Glyph> g)
@@ -45,14 +62,18 @@ void Glyph::setPos(QPointF p)
 
 void Glyph::setTransform(std::shared_ptr<Transform> t)
 {
+  _t->unsubscribe(this);
   _t = std::move(t);
+  _t->subscribe(this);
   updateGeometry();
   dropCachedData();
 }
 
 void Glyph::setAppearance(std::shared_ptr<Appearance> a)
 {
+  _a->unsubscribe(this);
   _a = std::move(a);
+  _a->subscribe(this);
   dropCachedData();
 }
 
@@ -115,6 +136,11 @@ void Glyph::draw(QPainter* p) const
   p->translate(br.topLeft());
   p->drawPixmap(0, 0, pxm);
   p->restore();
+}
+
+void Glyph::onAppearanceChanged()
+{
+  dropCachedData();
 }
 
 void Glyph::updateGeometry()

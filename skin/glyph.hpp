@@ -13,10 +13,19 @@
 
 #include <QPixmapCache>
 
+#include "observable.hpp"
 #include "skin.hpp"
 
+class AppearanceChangeListener {
+public:
+  virtual ~AppearanceChangeListener() = default;
+
+  virtual void onAppearanceChanged() = 0;
+};
+
+
 // many glyphs may have the same appearance
-class Appearance {
+class Appearance : public Observable<AppearanceChangeListener> {
 public:
   QBrush background() const { return _bg; }
   QBrush texture() const { return _tx; }
@@ -40,11 +49,11 @@ private:
 
 
 // many glyphs may have the same transform
-class Transform {
+class Transform : public Observable<AppearanceChangeListener> {
 public:
   QTransform transform() const { return _t; }
 
-  void setTransform(QTransform t) { _t = std::move(t); }
+  void setTransform(QTransform t);
 
 private:
   QTransform _t;
@@ -52,7 +61,7 @@ private:
 
 
 // non-shareable, as has unique data such as position
-class Glyph {
+class Glyph : public AppearanceChangeListener {
 public:
   Glyph() = default;
   explicit Glyph(std::shared_ptr<Skin::Glyph> g);
@@ -63,7 +72,7 @@ public:
   Glyph& operator=(const Glyph&) = default;
   Glyph& operator=(Glyph&&) = default;
 
-  virtual ~Glyph() = default;
+  ~Glyph();
 
   std::shared_ptr<Skin::Glyph> glyph() const { return _g; }
   void setGlyph(std::shared_ptr<Skin::Glyph> g);
@@ -101,6 +110,9 @@ public:
   // ---------------------
 
   void draw(QPainter* p) const;
+
+  // listeners
+  void onAppearanceChanged();
 
 protected:
   void updateGeometry();
