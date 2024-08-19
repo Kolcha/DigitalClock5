@@ -12,7 +12,9 @@
 #include "container.hpp"
 #include "skin.hpp"
 
-class GraphicsBase {
+#include "skin_engine_global.hpp"
+
+class SKIN_ENGINE_EXPORT GraphicsBase {
 public:
   GraphicsBase();
 
@@ -121,7 +123,7 @@ private:
 };
 
 
-class GraphicsText : public GraphicsBase {
+class SKIN_ENGINE_EXPORT GraphicsText : public GraphicsBase {
 public:
   explicit GraphicsText(QString text = {});
 
@@ -139,7 +141,7 @@ private:
 };
 
 
-class GraphicsDateTime : public GraphicsBase {
+class SKIN_ENGINE_EXPORT GraphicsDateTime : public GraphicsBase {
 public:
   explicit GraphicsDateTime(QDateTime dt = QDateTime::currentDateTime());
 

@@ -14,7 +14,7 @@
 // but from other side, it produces very tight rect with no extra spacing
 // can be used as widget for displaying data from plugins
 // TODO: add option to use full string height, add ascent/descent values to skin
-class GraphicsWidgetBase : public QWidget
+class SKIN_ENGINE_EXPORT GraphicsWidgetBase : public QWidget
 {
   Q_OBJECT
 
@@ -120,7 +120,7 @@ private:
 };
 
 
-class GraphicsTextWidget : public GraphicsWidgetBase
+class SKIN_ENGINE_EXPORT GraphicsTextWidget : public GraphicsWidgetBase
 {
   Q_OBJECT
 
@@ -140,7 +140,7 @@ private:
 };
 
 
-class GraphicsDateTimeWidget : public GraphicsWidgetBase
+class SKIN_ENGINE_EXPORT GraphicsDateTimeWidget : public GraphicsWidgetBase
 {
   Q_OBJECT
 

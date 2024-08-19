@@ -5,9 +5,13 @@
 project(ClockCommon VERSION 2.0.0 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
+    config/settings_storage.hpp
+    config/settings_storage.cpp
+    config/custom_converters.hpp
     clock_common_global.hpp
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE CLOCK_COMMON_LIBRARY)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt::Gui)

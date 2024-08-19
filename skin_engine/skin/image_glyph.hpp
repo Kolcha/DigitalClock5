@@ -11,7 +11,9 @@
 #include <QPixmap>
 #include <QSvgRenderer>
 
-class ImageGlyphBase : public Skin::Glyph {
+#include "skin_engine_global.hpp"
+
+class SKIN_ENGINE_EXPORT ImageGlyphBase : public Skin::Glyph {
 public:
   QRectF rect() const override { return _rect; }
   QPointF advance() const override { return _adv; }
@@ -32,7 +34,7 @@ private:
 };
 
 
-class RasterGlyph : public ImageGlyphBase {
+class SKIN_ENGINE_EXPORT RasterGlyph : public ImageGlyphBase {
 public:
   explicit RasterGlyph(const QString& filename)
       : RasterGlyph(QPixmap(filename))
@@ -57,7 +59,7 @@ private:
 };
 
 
-class VectorGlyph : public ImageGlyphBase {
+class SKIN_ENGINE_EXPORT VectorGlyph : public ImageGlyphBase {
 public:
   explicit VectorGlyph(const QString& filename)
       : VectorGlyph(std::make_unique<QSvgRenderer>(filename))

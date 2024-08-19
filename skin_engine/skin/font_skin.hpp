@@ -6,11 +6,13 @@
 
 #pragma once
 
+#include "skin_engine_global.hpp"
+
 #include "skin.hpp"
 
 #include <QFont>
 
-class FontSkin : public SkinBase {
+class SKIN_ENGINE_EXPORT FontSkin : public SkinBase {
 public:
   explicit FontSkin(QFont font);
 

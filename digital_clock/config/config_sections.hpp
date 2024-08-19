@@ -8,11 +8,11 @@
 
 #include <QFont>
 
-#include "settings_storage.hpp"
+#include "config/settings_storage.hpp"
 
 // even it may look as unnecessary and unused header,
 // it is requeired due to some templates behind macro
-#include "custom_converters.hpp"
+#include "config/custom_converters.hpp"
 
 class SectionAppGlobal : public SettingsStorageClient {
 public:

@@ -8,7 +8,9 @@
 
 #include <QSettings>
 
-class SettingsStorage {
+#include "clock_common_global.hpp"
+
+class CLOCK_COMMON_EXPORT SettingsStorage {
 public:
   SettingsStorage() = default;
   explicit SettingsStorage(const QString& filename);
@@ -43,7 +45,7 @@ private:
 };
 
 
-class SettingsStorageClient {
+class CLOCK_COMMON_EXPORT SettingsStorageClient {
 public:
   template<typename T>
   struct toVariant {
@@ -93,7 +95,7 @@ private:
 // state client doesn't assume discard operation,
 // all changes are stored permanently
 // state client is generic, only users know details
-class StateClient {
+class CLOCK_COMMON_EXPORT StateClient {
 public:
   template<typename T>
   using toVariant = SettingsStorageClient::toVariant<T>;

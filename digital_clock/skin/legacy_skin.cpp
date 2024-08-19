@@ -9,7 +9,7 @@
 #include <QDir>
 #include <QSettings>
 
-#include "image_glyph.hpp"
+#include "skin/image_glyph.hpp"
 
 namespace {
 

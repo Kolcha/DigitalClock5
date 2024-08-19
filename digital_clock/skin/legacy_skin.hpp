@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "skin.hpp"
+#include "skin/skin.hpp"
 
 class LegacySkin : public Skin {
 public:

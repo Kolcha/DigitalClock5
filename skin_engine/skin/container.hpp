@@ -8,7 +8,7 @@
 
 #include "glyph.hpp"
 
-class Algorithm {
+class SKIN_ENGINE_EXPORT Algorithm {
 public:
   virtual ~Algorithm() = default;
 
@@ -21,7 +21,7 @@ public:
 };
 
 
-class ContainerImplBase : public Skin::Glyph {
+class SKIN_ENGINE_EXPORT ContainerImplBase : public Skin::Glyph {
 public:
   explicit ContainerImplBase(std::shared_ptr<Algorithm> algo);
 
@@ -49,7 +49,7 @@ private:
 };
 
 
-class LinearLayout : public Algorithm {
+class SKIN_ENGINE_EXPORT LinearLayout : public Algorithm {
 public:
   void process(const GlyphList& glyps) override;
 
@@ -77,7 +77,7 @@ private:
 };
 
 
-class HLayout : public LinearLayout {
+class SKIN_ENGINE_EXPORT HLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;
@@ -85,7 +85,7 @@ protected:
 };
 
 
-class VLayout : public LinearLayout {
+class SKIN_ENGINE_EXPORT VLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;

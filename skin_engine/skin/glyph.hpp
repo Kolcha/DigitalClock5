@@ -16,6 +16,8 @@
 #include "observable.hpp"
 #include "skin.hpp"
 
+#include "skin_engine_global.hpp"
+
 class AppearanceChangeListener {
 public:
   virtual ~AppearanceChangeListener() = default;
@@ -25,7 +27,7 @@ public:
 
 
 // many glyphs may have the same appearance
-class Appearance : public Observable<AppearanceChangeListener> {
+class SKIN_ENGINE_EXPORT Appearance : public Observable<AppearanceChangeListener> {
 public:
   QBrush background() const { return _bg; }
   QBrush texture() const { return _tx; }
@@ -49,7 +51,7 @@ private:
 
 
 // many glyphs may have the same transform
-class Transform : public Observable<AppearanceChangeListener> {
+class SKIN_ENGINE_EXPORT Transform : public Observable<AppearanceChangeListener> {
 public:
   QTransform transform() const { return _t; }
 
@@ -61,7 +63,7 @@ private:
 
 
 // non-shareable, as has unique data such as position
-class Glyph : public AppearanceChangeListener {
+class SKIN_ENGINE_EXPORT Glyph : public AppearanceChangeListener {
 public:
   Glyph() = default;
   explicit Glyph(std::shared_ptr<Skin::Glyph> g);

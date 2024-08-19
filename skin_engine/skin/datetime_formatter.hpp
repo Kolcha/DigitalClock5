@@ -6,10 +6,12 @@
 
 #pragma once
 
+#include "skin_engine_global.hpp"
+
 #include <QDateTime>
 #include <QStringView>
 
-class DateTimeStringBuilder {
+class SKIN_ENGINE_EXPORT DateTimeStringBuilder {
 public:
   virtual ~DateTimeStringBuilder() = default;
 
@@ -20,6 +22,7 @@ public:
   virtual void tokenEnd(QStringView token) {}
 };
 
+SKIN_ENGINE_EXPORT
 // in format string only ':' is considered as separator
 void FormatDateTime(const QDateTime& dt, QStringView fmt,
                     DateTimeStringBuilder& str_builder);

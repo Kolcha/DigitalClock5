@@ -6,22 +6,6 @@ project(DigitalClock5 VERSION ${CLOCK_VERSION} LANGUAGES CXX)
 
 qt_add_executable(${PROJECT_NAME}
     main.cpp
-    skin/glyph.hpp
-    skin/container.hpp
-    skin/skin.hpp
-    skin/font_skin.hpp
-    skin/container.cpp
-    skin/font_skin.cpp
-    skin/glyph.cpp
-    skin/datetime_formatter.hpp
-    skin/datetime_formatter.cpp
-    skin/graphics.hpp
-    skin/graphics.cpp
-    skin/graphics_widgets.hpp
-    skin/graphics_widgets.cpp
-    config/settings_storage.hpp
-    config/settings_storage.cpp
-    config/custom_converters.hpp
     config/config_sections.hpp
     config/config_sections.cpp
     config/app_config.hpp
@@ -50,11 +34,8 @@ qt_add_executable(${PROJECT_NAME}
     app/settings_dialog.hpp
     app/settings_dialog.cpp
     app/settings_dialog.ui
-    skin/image_glyph.hpp
-    skin/image_glyph.cpp
     skin/legacy_skin.hpp
     skin/legacy_skin.cpp
-    skin/observable.hpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
