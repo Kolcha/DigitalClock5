@@ -20,6 +20,9 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network Svg)
 
 qt_standard_project_setup()
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+include(clock_utils)
+
 set(CLOCK_PROJECT_NAME ${PROJECT_NAME})
 set(CLOCK_VERSION ${PROJECT_VERSION})
 

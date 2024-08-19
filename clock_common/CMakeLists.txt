@@ -11,6 +11,8 @@ qt_add_library(${PROJECT_NAME} SHARED
     clock_common_global.hpp
 )
 
+add_win_rc_file(${PROJECT_NAME} clock_common.rc)
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE CLOCK_COMMON_LIBRARY)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

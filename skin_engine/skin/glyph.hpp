@@ -18,7 +18,7 @@
 
 #include "skin_engine_global.hpp"
 
-class AppearanceChangeListener {
+class SKIN_ENGINE_EXPORT AppearanceChangeListener {
 public:
   virtual ~AppearanceChangeListener() = default;
 

@@ -94,7 +94,7 @@ protected:
 
 
 template<class LayoutImpl>
-class ContainerGlyphPrivate : public ContainerImplBase {
+class SKIN_ENGINE_EXPORT ContainerGlyphPrivate : public ContainerImplBase {
 public:
   using AlgorithmType = LayoutImpl;
   ContainerGlyphPrivate() : ContainerImplBase(std::make_shared<LayoutImpl>()) {}
@@ -102,7 +102,7 @@ public:
 
 
 template<class ContainerImpl>
-class ContainerGlyph : public Glyph {
+class SKIN_ENGINE_EXPORT ContainerGlyph : public Glyph {
 public:
   using AlgorithmType = typename ContainerImpl::AlgorithmType;
 

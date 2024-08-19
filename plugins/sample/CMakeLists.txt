@@ -14,7 +14,7 @@ qt_add_resources(${PROJECT_NAME} "resources"
     FILES ${PROJECT_NAME}.svg
 )
 
-#add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
+add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
 
 set_clock_plugin_common_properties(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} PRIVATE PluginCore)

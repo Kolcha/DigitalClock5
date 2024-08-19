@@ -12,9 +12,11 @@
 #include <QPoint>
 #include <QRect>
 
+#include "skin_engine_global.hpp"
+
 class QPainter;
 
-class Skin {
+class SKIN_ENGINE_EXPORT Skin {
 public:
   virtual ~Skin() = default;
 
@@ -37,7 +39,7 @@ public:
 };
 
 
-class SkinBase : public Skin {
+class SKIN_ENGINE_EXPORT SkinBase : public Skin {
 public:
   std::shared_ptr<Glyph> glyph(char32_t c) const override
   {
