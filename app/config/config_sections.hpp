@@ -27,6 +27,8 @@ public:
   CONFIG_OPTION_Q(bool, CheckForUpdates, true)
   CONFIG_OPTION_Q(bool, CheckForBetaVersion, true)
   CONFIG_OPTION_Q(int, UpdatePeriodDays, 7)
+
+  CONFIG_OPTION_Q(QStringList, Plugins, QStringList())
 };
 
 

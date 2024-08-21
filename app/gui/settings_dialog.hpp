@@ -105,6 +105,9 @@ private slots:
   void on_bg_pattern_stretch_clicked(bool checked);
   void on_bg_per_element_cb_clicked(bool checked);
 
+  // plugins
+  void onPluginStateChanged(const QString& id, bool enabled);
+
 private:
   void initAppGlobalTab();
   void initGeneralTab(int idx);
@@ -118,6 +121,9 @@ private:
   void applyWindowOption(Method method, Args&&... args);
   template<typename Method, typename... Args>
   void applyClockOption(Method method, Args&&... args);
+
+  template<typename Method, typename... Args>
+  void notifyOptionChanged(Method method, Args&&... args);
 
 private:
   Ui::SettingsDialog* ui;

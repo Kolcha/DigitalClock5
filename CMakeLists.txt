@@ -20,6 +20,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network Svg)
 
 qt_standard_project_setup()
 
+set(CLOCK_PROJECT_NAME ${PROJECT_NAME})
 set(CLOCK_VERSION ${PROJECT_VERSION})
 
 set(CLOCK_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
@@ -30,4 +31,5 @@ add_subdirectory(3rdparty)
 add_subdirectory(app)
 add_subdirectory(clock_common)
 add_subdirectory(plugin_core)
+add_subdirectory(plugins)
 add_subdirectory(skin_engine)

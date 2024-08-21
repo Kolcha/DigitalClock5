@@ -19,6 +19,8 @@
 #include "gui/clock_tray_icon.hpp"
 #include "gui/clock_window.hpp"
 #include "dialog_manager.hpp"
+#include "plugin_manager.hpp"
+#include "settings_change_listener.hpp"
 #include "skin_manager.hpp"
 #include "update_checker.hpp"
 
@@ -40,12 +42,26 @@ public:
   void configureWindows();
 
   SkinManager& skinManager() { return _sm; }
+  PluginManager& pluginManager() { return _pm; }
+
+  auto& settingsListeners() const { return _settings_rcv; }
+  SettingsChangeListener* settingsListener(size_t i)
+  {
+    return _settings_rcv[i].get();
+  }
+
+  auto& settingsTransmitters() const { return _settings_tr; }
+  SettingsChangeTransmitter* settingsTransmitter(size_t i)
+  {
+    return _settings_tr[i].get();
+  }
 
 private:
   void initConfig();
   void initTray();
   void createWindows();
   void initUpdater();
+  void loadPlugins();
   void startTimers();
 
 private slots:
@@ -64,6 +80,10 @@ private:
   QTimer _time_timer;
   QTimer _tick_timer;
   SkinManager _sm;
+  PluginManager _pm;
   DialogManager<quint64> _dm;
   std::unique_ptr<UpdateChecker> _update_checker;
+  // settings bridge
+  std::vector<std::unique_ptr<SettingsChangeTransmitter>> _settings_tr;
+  std::vector<std::unique_ptr<SettingsChangeListener>> _settings_rcv;
 };

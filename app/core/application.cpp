@@ -13,11 +13,13 @@
 
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
+    , _pm(this)
 {
   initConfig();
   initTray();
   createWindows();
   initUpdater();
+  loadPlugins();
   startTimers();
 }
 
@@ -148,6 +150,9 @@ void Application::createWindows()
     _windows.push_back(std::move(wnd));
 
     configureWindow(_windows.size() - 1);
+
+    _settings_rcv.push_back(std::make_unique<SettingsChangeListener>(this, i));
+    _settings_tr.push_back(std::make_unique<SettingsChangeTransmitter>());
   }
 
   std::ranges::for_each(_windows, [](auto& w) { w->show(); });
@@ -176,6 +181,13 @@ void Application::initUpdater()
   const auto update_period = _cfg->global().getUpdatePeriodDays();
   if (last_update.daysTo(QDateTime::currentDateTime()) >= update_period)
     _update_checker->checkForUpdates();
+}
+
+void Application::loadPlugins()
+{
+  _pm.init();
+  const auto plugins = _cfg->global().getPlugins();
+  for (const auto& p : plugins) _pm.loadPlugin(p);
 }
 
 void Application::startTimers()

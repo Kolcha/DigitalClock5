@@ -36,6 +36,21 @@ private:
   StateClient _state;
 };
 
+// per-plugin config
+class PluginConfig {
+public:
+  PluginConfig(QStringView id, AppConfig& cfg);
+
+  auto& config(size_t i) { return _configs[i]; }
+  auto& config(size_t i) const { return _configs[i]; }
+
+  auto& state(size_t i) { return _states[i]; }
+  auto& state(size_t i) const { return _states[i]; }
+
+private:
+  std::vector<SettingsStorageClient> _configs;
+  std::vector<StateClient> _states;
+};
 
 // config object
 class AppConfig {
@@ -57,6 +72,8 @@ public:
   auto& state() { return _state; }
   auto& state() const { return _state; }
 
+  PluginConfig& plugin(QString id);
+
 private:
   AppConfig(std::unique_ptr<SettingsStorage> st);
 
@@ -67,4 +84,6 @@ private:
   SectionLimits _limits;
   std::vector<WindowConfig> _windows;
   StateClient _state;
+  // loaded/created on demand, as plugins, but never removed
+  std::unordered_map<QString, PluginConfig> _plugins;
 };

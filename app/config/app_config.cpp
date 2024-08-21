@@ -11,7 +11,7 @@ WindowConfig::WindowConfig(int id, AppConfig& cfg)
     , _cfg(cfg)
     , _appearance(title(u"appearance"), cfg.storage())
     , _generic(title(u"generic"), cfg.storage())
-    , _state(title(u"state"), cfg.storage())
+    , _state(QString("state/window/%1").arg(id), cfg.storage())
 {
 }
 
@@ -33,6 +33,17 @@ QString WindowConfig::title(QStringView t) const
 }
 
 
+PluginConfig::PluginConfig(QStringView id, AppConfig& cfg)
+{
+  // this is maybe a bit waste of space, as not every plugin has
+  // per-instance configuration, but this significantly simplifies logic
+  for (int i = 0; i < cfg.global().getNumInstances(); i++) {
+    _configs.emplace_back(QString("plugin/%1/%2").arg(id).arg(i), cfg.storage());
+    _states.emplace_back(QString("state/plugin/%1/%2").arg(id).arg(i), cfg.storage());
+  }
+}
+
+
 AppConfig::AppConfig()
     : AppConfig(std::make_unique<SettingsStorage>())
 {
@@ -43,11 +54,16 @@ AppConfig::AppConfig(const QString& filename)
 {
 }
 
+PluginConfig& AppConfig::plugin(QString id)
+{
+  return _plugins.try_emplace(id, id, *this).first->second;
+}
+
 AppConfig::AppConfig(std::unique_ptr<SettingsStorage> st)
     : _st(std::move(st))
     , _global("app_global", *_st)
     , _limits("limits", *_st)
-    , _state("state", *_st)
+    , _state("state/app", *_st)
 {
   for (int i = 0; i < _global.getNumInstances(); i++)
     _windows.push_back(WindowConfig(i, *this));

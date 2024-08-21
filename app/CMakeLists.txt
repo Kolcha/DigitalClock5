@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(DigitalClock5 VERSION ${CLOCK_VERSION} LANGUAGES CXX)
+project(${CLOCK_PROJECT_NAME} VERSION ${CLOCK_VERSION} LANGUAGES CXX)
 
 qt_add_executable(${PROJECT_NAME}
     main.cpp
@@ -36,6 +36,20 @@ qt_add_executable(${PROJECT_NAME}
     gui/settings_dialog.ui
     skin/legacy_skin.hpp
     skin/legacy_skin.cpp
+    core/plugin_manager.hpp
+    core/plugin_manager.cpp
+    gui/plugin_list_item_widget.cpp
+    gui/plugin_list_item_widget.hpp
+    gui/plugin_list_item_widget.ui
+    gui/plugin_info_dialog.cpp
+    gui/plugin_info_dialog.hpp
+    gui/plugin_info_dialog.ui
+    core/plugin_info.hpp
+    core/settings_change_listener.cpp
+    core/settings_change_listener.hpp
+    gui/plugin_settings_dialog.hpp
+    gui/plugin_settings_dialog.cpp
+    gui/plugin_settings_dialog.ui
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

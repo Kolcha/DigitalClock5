@@ -20,6 +20,7 @@
 #include <gradient_dialog.h>
 
 #include "core/application.hpp"
+#include "plugin_list_item_widget.hpp"
 #include "core/state.hpp"
 #include "config/custom_converters.hpp"
 
@@ -148,8 +149,12 @@ void SettingsDialog::accept()
 
 void SettingsDialog::reject()
 {
+  const auto prev_plugins = app->config().global().getPlugins();
+  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
   app->config().storage().discardAll();
   app->configureWindows();
+  const auto curr_plugins = app->config().global().getPlugins();
+  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
   QDialog::reject();
 }
 
@@ -338,6 +343,7 @@ void SettingsDialog::on_font_rbtn_clicked()
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getFont());
   applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
   acfg.setUseFontInsteadOfSkin(true);
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, true);
 }
 
 void SettingsDialog::on_select_font_btn_clicked()
@@ -349,6 +355,7 @@ void SettingsDialog::on_select_font_btn_clicked()
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(fnt);
   applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
   acfg.setFont(fnt);
+  notifyOptionChanged(&SettingsChangeTransmitter::setFont, fnt);
 }
 
 void SettingsDialog::on_skin_rbtn_clicked()
@@ -357,6 +364,7 @@ void SettingsDialog::on_skin_rbtn_clicked()
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getSkin());
   applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
   acfg.setUseFontInsteadOfSkin(false);
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, false);
 }
 
 void SettingsDialog::on_skin_cbox_activated(int index)
@@ -365,12 +373,14 @@ void SettingsDialog::on_skin_cbox_activated(int index)
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(skin_name);
   applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
   app->config().window(_curr_idx).appearance().setSkin(skin_name);
+  notifyOptionChanged(&SettingsChangeTransmitter::setSkin, skin_name);
 }
 
 void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
 {
   applyClockOption(&GraphicsDateTimeWidget::setFlashSeparator, checked);
   app->config().window(_curr_idx).appearance().setSeparatorFlashes(checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setSeparatorFlashes, checked);
 }
 
 void SettingsDialog::on_scaling_x_edit_valueChanged(int arg1)
@@ -378,6 +388,7 @@ void SettingsDialog::on_scaling_x_edit_valueChanged(int arg1)
   SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
   applyWindowOption(&ClockWindow::setScaling, arg1/100., acfg.getScalingV()/100.);
   acfg.setScalingH(arg1);
+  notifyOptionChanged(&SettingsChangeTransmitter::setScalingH, arg1);
 }
 
 void SettingsDialog::on_scaling_y_edit_valueChanged(int arg1)
@@ -385,6 +396,7 @@ void SettingsDialog::on_scaling_y_edit_valueChanged(int arg1)
   SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
   applyWindowOption(&ClockWindow::setScaling, acfg.getScalingH()/100., arg1/100.);
   acfg.setScalingV(arg1);
+  notifyOptionChanged(&SettingsChangeTransmitter::setScalingV, arg1);
 }
 
 void SettingsDialog::on_scaling_same_btn_clicked(bool checked)
@@ -403,6 +415,7 @@ void SettingsDialog::on_opacity_edit_valueChanged(int arg1)
 {
   applyWindowOption(&ClockWindow::setWindowOpacity, arg1/100.);
   app->config().window(_curr_idx).appearance().setOpacity(arg1);
+  notifyOptionChanged(&SettingsChangeTransmitter::setOpacity, arg1);
 }
 
 void SettingsDialog::on_use_colorization_clicked(bool checked)
@@ -413,6 +426,7 @@ void SettingsDialog::on_use_colorization_clicked(bool checked)
     applyWindowOption(&ClockWindow::setGraphicsEffect, nullptr);
   }
   app->config().window(_curr_idx).appearance().setApplyColorization(checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setApplyColorization, checked);
 }
 
 void SettingsDialog::on_select_colorization_color_clicked()
@@ -425,12 +439,14 @@ void SettingsDialog::on_select_colorization_color_clicked()
   if (!color.isValid()) return;
   acfg.setColorizationColor(color);
   updateColorization();
+  notifyOptionChanged(&SettingsChangeTransmitter::setColorizationColor, color);
 }
 
 void SettingsDialog::on_colorization_strength_edit_valueChanged(int arg1)
 {
   app->config().window(_curr_idx).appearance().setColorizationStrength(arg1/100.);
   updateColorization();
+  notifyOptionChanged(&SettingsChangeTransmitter::setColorizationStrength, arg1/100.);
 }
 
 void SettingsDialog::on_texture_group_clicked(bool checked)
@@ -452,6 +468,7 @@ void SettingsDialog::on_texture_group_clicked(bool checked)
 
   app->config().window(_curr_idx).appearance().setTexture(brush);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), brush);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, brush);
 }
 
 void SettingsDialog::on_tx_solid_color_rbtn_clicked()
@@ -459,6 +476,7 @@ void SettingsDialog::on_tx_solid_color_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setTexture(state.getTextureColor());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureColor());
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTextureColor());
 }
 
 void SettingsDialog::on_tx_select_color_btn_clicked()
@@ -472,6 +490,7 @@ void SettingsDialog::on_tx_select_color_btn_clicked()
   app->config().window(_curr_idx).appearance().setTexture(color);
   state.setTextureColor(color);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), color);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, color);
 }
 
 void SettingsDialog::on_tx_gradient_rbtn_clicked()
@@ -479,6 +498,7 @@ void SettingsDialog::on_tx_gradient_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setTexture(state.getTextureGradient());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureGradient());
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTextureGradient());
 }
 
 void SettingsDialog::on_tx_select_gradient_btn_clicked()
@@ -493,6 +513,7 @@ void SettingsDialog::on_tx_select_gradient_btn_clicked()
   app->config().window(_curr_idx).appearance().setTexture(gradient);
   state.setTextureGradient(gradient);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), gradient);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, gradient);
 }
 
 void SettingsDialog::on_tx_pattern_rbtn_clicked()
@@ -500,6 +521,7 @@ void SettingsDialog::on_tx_pattern_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setTexture(state.getTexturePattern());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTexturePattern());
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTexturePattern());
 }
 
 void SettingsDialog::on_tx_select_pattern_btn_clicked()
@@ -515,18 +537,21 @@ void SettingsDialog::on_tx_select_pattern_btn_clicked()
   app->config().window(_curr_idx).appearance().setTexture(pxm);
   state.setTexturePattern(pxm);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), pxm);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, pxm);
 }
 
 void SettingsDialog::on_tx_pattern_stretch_clicked(bool checked)
 {
   app->config().window(_curr_idx).appearance().setTextureStretch(checked);
   applyClockOption(&GraphicsDateTimeWidget::setTextureStretch, checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTextureStretch, checked);
 }
 
 void SettingsDialog::on_tx_per_element_cb_clicked(bool checked)
 {
   app->config().window(_curr_idx).appearance().setTexturePerCharacter(checked);
   applyClockOption(&GraphicsDateTimeWidget::setTexturePerChar, checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexturePerCharacter, checked);
 }
 
 void SettingsDialog::on_background_group_clicked(bool checked)
@@ -548,6 +573,7 @@ void SettingsDialog::on_background_group_clicked(bool checked)
 
   app->config().window(_curr_idx).appearance().setBackground(brush);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), brush);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, brush);
 }
 
 void SettingsDialog::on_bg_solid_color_rbtn_clicked()
@@ -555,6 +581,7 @@ void SettingsDialog::on_bg_solid_color_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundColor());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundColor());
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundColor());
 }
 
 void SettingsDialog::on_bg_select_color_btn_clicked()
@@ -568,6 +595,7 @@ void SettingsDialog::on_bg_select_color_btn_clicked()
   app->config().window(_curr_idx).appearance().setBackground(color);
   state.setBackgroundColor(color);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), color);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, color);
 }
 
 void SettingsDialog::on_bg_gradient_rbtn_clicked()
@@ -575,6 +603,7 @@ void SettingsDialog::on_bg_gradient_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundGradient());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundGradient());
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundGradient());
 }
 
 void SettingsDialog::on_bg_select_gradient_btn_clicked()
@@ -589,6 +618,7 @@ void SettingsDialog::on_bg_select_gradient_btn_clicked()
   app->config().window(_curr_idx).appearance().setBackground(gradient);
   state.setBackgroundGradient(gradient);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), gradient);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, gradient);
 }
 
 void SettingsDialog::on_bg_pattern_rbtn_clicked()
@@ -596,6 +626,7 @@ void SettingsDialog::on_bg_pattern_rbtn_clicked()
   SettingsDialogState state(app->config().window(_curr_idx).state());
   app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundPattern());
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundPattern());
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundPattern());
 }
 
 void SettingsDialog::on_bg_select_pattern_btn_clicked()
@@ -611,18 +642,34 @@ void SettingsDialog::on_bg_select_pattern_btn_clicked()
   app->config().window(_curr_idx).appearance().setBackground(pxm);
   state.setBackgroundPattern(pxm);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), pxm);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, pxm);
 }
 
 void SettingsDialog::on_bg_pattern_stretch_clicked(bool checked)
 {
   app->config().window(_curr_idx).appearance().setBackgroundStretch(checked);
   applyClockOption(&GraphicsDateTimeWidget::setBackgroundStretch, checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackgroundStretch, checked);
 }
 
 void SettingsDialog::on_bg_per_element_cb_clicked(bool checked)
 {
   app->config().window(_curr_idx).appearance().setBackgroundPerCharacter(checked);
   applyClockOption(&GraphicsDateTimeWidget::setBackgroundPerChar, checked);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackgroundPerCharacter, checked);
+}
+
+void SettingsDialog::onPluginStateChanged(const QString& id, bool enabled)
+{
+  auto current_plugins = app->config().global().getPlugins();
+  if (enabled) {
+    current_plugins.append(id);
+    app->pluginManager().loadPlugin(id);
+  } else {
+    current_plugins.removeAll(id);
+    app->pluginManager().unloadPlugin(id);
+  }
+  app->config().global().setPlugins(current_plugins);
 }
 
 void SettingsDialog::initAppGlobalTab()
@@ -763,6 +810,31 @@ void SettingsDialog::initAppearanceTab(int idx)
 
 void SettingsDialog::initPluginsTab()
 {
+  ui->plugins_list->clear();
+
+  const auto plugins_ids = app->pluginManager().availablePlugins();
+
+  QVector<PluginInfo> plugins_meta(plugins_ids.size());
+  std::transform(plugins_ids.begin(), plugins_ids.end(), plugins_meta.begin(),
+                 [this](auto& id) { return app->pluginManager().pluginInfo(id); });
+
+
+  auto by_title = [](const PluginInfo& a, const PluginInfo& b)
+  {
+    return QString::localeAwareCompare(a.title, b.title) < 0;
+  };
+  std::sort(plugins_meta.begin(), plugins_meta.end(), by_title);
+
+  for (const auto& plugin : std::as_const(plugins_meta)) {
+    QListWidgetItem* item = new QListWidgetItem();
+    PluginListItemWidget* widget = new PluginListItemWidget(ui->plugins_list);
+    widget->SetInfo(plugin);
+    item->setSizeHint(widget->sizeHint());
+    ui->plugins_list->addItem(item);
+    ui->plugins_list->setItemWidget(item, widget);
+    connect(widget, &PluginListItemWidget::StateChanged, this, &SettingsDialog::onPluginStateChanged);
+    connect(widget, &PluginListItemWidget::ConfigureRequested, &app->pluginManager(), &PluginManager::configurePlugin);
+  }
 }
 
 void SettingsDialog::applyTimeZoneSettings()
@@ -831,5 +903,17 @@ void SettingsDialog::applyClockOption(Method method, Args&&... args)
   } else {
     for (const auto& wnd : app->windows())
       (*wnd->clock().*method)(std::forward<Args>(args)...);
+  }
+}
+
+template<typename Method, typename... Args>
+void SettingsDialog::notifyOptionChanged(Method method, Args&&... args)
+{
+  if (app->config().global().getAppearancePerInstance()) {
+    auto t = app->settingsTransmitter(_curr_idx);
+    (*t.*method)(std::forward<Args>(args)...);
+  } else {
+    for (const auto& t : app->settingsTransmitters())
+      (*t.*method)(std::forward<Args>(args)...);
   }
 }
