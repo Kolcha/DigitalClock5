@@ -11,8 +11,8 @@
 #include <QLocale>
 #include <QSysInfo>
 
-#include "build_date.hpp"
-#include "update_checker.hpp"
+#include "core/build_date.hpp"
+#include "core/update_checker.hpp"
 
 static QString buildDateString()
 {

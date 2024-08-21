@@ -16,8 +16,8 @@
 
 #include "config/app_config.hpp"
 
-#include "clock_tray_icon.hpp"
-#include "clock_window.hpp"
+#include "gui/clock_tray_icon.hpp"
+#include "gui/clock_window.hpp"
 #include "dialog_manager.hpp"
 #include "skin_manager.hpp"
 #include "update_checker.hpp"

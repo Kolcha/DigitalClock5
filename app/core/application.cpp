@@ -8,8 +8,8 @@
 
 #include <QDir>
 
-#include "about_dialog.hpp"
-#include "settings_dialog.hpp"
+#include "gui/about_dialog.hpp"
+#include "gui/settings_dialog.hpp"
 
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)

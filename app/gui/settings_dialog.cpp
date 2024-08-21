@@ -19,8 +19,8 @@
 
 #include <gradient_dialog.h>
 
-#include "application.hpp"
-#include "state.hpp"
+#include "core/application.hpp"
+#include "core/state.hpp"
 #include "config/custom_converters.hpp"
 
 namespace {

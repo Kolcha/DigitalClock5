@@ -6,7 +6,7 @@
 
 #include <QApplication>
 
-#include "app/application.hpp"
+#include "core/application.hpp"
 #include "version.hpp"
 
 int main(int argc, char *argv[])

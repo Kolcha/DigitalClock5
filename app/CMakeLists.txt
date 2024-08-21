@@ -10,30 +10,30 @@ qt_add_executable(${PROJECT_NAME}
     config/config_sections.cpp
     config/app_config.hpp
     config/app_config.cpp
-    app/state.hpp
-    app/clock_window.hpp
-    app/clock_window.cpp
-    app/application.hpp
-    app/application.cpp
-    app/skin_manager.hpp
-    app/skin_manager.cpp
-    app/clock_icon_engine.hpp
-    app/clock_icon_engine.cpp
-    app/clock_tray_icon.hpp
-    app/clock_tray_icon.cpp
-    app/update_checker.hpp
-    app/update_checker.cpp
-    app/build_date.hpp
-    app/build_date.cpp
-    app/logo_label.hpp
-    app/logo_label.cpp
-    app/about_dialog.ui
-    app/about_dialog.hpp
-    app/about_dialog.cpp
-    app/dialog_manager.hpp
-    app/settings_dialog.hpp
-    app/settings_dialog.cpp
-    app/settings_dialog.ui
+    core/state.hpp
+    gui/clock_window.hpp
+    gui/clock_window.cpp
+    core/application.hpp
+    core/application.cpp
+    core/skin_manager.hpp
+    core/skin_manager.cpp
+    gui/clock_icon_engine.hpp
+    gui/clock_icon_engine.cpp
+    gui/clock_tray_icon.hpp
+    gui/clock_tray_icon.cpp
+    core/update_checker.hpp
+    core/update_checker.cpp
+    core/build_date.hpp
+    core/build_date.cpp
+    gui/logo_label.hpp
+    gui/logo_label.cpp
+    gui/about_dialog.ui
+    gui/about_dialog.hpp
+    gui/about_dialog.cpp
+    core/dialog_manager.hpp
+    gui/settings_dialog.hpp
+    gui/settings_dialog.cpp
+    gui/settings_dialog.ui
     skin/legacy_skin.hpp
     skin/legacy_skin.cpp
 )

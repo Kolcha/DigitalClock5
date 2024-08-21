@@ -27,7 +27,7 @@ set(CLOCK_VERSION_MINOR ${PROJECT_VERSION_MINOR})
 set(CLOCK_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 
 add_subdirectory(3rdparty)
+add_subdirectory(app)
 add_subdirectory(clock_common)
-add_subdirectory(digital_clock)
 add_subdirectory(plugin_core)
 add_subdirectory(skin_engine)

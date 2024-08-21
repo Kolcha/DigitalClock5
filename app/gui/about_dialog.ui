@@ -298,7 +298,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
   <customwidget>
    <class>LogoLabel</class>
    <extends>QLabel</extends>
-   <header>app/logo_label.hpp</header>
+   <header>gui/logo_label.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
