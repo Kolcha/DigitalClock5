@@ -91,6 +91,22 @@ private:
 #define CONFIG_OPTION_Q(type, name, def_value)    \
   CONFIG_OPTION(type, name, QLatin1String(#name), def_value)
 
+// general-purpose settings storage client
+// the same as bove, just set/get value are public
+class CLOCK_COMMON_EXPORT SettingsClient : public SettingsStorageClient {
+public:
+  template<typename T>
+  using toVariant = SettingsStorageClient::toVariant<T>;
+
+  template<typename T>
+  using fromVariant = SettingsStorageClient::fromVariant<T>;
+
+  using SettingsStorageClient::SettingsStorageClient;
+
+  void setValue(QString key, QVariant val);
+  QVariant value(QString key, QVariant def) const;
+};
+
 
 // state client doesn't assume discard operation,
 // all changes are stored permanently

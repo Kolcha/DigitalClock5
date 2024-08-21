@@ -293,6 +293,17 @@ void PluginManager::Impl::load(const QString& id)
 
   handle.createInstances(app->config().global().getNumInstances());
 
+  // load state and config
+  if (available[id].configurable) {
+    for (size_t i = 0; i < handle.instances().size(); i++) {
+      if (auto cp = dynamic_cast<ConfigurablePlugin*>(handle.instance(i))) {
+        auto& plg_cfg = app->config().plugin(id);
+        cp->loadState(plg_cfg.state(i));
+        cp->initSettings(plg_cfg.config(i));
+      }
+    }
+  }
+
   connectEverything(handle);
 
   std::ranges::for_each(handle.instances(), [](auto& p) { p->init(); });
@@ -303,6 +314,14 @@ void PluginManager::Impl::unload(const QString& id)
   auto iter = loaded.find(id);
   if (iter == loaded.end())
     return;
+
+  // save state
+  if (available[id].configurable) {
+    for (size_t i = 0; i < iter->second.instances().size(); i++) {
+      if (auto cp = dynamic_cast<ConfigurablePlugin*>(iter->second.instance(i)))
+        cp->saveState(app->config().plugin(id).state(i));
+    }
+  }
 
   std::ranges::for_each(iter->second.instances(), [](auto& p) { p->shutdown(); });
 
@@ -355,9 +374,11 @@ PluginManager::PluginManager(Application* app, QObject* parent)
 PluginManager::~PluginManager()
 {
   // shutdown all plugins on destruction
-  for (const auto& [_, h] : _impl->loaded)
-    for (const auto& p : h.instances())
-      p->shutdown();
+  // iterate over 'available' rather than 'loaded' because
+  // 'unload()' removes items, so iterators are invalidated
+  // it is safe to "unload" not loaded plugin
+  for (const auto& [id, _] : _impl->available)
+    _impl->unload(id);
 }
 
 void PluginManager::init()

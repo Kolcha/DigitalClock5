@@ -22,22 +22,24 @@ SamplePlugin::~SamplePlugin()
 
 void SamplePlugin::saveState(StateClient& st) const
 {
+  st.setValue("testA", 84);
   qDebug() << __FUNCTION__;
 }
 
 void SamplePlugin::loadState(const StateClient& st)
 {
-  qDebug() << __FUNCTION__;
+  qDebug() << __FUNCTION__ << st.value("testA", 42);
 }
 
-void SamplePlugin::initSettings(const SettingsStorageClient& st)
+void SamplePlugin::initSettings(const SettingsClient& st)
 {
-  qDebug() << __FUNCTION__;
+  qDebug() << __FUNCTION__ << st.value("V1", 25);
 }
 
-QWidget* SamplePlugin::configure(SettingsStorageClient& s, StateClient& t)
+QWidget* SamplePlugin::configure(SettingsClient& s, StateClient& t)
 {
   qDebug() << __FUNCTION__;
+  s.setValue("V1", quintptr(this));
   return new QPushButton(QString::number(quintptr(this)));
 }
 

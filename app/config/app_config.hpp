@@ -48,7 +48,7 @@ public:
   auto& state(size_t i) const { return _states[i]; }
 
 private:
-  std::vector<SettingsStorageClient> _configs;
+  std::vector<SettingsClient> _configs;
   std::vector<StateClient> _states;
 };
 
