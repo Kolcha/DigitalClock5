@@ -76,6 +76,10 @@ private slots:
 
   void on_is_separator_flashes_clicked(bool checked);
 
+  void on_anchor_left_clicked();
+  void on_anchor_center_clicked();
+  void on_anchor_right_clicked();
+
   void on_scaling_edit_valueChanged(int arg1);
   void on_opacity_edit_valueChanged(int arg1);
 

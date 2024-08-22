@@ -339,6 +339,24 @@ void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
   notifyOptionChanged(&SettingsChangeTransmitter::setSeparatorFlashes, checked);
 }
 
+void SettingsDialog::on_anchor_left_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorLeft);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorLeft);
+}
+
+void SettingsDialog::on_anchor_center_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorCenter);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorCenter);
+}
+
+void SettingsDialog::on_anchor_right_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorRight);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorRight);
+}
+
 void SettingsDialog::on_scaling_edit_valueChanged(int arg1)
 {
   SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
@@ -772,6 +790,11 @@ void SettingsDialog::initAppearanceTab(int idx)
   ui->opacity_edit->setValue(acfg.getOpacity());
   ui->colorize_group->setChecked(acfg.getApplyColorization());
   ui->colorization_strength_edit->setValue(qRound(acfg.getColorizationStrength() * 100));
+
+  SectionGeneric& gcfg = app->config().window(idx).generic();
+  ui->anchor_left->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorLeft);
+  ui->anchor_center->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorCenter);
+  ui->anchor_right->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorRight);
 
   auto tx = acfg.getTexture();
   ui->texture_group->setChecked(tx.style() != Qt::NoBrush);

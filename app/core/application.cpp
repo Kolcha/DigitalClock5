@@ -7,6 +7,7 @@
 #include "application.hpp"
 
 #include <QDir>
+#include <QGraphicsColorizeEffect>
 
 #include "gui/about_dialog.hpp"
 #include "gui/settings_dialog.hpp"
@@ -71,6 +72,15 @@ void Application::configureWindow(size_t i)
   clock->setBackground(acfg.getBackground(),
                        acfg.getBackgroundStretch(),
                        acfg.getBackgroundPerCharacter());
+
+  if (acfg.getApplyColorization()) {
+    auto effect = new QGraphicsColorizeEffect;
+    effect->setColor(acfg.getColorizationColor());
+    effect->setStrength(acfg.getColorizationStrength());
+    wnd->setGraphicsEffect(effect);
+  } else {
+    wnd->setGraphicsEffect(nullptr);
+  }
 }
 
 void Application::configureWindows()
