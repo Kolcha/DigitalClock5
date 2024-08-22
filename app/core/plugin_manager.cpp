@@ -158,7 +158,6 @@ private slots:
 private:
   Application* _app = nullptr;
   PluginSettingsDialog* _dlg = nullptr;
-  int _inst_idx = 0;
   // shared_ptr allows to set deleter on runtime
   std::shared_ptr<PluginHandle> _handle;
   const bool _was_loaded = false;
@@ -184,6 +183,7 @@ ConfigurePluginHandle::ConfigurePluginHandle(Application* app, const QString& p,
 void ConfigurePluginHandle::openDialog()
 {
   _dlg = new PluginSettingsDialog();
+  _dlg->setWindowTitle(_handle->plugin()->title());
 
   connect(_dlg, &QDialog::accepted, this, &ConfigurePluginHandle::onAccepted);
   connect(_dlg, &QDialog::rejected, this, &ConfigurePluginHandle::onRejected);
@@ -202,8 +202,6 @@ void ConfigurePluginHandle::openDialog()
 
 void ConfigurePluginHandle::onInstanceChanged(int idx)
 {
-  _inst_idx = idx;
-
   auto sp = dynamic_cast<ConfigurablePlugin*>(_handle->instance(idx));
   Q_ASSERT(sp);
 
@@ -213,19 +211,20 @@ void ConfigurePluginHandle::onInstanceChanged(int idx)
 
 void ConfigurePluginHandle::onAccepted()
 {
-  _app->config().plugin(_handle->id()).config(_inst_idx).commit();
+  for (size_t i = 0; i < _handle->instances().size(); i++)
+    _app->config().plugin(_handle->id()).config(i).commit();
 }
 
 void ConfigurePluginHandle::onRejected()
 {
-  auto& cfg = _app->config().plugin(_handle->id()).config(_inst_idx);
-  cfg.discard();
+  for (size_t i = 0; i < _handle->instances().size(); i++)
+    _app->config().plugin(_handle->id()).config(i).discard();
 
   if (_was_loaded) {
-    for (const auto& p : _handle->instances()) {
-      auto cp = dynamic_cast<ConfigurablePlugin*>(p.get());
+    for (size_t i = 0; i < _handle->instances().size(); i++) {
+      auto cp = dynamic_cast<ConfigurablePlugin*>(_handle->instance(i));
       Q_ASSERT(cp);
-      cp->initSettings(cfg);
+      cp->initSettings(_app->config().plugin(_handle->id()).config(i));
     }
   }
 }
@@ -247,6 +246,7 @@ struct PluginManager::Impl {
   void configure(const QString& id);
 
 private:
+  void initAllInterfaces(const PluginHandle& h);
   void connectEverything(const PluginHandle& h);
 };
 
@@ -293,17 +293,7 @@ void PluginManager::Impl::load(const QString& id)
 
   handle.createInstances(app->config().global().getNumInstances());
 
-  // load state and config
-  if (available[id].configurable) {
-    for (size_t i = 0; i < handle.instances().size(); i++) {
-      if (auto cp = dynamic_cast<ConfigurablePlugin*>(handle.instance(i))) {
-        auto& plg_cfg = app->config().plugin(id);
-        cp->loadState(plg_cfg.state(i));
-        cp->initSettings(plg_cfg.config(i));
-      }
-    }
-  }
-
+  initAllInterfaces(handle);
   connectEverything(handle);
 
   std::ranges::for_each(handle.instances(), [](auto& p) { p->init(); });
@@ -342,6 +332,35 @@ void PluginManager::Impl::configure(const QString& id)
     cfg_state = new ConfigurePluginHandle(app, aiter->second.path);
 
   cfg_state->openDialog();
+}
+
+void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
+{
+  for (size_t i = 0; i < h.instances().size(); i++) {
+    // load state and config
+    if (auto cp = dynamic_cast<ConfigurablePlugin*>(h.instance(i))) {
+      auto& plg_cfg = app->config().plugin(h.id());
+      cp->loadState(plg_cfg.state(i));
+      cp->initSettings(plg_cfg.config(i));
+    }
+    // provide skin settings
+    if (auto sa = dynamic_cast<SkinAccessExtension*>(h.instance(i))) {
+      auto wnd = app->window(i)->clock();
+      sa->initSkin(wnd->skin());    // TODO: track skin change
+      SkinAccessExtension::AppearanceSettings as;
+      as[cs::Texture] = wnd->texture();
+      as[cs::TextureStretch] = wnd->textureStretch();
+      as[cs::TexturePerCharacter] = wnd->texturePerChar();
+      as[cs::Background] = wnd->background();
+      as[cs::BackgroundStretch] = wnd->backgroundStretch();
+      as[cs::BackgroundPerCharacter] = wnd->backgroundPerChar();
+      sa->initAppearance(as);
+    }
+    // provide clock window
+    if (auto wa = dynamic_cast<WindowAccessExtension*>(h.instance(i))) {
+      wa->initWindow(app->window(i));
+    }
+  }
 }
 
 void PluginManager::Impl::connectEverything(const PluginHandle& h)

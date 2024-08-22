@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AppearanceSettingsWidget</class>
+ <widget class="QWidget" name="AppearanceSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>488</width>
+    <height>288</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Appearance</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="verticalSpacing">
+    <number>4</number>
+   </property>
+   <item row="3" column="2" rowspan="2">
+    <widget class="QGroupBox" name="bg_group">
+     <property name="title">
+      <string>background</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="bg_layout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="bg_color">
+        <property name="text">
+         <string>solid color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QToolButton" name="bg_color_select">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="bg_gradient">
+        <property name="text">
+         <string>gradient</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QToolButton" name="bg_gradient_select">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="bg_pattern">
+        <property name="text">
+         <string>pattern</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QToolButton" name="bg_pattern_select">
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="bg_stretch">
+        <property name="text">
+         <string>stretch pattern</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="bg_per_char">
+        <property name="text">
+         <string>apply per charcter</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="1" rowspan="2">
+    <widget class="QGroupBox" name="tx_group">
+     <property name="title">
+      <string>texture</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="tx_layout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="tx_color">
+        <property name="text">
+         <string>solid color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QToolButton" name="tx_color_select">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="tx_gradient">
+        <property name="text">
+         <string>gradient</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QToolButton" name="tx_gradient_select">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="tx_pattern">
+        <property name="text">
+         <string>pattern</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QToolButton" name="tx_pattern_select">
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="tx_stretch">
+        <property name="text">
+         <string>stretch pattern</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="tx_per_char">
+        <property name="text">
+         <string>apply per charcter</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QGroupBox" name="appearance_group">
+     <property name="title">
+      <string>appearance</string>
+     </property>
+     <layout class="QVBoxLayout" name="appearance_layout">
+      <item>
+       <widget class="QRadioButton" name="appear_follow">
+        <property name="text">
+         <string>follow clock</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="appear_custom">
+        <property name="text">
+         <string>custom</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" rowspan="2">
+    <widget class="QGroupBox" name="resize_group">
+     <property name="title">
+      <string>resize policy</string>
+     </property>
+     <layout class="QVBoxLayout" name="resize_layout">
+      <item>
+       <widget class="QRadioButton" name="resize_auto">
+        <property name="text">
+         <string>autoscale</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="resize_fixed">
+        <property name="text">
+         <string>fixed size</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QGroupBox" name="align_group">
+     <property name="title">
+      <string>content alignment</string>
+     </property>
+     <layout class="QHBoxLayout" name="align_layout">
+      <item>
+       <widget class="QComboBox" name="align_h_box"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="align_v_box"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QGroupBox" name="position_group">
+     <property name="title">
+      <string>position</string>
+     </property>
+     <layout class="QVBoxLayout" name="position_layout">
+      <item>
+       <widget class="QRadioButton" name="pos_bottom">
+        <property name="text">
+         <string>bottom</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="pos_right">
+        <property name="text">
+         <string>right</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1" rowspan="2" colspan="2">
+    <layout class="QHBoxLayout" name="font_layout" stretch="0,1,0">
+     <item>
+      <widget class="QLabel" name="font_label">
+       <property name="text">
+        <string>current font:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="font_value">
+       <property name="text">
+        <string notr="true">&lt;font, size&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="font_select">
+       <property name="text">
+        <string notr="true">...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>tx_color</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tx_color_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>146</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tx_gradient</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tx_gradient_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>275</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tx_pattern</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tx_pattern_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bg_color</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bg_color_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>413</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bg_gradient</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bg_gradient_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>411</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bg_pattern</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bg_pattern_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>410</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tx_pattern</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tx_stretch</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>197</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>207</x>
+     <y>233</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bg_pattern</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bg_stretch</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>390</x>
+     <y>232</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>appear_custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>font_select</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>appear_custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>font_value</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>92</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>appear_custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>font_label</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>162</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>appear_custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>bg_group</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>appear_custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tx_group</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

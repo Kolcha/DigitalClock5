@@ -9,6 +9,9 @@ qt_add_library(${PROJECT_NAME} SHARED
     config/settings_storage.cpp
     config/custom_converters.hpp
     clock_common_global.hpp
+    state.hpp
+    common_appearance_state.cpp
+    common_appearance_state.hpp
 )
 
 add_win_rc_file(${PROJECT_NAME} clock_common.rc)

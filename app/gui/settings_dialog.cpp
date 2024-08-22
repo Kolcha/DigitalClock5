@@ -15,67 +15,18 @@
 
 #include <QGraphicsColorizeEffect>
 
-#include <QPainter>
-
 #include <gradient_dialog.h>
 
 #include "core/application.hpp"
 #include "plugin_list_item_widget.hpp"
-#include "core/state.hpp"
-#include "config/custom_converters.hpp"
+#include "common_appearance_state.hpp"
 
 namespace {
 
-class SettingsDialogState : public StateImpl {
+class SettingsDialogState : public CommonAppearanceState {
 public:
-  using StateImpl::StateImpl;
-
-  CONFIG_OPTION_Q(QColor, TextureColor, QColor(112, 96, 240))
-  CONFIG_OPTION_Q(QGradient, TextureGradient, sample_conical_gradient())
-  CONFIG_OPTION_Q(QPixmap, TexturePattern, sample_pattern())
-  CONFIG_OPTION_Q(QColor, BackgroundColor, QColor(0, 0, 0, 160))
-  CONFIG_OPTION_Q(QGradient, BackgroundGradient, sample_linear_gradient())
-  CONFIG_OPTION_Q(QPixmap, BackgroundPattern, sample_pattern())
-
-private:
-  static QGradient sample_conical_gradient();
-  static QGradient sample_linear_gradient();
-  static QPixmap sample_pattern();
+  using CommonAppearanceState::CommonAppearanceState;
 };
-
-QGradient SettingsDialogState::sample_conical_gradient()
-{
-  QConicalGradient g(0.5, 0.5, 45.0);
-  g.setStops({
-    {0.00, {170,   0,   0}},  // #aa0000
-    {0.20, {  0,  85, 255}},  // #0055ff
-    {0.45, {  0, 170,   0}},  // #00aa00
-    {0.65, {255, 255,   0}},  // #ffff00
-    {1.00, {170,   0,   0}},  // #aa0000
-  });
-  g.setCoordinateMode(QGradient::ObjectMode);
-  return g;
-}
-
-QGradient SettingsDialogState::sample_linear_gradient()
-{
-  QLinearGradient g(0., 0., 0., 1.);
-  g.setColorAt(0.0, Qt::transparent);
-  g.setColorAt(0.6, Qt::transparent);
-  g.setColorAt(1.0, QColor(85, 0, 255));
-  g.setCoordinateMode(QGradient::ObjectMode);
-  return g;
-}
-
-QPixmap SettingsDialogState::sample_pattern()
-{
-  QPixmap pxm(8, 8);
-  pxm.fill(QColor(160, 0, 160));
-  QPainter p(&pxm);
-  p.fillRect(0, 0, 4, 4, QColor(224, 0, 224));
-  p.fillRect(4, 4, 8, 8, QColor(224, 0, 224));
-  return pxm;
-}
 
 int setIndexByValue(QComboBox* box, const QVariant& value)
 {

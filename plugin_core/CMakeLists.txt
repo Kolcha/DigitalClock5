@@ -11,11 +11,22 @@ qt_add_library(${PROJECT_NAME} SHARED
     settings_bridge.cpp
     settings_bridge.hpp
     shared_config_keys.hpp
+    widget_plugin_base.cpp
+    widget_plugin_base.hpp
+    plugin_config.hpp
+    impl/plugin_section_appearance.hpp
+    impl/appearance_settings_widget.cpp
+    impl/appearance_settings_widget.hpp
+    impl/appearance_settings_widget.ui
+    impl/widget_plugin_base_impl.cpp
+    impl/widget_plugin_base_impl.hpp
 )
 
 add_win_rc_file(${PROJECT_NAME} plugin_core.rc)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE PLUGIN_CORE_LIBRARY)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE gradient_dialog)
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${PROJECT_NAME} PUBLIC ClockCommon)
+target_link_libraries(${PROJECT_NAME} PUBLIC SkinEngine ClockCommon)

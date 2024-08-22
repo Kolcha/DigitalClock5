@@ -80,3 +80,22 @@ struct SettingsStorageClient::fromVariant<QFlags<T>> {
     return static_cast<QFlags<T>>(fromVariant<int>()(v));
   }
 };
+
+// serialize any enum values as int
+template<typename T>
+  requires std::is_enum_v<T>
+struct SettingsStorageClient::toVariant<T> {
+  QVariant operator ()(const T& v)
+  {
+    return toVariant<int>()(static_cast<int>(v));
+  }
+};
+
+template<typename T>
+  requires std::is_enum_v<T>
+struct SettingsStorageClient::fromVariant<T> {
+  T operator ()(const QVariant& v)
+  {
+    return static_cast<T>(fromVariant<int>()(v));
+  }
+};

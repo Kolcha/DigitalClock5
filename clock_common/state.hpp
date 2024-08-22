@@ -6,9 +6,10 @@
 
 #pragma once
 
+#include "clock_common_global.hpp"
 #include "config/settings_storage.hpp"
 
-class State {
+class CLOCK_COMMON_EXPORT State {
 public:
   virtual ~State() = default;
 
@@ -19,7 +20,7 @@ public:
 
 // this is maybe overkill, but window should not know
 // about any config implementation details
-class StateImpl : public State {
+class CLOCK_COMMON_EXPORT StateImpl : public State {
 public:
   template<typename T>
   using toVariant = StateClient::toVariant<T>;

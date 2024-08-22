@@ -9,6 +9,7 @@
 #include <QObject>
 
 #include "config/settings_storage.hpp"
+#include "skin/skin.hpp"
 
 #include "plugin_core_global.hpp"
 #include "shared_config_keys.hpp"
@@ -20,7 +21,7 @@ class PLUGIN_CORE_EXPORT ClockPluginBase : public QObject
 {
   Q_OBJECT
 
-public:
+public slots:
   virtual void init() = 0;
   virtual void shutdown() = 0;
 
@@ -60,7 +61,7 @@ public slots:
   // (doesn't matter by the clock or another plugin)
   // plugin must have 'settings_listener' metadata field set to 'true'
   // to subscribe to this updates, disabled by default
-  // TODO: connect this slot after init() call
+  // for now, in unlucky case it can be called even before init()
   virtual void onOptionChanged(cs::SharedConfigKeys opt, const QVariant& val) = 0;
 
 signals:
@@ -73,6 +74,7 @@ signals:
 
 
 // extension interface for configurable plugins
+// plugin must have 'configurable' metadata field set to 'true' to get called
 class PLUGIN_CORE_EXPORT ConfigurablePlugin {
 public:
   virtual ~ConfigurablePlugin() = default;
@@ -102,4 +104,39 @@ public:
   // this function can be called for not started (i.e. no init() calls) plugin
   // implementation should be prepared for the such case
   virtual QWidget* configure(SettingsClient& s, StateClient& t) = 0;
+};
+
+
+// extension interface that allows access to the currently used skin (per instance)
+class PLUGIN_CORE_EXPORT SkinAccessExtension {
+public:
+  virtual ~SkinAccessExtension() = default;
+
+  using AppearanceSettings = QHash<cs::SharedConfigKeys, QVariant>;
+  // called during initialization, or on skin change
+  // nullptr may appear if it appears in the clock, plugin should be tolerant to it
+  // the order of init*() calls from other interface is not specified,
+  // but it is guaranteed that it is called before the final init() call
+  // so, plugin should not depend on specific sequence
+  virtual void initSkin(std::shared_ptr<Skin> skin) = 0;
+  // called only during initialization, after initSkin()
+  // passes current clock appearance configuration to the plugin
+  // further appearance changes can be tracked thanks to SettingsPlugin interface
+  virtual void initAppearance(const AppearanceSettings& s) = 0;
+};
+
+
+// extension interface that allows access to the main clock window (per instance)
+// actual window type is not available, but it is guaranteed that it has QGridLayout
+// as top-level layout (available through layout() method)
+class PLUGIN_CORE_EXPORT WindowAccessExtension {
+public:
+  virtual ~WindowAccessExtension() = default;
+
+  // called only during initialization, before init(), in per-instance basis
+  // plugins implementing this interface must set perClockInstance() to true
+  // the call sequence with other interfaces is not specified
+  // it is guaranteed that nullptr will be never passed here
+  // plugin should not insert any widgets to layout at this point
+  virtual void initWindow(QWidget* wnd) = 0;
 };

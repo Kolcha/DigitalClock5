@@ -11,7 +11,7 @@
 #include <QGridLayout>
 
 #include "skin/graphics_widgets.hpp"
-#include "core/state.hpp"
+#include "state.hpp"
 
 class ClockWindow : public QWidget
 {
