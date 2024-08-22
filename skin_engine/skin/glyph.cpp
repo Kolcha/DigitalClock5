@@ -11,6 +11,7 @@
 
 void Appearance::setBackground(QBrush b, bool stretch)
 {
+  if (_bg == b && _bg_s == stretch) return;
   _bg = std::move(b);
   _bg_s = stretch;
   notify(&AppearanceChangeListener::onAppearanceChanged);
@@ -18,6 +19,7 @@ void Appearance::setBackground(QBrush b, bool stretch)
 
 void Appearance::setTexture(QBrush b, bool stretch)
 {
+  if (_tx == b && _tx_s == stretch) return;
   _tx = std::move(b);
   _tx_s = stretch;
   notify(&AppearanceChangeListener::onAppearanceChanged);
@@ -26,6 +28,7 @@ void Appearance::setTexture(QBrush b, bool stretch)
 
 void Transform::setTransform(QTransform t)
 {
+  if (_t == t) return;
   _t = std::move(t);
   notify(&AppearanceChangeListener::onAppearanceChanged);
 }
@@ -49,6 +52,7 @@ Glyph::~Glyph()
 
 void Glyph::setGlyph(std::shared_ptr<Skin::Glyph> g)
 {
+  if (_g == g) return;
   _g = std::move(g);
   updateGeometry();
   dropCachedData();
@@ -62,6 +66,7 @@ void Glyph::setPos(QPointF p)
 
 void Glyph::setTransform(std::shared_ptr<Transform> t)
 {
+  if (_t == t) return;
   _t->unsubscribe(this);
   _t = std::move(t);
   _t->subscribe(this);
@@ -71,6 +76,7 @@ void Glyph::setTransform(std::shared_ptr<Transform> t)
 
 void Glyph::setAppearance(std::shared_ptr<Appearance> a)
 {
+  if (_a == a) return;
   _a->unsubscribe(this);
   _a = std::move(a);
   _a->subscribe(this);
