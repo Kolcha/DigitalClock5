@@ -47,7 +47,7 @@ private slots:
 
   void on_enable_debug_options_clicked(bool checked);
 
-  // general
+  // format
   void on_smaller_seconds_clicked(bool checked);
   void on_seconds_scale_factor_edit_valueChanged(int arg1);
   void on_use_custom_format_toggled(bool checked);
@@ -60,6 +60,7 @@ private slots:
   void on_layout_cfg_help_btn_clicked();
   void on_use_custom_seps_clicked(bool checked);
   void on_custom_seps_edit_textEdited(const QString& arg1);
+  void on_custom_seps_help_btn_clicked();
 
   void updateTimeFormat();
 
@@ -75,34 +76,29 @@ private slots:
 
   void on_is_separator_flashes_clicked(bool checked);
 
-  void on_scaling_x_edit_valueChanged(int arg1);
-  void on_scaling_y_edit_valueChanged(int arg1);
-  void on_scaling_same_btn_clicked(bool checked);
-
+  void on_scaling_edit_valueChanged(int arg1);
   void on_opacity_edit_valueChanged(int arg1);
 
-  void on_use_colorization_clicked(bool checked);
+  void on_colorize_group_clicked(bool checked);
   void on_select_colorization_color_clicked();
   void on_colorization_strength_edit_valueChanged(int arg1);
 
   void on_texture_group_clicked(bool checked);
-  void on_tx_solid_color_rbtn_clicked();
-  void on_tx_select_color_btn_clicked();
-  void on_tx_gradient_rbtn_clicked();
-  void on_tx_select_gradient_btn_clicked();
-  void on_tx_pattern_rbtn_clicked();
-  void on_tx_select_pattern_btn_clicked();
-  void on_tx_pattern_stretch_clicked(bool checked);
+  void on_tx_options_box_activated(int index);
+  void on_tx_options_box_currentIndexChanged(int index);
+  void tx_select_color();
+  void tx_select_gradient();
+  void tx_select_pattern();
+  void tx_pattern_stretch(bool checked);
   void on_tx_per_element_cb_clicked(bool checked);
 
   void on_background_group_clicked(bool checked);
-  void on_bg_solid_color_rbtn_clicked();
-  void on_bg_select_color_btn_clicked();
-  void on_bg_gradient_rbtn_clicked();
-  void on_bg_select_gradient_btn_clicked();
-  void on_bg_pattern_rbtn_clicked();
-  void on_bg_select_pattern_btn_clicked();
-  void on_bg_pattern_stretch_clicked(bool checked);
+  void on_bg_options_box_activated(int index);
+  void on_bg_options_box_currentIndexChanged(int index);
+  void bg_select_color();
+  void bg_select_gradient();
+  void bg_select_pattern();
+  void bg_pattern_stretch(bool checked);
   void on_bg_per_element_cb_clicked(bool checked);
 
   // plugins
