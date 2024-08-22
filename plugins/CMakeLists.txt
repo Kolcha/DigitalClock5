@@ -19,4 +19,5 @@ function(set_clock_plugin_common_properties target)
     set_target_properties(${target} PROPERTIES PREFIX "")
 endfunction()
 
+add_subdirectory(quick_note)
 add_subdirectory(sample)
