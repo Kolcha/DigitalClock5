@@ -17,15 +17,25 @@
 // generic plugin interface
 // represents loaded and running plugin instance
 // several instances may exist for the same plugin
+// all methods are completely optional, so default implementation is provided
+// for the convenience (just to avoid a lot of empty functions)
+// default implementation does nothing
 class PLUGIN_CORE_EXPORT ClockPluginBase : public QObject
 {
   Q_OBJECT
 
 public slots:
-  virtual void init() = 0;
-  virtual void shutdown() = 0;
+  virtual void init() {}
+  virtual void shutdown() {}
 
-  virtual void tick() = 0;
+  // called periodically, per 1 second
+  virtual void tick() {}
+
+  // called each time clock updates current time
+  // time is in widget's configured time zone
+  // plugin must have 'time_listener' metadata field set to 'true'
+  // to subscribe to this updates, disabled by default
+  virtual void onTimeChanged(const QDateTime& dt) {}
 };
 
 

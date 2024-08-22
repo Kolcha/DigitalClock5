@@ -159,6 +159,10 @@ public:
 
   QTransform tokenTransform(QString token) const { return _gt->tokenTransform(token); }
 
+signals:
+  // time in configured time zone (local time by default)
+  void dateTimeChanged(const QDateTime& dt);
+
 public slots:
   void setDateTime(QDateTime dt);
   void setTimeZone(QTimeZone tz);

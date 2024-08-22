@@ -238,6 +238,8 @@ struct PluginManager::Impl {
 
   std::vector<std::unique_ptr<ChangeRetransmitter>> cfg_sinks;
 
+  QTimer timer;   // independent timer for periodic tick() calls
+
   void enumerate();
 
   void load(const QString& id);
@@ -367,6 +369,14 @@ void PluginManager::Impl::connectEverything(const PluginHandle& h)
 {
   const auto& mdata = h.metadata();
   for (size_t i = 0; i < h.instances().size(); i++) {
+    // generic plugin interface
+    if (mdata.value("time_listener", false).toBool()) {
+      QObject::connect(app->window(i)->clock(), &GraphicsDateTimeWidget::dateTimeChanged,
+                       h.instance(i), &ClockPluginBase::onTimeChanged);
+    }
+    // always connect tick()
+    QObject::connect(&timer, &QTimer::timeout, h.instance(i), &ClockPluginBase::tick);
+    // settings plugin interface
     if (auto sp = dynamic_cast<SettingsPlugin*>(h.instance(i))) {
       if (mdata.value("settings_listener", false).toBool()) {
         auto idx = h.plugin()->perClockInstance() ? i : 0;
@@ -430,6 +440,8 @@ void PluginManager::init()
       connect(ct, &SettingsChangeTransmitter::optionChanged, ss, &ChangeRetransmitter::optionChanged);
     }
   }
+
+  _impl->timer.start(1000);
 }
 
 QStringList PluginManager::availablePlugins() const
