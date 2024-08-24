@@ -40,12 +40,12 @@ void WidgetPluginBaseImpl::repositionWidget()
     widget->setAutoResizePolicy(fixed_size ? GraphicsWidgetBase::None : GraphicsWidgetBase::KeepWidth);
     int r = layout->rowCount();
     int cs = layout->columnCount();
-    layout->addWidget(widget.get(), r, 0, 1, cs, content_alignment);
+    layout->addWidget(widget.get(), r, 0, 1, cs, fixed_size ? content_alignment : Qt::Alignment());
   } else {
     widget->setAutoResizePolicy(fixed_size ? GraphicsWidgetBase::None : GraphicsWidgetBase::KeepHeight);
     int c = layout->columnCount();
     int rs = layout->rowCount();
-    layout->addWidget(widget.get(), 0, c, rs, 1, content_alignment);
+    layout->addWidget(widget.get(), 0, c, rs, 1, fixed_size ? content_alignment : Qt::Alignment());
   }
 }
 

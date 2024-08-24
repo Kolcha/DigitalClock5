@@ -110,18 +110,22 @@ void AppearanceSettingsWidget::on_pos_right_clicked()
 
 void AppearanceSettingsWidget::on_resize_auto_clicked()
 {
-  if (widget)
+  if (widget) {
     widget->setAutoResizePolicy(cfg.getWidgetPosition() == WidgetPosition::Bottom ?
                                     GraphicsWidgetBase::KeepWidth :
                                     GraphicsWidgetBase::KeepHeight);
+    impl->layout->setAlignment(widget, Qt::Alignment());
+  }
   impl->resize_policy = ResizePolicy::Autoscale;
   cfg.setResizePolicy(ResizePolicy::Autoscale);
 }
 
 void AppearanceSettingsWidget::on_resize_fixed_clicked()
 {
-  if (widget)
+  if (widget) {
     widget->setAutoResizePolicy(GraphicsWidgetBase::None);
+    impl->layout->setAlignment(widget, cfg.getAlignment());
+  }
   impl->resize_policy = ResizePolicy::Fixed;
   cfg.setResizePolicy(ResizePolicy::Fixed);
 }

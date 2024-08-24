@@ -26,6 +26,9 @@ public:
 
   QSize sizeHint() const override;
 
+  bool hasHeightForWidth() const override;
+  int heightForWidth(int w) const override;
+
   AutoResizePolicy autoResizePolicy() const { return _rp; }
 
   std::shared_ptr<Skin> skin() const { return _gt->skin(); }

@@ -208,15 +208,15 @@
         <property name="text">
          <string>autoscale</string>
         </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="resize_fixed">
         <property name="text">
          <string>fixed size</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -501,6 +501,22 @@
     <hint type="destinationlabel">
      <x>156</x>
      <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resize_fixed</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>align_group</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>43</y>
     </hint>
    </hints>
   </connection>

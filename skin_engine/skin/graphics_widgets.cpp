@@ -21,6 +21,19 @@ QSize GraphicsWidgetBase::sizeHint() const
   return QSize(_sx * w, _sy * h);
 }
 
+bool GraphicsWidgetBase::hasHeightForWidth() const
+{
+  return _rp == KeepWidth;
+}
+
+int GraphicsWidgetBase::heightForWidth(int w) const
+{
+  auto [hw, hh] = _gt->rect().size();
+  auto hz = QSizeF(_sx*hw, _sy*hh);
+  auto ar = hz.width() / hz.height();
+  return w/ar;
+}
+
 QPoint GraphicsWidgetBase::origin() const
 {
   // keep in sync with paint transformations!
@@ -114,10 +127,7 @@ void GraphicsWidgetBase::paintEvent(QPaintEvent* event)
       break;
 
     case KeepWidth:
-      if (qAbs(width() - hint.width()) > 1) {
         _k = width() / sz.width() / _sx;
-        geometry_changed = true;
-      }
       break;
 
     case KeepHeight:

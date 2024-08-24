@@ -69,13 +69,13 @@ void QuickNotePlugin::loadState(const StateClient& st)
   _last_text = st.value("last_text", tr("double click me!")).toString();
 }
 
-QWidget* QuickNotePlugin::customConfigure(SettingsClient& s, StateClient& t)
+QList<QWidget*> QuickNotePlugin::customConfigure(SettingsClient& s, StateClient& t)
 {
   Q_UNUSED(s);
   Q_UNUSED(t);
   auto l = new QLabel(tr("Nothing is here!\nDouble click the widget to change the text."));
   l->setAlignment(Qt::AlignCenter);
-  return l;
+  return {l};
 }
 
 std::shared_ptr<GraphicsWidgetBase> QuickNotePlugin::createWidget()

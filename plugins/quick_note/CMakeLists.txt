@@ -4,7 +4,7 @@
 
 project(quick_note VERSION 2.0.0 LANGUAGES CXX)
 
-qt_add_plugin(${PROJECT_NAME} CLASS_NAME SimpleNote
+qt_add_plugin(${PROJECT_NAME} CLASS_NAME QuickNotePlugin
     quick_note_plugin.cpp
     quick_note_plugin.hpp
 )

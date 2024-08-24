@@ -70,6 +70,7 @@ PluginInfoDialog::PluginInfoDialog(QWidget* parent)
   fnt = font();
   fnt.setPointSizeF(fnt.pointSizeF() * 5/6);
   ui->description_value->setFont(fnt);
+  ui->copyright_label->setFont(fnt);
 }
 
 PluginInfoDialog::~PluginInfoDialog()

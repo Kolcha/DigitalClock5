@@ -22,17 +22,21 @@ void WidgetPluginBase::initSettings(const SettingsClient& st)
 {
   _impl->initSettings(st);
   _impl->applyAppearanceSettings();
+  _impl->repositionWidget();
 }
 
 QWidget* WidgetPluginBase::configure(SettingsClient& s, StateClient& t)
 {
   auto tab_widget = new QTabWidget;
+  const auto custom_tabs = customConfigure(s, t);
+  for (auto w : custom_tabs) {
+    if (w->windowTitle().isEmpty())
+      w->setWindowTitle(tr("Plugin"));
+    tab_widget->addTab(w, w->windowTitle());
+  }
+  // add common tab at the end
   auto common_tab = new AppearanceSettingsWidget(_impl.get(), s, t);
   tab_widget->addTab(common_tab, common_tab->windowTitle());
-  auto custom_tab = customConfigure(s, t);
-  if (custom_tab->windowTitle().isEmpty())
-    custom_tab->setWindowTitle(tr("Plugin"));
-  tab_widget->addTab(custom_tab, custom_tab->windowTitle());
   return tab_widget;
 }
 
@@ -64,7 +68,7 @@ void WidgetPluginBase::init()
 void WidgetPluginBase::shutdown()
 {
   destroyWidget();
-  Q_ASSERT(_impl->widget.use_count() == 1);
+  Q_ASSERT(_impl->widget.use_count() <= 1);
   _impl->layout->removeWidget(_impl->widget.get());
   _impl->widget.reset();
 }
@@ -102,4 +106,9 @@ void WidgetPluginBase::onOptionChanged(clock_settings::SharedConfigKeys opt, con
     default:  // ugly default in modern world...
       break;  // just to make everything happy
   }
+}
+
+void WidgetPluginBase::replaceWidget(std::shared_ptr<GraphicsWidgetBase> widget)
+{
+  _impl->widget = widget;
 }

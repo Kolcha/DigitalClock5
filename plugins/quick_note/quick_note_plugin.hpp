@@ -17,7 +17,7 @@ public:
   void loadState(const StateClient& st) override;
 
 protected:
-  QWidget* customConfigure(SettingsClient& s, StateClient& t) override;
+  QList<QWidget*> customConfigure(SettingsClient& s, StateClient& t) override;
 
   std::shared_ptr<GraphicsWidgetBase> createWidget() override;
   void destroyWidget() override;

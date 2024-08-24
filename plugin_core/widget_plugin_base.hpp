@@ -49,7 +49,9 @@ public slots:
 
 protected:
   // the same as configure() and called by reimplemented configure()
-  virtual QWidget* customConfigure(SettingsClient& s, StateClient& t) = 0;
+  // should return a set of configuration widgets (tabs)
+  // widgets should have window title property set, it is used as tab label
+  virtual QList<QWidget*> customConfigure(SettingsClient& s, StateClient& t) = 0;
 
   // should create and set initial data to the widget, called on init()
   // plugin is allowed to keep reference to the widget
@@ -57,6 +59,12 @@ protected:
   // destroy widget if any, called on shutdown()
   // after this point the only widget reference should be in base class
   virtual void destroyWidget() = 0;
+
+  // utility function that allows to replace already known widget
+  // caller is allowed to keep the reference to the provided widget
+  // after this point the base class doesn't track the old widget anymore
+  // and it's a caller responsibility to destroy any its remaining copies
+  void replaceWidget(std::shared_ptr<GraphicsWidgetBase> widget);
 
 private:
   std::unique_ptr<WidgetPluginBaseImpl> _impl;
