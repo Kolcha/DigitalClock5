@@ -202,7 +202,6 @@ void DateTimeTokenizer::addSingleCharToken(char32_t c, bool s)
 GraphicsDateTime::GraphicsDateTime(QDateTime dt)
     : GraphicsBase()
     , _dt(std::move(dt))
-    , _tz(_dt.timeZone())
     , _fmt(QLocale::system().timeFormat(QLocale::ShortFormat))
 {
   rebuild();
@@ -216,15 +215,16 @@ QTransform GraphicsDateTime::tokenTransform(QString token) const
 
 void GraphicsDateTime::setDateTime(QDateTime dt)
 {
-  if (_dt == dt) return;
-  _dt = std::move(dt);
+  auto dtn = dt.toTimeZone(_dt.timeZone());
+  if (_dt == dtn) return;
+  _dt = std::move(dtn);
   rebuild();
 }
 
 void GraphicsDateTime::setTimeZone(QTimeZone tz)
 {
-  if (_tz == tz) return;
-  _tz = std::move(tz);
+  if (_dt.timeZone() == tz) return;
+  _dt = _dt.toTimeZone(tz);
   rebuild();
 }
 
@@ -297,7 +297,7 @@ void GraphicsDateTime::clearLayout()
 void GraphicsDateTime::buildLayout()
 {
   DateTimeTokenizer dtkz;
-  FormatDateTime(_dt.toTimeZone(_tz), _fmt, dtkz);
+  FormatDateTime(_dt, _fmt, dtkz);
 
   auto dt_tokens = dtkz.tokens();
   QStringList fmt_tokens(dt_tokens.size());

@@ -146,7 +146,7 @@ public:
   explicit GraphicsDateTime(QDateTime dt = QDateTime::currentDateTime());
 
   QDateTime currentDateTime() const { return _dt; }
-  QTimeZone currentTimeZone() const { return _tz; }
+  QTimeZone currentTimeZone() const { return _dt.timeZone(); }
   QString format() const { return _fmt; }
 
   bool flashSeparators() const { return _flash_seps; }
@@ -183,7 +183,6 @@ private:
 
 private:
   QDateTime _dt;
-  QTimeZone _tz;
   QString _fmt;
 
   QStringList _last_tokens;

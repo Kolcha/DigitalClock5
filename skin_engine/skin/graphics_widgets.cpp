@@ -184,7 +184,7 @@ void GraphicsDateTimeWidget::setDateTime(QDateTime dt)
   _gt->setDateTime(std::move(dt));
   updateGeometry();
   update();
-  emit dateTimeChanged(currentDateTime().toTimeZone(currentTimeZone()));
+  emit dateTimeChanged(currentDateTime());
 }
 
 void GraphicsDateTimeWidget::setTimeZone(QTimeZone tz)

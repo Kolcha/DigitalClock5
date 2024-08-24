@@ -49,6 +49,7 @@ QList<QWidget*> DatePlugin::customConfigure(SettingsClient& s, StateClient& t)
 std::shared_ptr<GraphicsWidgetBase> DatePlugin::createWidget()
 {
   _impl->widget = std::make_shared<GraphicsDateTimeWidget>();
+  _impl->widget->setTimeZone(_impl->last_dt.timeZone());
   _impl->widget->setDateTime(_impl->last_dt);
   _impl->updateWidget();
   return _impl->widget;
