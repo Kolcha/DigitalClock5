@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsWidget</class>
+ <widget class="QWidget" name="SettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Date</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Date Format</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,0">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="sys_format_rbtn">
+        <property name="text">
+         <string>system</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="sys_format_box">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="str_format_rbtn">
+        <property name="text">
+         <string>custom</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="str_format_edit">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string notr="true">dd.MM.yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">dd.MM.yy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MM/dd/yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">M/d/yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MM/dd/yy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">M/d/yy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">yy/MM/dd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">yyyy-MM-dd</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">d-MMM-yy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">ddd dd-MMM-yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">dddd'\n'dd-MMM-yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">dddd, MMMM d</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MM:WW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">MMMM:W</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">dddd,'\n'MMMM d, yyyy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MMMM d, yyyy'\nWeek: 'WW</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string notr="true">yyyy-MM-dd - J</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>yyyy-MM-dd'\nweek': WW'\nday': J</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QToolButton" name="str_format_help_btn">
+        <property name="icon">
+         <iconset theme="help-hint"/>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>159</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>sys_format_rbtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sys_format_box</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>str_format_rbtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>str_format_edit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>str_format_rbtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>str_format_help_btn</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>78</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>365</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

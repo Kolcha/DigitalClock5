@@ -1,0 +1,8 @@
+{
+  "name": "@PROJECT_NAME@",
+  "version": "@PROJECT_VERSION@",
+  "configurable": true,
+  "settings_listener": true,
+  "time_listener": true,
+  "author": "Nick Korotysh"
+}

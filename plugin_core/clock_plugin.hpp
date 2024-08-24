@@ -33,6 +33,8 @@ public slots:
 
   // called each time clock updates current time
   // time is in widget's configured time zone
+  // this handler is also called before the init(), as
+  // plugin may need date/time (or time zone) for initialization
   // plugin must have 'time_listener' metadata field set to 'true'
   // to subscribe to this updates, disabled by default
   virtual void onTimeChanged(const QDateTime& dt) {}

@@ -373,6 +373,8 @@ void PluginManager::Impl::connectEverything(const PluginHandle& h)
     if (mdata.value("time_listener", false).toBool()) {
       QObject::connect(app->window(i)->clock(), &GraphicsDateTimeWidget::dateTimeChanged,
                        h.instance(i), &ClockPluginBase::onTimeChanged);
+      // plugin may need date/time (or time zone) for initialization, so call handler now
+      h.instance(i)->onTimeChanged(app->window(i)->clock()->currentDateTime());
     }
     // always connect tick()
     QObject::connect(&timer, &QTimer::timeout, h.instance(i), &ClockPluginBase::tick);
