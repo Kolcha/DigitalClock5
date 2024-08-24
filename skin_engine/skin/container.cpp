@@ -42,6 +42,8 @@ void LinearLayout::process(const GlyphList& glyphs)
 
   if (glyphs.empty()) return;
 
+  resizeItems(glyphs);
+
   glyphs.front()->setPos({0, 0});
   _rect = glyphs.front()->rect();
   _adv = glyphs.front()->advance();
@@ -56,7 +58,37 @@ void LinearLayout::process(const GlyphList& glyphs)
     _rect |= curr.geometry();
   }
 
-  applyAlignment(glyphs);
+  alignItems(glyphs);
+}
+
+void LinearLayout::resizeItems(const GlyphList& glyphs) const
+{
+  // find min/max y for non-resizeable items
+  auto f_iter = std::find_if_not(glyphs.begin(), glyphs.end(),
+      [](const auto& i) { return i->resizeEnabled(); });
+  const auto& f_item = f_iter == glyphs.end() ? glyphs.front() : *f_iter;
+
+  auto br = (*f_iter)->rect();
+  for (const auto& g : glyphs)
+    if (!g->resizeEnabled())
+      br |= g->rect();
+
+  // resize resizeable items
+  for (const auto& g : glyphs) {
+    if (!g->resizeEnabled()) continue;
+    resizeGlyph(*g, br);
+  }
+}
+
+void LinearLayout::alignItems(const GlyphList& glyphs) const
+{
+    for (qsizetype i = 0; i < glyphs.size(); i++) {
+    auto& g = *glyphs[i];
+    // apply alignment only to non-resizeable items
+    if (g.resizeEnabled()) continue;
+    // per-item or global alignment
+    applyAlignment(g, alignment(i));
+  }
 }
 
 
@@ -71,13 +103,17 @@ void HLayout::updateAdv(QPointF& adv, const Glyph& curr) const
   adv.ry() = std::max(adv.y(), curr.advance().y());
 }
 
-void HLayout::applyAlignment(const GlyphList& glyphs) const
+void HLayout::applyAlignment(Glyph& g, Qt::Alignment a) const
 {
   std::function<qreal(Glyph&)> ypos = [](auto& g) { return g.pos().y(); };
 
-  switch (alignment() & Qt::AlignVertical_Mask) {
-    case Qt::AlignTop:
+  switch (a & Qt::AlignVertical_Mask) {
+    case Qt::AlignBaseline:
       ypos = [](auto& g) { return 0; };
+      break;
+
+    case Qt::AlignTop:
+      ypos = [this](auto& g) { return rect().top() - g.rect().top(); };
       break;
 
     case Qt::AlignVCenter:
@@ -92,7 +128,13 @@ void HLayout::applyAlignment(const GlyphList& glyphs) const
       break;
   }
 
-  for (auto& g : glyphs) { g->setPos({g->pos().x(), ypos(*g)}); }
+  g.setPos({g.pos().x(), ypos(g)});
+}
+
+void HLayout::resizeGlyph(Glyph& g, const QRectF& br) const
+{
+  g.resize(br.bottom() - br.top(), Qt::Vertical);
+  g.setPos({g.pos().x(), br.top() - g.rect().top()});
 }
 
 
@@ -107,11 +149,11 @@ void VLayout::updateAdv(QPointF& adv, const Glyph& curr) const
   adv.rx() = std::max(adv.x(), curr.advance().x());
 }
 
-void VLayout::applyAlignment(const GlyphList& glyphs) const
+void VLayout::applyAlignment(Glyph& g, Qt::Alignment a) const
 {
   std::function<qreal(Glyph&)> xpos = [](auto& g) { return g.pos().x(); };
 
-  switch (alignment() & Qt::AlignHorizontal_Mask) {
+  switch (a & Qt::AlignHorizontal_Mask) {
     case Qt::AlignLeft:
       xpos = [](auto& g) { return 0; };
       break;
@@ -128,5 +170,11 @@ void VLayout::applyAlignment(const GlyphList& glyphs) const
       break;
   }
 
-  for (auto& g : glyphs) { g->setPos({xpos(*g), g->pos().y()}); }
+  g.setPos({xpos(g), g.pos().y()});
+}
+
+void VLayout::resizeGlyph(Glyph& g, const QRectF& br) const
+{
+  g.resize(br.right() - br.left(), Qt::Horizontal);
+  g.setPos({br.left() - g.rect().left(), g.pos().y()});
 }

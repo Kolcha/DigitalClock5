@@ -27,6 +27,7 @@ FontSkin::CharGlyph::CharGlyph(char32_t c, const QFont& font)
     _br = fmf.tightBoundingRect(QString::fromUcs4(&c, 1));
     _adv.rx() = (_font.italic() ? 0.8 : 1.0) * _br.width();
   }
+  _br.adjust(-0.5, -0.5, 0.5, 0.5);
   _adv.ry() = -fmf.lineSpacing();
 }
 

@@ -24,6 +24,8 @@ public:
   qreal lineSpacing() const { return _line_spacing; }
 
   Qt::Alignment alignment() const { return _tg.algorithm()->alignment(); }
+  Qt::Alignment alignment(size_t i) const
+  { return _tg.algorithm()->alignment(i); }
 
   // ---------------------
 
@@ -49,6 +51,10 @@ public:
   void setLineSpacing(qreal spacing);
 
   void setAlignment(Qt::Alignment a);
+  void setAlignment(size_t i, Qt::Alignment a);
+
+  // unique function to set per-line alignment at once
+  void applyLayoutConfig(QStringView cfg);
 
   // ---------------------
 

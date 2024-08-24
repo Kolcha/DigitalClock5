@@ -89,6 +89,8 @@ public:
 
   std::shared_ptr<Transform> transform() const { return _t; }
 
+  bool resizeEnabled() const { return _resize_enabled; }
+
   // appearance
   std::shared_ptr<Appearance> appearance() const { return _a; }
 
@@ -100,6 +102,14 @@ public:
   void setPos(QPointF p);
 
   void setTransform(std::shared_ptr<Transform> t);
+
+  void setResizeEnabled(bool enabled);
+  inline void enableResize() { setResizeEnabled(true); }
+  inline void disableResize() { setResizeEnabled(false); }
+
+  // resize item in given direction
+  // aspect ratio is preserved
+  void resize(qreal l, Qt::Orientation o);
 
   // appearance
   void setAppearance(std::shared_ptr<Appearance> a);
@@ -136,6 +146,11 @@ private:
 
   bool _vis = true;
   bool _caching = true;
+
+  // is resizing enabled?
+  bool _resize_enabled = false;
+  // scaling coefficient to achive "resize effect"
+  qreal _ks = 1.0;
 
   // draw() is const (and expected to be const),
   // and caching should be transparent for users

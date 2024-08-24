@@ -40,6 +40,46 @@ void GraphicsBase::setAlignment(Qt::Alignment a)
   _tg.updateGeometry();
 }
 
+void GraphicsBase::setAlignment(size_t i, Qt::Alignment a)
+{
+  _tg.algorithm()->setAlignment(i, a);
+  _tg.updateGeometry();
+}
+
+void GraphicsBase::applyLayoutConfig(QStringView cfg)
+{
+  if (cfg.isEmpty()) {
+    for (qsizetype i = 0; i < _tg.size(); i++) {
+      _tg[i]->disableResize();
+      _tg.algorithm()->setAlignment(i, _tg.algorithm()->alignment());
+    }
+  }
+
+  for (qsizetype i = 0; i < std::min(_tg.size(), cfg.length()); i++) {
+    _tg[i]->disableResize();
+    switch (cfg[i].unicode()) {
+      case '1':
+        _tg[i]->enableResize();
+        break;
+      case '<':
+        _tg.algorithm()->setAlignment(i, Qt::AlignLeft | Qt::AlignBaseline);
+        break;
+      case '>':
+        _tg.algorithm()->setAlignment(i, Qt::AlignRight | Qt::AlignBaseline);
+        break;
+      case 'x':
+      case 'X':
+        _tg.algorithm()->setAlignment(i, Qt::AlignHCenter | Qt::AlignBaseline);
+        break;
+      case '0':
+        break;
+      default:
+        break;
+    }
+  }
+  _tg.updateGeometry();
+}
+
 void GraphicsBase::setBackground(QBrush b, bool stretch, bool per_char)
 {
   _bg = std::move(b);

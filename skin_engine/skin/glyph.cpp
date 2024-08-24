@@ -74,6 +74,23 @@ void Glyph::setTransform(std::shared_ptr<Transform> t)
   dropCachedData();
 }
 
+void Glyph::setResizeEnabled(bool enabled)
+{
+  _resize_enabled = enabled;
+  if (!enabled) _ks = 1.0;
+  updateGeometry();
+}
+
+void Glyph::resize(qreal l, Qt::Orientation o)
+{
+  Q_ASSERT(_resize_enabled);
+  if (o == Qt::Horizontal)
+    _ks *= l / _br.width();
+  else
+    _ks *= l / _br.height();
+  updateGeometry();
+}
+
 void Glyph::setAppearance(std::shared_ptr<Appearance> a)
 {
   if (_a == a) return;
@@ -111,6 +128,7 @@ void Glyph::draw(QPainter* p) const
   p->save();
   p->translate(_pos);
   p->setTransform(_t->transform(), true);
+  p->scale(_ks, _ks);
   QRectF br = p->transform().mapRect(_g->rect());
 
   QPixmap pxm;
@@ -141,6 +159,8 @@ void Glyph::draw(QPainter* p) const
   p->resetTransform();
   p->translate(br.topLeft());
   p->drawPixmap(0, 0, pxm);
+  p->setPen(Qt::green);
+  p->drawRect(QRectF({0,0}, pxm.deviceIndependentSize()).adjusted(0.5, 0.5, -0.5, -0.5));
   p->restore();
 }
 
@@ -153,9 +173,9 @@ void Glyph::updateGeometry()
 {
   if (!_g) return;
 
-  _br = _t->transform().mapRect(_g->rect());
+  _br = _t->transform().scale(_ks, _ks).mapRect(_g->rect());
   _gr = _br.translated(_pos);
-  _adv = _t->transform().map(_g->advance());
+  _adv = _t->transform().scale(_ks, _ks).map(_g->advance());
 }
 
 void Glyph::dropCachedData()

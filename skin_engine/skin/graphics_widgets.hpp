@@ -40,6 +40,7 @@ public:
   qreal scalingY() const { return _sy; }
 
   Qt::Alignment alignment() const { return _gt->alignment(); }
+  QString layoutConfig() const { return _lcfg; }
 
   // ---------------------
 
@@ -73,6 +74,7 @@ public slots:
   void setScaling(qreal sx, qreal sy);
 
   void setAlignment(Qt::Alignment a);
+  void setLayoutConfig(QString lcfg);
 
   void setBackground(QBrush b, bool stretch, bool per_char);
 
@@ -120,6 +122,8 @@ private:
 
   qreal _sx = 1.0;
   qreal _sy = 1.0;
+
+  QString _lcfg;
 };
 
 

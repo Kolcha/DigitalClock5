@@ -102,6 +102,14 @@ void GraphicsWidgetBase::setAlignment(Qt::Alignment a)
   update();
 }
 
+void GraphicsWidgetBase::setLayoutConfig(QString lcfg)
+{
+  _lcfg = std::move(lcfg);
+  _gt->applyLayoutConfig(_lcfg);
+  updateGeometry();
+  update();
+}
+
 void GraphicsWidgetBase::setBackground(QBrush b, bool stretch, bool per_char)
 {
   _gt->setBackground(std::move(b), stretch, per_char);

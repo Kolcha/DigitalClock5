@@ -64,6 +64,7 @@ void Application::configureWindow(size_t i)
   clock->setCustomSeparators(acfg.getCustomSeparators());
 
   clock->setFormat(acfg.getTimeFormat());
+  clock->setLayoutConfig(acfg.getLayoutConfig());
   clock->setSecondsScaleFactor(acfg.getSecondsScaleFactor()/100.);
 
   clock->setTexture(acfg.getTexture(),

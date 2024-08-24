@@ -233,8 +233,8 @@ void SettingsDialog::on_format_apply_btn_clicked()
 
 void SettingsDialog::on_layout_cfg_edit_textEdited(const QString& arg1)
 {
-  // impl->skin->setLayoutConfig(arg1);
-  // impl->scfg->setLayoutConfig(arg1);
+  applyClockOption(&GraphicsDateTimeWidget::setLayoutConfig, arg1);
+  app->config().window(_curr_idx).appearance().setLayoutConfig(arg1);
 }
 
 void SettingsDialog::on_layout_cfg_help_btn_clicked()
@@ -744,7 +744,7 @@ void SettingsDialog::initGeneralTab(int idx)
   ui->custom_seps_edit->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
   ui->custom_seps_edit->setText(acfg.getCustomSeparators());
 
-  // ui->layout_cfg_edit->setText(impl->scfg->getLayoutConfig());
+  ui->layout_cfg_edit->setText(acfg.getLayoutConfig());
 
   connect(ui->rb_12h, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
   connect(ui->rb_24h, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);

@@ -51,7 +51,7 @@ private:
 
 class SKIN_ENGINE_EXPORT LinearLayout : public Algorithm {
 public:
-  void process(const GlyphList& glyps) override;
+  void process(const GlyphList& glyphs) override;
 
   QRectF rect() const override { return _rect; }
   QPointF advance() const override { return _adv; }
@@ -59,21 +59,29 @@ public:
   qreal spacing() const { return _spacing; }
 
   Qt::Alignment alignment() const { return _align; }
+  Qt::Alignment alignment(size_t i) const { return _item_a.value(i, _align); }
 
   void setSpacing(qreal spacing) { _spacing = spacing; }
 
   void setAlignment(Qt::Alignment align) { _align = align; }
+  void setAlignment(size_t i, Qt::Alignment a) { _item_a[i] = a; }
 
 protected:
   virtual void updatePos(Glyph& curr, const Glyph& prev) const = 0;
   virtual void updateAdv(QPointF& adv, const Glyph& curr) const = 0;
-  virtual void applyAlignment(const GlyphList& glyps) const = 0;
+  virtual void applyAlignment(Glyph& g, Qt::Alignment a) const = 0;
+  virtual void resizeGlyph(Glyph& g, const QRectF& br) const = 0;
+
+private:
+  void resizeItems(const GlyphList& glyphs) const;
+  void alignItems(const GlyphList& glyphs) const;
 
 private:
   QRectF _rect;
   QPointF _adv;
   qreal _spacing = 0;
-  Qt::Alignment _align = Qt::AlignTop | Qt::AlignLeft;
+  Qt::Alignment _align = Qt::AlignBaseline | Qt::AlignLeft;
+  QHash<size_t, Qt::Alignment> _item_a;
 };
 
 
@@ -81,7 +89,8 @@ class SKIN_ENGINE_EXPORT HLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;
-  void applyAlignment(const GlyphList& glyphs) const override;
+  void applyAlignment(Glyph& g, Qt::Alignment a) const override;
+  void resizeGlyph(Glyph& g, const QRectF& br) const override;
 };
 
 
@@ -89,7 +98,8 @@ class SKIN_ENGINE_EXPORT VLayout : public LinearLayout {
 protected:
   void updatePos(Glyph& curr, const Glyph& prev) const override;
   void updateAdv(QPointF& adv, const Glyph& curr) const override;
-  void applyAlignment(const GlyphList& glyphs) const override;
+  void applyAlignment(Glyph& g, Qt::Alignment a) const override;
+  void resizeGlyph(Glyph& g, const QRectF& br) const override;
 };
 
 
