@@ -105,6 +105,7 @@ void Application::initConfig()
     _cfg = std::make_unique<AppConfig>(app_dir.absoluteFilePath(u"settings.ini"_s));
   else
     _cfg = std::make_unique<AppConfig>();
+  _sm.setSkinBaseSize(_cfg->limits().getBaseSize());
 }
 
 void Application::initTray()

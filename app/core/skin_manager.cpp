@@ -80,3 +80,9 @@ SkinManager::Metadata SkinManager::metadata(const QString& id) const
     return iter->metadata();
   return {};
 }
+
+void SkinManager::setSkinBaseSize(int sz)
+{
+  for (auto& l : _impl->loaders)
+    l.setGlyphBaseSize(sz);
+}

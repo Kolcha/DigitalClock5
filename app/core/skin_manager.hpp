@@ -26,6 +26,9 @@ public:
   using Metadata = QHash<QString, QString>;
   Metadata metadata(const QString& id) const;
 
+  // skin base size (affects not all skins)
+  void setSkinBaseSize(int sz);
+
 private:
   struct Impl;
   std::unique_ptr<Impl> _impl;

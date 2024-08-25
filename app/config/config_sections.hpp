@@ -39,7 +39,7 @@ public:
   CONFIG_OPTION_Q(int, MinScaling, 10)
   CONFIG_OPTION_Q(int, MaxScaling, 250)
 
-  CONFIG_OPTION_Q(int, BaseSize, 120)
+  CONFIG_OPTION_Q(int, BaseSize, 96)
 
   CONFIG_OPTION_Q(int, MinSpacing, -8)
   CONFIG_OPTION_Q(int, MaxSpacing, 16)

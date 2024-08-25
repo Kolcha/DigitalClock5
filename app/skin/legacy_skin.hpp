@@ -47,6 +47,10 @@ public:
   auto& metadata() const { return _metadata; }
   bool valid() const { return _is_valid; }
 
+  int glyphBaseSize() const { return _glyph_base_size; }
+
+  void setGlyphBaseSize(int s) { _glyph_base_size = s; }
+
   // TODO: consider tracking file changes
   void addOverlay(const QString& path);
 
@@ -58,4 +62,5 @@ private:
   Metadata _metadata;
   FilesMap _filesmap;
   bool _is_valid = false;
+  int _glyph_base_size = 96;
 };

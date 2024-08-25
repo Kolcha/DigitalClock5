@@ -180,6 +180,28 @@ void loadGeometry(const QString& path, SkinGlyphs& glyphs)
   }
 }
 
+void applyGlyphBaseSize(SkinGlyphs& glyphs, int base_size)
+{
+  auto& f_item = glyphs.begin().value();
+  qreal ymin = f_item->rect().top();
+  qreal ymax = f_item->rect().bottom();
+
+  for (auto i = glyphs.begin(); i != glyphs.end(); ++i) {
+    ymin = std::min(ymin, i.value()->rect().top());
+    ymax = std::max(ymax, i.value()->rect().bottom());
+  }
+
+  qreal ks = base_size / (ymax - ymin);
+
+  for (auto i = glyphs.begin(); i != glyphs.end(); ++i) {
+    auto& g = *i.value();
+    auto r = g.rect();
+    auto a = g.advance();
+    g.setRect(QRectF(r.topLeft() * ks, r.size() * ks));
+    g.setAdvance(a * ks);
+  }
+}
+
 } // namespace
 
 LegacySkinLoader::LegacySkinLoader(const QString& path)
@@ -209,6 +231,8 @@ std::unique_ptr<Skin> LegacySkinLoader::skin() const
 
   for (const auto& p : std::as_const(_overlays))
     loadGeometry(p, glyphs);
+
+  applyGlyphBaseSize(glyphs, _glyph_base_size);
 
   auto skin = std::make_unique<LegacySkin>();
 
