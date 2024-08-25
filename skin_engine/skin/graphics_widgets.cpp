@@ -50,6 +50,7 @@ QPointF GraphicsWidgetBase::advance() const
 
 void GraphicsWidgetBase::setSkin(std::shared_ptr<Skin> skin)
 {
+  emit skinChanged(skin);
   _gt->setSkin(std::move(skin));
   updateGeometry();
   update();

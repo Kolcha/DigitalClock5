@@ -371,7 +371,7 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
     // provide skin settings
     if (auto sa = dynamic_cast<SkinAccessExtension*>(h.instance(i))) {
       auto wnd = app->window(i)->clock();
-      sa->initSkin(wnd->skin());    // TODO: track skin change
+      sa->initSkin(wnd->skin());
       SkinAccessExtension::AppearanceSettings as;
       as[cs::Texture] = wnd->texture();
       as[cs::TextureStretch] = wnd->textureStretch();
@@ -413,6 +413,11 @@ void PluginManager::Impl::connectEverything(const PluginHandle& h)
         QObject::connect(sp, &SettingsPlugin::optionChanged,
                          cfg_sinks[idx].get(), &ChangeRetransmitter::optionChanged);
       }
+    }
+    // skin access extension
+    if (auto sp = dynamic_cast<SkinAccessExtension*>(h.instance(i))) {
+      QObject::connect(app->window(i)->clock(), &GraphicsWidgetBase::skinChanged,
+                       h.instance(i), [sp](auto skin) { sp->initSkin(skin); });
     }
   }
 }

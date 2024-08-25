@@ -63,6 +63,9 @@ public:
 
   void setSkin(std::shared_ptr<Skin> skin);
 
+signals:
+  void skinChanged(std::shared_ptr<Skin> skin);
+
 public slots:
   void setAutoResizePolicy(AutoResizePolicy rp);
 

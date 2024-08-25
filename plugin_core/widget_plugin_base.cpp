@@ -42,7 +42,7 @@ QWidget* WidgetPluginBase::configure(SettingsClient& s, StateClient& t)
 
 void WidgetPluginBase::initSkin(std::shared_ptr<Skin> skin)
 {
-  if (_impl->widget && _impl->appearance == FollowClock)
+  if (_impl->widget && _impl->use_clock_skin)
     _impl->widget->setSkin(skin);
   _impl->skin = std::move(skin);
 }
