@@ -147,6 +147,8 @@ public:
   // plugin is not loaded
   explicit ConfigurePluginHandle(Application* app, const QString& p, QObject* parent = nullptr);
 
+  ~ConfigurePluginHandle();
+
   void openDialog();
 
 private slots:
@@ -161,6 +163,9 @@ private:
   // shared_ptr allows to set deleter on runtime
   std::shared_ptr<PluginHandle> _handle;
   const bool _was_loaded = false;
+  // window highlight tracking
+  int _init_hl_wnd = 0;
+  int _curr_hl_wnd = 0;
 };
 
 ConfigurePluginHandle::ConfigurePluginHandle(Application* app, PluginHandle* h, QObject* parent)
@@ -180,8 +185,22 @@ ConfigurePluginHandle::ConfigurePluginHandle(Application* app, const QString& p,
   _handle->createInstances(app->config().global().getNumInstances());
 }
 
+ConfigurePluginHandle::~ConfigurePluginHandle()
+{
+  _app->window(_curr_hl_wnd)->disableFrame();
+  _app->window(_init_hl_wnd)->enableFrame();
+}
+
 void ConfigurePluginHandle::openDialog()
 {
+  for (int i = 0; i < _app->config().global().getNumInstances(); i++) {
+    if (_app->window(i)->frameVisible()) {
+      _init_hl_wnd = i;
+      _curr_hl_wnd = i;
+      break;
+    }
+  }
+
   _dlg = new PluginSettingsDialog();
   _dlg->setWindowTitle(_handle->plugin()->title());
 
@@ -207,6 +226,10 @@ void ConfigurePluginHandle::onInstanceChanged(int idx)
 
   auto& plg_cfg = _app->config().plugin(_handle->id());
   _dlg->setWidget(sp->configure(plg_cfg.config(idx), plg_cfg.state(idx)));
+
+  _app->window(_curr_hl_wnd)->disableFrame();
+  _curr_hl_wnd = idx;
+  _app->window(_curr_hl_wnd)->enableFrame();
 }
 
 void ConfigurePluginHandle::onAccepted()
