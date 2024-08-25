@@ -10,3 +10,10 @@ function(add_win_rc_file _target _file)
     )
   endif()
 endfunction()
+
+if (NOT WIN32)
+  function(target_win_deploy_qt _target _out_file)
+    # just a stub function, to avoid if statements
+    # Win32 implementation is in MSI build code
+  endfunction()
+endif()

@@ -30,6 +30,9 @@ set(CLOCK_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CLOCK_VERSION_MINOR ${PROJECT_VERSION_MINOR})
 set(CLOCK_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 
+# dist should be included first, as it defines some important variables
+add_subdirectory(dist)
+
 add_subdirectory(3rdparty)
 add_subdirectory(app)
 add_subdirectory(clock_common)

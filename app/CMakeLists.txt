@@ -71,3 +71,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.exe)

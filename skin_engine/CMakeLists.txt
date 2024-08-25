@@ -30,3 +30,5 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE SKIN_ENGINE_LIBRARY)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC Qt::Widgets Qt::Svg)
+
+target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.dll)
