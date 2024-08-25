@@ -159,8 +159,6 @@ void Glyph::draw(QPainter* p) const
   p->resetTransform();
   p->translate(br.topLeft());
   p->drawPixmap(0, 0, pxm);
-  p->setPen(Qt::green);
-  p->drawRect(QRectF({0,0}, pxm.deviceIndependentSize()).adjusted(0.5, 0.5, -0.5, -0.5));
   p->restore();
 }
 
