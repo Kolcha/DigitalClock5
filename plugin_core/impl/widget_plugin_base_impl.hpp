@@ -32,6 +32,8 @@ public:
   ResizePolicy resize_policy = Autoscale;
   WidgetAppearance appearance = FollowClock;
   Qt::Alignment content_alignment = Qt::AlignCenter;
+  QString layout_cfg;
+  bool use_clock_skin = false;
 
   std::shared_ptr<FontSkin> custom_skin;
 

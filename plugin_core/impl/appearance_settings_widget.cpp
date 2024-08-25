@@ -11,6 +11,8 @@
 #include <QFontDialog>
 #include <QFileDialog>
 
+#include <QDesktopServices>
+
 #include <gradient_dialog.h>
 
 #include "common_appearance_state.hpp"
@@ -35,24 +37,38 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(
   ui->appear_follow->setChecked(cfg.getFollowClock());
   ui->appear_custom->setChecked(!cfg.getFollowClock());
 
-  const auto& fnt = cfg.getCustomFont();
-  ui->font_value->setText(QString("%1, %2").arg(fnt.family()).arg(fnt.pointSize()));
+  ui->font_rbtn->setChecked(!cfg.getUseClockSkin());
+  ui->skin_rbtn->setChecked(cfg.getUseClockSkin());
 
   const auto& tx = cfg.getTexture();
   ui->tx_group->setChecked(tx.style() != Qt::NoBrush);
-  ui->tx_color->setChecked(tx.style() == Qt::SolidPattern);
-  ui->tx_gradient->setChecked(tx.gradient() != nullptr);
-  ui->tx_pattern->setChecked(tx.style() == Qt::TexturePattern);
-  ui->tx_stretch->setChecked(cfg.getTextureStretch());
+  if (tx.style() == Qt::SolidPattern) {
+    ui->tx_options_box->setCurrentIndex(0);
+  }
+  if (tx.gradient() != nullptr) {
+    ui->tx_options_box->setCurrentIndex(1);
+  }
+  if (tx.style() == Qt::TexturePattern) {
+    ui->tx_options_box->setCurrentIndex(2);
+    ui->tx_option->setChecked(cfg.getTextureStretch());
+  }
   ui->tx_per_char->setChecked(cfg.getTexturePerChar());
+  on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
 
   const auto& bg = cfg.getBackground();
   ui->bg_group->setChecked(bg.style() != Qt::NoBrush);
-  ui->bg_color->setChecked(bg.style() == Qt::SolidPattern);
-  ui->bg_gradient->setChecked(bg.gradient() != nullptr);
-  ui->bg_pattern->setChecked(bg.style() == Qt::TexturePattern);
-  ui->bg_stretch->setChecked(cfg.getBackgroundStretch());
+  if (bg.style() == Qt::SolidPattern) {
+    ui->bg_options_box->setCurrentIndex(0);
+  }
+  if (bg.gradient() != nullptr) {
+    ui->bg_options_box->setCurrentIndex(1);
+  }
+  if (bg.style() == Qt::TexturePattern) {
+    ui->bg_options_box->setCurrentIndex(2);
+    ui->bg_option->setChecked(cfg.getBackgroundStretch());
+  }
   ui->bg_per_char->setChecked(cfg.getBackgroundPerChar());
+  on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
 
   QSignalBlocker ah(ui->align_h_box);
   QSignalBlocker av(ui->align_v_box);
@@ -85,6 +101,8 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(
 
   ui->align_h_box->setCurrentIndex(hidx);
   ui->align_v_box->setCurrentIndex(vidx);
+
+  ui->layout_cfg_edit->setText(cfg.getLayoutConfig());
 }
 
 AppearanceSettingsWidget::~AppearanceSettingsWidget()
@@ -164,19 +182,46 @@ void AppearanceSettingsWidget::on_align_v_box_activated(int index)
     impl->layout->setAlignment(widget, cfg.getAlignment());
 }
 
+void AppearanceSettingsWidget::on_layout_cfg_edit_textEdited(const QString& arg1)
+{
+  if (widget)
+    widget->setLayoutConfig(arg1);
+  impl->layout_cfg = arg1;
+  cfg.setLayoutConfig(arg1);
+}
+
+void AppearanceSettingsWidget::on_layout_cfg_help_btn_clicked()
+{
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Multiple-lines"));
+}
+
+void AppearanceSettingsWidget::on_font_rbtn_clicked()
+{
+  if (widget)
+    widget->setSkin(impl->custom_skin);
+  impl->use_clock_skin = false;
+  cfg.setUseClockSkin(false);
+}
+
 void AppearanceSettingsWidget::on_font_select_clicked()
 {
   bool ok = false;
   QFont fnt = QFontDialog::getFont(&ok, cfg.getCustomFont(), this);
   if (!ok) return;
 
-  ui->font_value->setText(QString("%1, %2").arg(fnt.family()).arg(fnt.pointSize()));
-
   cfg.setCustomFont(fnt);
   impl->custom_skin = std::make_shared<FontSkin>(fnt);
 
   if (widget)
     widget->setSkin(impl->custom_skin);
+}
+
+void AppearanceSettingsWidget::on_skin_rbtn_clicked()
+{
+  if (widget)
+    widget->setSkin(impl->skin);
+  impl->use_clock_skin = true;
+  cfg.setUseClockSkin(true);
 }
 
 void AppearanceSettingsWidget::on_tx_group_clicked(bool checked)
@@ -186,13 +231,13 @@ void AppearanceSettingsWidget::on_tx_group_clicked(bool checked)
   QBrush brush(Qt::NoBrush);
 
   if (checked) {
-    if (ui->tx_color->isChecked())
+    if (ui->tx_options_box->currentIndex() == 0)
       brush = QBrush(state.getTextureColor());
 
-    if (ui->tx_gradient->isChecked())
+    if (ui->tx_options_box->currentIndex() == 1)
       brush = QBrush(state.getTextureGradient());
 
-    if (ui->tx_pattern->isChecked())
+    if (ui->tx_options_box->currentIndex() == 2)
       brush = QBrush(state.getTexturePattern());
   }
 
@@ -203,17 +248,58 @@ void AppearanceSettingsWidget::on_tx_group_clicked(bool checked)
     widget->setTexture(std::move(brush));
 }
 
-void AppearanceSettingsWidget::on_tx_color_clicked()
+void AppearanceSettingsWidget::on_tx_options_box_activated(int index)
 {
   CommonAppearanceState state(st);
-  cfg.setTexture(state.getTextureColor());
-  impl->tx = state.getTextureColor();
-
-  if (widget)
-    widget->setTexture(state.getTextureColor());
+  switch (index) {
+    case 0: // color
+      cfg.setTexture(state.getTextureColor());
+      impl->tx = state.getTextureColor();
+      if (widget)
+        widget->setTexture(state.getTextureColor());
+      break;
+    case 1: // gradient
+      cfg.setTexture(state.getTextureGradient());
+      impl->tx = state.getTextureGradient();
+      if (widget)
+        widget->setTexture(state.getTextureGradient());
+      break;
+    case 2: // pattern
+      cfg.setTexture(state.getTexturePattern());
+      impl->tx = state.getTexturePattern();
+      if (widget)
+        widget->setTexture(state.getTexturePattern());
+      break;
+  }
 }
 
-void AppearanceSettingsWidget::on_tx_color_select_clicked()
+void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
+{
+  disconnect(ui->tx_btn, &QToolButton::clicked, nullptr, nullptr);
+  disconnect(ui->tx_option, &QCheckBox::clicked, nullptr, nullptr);
+  ui->tx_option->hide();
+
+  switch (index) {
+    case 0: // color
+      connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_color);
+      ui->tx_option->setText(tr("follow system theme"));
+      // ui->tx_option->show();
+      // connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::applySystemColor);
+      break;
+    case 1: // gradient
+      connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_gradient);
+      ui->tx_option->hide();
+      break;
+    case 2: // pattern
+      connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_pattern);
+      ui->tx_option->setText(tr("stretch instead of tile"));
+      ui->tx_option->show();
+      connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::tx_pattern_stretch);
+      break;
+  }
+}
+
+void AppearanceSettingsWidget::tx_select_color()
 {
   CommonAppearanceState state(st);
   auto color = QColorDialog::getColor(state.getTextureColor(),
@@ -230,17 +316,7 @@ void AppearanceSettingsWidget::on_tx_color_select_clicked()
     widget->setTexture(std::move(color));
 }
 
-void AppearanceSettingsWidget::on_tx_gradient_clicked()
-{
-  CommonAppearanceState state(st);
-  cfg.setTexture(state.getTextureGradient());
-  impl->tx = state.getTextureGradient();
-
-  if (widget)
-    widget->setTexture(state.getTextureGradient());
-}
-
-void AppearanceSettingsWidget::on_tx_gradient_select_clicked()
+void AppearanceSettingsWidget::tx_select_gradient()
 {
   CommonAppearanceState state(st);
   bool ok = false;
@@ -258,17 +334,7 @@ void AppearanceSettingsWidget::on_tx_gradient_select_clicked()
     widget->setTexture(std::move(gradient));
 }
 
-void AppearanceSettingsWidget::on_tx_pattern_clicked()
-{
-  CommonAppearanceState state(st);
-  cfg.setTexture(state.getTexturePattern());
-  impl->tx = state.getTexturePattern();
-
-  if (widget)
-    widget->setTexture(state.getTexturePattern());
-}
-
-void AppearanceSettingsWidget::on_tx_pattern_select_clicked()
+void AppearanceSettingsWidget::tx_select_pattern()
 {
   CommonAppearanceState state(st);
   auto file = QFileDialog::getOpenFileName(this,
@@ -288,7 +354,7 @@ void AppearanceSettingsWidget::on_tx_pattern_select_clicked()
     widget->setTexture(std::move(pxm));
 }
 
-void AppearanceSettingsWidget::on_tx_stretch_clicked(bool checked)
+void AppearanceSettingsWidget::tx_pattern_stretch(bool checked)
 {
   cfg.setTextureStretch(checked);
   impl->tx_stretch = checked;
@@ -296,7 +362,6 @@ void AppearanceSettingsWidget::on_tx_stretch_clicked(bool checked)
   if (widget)
     widget->setTextureStretch(checked);
 }
-
 
 void AppearanceSettingsWidget::on_tx_per_char_clicked(bool checked)
 {
@@ -314,13 +379,13 @@ void AppearanceSettingsWidget::on_bg_group_clicked(bool checked)
   QBrush brush(Qt::NoBrush);
 
   if (checked) {
-    if (ui->bg_color->isChecked())
+    if (ui->bg_options_box->currentIndex() == 0)
       brush = QBrush(state.getBackgroundColor());
 
-    if (ui->bg_gradient->isChecked())
+    if (ui->bg_options_box->currentIndex() == 1)
       brush = QBrush(state.getBackgroundGradient());
 
-    if (ui->bg_pattern->isChecked())
+    if (ui->bg_options_box->currentIndex() == 2)
       brush = QBrush(state.getBackgroundPattern());
   }
 
@@ -331,17 +396,58 @@ void AppearanceSettingsWidget::on_bg_group_clicked(bool checked)
     widget->setBackground(std::move(brush));
 }
 
-void AppearanceSettingsWidget::on_bg_color_clicked()
+void AppearanceSettingsWidget::on_bg_options_box_activated(int index)
 {
   CommonAppearanceState state(st);
-  cfg.setBackground(state.getBackgroundColor());
-  impl->bg = state.getBackgroundColor();
-
-  if (widget)
-    widget->setBackground(state.getBackgroundColor());
+  switch (index) {
+    case 0: // color
+      cfg.setBackground(state.getBackgroundColor());
+      impl->bg = state.getBackgroundColor();
+      if (widget)
+        widget->setBackground(state.getBackgroundColor());
+      break;
+    case 1: // gradient
+      cfg.setBackground(state.getBackgroundGradient());
+      impl->bg = state.getBackgroundGradient();
+      if (widget)
+        widget->setBackground(state.getBackgroundGradient());
+      break;
+    case 2: // pattern
+      cfg.setBackground(state.getBackgroundPattern());
+      impl->bg = state.getBackgroundPattern();
+      if (widget)
+        widget->setBackground(state.getBackgroundPattern());
+      break;
+  }
 }
 
-void AppearanceSettingsWidget::on_bg_color_select_clicked()
+void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
+{
+  disconnect(ui->bg_btn, &QToolButton::clicked, nullptr, nullptr);
+  disconnect(ui->bg_option, &QCheckBox::clicked, nullptr, nullptr);
+  ui->bg_option->hide();
+
+  switch (index) {
+    case 0: // color
+      connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_color);
+      ui->bg_option->setText(tr("follow system theme"));
+      // ui->bg_option->show();
+      // connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::applySystemColor);
+      break;
+    case 1: // gradient
+      connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_gradient);
+      ui->bg_option->hide();
+      break;
+    case 2: // pattern
+      connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_pattern);
+      ui->bg_option->setText(tr("stretch instead of tile"));
+      ui->bg_option->show();
+      connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::bg_pattern_stretch);
+      break;
+  }
+}
+
+void AppearanceSettingsWidget::bg_select_color()
 {
   CommonAppearanceState state(st);
   auto color = QColorDialog::getColor(state.getBackgroundColor(),
@@ -358,17 +464,7 @@ void AppearanceSettingsWidget::on_bg_color_select_clicked()
     widget->setBackground(std::move(color));
 }
 
-void AppearanceSettingsWidget::on_bg_gradient_clicked()
-{
-  CommonAppearanceState state(st);
-  cfg.setBackground(state.getBackgroundGradient());
-  impl->bg = state.getBackgroundGradient();
-
-  if (widget)
-    widget->setBackground(state.getBackgroundGradient());
-}
-
-void AppearanceSettingsWidget::on_bg_gradient_select_clicked()
+void AppearanceSettingsWidget::bg_select_gradient()
 {
   CommonAppearanceState state(st);
   bool ok = false;
@@ -386,17 +482,7 @@ void AppearanceSettingsWidget::on_bg_gradient_select_clicked()
     widget->setBackground(std::move(gradient));
 }
 
-void AppearanceSettingsWidget::on_bg_pattern_clicked()
-{
-  CommonAppearanceState state(st);
-  cfg.setBackground(state.getBackgroundPattern());
-  impl->bg = state.getBackgroundPattern();
-
-  if (widget)
-    widget->setBackground(state.getBackgroundPattern());
-}
-
-void AppearanceSettingsWidget::on_bg_pattern_select_clicked()
+void AppearanceSettingsWidget::bg_select_pattern()
 {
   CommonAppearanceState state(st);
   auto file = QFileDialog::getOpenFileName(this,
@@ -416,7 +502,7 @@ void AppearanceSettingsWidget::on_bg_pattern_select_clicked()
     widget->setBackground(std::move(pxm));
 }
 
-void AppearanceSettingsWidget::on_bg_stretch_clicked(bool checked)
+void AppearanceSettingsWidget::bg_pattern_stretch(bool checked)
 {
   cfg.setBackgroundStretch(checked);
   impl->bg_stretch = checked;
@@ -424,7 +510,6 @@ void AppearanceSettingsWidget::on_bg_stretch_clicked(bool checked)
   if (widget)
     widget->setBackgroundStretch(checked);
 }
-
 
 void AppearanceSettingsWidget::on_bg_per_char_clicked(bool checked)
 {

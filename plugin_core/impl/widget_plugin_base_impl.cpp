@@ -11,9 +11,13 @@ void WidgetPluginBaseImpl::applyAppearanceSettings()
   if (!widget)
     return;
 
+  if (use_clock_skin)
+    widget->setSkin(skin);
+  else
+    widget->setSkin(custom_skin);
+
   bool use_clock_settings = appearance == FollowClock;
   if (use_clock_settings) {
-    widget->setSkin(skin);
     widget->setTexture(skin_cfg[cs::Texture].value<QBrush>(),
                        skin_cfg[cs::TextureStretch].toBool(),
                        skin_cfg[cs::TexturePerCharacter].toBool());
@@ -21,10 +25,11 @@ void WidgetPluginBaseImpl::applyAppearanceSettings()
                           skin_cfg[cs::BackgroundStretch].toBool(),
                           skin_cfg[cs::BackgroundPerCharacter].toBool());
   } else {
-    widget->setSkin(custom_skin);
     widget->setTexture(tx, tx_stretch, tx_per_char);
     widget->setBackground(bg, bg_stretch, bg_per_char);
   }
+
+  widget->setLayoutConfig(layout_cfg);
 }
 
 void WidgetPluginBaseImpl::repositionWidget()
@@ -57,8 +62,9 @@ void WidgetPluginBaseImpl::initSettings(const SettingsClient& st)
   resize_policy = sa.getResizePolicy();
   appearance = sa.getFollowClock() ? FollowClock : Custom;
   content_alignment = sa.getAlignment();
+  layout_cfg = sa.getLayoutConfig();
+  use_clock_skin = sa.getUseClockSkin();
 
-  // BUG: autoscale seems to work only when widget wants more space than clock
   custom_skin = std::make_shared<FontSkin>(sa.getCustomFont());
 
   tx = sa.getTexture();
