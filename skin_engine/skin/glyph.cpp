@@ -9,6 +9,20 @@
 #include <QPainter>
 #include <QPixmap>
 
+namespace {
+
+class QPainterStateSaver {
+public:
+  explicit QPainterStateSaver(QPainter& p)
+      : _p(p) { _p.save(); }
+  ~QPainterStateSaver() { _p.restore(); }
+
+private:
+  QPainter& _p;
+};
+
+} // namespace
+
 void Appearance::setBackground(QBrush b, bool stretch)
 {
   if (_bg == b && _bg_s == stretch) return;
@@ -125,7 +139,7 @@ void Glyph::draw(QPainter* p) const
     _ht = h;
   }
 
-  p->save();
+  QPainterStateSaver _(*p);
   p->translate(_pos);
   p->setTransform(_t->transform(), true);
   p->scale(_ks, _ks);
@@ -135,6 +149,11 @@ void Glyph::draw(QPainter* p) const
   if (!QPixmapCache::find(_ck, &pxm)) {
     qreal dpr = p->device()->devicePixelRatioF();
     pxm = QPixmap((br.size() * dpr).toSize());
+    // space characters not always 0x0, so not all of them can be detected early
+    // sometimes they have very small size (e.g. 1x1), and after scaling and
+    // after conversion it may become (0x0), and this leads to invalid state
+    // so, check pixmap size before initializing the painter
+    if (pxm.size().isEmpty()) return;
     pxm.setDevicePixelRatio(dpr);
     pxm.fill(Qt::transparent);
     {
@@ -159,7 +178,6 @@ void Glyph::draw(QPainter* p) const
   p->resetTransform();
   p->translate(br.topLeft());
   p->drawPixmap(0, 0, pxm);
-  p->restore();
 }
 
 void Glyph::onAppearanceChanged()

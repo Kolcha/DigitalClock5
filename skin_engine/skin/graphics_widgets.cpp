@@ -158,6 +158,7 @@ void GraphicsWidgetBase::paintEvent(QPaintEvent* event)
   QPainter p(this);
   p.scale(_k*_sx, _k*_sy);
   p.setRenderHint(QPainter::Antialiasing);
+  p.setRenderHint(QPainter::SmoothPixmapTransform);
   p.translate(-_gt->rect().topLeft());
   _gt->draw(&p);
 }
