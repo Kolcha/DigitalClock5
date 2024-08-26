@@ -68,6 +68,11 @@ class PLUGIN_CORE_EXPORT SettingsPlugin : public ClockPluginBase
 {
   Q_OBJECT
 
+public:
+  using SharedSettings = QHash<cs::SharedConfigKeys, QVariant>;
+  // allows plugin to get clock's current settings, called before init()
+  virtual void initSharedSettings(const SharedSettings& s) = 0;
+
 public slots:
   // called each time one of shared options changed
   // (doesn't matter by the clock or another plugin)

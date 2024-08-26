@@ -27,6 +27,9 @@ public:
   WidgetPluginBase();
   ~WidgetPluginBase();
 
+  // SettingsPlugin interface
+  void initSharedSettings(const SharedSettings& s) override;
+
   // ConfigurablePlugin interface
   void initSettings(const SettingsClient& st) override;
 

@@ -39,5 +39,6 @@ void PluginSettingsDialog::setWidget(QWidget* w)
   auto l = new QVBoxLayout(ui->widget);
   l->setSpacing(0);
   l->setContentsMargins(0, 0, 0, 0);
+  w->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
   l->addWidget(w);
 }

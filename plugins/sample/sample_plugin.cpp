@@ -20,6 +20,11 @@ SamplePlugin::~SamplePlugin()
   qDebug() << __FUNCTION__;
 }
 
+void SamplePlugin::initSharedSettings(const SharedSettings& s)
+{
+  qDebug() << __FUNCTION__;
+}
+
 void SamplePlugin::saveState(StateClient& st) const
 {
   st.setValue("testA", 84);

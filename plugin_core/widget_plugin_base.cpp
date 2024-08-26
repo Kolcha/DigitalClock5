@@ -16,6 +16,11 @@ WidgetPluginBase::WidgetPluginBase()
 {
 }
 
+void WidgetPluginBase::initSharedSettings(const SharedSettings& s)
+{
+  Q_UNUSED(s);
+}
+
 WidgetPluginBase::~WidgetPluginBase() = default;
 
 void WidgetPluginBase::initSettings(const SettingsClient& st)

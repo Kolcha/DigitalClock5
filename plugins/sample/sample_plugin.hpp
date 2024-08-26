@@ -16,6 +16,8 @@ public:
   SamplePlugin();
   ~SamplePlugin();
 
+  void initSharedSettings(const SharedSettings& s) override;
+
   void saveState(StateClient& st) const override;
   void loadState(const StateClient& st) override;
 

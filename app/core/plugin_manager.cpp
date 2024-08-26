@@ -368,6 +368,34 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
       cp->loadState(plg_cfg.state(i));
       cp->initSettings(plg_cfg.config(i));
     }
+    // provide shared settings
+    if (auto sp = dynamic_cast<SettingsPlugin*>(h.instance(i))) {
+      auto& wcfg = app->config().window(i).appearance();
+      SettingsPlugin::SharedSettings ss;
+      ss[cs::Opacity] = wcfg.getOpacity();
+      ss[cs::ScalingH] = wcfg.getScalingH();
+      ss[cs::ScalingV] = wcfg.getScalingV();
+      ss[cs::SpacingH] = wcfg.getSpacingH();
+      ss[cs::SpacingV] = wcfg.getSpacingV();
+      ss[cs::ApplyColorization] = wcfg.getApplyColorization();
+      ss[cs::ColorizationStrength] = wcfg.getColorizationStrength();
+      ss[cs::ColorizationColor] = wcfg.getColorizationColor();
+      ss[cs::UseFontInsteadOfSkin] = wcfg.getUseFontInsteadOfSkin();
+      ss[cs::Font] = wcfg.getFont();
+      ss[cs::Skin] = wcfg.getSkin();
+      ss[cs::SeparatorFlashes] = wcfg.getSeparatorFlashes();
+      ss[cs::UseCustomSeparators] = wcfg.getUseCustomSeparators();
+      ss[cs::CustomSeparators] = wcfg.getCustomSeparators();
+      ss[cs::TimeFormat] = wcfg.getTimeFormat();
+      ss[cs::SecondsScaleFactor] = wcfg.getSecondsScaleFactor();
+      ss[cs::Texture] = wcfg.getTexture();
+      ss[cs::TextureStretch] = wcfg.getTextureStretch();
+      ss[cs::TexturePerCharacter] = wcfg.getTexturePerCharacter();
+      ss[cs::Background] = wcfg.getBackground();
+      ss[cs::BackgroundStretch] = wcfg.getBackgroundStretch();
+      ss[cs::BackgroundPerCharacter] = wcfg.getBackgroundPerCharacter();
+      sp->initSharedSettings(ss);
+    }
     // provide skin settings
     if (auto sa = dynamic_cast<SkinAccessExtension*>(h.instance(i))) {
       auto wnd = app->window(i)->clock();
