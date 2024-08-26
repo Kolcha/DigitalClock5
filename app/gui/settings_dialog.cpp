@@ -83,6 +83,7 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
   initAppGlobalTab();
   initGeneralTab(_curr_idx);
   initAppearanceTab(_curr_idx);
+  initMiscTab(_curr_idx);
   initPluginsTab();
 }
 
@@ -337,24 +338,6 @@ void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
   applyClockOption(&GraphicsDateTimeWidget::setFlashSeparator, checked);
   app->config().window(_curr_idx).appearance().setSeparatorFlashes(checked);
   notifyOptionChanged(&SettingsChangeTransmitter::setSeparatorFlashes, checked);
-}
-
-void SettingsDialog::on_anchor_left_clicked()
-{
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorLeft);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorLeft);
-}
-
-void SettingsDialog::on_anchor_center_clicked()
-{
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorCenter);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorCenter);
-}
-
-void SettingsDialog::on_anchor_right_clicked()
-{
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorRight);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorRight);
 }
 
 void SettingsDialog::on_scaling_edit_valueChanged(int arg1)
@@ -663,6 +646,36 @@ void SettingsDialog::on_bg_per_element_cb_clicked(bool checked)
   notifyOptionChanged(&SettingsChangeTransmitter::setBackgroundPerCharacter, checked);
 }
 
+void SettingsDialog::on_anchor_left_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorLeft);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorLeft);
+}
+
+void SettingsDialog::on_anchor_center_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorCenter);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorCenter);
+}
+
+void SettingsDialog::on_anchor_right_clicked()
+{
+  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorRight);
+  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorRight);
+}
+
+void SettingsDialog::on_hs_edit_valueChanged(int arg1)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setCharSpacing, arg1);
+  app->config().window(_curr_idx).appearance().setSpacingH(arg1);
+}
+
+void SettingsDialog::on_vs_edit_valueChanged(int arg1)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setLineSpacing, arg1);
+  app->config().window(_curr_idx).appearance().setSpacingV(arg1);
+}
+
 void SettingsDialog::onPluginStateChanged(const QString& id, bool enabled)
 {
   auto current_plugins = app->config().global().getPlugins();
@@ -791,11 +804,6 @@ void SettingsDialog::initAppearanceTab(int idx)
   ui->colorize_group->setChecked(acfg.getApplyColorization());
   ui->colorization_strength_edit->setValue(qRound(acfg.getColorizationStrength() * 100));
 
-  SectionGeneric& gcfg = app->config().window(idx).generic();
-  ui->anchor_left->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorLeft);
-  ui->anchor_center->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorCenter);
-  ui->anchor_right->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorRight);
-
   auto tx = acfg.getTexture();
   ui->texture_group->setChecked(tx.style() != Qt::NoBrush);
   if (tx.style() == Qt::SolidPattern) {
@@ -825,6 +833,18 @@ void SettingsDialog::initAppearanceTab(int idx)
   }
   ui->bg_per_element_cb->setChecked(acfg.getBackgroundPerCharacter());
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
+}
+
+void SettingsDialog::initMiscTab(int idx)
+{
+  SectionGeneric& gcfg = app->config().window(idx).generic();
+  ui->anchor_left->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorLeft);
+  ui->anchor_center->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorCenter);
+  ui->anchor_right->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorRight);
+
+  SectionAppearance& acfg = app->config().window(idx).appearance();
+  ui->hs_edit->setValue(acfg.getSpacingH());
+  ui->vs_edit->setValue(acfg.getSpacingV());
 }
 
 void SettingsDialog::initPluginsTab()

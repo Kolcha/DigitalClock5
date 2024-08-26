@@ -76,10 +76,6 @@ private slots:
 
   void on_is_separator_flashes_clicked(bool checked);
 
-  void on_anchor_left_clicked();
-  void on_anchor_center_clicked();
-  void on_anchor_right_clicked();
-
   void on_scaling_edit_valueChanged(int arg1);
   void on_opacity_edit_valueChanged(int arg1);
 
@@ -105,6 +101,14 @@ private slots:
   void bg_pattern_stretch(bool checked);
   void on_bg_per_element_cb_clicked(bool checked);
 
+  // misc
+  void on_anchor_left_clicked();
+  void on_anchor_center_clicked();
+  void on_anchor_right_clicked();
+
+  void on_hs_edit_valueChanged(int arg1);
+  void on_vs_edit_valueChanged(int arg1);
+
   // plugins
   void onPluginStateChanged(const QString& id, bool enabled);
 
@@ -112,6 +116,7 @@ private:
   void initAppGlobalTab();
   void initGeneralTab(int idx);
   void initAppearanceTab(int idx);
+  void initMiscTab(int idx);
   void initPluginsTab();
 
   void applyTimeZoneSettings();
