@@ -1,0 +1,7 @@
+{
+  "name": "@PROJECT_NAME@",
+  "version": "@PROJECT_VERSION@",
+  "configurable": true,
+  "settings_notifier": true,
+  "author": "Nick Korotysh"
+}
