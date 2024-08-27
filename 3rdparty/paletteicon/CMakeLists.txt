@@ -41,3 +41,5 @@ if (DEFINED PLUGINS_OUT_DIR)
         LIBRARY_OUTPUT_DIRECTORY "${PLUGINS_OUT_DIR}"
     )
 endif()
+
+target_win_deploy_qt(${PROJECT_NAME} "plugins/iconengines/${PROJECT_NAME}.dll")

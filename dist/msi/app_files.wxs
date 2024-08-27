@@ -40,6 +40,9 @@ initial file was generated with the next command:
       <Component Id="cmp6011ADEC16C9FF3AE5154C8E028F76A0" Directory="INSTALLDIR" Guid="{DF72F445-978A-4985-A13A-B27E536F39A4}">
         <File Id="fil7400C082121A5C0CAEC94EC2C9A15870" KeyPath="yes" Source="$(var.MySource)\Qt6Gui.dll" />
       </Component>
+      <Component Id="cmp2C8B5468E91E7DDA098985C9143ABC2E" Directory="INSTALLDIR" Guid="{87BD4981-F86D-4179-84D4-A574B60F0574}">
+        <File Id="filBD0EAAF682667445DBE480BE209B58B4" KeyPath="yes" Source="$(var.MySource)\Qt6Multimedia.dll" />
+      </Component>
       <Component Id="cmp3DF2D539B6AF7FF49FF2425DD9926ADD" Directory="INSTALLDIR" Guid="{95E4470E-82D8-4156-BD0A-0803CEEDD69D}">
         <File Id="filAF2504AC63442A07DF09646CE2F428C3" KeyPath="yes" Source="$(var.MySource)\Qt6Network.dll" />
       </Component>
@@ -52,6 +55,12 @@ initial file was generated with the next command:
       <Component Id="cmp6770F2B8831A4B78BD2A17B5823D4C97" Directory="INSTALLDIR" Guid="{2E1069A7-DA77-47A4-8C52-9483F962D8CF}">
         <File Id="fil405520D372CB81BDA33B46ECBBC5C819" KeyPath="yes" Source="$(var.MySource)\SkinEngine.dll" />
       </Component>
+      <Component Id="cmp899BEA127D03725BB6B39785B61A6EC3" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{912BFB41-85FD-4C28-9FB1-E78CFD73DA39}">
+        <File Id="filF1A3BD4D316D07C0BE3577CD4F4C460A" KeyPath="yes" Source="$(var.MySource)\plugins\any_zoom.dll" />
+      </Component>
+      <Component Id="cmp545DD1E869709E0441A02B1A12D447CE" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{47D1676F-3B07-4FEB-9024-9469730B21D7}">
+        <File Id="fil1FBAD2125773A7DB7DF8FDC27420C6B7" KeyPath="yes" Source="$(var.MySource)\plugins\chime.dll" />
+      </Component>
       <Component Id="cmp591185D005BC8A86F42703372CEBCC40" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{AB6EFEB8-5069-4BBF-B52A-069587FEFFAB}">
         <File Id="filBD8F914FE753A4434FDEDFFDB5A79158" KeyPath="yes" Source="$(var.MySource)\plugins\date.dll" />
       </Component>
@@ -60,6 +69,9 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp6429D28736F78294E789F1285CDBA0C5" Directory="dir38849F6D66CAD1C9D4D23BF20EB0981D" Guid="{6167DA39-3BFA-4F21-A783-D155C356E320}">
         <File Id="fil7AEA337D7CE4012DC6754A25FCEC4511" KeyPath="yes" Source="$(var.MySource)\plugins\generic\qtuiotouchplugin.dll" />
+      </Component>
+      <Component Id="cmp698C06FA13803FBEF53A4F76718FD5DA" Directory="dir2C41C47317919F7F40F42C2D5CABDBDE" Guid="{DBF1E50C-0BEF-46D3-B0F4-BAA7BE3ECA5E}">
+        <File Id="filDAE56F1EDD72339316724F169D2857CA" KeyPath="yes" Source="$(var.MySource)\plugins\iconengines\paletteicon.dll" />
       </Component>
       <Component Id="cmp8868342A11EC1A5F0F368534A0870AAB" Directory="dir2C41C47317919F7F40F42C2D5CABDBDE" Guid="{8C0C42ED-978D-4BBA-83BA-AEF58FBF1A29}">
         <File Id="filACA0F8188FFBA3FCA53DDF584A3C92BA" KeyPath="yes" Source="$(var.MySource)\plugins\iconengines\qsvgicon.dll" />
@@ -75,6 +87,9 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp75085EA01AF53C1C4393D459D1D6951C" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{0283A612-B950-48DE-9F45-58BEF546E776}">
         <File Id="filE9B34AC1DE1A10992341BF7A70583E2F" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qsvg.dll" />
+      </Component>
+      <Component Id="cmpA7585CA1F1B9EB958D938725CF955F56" Directory="dir4F98CE51275AF43EFBBADFB6FEFD4160" Guid="{21A82835-2FCC-480D-8C63-7CF464BFA067}">
+        <File Id="fil0CAA0C5FA5E1018A3FAF854451BDFFAA" KeyPath="yes" Source="$(var.MySource)\plugins\multimedia\windowsmediaplugin.dll" />
       </Component>
       <Component Id="cmp625DC10C0C4A5863E4CCFE819E990558" Directory="dir4F0578F2BC61AED767C601E31CCBE8E2" Guid="{A5B933FF-D16C-4D38-8EB8-0049ECB1EDEA}">
         <File Id="filADE8EFC6509C692B4B7BEA295644795D" KeyPath="yes" Source="$(var.MySource)\plugins\networkinformation\qnetworklistmanager.dll" />
@@ -114,6 +129,11 @@ initial file was generated with the next command:
   <Fragment>
     <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
       <Directory Id="dir4F0578F2BC61AED767C601E31CCBE8E2" Name="networkinformation" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
+      <Directory Id="dir4F98CE51275AF43EFBBADFB6FEFD4160" Name="multimedia" />
     </DirectoryRef>
   </Fragment>
   <Fragment>

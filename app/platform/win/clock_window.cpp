@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "clock_window.hpp"
+#include "gui/clock_window.hpp"
 
 #ifndef NOMINMAX
 #define NOMINMAX

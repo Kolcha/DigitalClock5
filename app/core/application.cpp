@@ -165,7 +165,9 @@ void Application::createWindows()
     connect(&_mouse_tracker, &MouseTracker::mousePositionChanged, wnd.get(), &ClockWindow::handleMouseMove);
 #endif
 #if defined(Q_OS_WINDOWS)
-    connect(&_time_timer, &QTimer::timeout, wnd.get(), &ClockWindow::runStayOnTopHacks);
+    if (_cfg->global().getStayOnTop()) {
+      connect(&_time_timer, &QTimer::timeout, wnd.get(), &ClockWindow::runStayOnTopHacks);
+    }
 #endif
 
     _windows.push_back(std::move(wnd));

@@ -20,6 +20,7 @@ SettingsWidget::SettingsWidget(SettingsClient& s, StateClient& t,
     , impl(impl)
 {
   ui->setupUi(this);
+  impl->initSettings(s);
 
   ui->hour_count_box->addItem(tr("Once"), static_cast<int>(Repeat::Once));
   ui->hour_count_box->addItem(tr("1-12 times"), static_cast<int>(Repeat::Dynamic));
