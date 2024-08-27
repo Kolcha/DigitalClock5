@@ -46,8 +46,12 @@ jobs:
       - name: Prepare build artifacts
         run: |
           pushd build/app
+          rm DigitalClock5.app/Contents/PlugIns/sample.dylib
           macdeployqt DigitalClock5.app
-          macdeployqt DigitalClock5.app -dmg -codesign=-
+          rm DigitalClock5.app/Contents/PlugIns/multimedia/libffmpegmediaplugin.dylib
+          rm DigitalClock5.app/Contents/Frameworks/libav*
+          rm DigitalClock5.app/Contents/Frameworks/libsw*
+          macdeployqt DigitalClock5.app -no-plugins -dmg -codesign=-
           popd
           mkdir upload
           mv build/app/DigitalClock5.dmg upload/digital_clock_5-macos.dmg

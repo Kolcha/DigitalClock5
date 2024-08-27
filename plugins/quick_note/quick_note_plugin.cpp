@@ -9,7 +9,6 @@
 #include <QInputDialog>
 #include <QLabel>
 #include <QMouseEvent>
-#include <QTimer>
 
 class DoubleClickWidget : public GraphicsTextWidget
 {
@@ -22,40 +21,21 @@ signals:
   void doubleClicked();
 
 protected:
-  void mouseReleaseEvent(QMouseEvent* event) override;
-
-private slots:
-  void onTimeout();
-
-private:
-  QTimer _timer;
-  int _clicks_count = 0;
+  void mouseDoubleClickEvent(QMouseEvent* event) override;
 };
 
 
 DoubleClickWidget::DoubleClickWidget(QWidget* parent)
     : GraphicsTextWidget(parent)
 {
-  connect(&_timer, &QTimer::timeout, this, &DoubleClickWidget::onTimeout);
 }
 
-void DoubleClickWidget::mouseReleaseEvent(QMouseEvent* event)
+void DoubleClickWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
   if (event->button() == Qt::LeftButton) {
-    if (!_timer.isActive()) {
-      _timer.setSingleShot(true);
-      _timer.start(250);
-    }
-    if (++_clicks_count == 2) {
-      emit doubleClicked();
-    }
+    emit doubleClicked();
   }
-  GraphicsTextWidget::mouseReleaseEvent(event);
-}
-
-void DoubleClickWidget::onTimeout()
-{
-  _clicks_count = 0;
+  GraphicsTextWidget::mouseDoubleClickEvent(event);
 }
 
 

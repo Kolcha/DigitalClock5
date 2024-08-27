@@ -101,13 +101,14 @@ private slots:
   void bg_pattern_stretch(bool checked);
   void on_bg_per_element_cb_clicked(bool checked);
 
-  // misc
   void on_anchor_left_clicked();
   void on_anchor_center_clicked();
   void on_anchor_right_clicked();
 
   void on_hs_edit_valueChanged(int arg1);
   void on_vs_edit_valueChanged(int arg1);
+
+  // misc
 
   // plugins
   void onPluginStateChanged(const QString& id, bool enabled);

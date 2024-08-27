@@ -87,7 +87,7 @@ protected:
 
 private:
   AnchorPoint _anchor_point = AnchorLeft;
-  QPoint _last_origin = {400, 400};
+  QPoint _last_origin = {80, 120};
 
   QGridLayout* _layout = nullptr;
   GraphicsDateTimeWidget* _clock = nullptr;

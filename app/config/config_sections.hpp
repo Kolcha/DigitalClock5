@@ -66,8 +66,8 @@ public:
   CONFIG_OPTION_Q(qreal, ColorizationStrength, 0.8)
   CONFIG_OPTION_Q(QColor, ColorizationColor, QColor(0, 85, 255))
 
-  CONFIG_OPTION_Q(bool, UseFontInsteadOfSkin, true)
-  CONFIG_OPTION_Q(QFont, Font, QFont("Comic Sans MS", 96))
+  CONFIG_OPTION_Q(bool, UseFontInsteadOfSkin, false)
+  CONFIG_OPTION_Q(QFont, Font, default_font())
   CONFIG_OPTION_Q(QString, Skin, QString("electronic"))
 
   CONFIG_OPTION_Q(bool, SeparatorFlashes, true)
@@ -85,6 +85,9 @@ public:
   CONFIG_OPTION_Q(QBrush, Background, Qt::NoBrush)
   CONFIG_OPTION_Q(bool, BackgroundStretch, false)
   CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false)
+
+private:
+  static QFont default_font();
 };
 
 class SectionGeneric : public SettingsStorageClient {

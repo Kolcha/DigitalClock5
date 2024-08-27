@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-SPDX-FileCopyrightText: 2023 Nick Korotysh <nick.korotysh@gmail.com>
-
-SPDX-License-Identifier: GPL-3.0-or-later
--->
-
 <ui version="4.0">
  <class>AboutDialog</class>
  <widget class="QDialog" name="AboutDialog">
@@ -22,12 +15,12 @@ SPDX-License-Identifier: GPL-3.0-or-later
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
+    <enum>QLayout::SizeConstraint::SetFixedSize</enum>
    </property>
    <item row="1" column="2">
     <spacer name="h_spacer_2">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -40,10 +33,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
    <item row="1" column="1">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Ok</set>
      </property>
      <property name="centerButtons">
       <bool>true</bool>
@@ -53,7 +46,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
    <item row="1" column="0">
     <spacer name="h_spacer_1">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -79,7 +72,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">&lt;logo&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -95,7 +88,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">&lt;App Name&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -111,7 +104,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">&lt;app version&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -121,7 +114,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">&lt;build info&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -131,7 +124,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">&lt;build date&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -141,7 +134,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">© 2013-2024 Nick Korotysh</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -164,7 +157,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string>&lt;a href=&quot;https://digitalclock4.sourceforge.io/&quot;&gt;project home page&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -174,10 +167,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <item>
            <widget class="QLabel" name="support_lbl">
             <property name="text">
-             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClockNext/issues&quot;&gt;bug report/feature request&lt;/a&gt;</string>
+             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/issues&quot;&gt;bug report/feature request&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -187,10 +180,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <item>
            <widget class="QLabel" name="changelog_lbl">
             <property name="text">
-             <string>&lt;a href=&quot;https://sourceforge.net/p/digitalclock4/code/ci/default/tree/changelog.txt&quot;&gt;view full changelog&lt;/a&gt;</string>
+             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;view full changelog&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -203,7 +196,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClockNext/wiki&quot;&gt;project Wiki home page&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -225,7 +218,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string notr="true">&lt;a href=&quot;https://showroom.qt.io/digital-clock/&quot;&gt;showroom.qt.io&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -238,7 +231,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string notr="true">&lt;a href=&quot;https://www.softpedia.com/get/Desktop-Enhancements/Clocks-Time-Management/Korotysh-Digital-Clock.shtml&quot;&gt;www.softpedia.com&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -251,7 +244,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string notr="true">&lt;a href=&quot;https://mac.softpedia.com/get/Utilities/Digital-Clock-Nick-Korotysh.shtml&quot;&gt;mac.softpedia.com&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -264,7 +257,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
              <string notr="true">&lt;a href=&quot;https://www.softpedia.com/get/PORTABLE-SOFTWARE/Other-Portable-Applications/Digital-Clock-Portable.shtml&quot;&gt;www.softpedia.com&lt;/a&gt;</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="openExternalLinks">
              <bool>true</bool>
@@ -280,7 +273,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
           <string notr="true">e-mail: &lt;a href=&quot;mailto:nick.korotysh@gmail.com&quot;&gt;nick.korotysh@gmail.com&lt;/a&gt;</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
          <property name="openExternalLinks">
           <bool>true</bool>

@@ -7,3 +7,11 @@
 #include "config_sections.hpp"
 
 // complex default values should be implemneted here
+
+QFont SectionAppearance::default_font()
+{
+#ifdef Q_OS_WINDOWS
+  return QFont("Comic Sans MS", 72);
+#endif
+  return QFont("Comic Sans MS", 96);
+}

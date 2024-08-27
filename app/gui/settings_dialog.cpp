@@ -845,18 +845,20 @@ void SettingsDialog::initAppearanceTab(int idx)
   }
   ui->bg_per_element_cb->setChecked(acfg.getBackgroundPerCharacter());
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
-}
 
-void SettingsDialog::initMiscTab(int idx)
-{
   SectionGeneric& gcfg = app->config().window(idx).generic();
   ui->anchor_left->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorLeft);
   ui->anchor_center->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorCenter);
   ui->anchor_right->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorRight);
 
-  SectionAppearance& acfg = app->config().window(idx).appearance();
   ui->hs_edit->setValue(acfg.getSpacingH());
   ui->vs_edit->setValue(acfg.getSpacingV());
+}
+
+void SettingsDialog::initMiscTab(int idx)
+{
+  Q_UNUSED(idx);
+  ui->tabWidget->tabBar()->setTabVisible(3, false);
 }
 
 void SettingsDialog::initPluginsTab()
