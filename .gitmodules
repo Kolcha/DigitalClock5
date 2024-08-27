@@ -2,3 +2,7 @@
 	path = 3rdparty/GradientDialog
 	url = https://github.com/Kolcha/GradientDialog.git
 	branch = master
+[submodule "paletteicon"]
+	path = 3rdparty/paletteicon/paletteicon
+	url = https://github.com/Kolcha/paletteicon.git
+	branch = master
