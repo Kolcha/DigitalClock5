@@ -24,6 +24,7 @@ add_subdirectory(date)
 add_subdirectory(quick_note)
 add_subdirectory(random_position)
 add_subdirectory(sample)
+add_subdirectory(spectrum_clock)
 add_subdirectory(var_translucency)
 
 if (TARGET Qt6::Multimedia)
