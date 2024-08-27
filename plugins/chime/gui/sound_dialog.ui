@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>chime::SoundDialog</class>
+ <widget class="QDialog" name="chime::SoundDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>302</width>
+    <height>197</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sound Settings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="sound_src_group">
+     <property name="title">
+      <string>Sound</string>
+     </property>
+     <layout class="QHBoxLayout" name="sound_src_layout">
+      <item>
+       <widget class="QRadioButton" name="default_snd_rb">
+        <property name="text">
+         <string>default</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="defaults_box"/>
+      </item>
+      <item>
+       <spacer name="sound_spacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="custom_snd_rb">
+        <property name="text">
+         <string>custom</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="custom_browse_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string notr="true">...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="current_file_value">
+     <property name="text">
+      <string notr="true">&lt;current file&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="volume_group">
+     <property name="title">
+      <string>Volume</string>
+     </property>
+     <layout class="QHBoxLayout" name="volume_layout">
+      <item>
+       <widget class="QLabel" name="volume_value">
+        <property name="text">
+         <string notr="true">68</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="volume_slider">
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>68</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="preview_btn">
+        <property name="icon">
+         <iconset resource="../chime.qrc">
+          <normaloff>:/chime/play.svg.p</normaloff>:/chime/play.svg.p</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../chime.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>chime::SoundDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>224</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>chime::SoundDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>203</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>default_snd_rb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>defaults_box</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>custom_snd_rb</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>custom_browse_btn</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>267</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>333</x>
+     <y>44</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>volume_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>volume_value</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

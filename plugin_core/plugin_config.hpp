@@ -39,6 +39,43 @@ private:
   C& _c;
 };
 
+
+template<class C>
+class PluginConfigSection {
+public:
+  template<typename T>
+  using toVariant = C::template toVariant<T>;
+
+  template<typename T>
+  using fromVariant = C::template fromVariant<T>;
+
+  explicit PluginConfigSection(C& c) : _c(c) {}
+
+  template<typename T>
+  T get(const QString& k, const QVariant& d) const
+  {
+    return fromVariant<T>{}(_c.value(sectionKey(k), d));
+  }
+
+  template<typename T>
+  void set(const QString& k, const T& v)
+  {
+    _c.setValue(sectionKey(k), toVariant<T>{}(v));
+  }
+
+protected:
+  virtual QLatin1String section() const = 0;
+
+private:
+  QString sectionKey(QStringView k) const
+  {
+    return QString("%1/%2").arg(section(), k);
+  }
+
+private:
+  C& _c;
+};
+
 #define PLG_CONFIG_OPTION(type, name, key, def_value) \
 void set##name(const type& val)                       \
   { this->template set<type>(key, val); }             \

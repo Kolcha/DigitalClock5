@@ -1,0 +1,6 @@
+{
+  "name": "@PROJECT_NAME@",
+  "version": "@PROJECT_VERSION@",
+  "configurable": true,
+  "author": "Nick Korotysh"
+}
