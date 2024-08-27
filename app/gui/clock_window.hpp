@@ -33,6 +33,9 @@ public:
 
   bool frameVisible() const { return _frame_visible; }
 
+  bool transparentOnHover() const { return _transparent_on_hover; }
+  qreal opacityOnHover() const { return _opacity_on_hover; }
+
   void addPluginWidget(GraphicsWidgetBase* w, int row, int column,
                        int row_span = 1, int column_span = 1);
 
@@ -53,6 +56,19 @@ public slots:
   void enableFrame() { setFrameVisible(true); }
   void disableFrame() { setFrameVisible(false); }
   void setFrameVisible(bool vis);
+
+  void setTransparentOnHover(bool en);
+  void setOpacityOnHover(qreal o);
+
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+  // if window is transparent for input, no input events are sent
+  // even to application, so mouse should be tracked using platform API
+  // handler should be public to keep only one instance of that tracker
+  void handleMouseMove(const QPoint& global_pos);
+#endif
+#if defined(Q_OS_WINDOWS)
+  void runStayOnTopHacks();
+#endif
 
 signals:
   void saveStateRequested();
@@ -88,4 +104,12 @@ private:
   bool _frame_visible = false;
 
   QMenu* _ctx_menu;
+
+  bool _transparent_on_hover = true;
+  qreal _opacity_on_hover = 0.15;
+
+  // used by stay on top hacks, but types are not platform-dependent
+  QScreen* _last_screen = nullptr;
+  QSet<QString> _fullscreen_ignore_list;
+  bool _detect_fullscreen = true;
 };

@@ -28,6 +28,9 @@ public:
   CONFIG_OPTION_Q(bool, CheckForBetaVersion, true)
   CONFIG_OPTION_Q(int, UpdatePeriodDays, 7)
 
+  CONFIG_OPTION_Q(bool, TransparentOnHover, true)
+  CONFIG_OPTION_Q(int, OpacityOnHover, 15)
+
   CONFIG_OPTION_Q(QStringList, Plugins, QStringList())
 };
 

@@ -18,6 +18,7 @@
 #include <gradient_dialog.h>
 
 #include "core/application.hpp"
+#include "platform/autostart.h"
 #include "plugin_list_item_widget.hpp"
 #include "common_appearance_state.hpp"
 
@@ -95,6 +96,12 @@ SettingsDialog::~SettingsDialog()
 
 void SettingsDialog::accept()
 {
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+  // autostart case is unique
+  if (ui->enable_autostart->isChecked() != IsAutoStartEnabled()) {
+    SetAutoStart(ui->enable_autostart->isChecked());
+  }
+#endif
   app->config().storage().commitAll();
   QDialog::accept();
 }
@@ -153,10 +160,15 @@ void SettingsDialog::on_use_same_appearance_clicked(bool checked)
 
 void SettingsDialog::on_transparent_on_hover_clicked(bool checked)
 {
+  app->config().global().setTransparentOnHover(checked);
+  applyWindowOption(&ClockWindow::setTransparentOnHover, checked);
 }
 
 void SettingsDialog::on_hide_on_mouse_hover_clicked(bool checked)
 {
+  int opacity = checked ? 0 : 15;
+  app->config().global().setOpacityOnHover(opacity);
+  applyWindowOption(&ClockWindow::setOpacityOnHover, opacity / 100.);
 }
 
 void SettingsDialog::on_enable_autoupdate_clicked(bool checked)
@@ -705,8 +717,8 @@ void SettingsDialog::initAppGlobalTab()
   ui->wnd_count_edit->setValue(gs.getNumInstances());
   ui->use_same_appearance->setChecked(!gs.getAppearancePerInstance());
 
-  // ui->transparent_on_hover->setChecked(impl->config.getChangeOpacityOnMouseHover());
-  // ui->hide_on_mouse_hover->setChecked(qFuzzyIsNull(impl->config.getOpacityOnMouseHover()));
+  ui->transparent_on_hover->setChecked(gs.getTransparentOnHover());
+  ui->hide_on_mouse_hover->setChecked(gs.getOpacityOnHover() == 0);
 
   ui->enable_autoupdate->setChecked(gs.getCheckForUpdates());
   ui->check_for_beta->setChecked(gs.getCheckForBetaVersion());

@@ -92,6 +92,45 @@ void ClockWindow::setFrameVisible(bool vis)
   update();
 }
 
+void ClockWindow::setTransparentOnHover(bool en)
+{
+  _transparent_on_hover = en;
+}
+
+void ClockWindow::setOpacityOnHover(qreal o)
+{
+  _opacity_on_hover = o;
+}
+
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+void ClockWindow::handleMouseMove(const QPoint& global_pos)
+{
+  if (!_transparent_on_hover)
+    return;
+
+  bool entered = property("dc_mouse_entered").toBool();
+
+  QRect rect = frameGeometry();
+#ifndef Q_OS_MACOS
+  QTransform t;
+  t.scale(devicePixelRatioF(), devicePixelRatioF());
+  rect = t.mapRect(rect);
+#endif
+  if (rect.contains(global_pos) && !entered) {
+    entered = true;
+    setProperty("dc_orig_opacity", windowOpacity());
+    setWindowOpacity(_opacity_on_hover);
+  }
+
+  if (!rect.contains(global_pos) && entered) {
+    entered = false;
+    setWindowOpacity(property("dc_orig_opacity").toReal());
+  }
+
+  setProperty("dc_mouse_entered", entered);
+}
+#endif
+
 void ClockWindow::contextMenuEvent(QContextMenuEvent* event)
 {
   _ctx_menu->popup(event->globalPos());

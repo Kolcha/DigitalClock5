@@ -18,6 +18,7 @@
 
 #include "gui/clock_tray_icon.hpp"
 #include "gui/clock_window.hpp"
+#include "platform/mouse_tracker.hpp"
 #include "dialog_manager.hpp"
 #include "plugin_manager.hpp"
 #include "settings_change_listener.hpp"
@@ -86,4 +87,8 @@ private:
   // settings bridge
   std::vector<std::unique_ptr<SettingsChangeTransmitter>> _settings_tr;
   std::vector<std::unique_ptr<SettingsChangeListener>> _settings_rcv;
+  // platform-specific code
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+  MouseTracker _mouse_tracker;
+#endif
 };

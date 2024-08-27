@@ -56,6 +56,8 @@ set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
 add_subdirectory(dist)
 add_subdirectory(res)
 
+add_subdirectory(platform)
+
 configure_file(version.hpp.in version.hpp @ONLY)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gradient_dialog)

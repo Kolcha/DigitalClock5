@@ -82,6 +82,9 @@ void Application::configureWindow(size_t i)
   } else {
     wnd->setGraphicsEffect(nullptr);
   }
+
+  wnd->setTransparentOnHover(_cfg->global().getTransparentOnHover());
+  wnd->setOpacityOnHover(_cfg->global().getOpacityOnHover() / 100.);
 }
 
 void Application::configureWindows()
@@ -158,6 +161,12 @@ void Application::createWindows()
     connect(wnd.get(), &ClockWindow::appExitRequested, this, &QApplication::quit);
 
     connect(&_tick_timer, &QTimer::timeout, wnd->clock(), &GraphicsDateTimeWidget::updateSeparatorsState);
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
+    connect(&_mouse_tracker, &MouseTracker::mousePositionChanged, wnd.get(), &ClockWindow::handleMouseMove);
+#endif
+#if defined(Q_OS_WINDOWS)
+    connect(&_time_timer, &QTimer::timeout, wnd.get(), &ClockWindow::runStayOnTopHacks);
+#endif
 
     _windows.push_back(std::move(wnd));
 
