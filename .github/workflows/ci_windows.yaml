@@ -1,0 +1,60 @@
+name: CI - Windows
+
+on: [pull_request, push]
+
+permissions:
+  actions: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: ${{ github.head_ref != '' }}
+
+jobs:
+  ci:
+    name: Build
+    runs-on: windows-2019
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          submodules: recursive
+
+      - name: Setup devcmd
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install build tools
+        run: |
+          "C:\Program Files (x86)\WiX Toolset v3.14\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: "6.7.*"
+          archives: qtbase qtsvg
+          modules: qtmultimedia
+
+      - name: Build application
+        run: |
+          cmake `
+            -B build `
+            -G Ninja `
+            -D CMAKE_BUILD_TYPE=Release
+          cmake --build build
+
+      - name: Prepare build artifacts
+        run: |
+          cmake --build build --target win_installer
+          mkdir upload
+          move build\dist\msi\digital_clock_5-x64.msi upload
+          move build\installer_files DigitalClock5
+          New-Item -ItemType File -Path DigitalClock5 -Name portable.txt
+          attrib +h DigitalClock5\portable.txt
+          7z a upload\digital_clock_5-win64.zip DigitalClock5
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DigitalClock5 Windows Nightly
+          path: upload
