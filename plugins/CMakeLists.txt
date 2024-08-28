@@ -30,4 +30,5 @@ add_subdirectory(var_translucency)
 
 if (TARGET Qt6::Multimedia)
     add_subdirectory(chime)
+    add_subdirectory(countdown_timer)
 endif()
