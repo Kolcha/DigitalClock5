@@ -6,3 +6,7 @@
 	path = 3rdparty/paletteicon/paletteicon
 	url = https://github.com/Kolcha/paletteicon.git
 	branch = master
+[submodule "QHotkey"]
+	path = 3rdparty/QHotkey
+	url = https://github.com/Skycoder42/QHotkey.git
+	branch = master

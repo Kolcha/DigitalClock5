@@ -4,3 +4,7 @@
 
 add_subdirectory(GradientDialog)
 add_subdirectory(paletteicon)
+
+set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "Qt version for QHotkey")
+
+add_subdirectory(QHotkey)
