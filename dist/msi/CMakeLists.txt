@@ -8,6 +8,7 @@ set(MSI_SRC_DIR "${CMAKE_BINARY_DIR}/installer_files" CACHE STRING "MSI source d
 set(WIX_SRC_FILES
     main.wxs
     app_files.wxs
+    skins.wxs
 )
 
 set_property(GLOBAL PROPERTY JOB_POOLS single_job=1)
@@ -25,6 +26,12 @@ separate_arguments(WIX_CANDLE_FLAGS)
 separate_arguments(WIX_LIGHT_FLAGS)
 
 add_custom_target(deploy_qt COMMENT "Deploying Qt")
+
+# not strictly required to be here, but just convenient
+add_custom_command(TARGET deploy_qt POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_BINARY_DIR}/skins" "${MSI_SRC_DIR}/skins"
+)
 
 function(target_win_deploy_qt _target _out_file)
     add_custom_command(

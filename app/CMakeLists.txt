@@ -74,4 +74,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+if (APPLE)
+    # unfortunately, this can't be in any other CMakeLists.txt in subdirectory :(
+    # also cmake copies the content of the directory, not the directory itself :(
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+            "${CMAKE_BINARY_DIR}/skins" "${PROJECT_NAME}.app/Contents/Resources/skins"
+    )
+endif()
+
 target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.exe)
