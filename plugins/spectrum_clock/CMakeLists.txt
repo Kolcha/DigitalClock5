@@ -16,3 +16,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE PluginCore)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Gui)
 
 configure_file(${PROJECT_NAME}.json.in ${PROJECT_NAME}.json @ONLY)
+
+target_win_deploy_qt(${PROJECT_NAME} "plugins/${PROJECT_NAME}.dll")
