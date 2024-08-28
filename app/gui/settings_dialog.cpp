@@ -310,7 +310,7 @@ void SettingsDialog::on_font_rbtn_clicked()
 {
   SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getFont());
-  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  applySkin(skin);
   acfg.setUseFontInsteadOfSkin(true);
   notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, true);
 }
@@ -322,7 +322,7 @@ void SettingsDialog::on_select_font_btn_clicked()
   QFont fnt = QFontDialog::getFont(&ok, actual_font(acfg.getFont()), this);
   if (!ok) return;
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(fnt);
-  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  applySkin(skin);
   acfg.setFont(fnt);
   notifyOptionChanged(&SettingsChangeTransmitter::setFont, fnt);
 }
@@ -331,7 +331,7 @@ void SettingsDialog::on_skin_rbtn_clicked()
 {
   SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getSkin());
-  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  applySkin(skin);
   acfg.setUseFontInsteadOfSkin(false);
   notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, false);
 }
@@ -340,7 +340,7 @@ void SettingsDialog::on_skin_cbox_activated(int index)
 {
   QString skin_name = ui->skin_cbox->itemData(index).toString();
   std::shared_ptr<Skin> skin = app->skinManager().loadSkin(skin_name);
-  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  applySkin(skin);
   app->config().window(_curr_idx).appearance().setSkin(skin_name);
   notifyOptionChanged(&SettingsChangeTransmitter::setSkin, skin_name);
 }
@@ -888,6 +888,17 @@ void SettingsDialog::initPluginsTab()
     connect(widget, &PluginListItemWidget::StateChanged, this, &SettingsDialog::onPluginStateChanged);
     connect(widget, &PluginListItemWidget::ConfigureRequested, &app->pluginManager(), &PluginManager::configurePlugin);
   }
+}
+
+void SettingsDialog::applySkin(std::shared_ptr<Skin> skin)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
+  applyClockOption(&GraphicsDateTimeWidget::setUseAlternateSeparator, skin->hasAlternateSeparator());
+  applyClockOption(&GraphicsDateTimeWidget::setUseCustomSeparators, skin->supportsCustomSeparator() && ui->use_custom_seps->isChecked());
+
+  ui->use_custom_seps->setEnabled(skin->supportsCustomSeparator());
+  ui->custom_seps_edit->setEnabled(skin->supportsCustomSeparator());
+  ui->custom_seps_help_btn->setEnabled(skin->supportsCustomSeparator());
 }
 
 void SettingsDialog::applyTimeZoneSettings()

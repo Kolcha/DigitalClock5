@@ -59,6 +59,8 @@ void Application::configureWindow(size_t i)
     clock->setSkin(_windows[0]->clock()->skin());
   }
 
+  clock->setUseAlternateSeparator(clock->skin()->hasAlternateSeparator());
+
   clock->setFlashSeparator(acfg.getSeparatorFlashes());
   clock->setUseCustomSeparators(acfg.getUseCustomSeparators());
   clock->setCustomSeparators(acfg.getCustomSeparators());

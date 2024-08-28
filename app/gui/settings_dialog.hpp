@@ -8,6 +8,8 @@
 
 #include <QDialog>
 
+#include "skin/skin.hpp"
+
 class Application;
 
 namespace Ui {
@@ -120,6 +122,7 @@ private:
   void initMiscTab(int idx);
   void initPluginsTab();
 
+  void applySkin(std::shared_ptr<Skin> skin);
   void applyTimeZoneSettings();
   void applyColorization();
   void updateColorization();
