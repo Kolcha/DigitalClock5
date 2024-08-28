@@ -121,6 +121,11 @@ public:
   // this function can be called for not started (i.e. no init() calls) plugin
   // implementation should be prepared for the such case
   virtual QWidget* configure(SettingsClient& s, StateClient& t) = 0;
+
+  // called when dialog was accepted
+  virtual void accepted() {}
+  // called when dialog was rejected
+  virtual void rejected() {}
 };
 
 

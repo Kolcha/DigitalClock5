@@ -234,14 +234,18 @@ void ConfigurePluginHandle::onInstanceChanged(int idx)
 
 void ConfigurePluginHandle::onAccepted()
 {
-  for (size_t i = 0; i < _handle->instances().size(); i++)
+  for (size_t i = 0; i < _handle->instances().size(); i++) {
     _app->config().plugin(_handle->id()).config(i).commit();
+    dynamic_cast<ConfigurablePlugin*>(_handle->instance(i))->accepted();
+  }
 }
 
 void ConfigurePluginHandle::onRejected()
 {
-  for (size_t i = 0; i < _handle->instances().size(); i++)
+  for (size_t i = 0; i < _handle->instances().size(); i++) {
     _app->config().plugin(_handle->id()).config(i).discard();
+    dynamic_cast<ConfigurablePlugin*>(_handle->instance(i))->rejected();
+  }
 
   if (_was_loaded) {
     for (size_t i = 0; i < _handle->instances().size(); i++) {
