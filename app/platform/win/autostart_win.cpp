@@ -21,7 +21,7 @@ static bool isPortable()
 
 static QString GetAppKey()
 {
-  QString key = "Digital Clock Next";   // unfortunately, installer uses spaces :(
+  QString key = "Digital Clock 5";   // unfortunately, installer uses spaces :(
   if (isPortable()) {
     key = QCoreApplication::applicationName();
     quint16 checksum = qChecksum(QCoreApplication::applicationFilePath().toUtf8());
