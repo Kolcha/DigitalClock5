@@ -31,7 +31,6 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: "6.7.*"
-          archives: qtbase qtsvg
           modules: qtimageformats qtmultimedia
 
       - name: Build application
@@ -42,6 +41,7 @@ jobs:
             -D CMAKE_OSX_DEPLOYMENT_TARGET=12.0 \
             -D CMAKE_BUILD_TYPE=Release \
             -D CMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+          cmake --build build --target update_translations
           cmake --build build
 
       - name: Prepare build artifacts

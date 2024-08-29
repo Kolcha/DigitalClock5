@@ -84,3 +84,4 @@ if (APPLE)
 endif()
 
 target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.exe)
+target_add_translations(${PROJECT_NAME} digital_clock)

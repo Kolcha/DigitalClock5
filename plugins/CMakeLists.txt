@@ -17,6 +17,7 @@ function(set_clock_plugin_common_properties target)
         )
     endif()
     set_target_properties(${target} PROPERTIES PREFIX "")
+    target_add_translations(${target} ${target})
 endfunction()
 
 add_subdirectory(any_zoom)

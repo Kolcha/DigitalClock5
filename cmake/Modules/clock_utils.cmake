@@ -17,3 +17,9 @@ if (NOT WIN32)
     # Win32 implementation is in MSI build code
   endfunction()
 endif()
+
+function(target_add_translations _target _base)
+  qt_add_translations(TARGETS ${_target} TS_FILE_DIR i18n TS_FILE_BASE ${_base})
+  file(GLOB ts_files i18n/*.ts)
+  set_source_files_properties(${ts_files} PROPERTIES OUTPUT_LOCATION i18n)
+endfunction()

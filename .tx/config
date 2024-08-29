@@ -1,0 +1,102 @@
+[main]
+host = https://app.transifex.com
+
+[o:nick-korotysh:p:digital-clock-5:r:app]
+file_filter            = app/i18n/digital_clock_<lang>.ts
+source_file            = app/i18n/digital_clock_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = digital_clock
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-any-zoom]
+file_filter            = plugins/any_zoom/i18n/any_zoom_<lang>.ts
+source_file            = plugins/any_zoom/i18n/any_zoom_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = any_zoom
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-chime]
+file_filter            = plugins/chime/i18n/chime_<lang>.ts
+source_file            = plugins/chime/i18n/chime_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = chime
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-core]
+file_filter            = plugin_core/i18n/plugin_core_<lang>.ts
+source_file            = plugin_core/i18n/plugin_core_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = plugin_core
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-countdown-timer]
+file_filter            = plugins/countdown_timer/i18n/countdown_timer_<lang>.ts
+source_file            = plugins/countdown_timer/i18n/countdown_timer_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = countdown_timer
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-date]
+file_filter            = plugins/date/i18n/date_<lang>.ts
+source_file            = plugins/date/i18n/date_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = date
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-quick-note]
+file_filter            = plugins/quick_note/i18n/quick_note_<lang>.ts
+source_file            = plugins/quick_note/i18n/quick_note_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = quick_note
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-random-position]
+file_filter            = plugins/random_position/i18n/random_position_<lang>.ts
+source_file            = plugins/random_position/i18n/random_position_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = random_position
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-spectrum-clock]
+file_filter            = plugins/spectrum_clock/i18n/spectrum_clock_<lang>.ts
+source_file            = plugins/spectrum_clock/i18n/spectrum_clock_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = spectrum_clock
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-stopwatch]
+file_filter            = plugins/stopwatch/i18n/stopwatch_<lang>.ts
+source_file            = plugins/stopwatch/i18n/stopwatch_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = stopwatch
+replace_edited_strings = false
+keep_translations      = false
+
+[o:nick-korotysh:p:digital-clock-5:r:plugin-var-translucency]
+file_filter            = plugins/var_translucency/i18n/var_translucency_<lang>.ts
+source_file            = plugins/var_translucency/i18n/var_translucency_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = var_translucency
+replace_edited_strings = false
+keep_translations      = false
+

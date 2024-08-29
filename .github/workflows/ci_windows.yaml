@@ -32,7 +32,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: "6.7.*"
-          archives: qtbase qtsvg
+          archives: qtbase qtsvg qttools qttranslations
           modules: qtimageformats qtmultimedia
 
       - name: Build application
@@ -41,6 +41,7 @@ jobs:
             -B build `
             -G Ninja `
             -D CMAKE_BUILD_TYPE=Release
+          cmake --build build --target update_translations
           cmake --build build
 
       - name: Prepare build artifacts

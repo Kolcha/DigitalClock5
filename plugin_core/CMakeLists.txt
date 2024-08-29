@@ -32,3 +32,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC SkinEngine ClockCommon)
 
 target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.dll)
+target_add_translations(${PROJECT_NAME} plugin_core)
