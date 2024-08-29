@@ -802,11 +802,15 @@ void SettingsDialog::initAppearanceTab(int idx)
   ui->font_rbtn->setChecked(acfg.getUseFontInsteadOfSkin());
   ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
 
+  auto locale_cmp = [](QStringView lhs, QStringView rhs) { return QString::localeAwareCompare(lhs, rhs) < 0; };
+  std::map<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
+
   const auto avail_skins = app->skinManager().availableSkins();
-  for (const auto& s : avail_skins) {
-    auto t = app->skinManager().metadata(s)["name"];
+  for (const auto& s : avail_skins)
+    sorted_skins[app->skinManager().metadata(s)["name"]] = s;
+  for (const auto& [t, s] : std::as_const(sorted_skins))
     ui->skin_cbox->addItem(t, s);
-  }
+
   ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
   ui->skin_cbox->setCurrentText(app->skinManager().metadata(acfg.getSkin())["name"]);
 
