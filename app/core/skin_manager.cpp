@@ -14,6 +14,7 @@
 
 struct SkinManager::Impl {
   QHash<QString, LegacySkinLoader> loaders;
+  QSet<QString> user_skins;
 
   void reload();
 };
@@ -26,6 +27,7 @@ void SkinManager::Impl::reload()
   std::reverse(data_paths.begin(), data_paths.end());
 
   for (const auto& p : std::as_const(data_paths)) {
+    bool is_user = p == QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir d(p);
 
     if (!d.exists() || !d.cd("skins"))
@@ -37,6 +39,9 @@ void SkinManager::Impl::reload()
         iter->addOverlay(d.absoluteFilePath(sd));
       else
         loaders.emplace(sd, d.absoluteFilePath(sd));
+
+      if (is_user)
+        user_skins.insert(sd);
     }
   }
 
@@ -79,6 +84,11 @@ SkinManager::Metadata SkinManager::metadata(const QString& id) const
   if (auto iter = _impl->loaders.find(id); iter != _impl->loaders.end())
     return iter->metadata();
   return {};
+}
+
+bool SkinManager::isUserSkin(const QString& id) const
+{
+  return _impl->user_skins.contains(id);
 }
 
 void SkinManager::setSkinBaseSize(int sz)

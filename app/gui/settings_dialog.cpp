@@ -811,6 +811,14 @@ void SettingsDialog::initAppearanceTab(int idx)
   for (const auto& [t, s] : std::as_const(sorted_skins))
     ui->skin_cbox->addItem(t, s);
 
+  auto user_fnt = ui->skin_cbox->font();
+  user_fnt.setItalic(true);
+  for (int i = 0; i < ui->skin_cbox->count(); i++) {
+    auto s = ui->skin_cbox->itemData(i).toString();
+    if (app->skinManager().isUserSkin(s))
+      ui->skin_cbox->setItemData(i, user_fnt, Qt::FontRole);
+  }
+
   ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
   ui->skin_cbox->setCurrentText(app->skinManager().metadata(acfg.getSkin())["name"]);
 
