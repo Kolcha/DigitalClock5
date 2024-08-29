@@ -33,7 +33,7 @@ jobs:
         with:
           version: "6.7.*"
           archives: qtbase qtsvg
-          modules: qtmultimedia
+          modules: qtimageformats qtmultimedia
 
       - name: Build application
         run: |

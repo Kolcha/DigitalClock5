@@ -94,6 +94,9 @@ initial file was generated with the next command:
       <Component Id="cmp59F2CC1FC0003B3C2DC2E59B669C1485" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{68687074-6043-4B11-AF10-38F738E25787}">
         <File Id="fil706689E2C7B5A960108A3851CA1FFFB5" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qgif.dll" />
       </Component>
+      <Component Id="cmp6FB78818D91522EEF11835938524CAA2" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{2AFC7F1E-93DD-4636-93DB-230338328CD3}">
+        <File Id="fil0A82059D502389A6C6F393F0DC857D8F" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qicns.dll" />
+      </Component>
       <Component Id="cmp715C1286E8B00FFDC913B863D49664A7" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{B6C18B6B-CCD8-4B48-8D35-A1D18E6A62B2}">
         <File Id="filA1C4CFCEA4776592E7A7B3708B0E39F5" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qico.dll" />
       </Component>
@@ -102,6 +105,18 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp75085EA01AF53C1C4393D459D1D6951C" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{0283A612-B950-48DE-9F45-58BEF546E776}">
         <File Id="filE9B34AC1DE1A10992341BF7A70583E2F" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qsvg.dll" />
+      </Component>
+      <Component Id="cmpE757721F807C2BF87C8E838648807E41" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{54AC48B7-371F-4F0F-8962-BB55B38BCCB3}">
+        <File Id="filD1501C8638A304E960D5BD13EC32B0C4" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qtga.dll" />
+      </Component>
+      <Component Id="cmp4532D35F12ACC340796CCC2898BAD222" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{C2771678-3B77-4784-855D-A3E8EEA763B7}">
+        <File Id="filFA0D58ADB1871DEFE58B2E38C8A20A54" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qtiff.dll" />
+      </Component>
+      <Component Id="cmpE361B2F2F2C313ABC3DC7CD756240FEA" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{715BE180-28D5-421F-AD4F-2C8BC0FC774D}">
+        <File Id="fil56CF4E2EDC7A48235E689A8737B69AB8" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qwbmp.dll" />
+      </Component>
+      <Component Id="cmp55D3B5F14A47B895D41318BEF87A73BD" Directory="dirC7D12466D9D4EFB37CFFCE0FE430D862" Guid="{872D0732-7386-485D-8E92-E782D6A1A889}">
+        <File Id="filC417BF80A35F4D0348603D09CFB25E1B" KeyPath="yes" Source="$(var.MySource)\plugins\imageformats\qwebp.dll" />
       </Component>
       <Component Id="cmpA7585CA1F1B9EB958D938725CF955F56" Directory="dir4F98CE51275AF43EFBBADFB6FEFD4160" Guid="{21A82835-2FCC-480D-8C63-7CF464BFA067}">
         <File Id="fil0CAA0C5FA5E1018A3FAF854451BDFFAA" KeyPath="yes" Source="$(var.MySource)\plugins\multimedia\windowsmediaplugin.dll" />
