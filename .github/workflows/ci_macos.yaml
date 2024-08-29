@@ -25,6 +25,7 @@ jobs:
         run: |
           brew update > /dev/null
           brew install cmake ninja
+          brew install create-dmg
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -51,10 +52,10 @@ jobs:
           rm DigitalClock5.app/Contents/PlugIns/multimedia/libffmpegmediaplugin.dylib
           rm DigitalClock5.app/Contents/Frameworks/libav*
           rm DigitalClock5.app/Contents/Frameworks/libsw*
-          macdeployqt DigitalClock5.app -no-plugins -dmg -codesign=-
+          macdeployqt DigitalClock5.app -no-plugins -codesign=-
           popd
           mkdir upload
-          mv build/app/DigitalClock5.dmg upload/digital_clock_5-macos.dmg
+          create-dmg --volname "Digital Clock 5" --window-size 400 300 --text-size 16 --icon-size 128 --icon "DigitalClock5.app" 30 110 --app-drop-link 200 110 --format UDBZ upload/digital_clock_5-macos.dmg build/app/DigitalClock5.app
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
