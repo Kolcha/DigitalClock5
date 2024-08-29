@@ -61,5 +61,5 @@ void SettingsWidget::on_str_format_edit_editTextChanged(const QString& arg1)
 
 void SettingsWidget::on_str_format_help_btn_clicked()
 {
-  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Supported-date-time-formats"));
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Supported-date-time-formats"));
 }

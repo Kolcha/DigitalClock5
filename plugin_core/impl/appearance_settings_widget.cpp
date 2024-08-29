@@ -192,7 +192,7 @@ void AppearanceSettingsWidget::on_layout_cfg_edit_textEdited(const QString& arg1
 
 void AppearanceSettingsWidget::on_layout_cfg_help_btn_clicked()
 {
-  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Multiple-lines"));
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Multiple-lines"));
 }
 
 void AppearanceSettingsWidget::on_font_rbtn_clicked()

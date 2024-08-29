@@ -193,7 +193,7 @@
           <item>
            <widget class="QLabel" name="wiki_home_lbl">
             <property name="text">
-             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClockNext/wiki&quot;&gt;project Wiki home page&lt;/a&gt;</string>
+             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki&quot;&gt;project Wiki home page&lt;/a&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>

@@ -234,7 +234,7 @@ void SettingsDialog::on_format_edit_textEdited(const QString& arg1)
 
 void SettingsDialog::on_format_help_btn_clicked()
 {
-  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Supported-date-time-formats"));
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Supported-date-time-formats"));
 }
 
 void SettingsDialog::on_format_apply_btn_clicked()
@@ -252,7 +252,7 @@ void SettingsDialog::on_layout_cfg_edit_textEdited(const QString& arg1)
 
 void SettingsDialog::on_layout_cfg_help_btn_clicked()
 {
-  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Multiple-lines"));
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Multiple-lines"));
 }
 
 void SettingsDialog::on_use_custom_seps_clicked(bool checked)
@@ -269,7 +269,7 @@ void SettingsDialog::on_custom_seps_edit_textEdited(const QString& arg1)
 
 void SettingsDialog::on_custom_seps_help_btn_clicked()
 {
-  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClockNext/wiki/Custom-separator-characters"));
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Custom-separator-characters"));
 }
 
 void SettingsDialog::updateTimeFormat()
