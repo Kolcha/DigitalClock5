@@ -706,7 +706,7 @@ void SettingsDialog::initAppGlobalTab()
   // app global
   SectionAppGlobal& gs = app->config().global();
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
-  // ui->enable_autostart->setChecked(IsAutoStartEnabled());
+  ui->enable_autostart->setChecked(IsAutoStartEnabled());
 #else
   ui->enable_autostart->setVisible(false);  // not implemented
 #endif
@@ -803,11 +803,11 @@ void SettingsDialog::initAppearanceTab(int idx)
   ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
 
   auto locale_cmp = [](QStringView lhs, QStringView rhs) { return QString::localeAwareCompare(lhs, rhs) < 0; };
-  std::map<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
+  std::multimap<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
 
   const auto avail_skins = app->skinManager().availableSkins();
   for (const auto& s : avail_skins)
-    sorted_skins[app->skinManager().metadata(s)["name"]] = s;
+    sorted_skins.insert({app->skinManager().metadata(s)["name"], s});
   for (const auto& [t, s] : std::as_const(sorted_skins))
     ui->skin_cbox->addItem(t, s);
 
