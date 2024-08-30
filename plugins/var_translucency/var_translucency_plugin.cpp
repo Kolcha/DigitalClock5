@@ -73,5 +73,5 @@ std::unique_ptr<ClockPluginBase> VarTranslucencyPluginFactory::create() const
 
 QString VarTranslucencyPluginFactory::description() const
 {
-  return tr("Randomly changes clock position during time.");
+  return tr("Changes clock opacity level during time.");
 }

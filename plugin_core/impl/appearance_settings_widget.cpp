@@ -73,13 +73,13 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(
   QSignalBlocker ah(ui->align_h_box);
   QSignalBlocker av(ui->align_v_box);
 
-  ui->align_h_box->addItem(tr("left"), Qt::AlignLeft);
-  ui->align_h_box->addItem(tr("center"), Qt::AlignHCenter);
-  ui->align_h_box->addItem(tr("right"), Qt::AlignRight);
+  ui->align_h_box->addItem(tr("left", "alignment"), Qt::AlignLeft);
+  ui->align_h_box->addItem(tr("center", "alignment"), Qt::AlignHCenter);
+  ui->align_h_box->addItem(tr("right", "alignment"), Qt::AlignRight);
 
-  ui->align_v_box->addItem(tr("top"), Qt::AlignTop);
-  ui->align_v_box->addItem(tr("center"), Qt::AlignVCenter);
-  ui->align_v_box->addItem(tr("bottom"), Qt::AlignBottom);
+  ui->align_v_box->addItem(tr("top", "alignment"), Qt::AlignTop);
+  ui->align_v_box->addItem(tr("center", "alignment"), Qt::AlignVCenter);
+  ui->align_v_box->addItem(tr("bottom", "alignment"), Qt::AlignBottom);
 
   int hidx = -1;
   auto halign = cfg.getAlignment() & Qt::AlignHorizontal_Mask;

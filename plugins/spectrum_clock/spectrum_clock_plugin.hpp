@@ -41,7 +41,7 @@ class SpectrumClockPluginFactory : public ClockPluginFactory
 public:
   std::unique_ptr<ClockPluginBase> create() const override;
 
-  QString title() const override { return tr("\"Spectrum clock\""); }
+  QString title() const override { return QString("\"Spectrum clock\""); }
   QString description() const override;
 
   bool perClockInstance() const override { return true; }
