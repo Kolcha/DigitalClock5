@@ -64,12 +64,14 @@ SettingsWidget::~SettingsWidget()
 void SettingsWidget::on_hour_enabled_cb_clicked(bool checked)
 {
   impl->every_hour_enabled = checked;
+  cfg.hour().setEnabled(checked);
 }
 
 void SettingsWidget::on_hour_count_box_activated(int index)
 {
   Q_ASSERT(index >= 0);
   impl->every_hour_repeat = ui->hour_count_box->itemData(index).value<Repeat>();
+  cfg.hour().setRepeat(impl->every_hour_repeat);
 }
 
 void SettingsWidget::on_hour_sound_btn_clicked()
@@ -87,17 +89,22 @@ void SettingsWidget::on_hour_sound_btn_clicked()
 
   if (dlg.sound().scheme() == "file")
     st.setValue("every_hour/last_file", dlg.sound().toLocalFile());
+
+  cfg.hour().setSignal(dlg.sound());
+  cfg.hour().setVolume(dlg.volume());
 }
 
 void SettingsWidget::on_quarter_enabled_cb_clicked(bool checked)
 {
   impl->quarter_hour_enabled = checked;
+  cfg.quarter().setEnabled(checked);
 }
 
 void SettingsWidget::on_quarter_count_box_activated(int index)
 {
   Q_ASSERT(index >= 0);
   impl->quarter_hour_repeat = ui->quarter_count_box->itemData(index).value<Repeat>();
+  cfg.quarter().setRepeat(impl->quarter_hour_repeat);
 }
 
 void SettingsWidget::on_quarter_sound_btn_clicked()
@@ -115,21 +122,27 @@ void SettingsWidget::on_quarter_sound_btn_clicked()
 
   if (dlg.sound().scheme() == "file")
     st.setValue("quarter_hour/last_file", dlg.sound().toLocalFile());
+
+  cfg.quarter().setSignal(dlg.sound());
+  cfg.quarter().setVolume(dlg.volume());
 }
 
 void SettingsWidget::on_quiet_hours_enabled_clicked(bool checked)
 {
   impl->quiet_hours_enabled = checked;
+  cfg.quietTime().setEnabled(checked);
 }
 
 void SettingsWidget::on_q_time_start_timeChanged(const QTime& time)
 {
   impl->quiet_hours_start = time;
+  cfg.quietTime().setStartTime(time);
 }
 
 void SettingsWidget::on_q_time_end_timeChanged(const QTime& time)
 {
   impl->quiet_hours_end = time;
+  cfg.quietTime().setEndTime(time);
 }
 
 } // namespace chime
