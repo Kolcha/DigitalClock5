@@ -6,7 +6,11 @@
 
 #include <QApplication>
 
+#include <QLibraryInfo>
+#include <QTranslator>
+
 #include "core/application.hpp"
+#include "core/translation.hpp"
 #include "version.hpp"
 
 int main(int argc, char *argv[])
@@ -33,7 +37,25 @@ int main(int argc, char *argv[])
 #else
   QApplication::setStyle(u"fusion"_s);
 #endif
+  QApplication app(argc, argv);
 
-  Application app(argc, argv);
+  // install app translators
+  auto app_translator = findTranslation(u"digital_clock");
+  auto core_translator = findTranslation(u"plugin_core");
+  QTranslator qt_translator;
+
+  if (app_translator) {
+    QApplication::installTranslator(app_translator.get());
+
+    if (core_translator)
+      QApplication::installTranslator(core_translator.get());
+
+    if (qt_translator.load(QLatin1String("qt_") + app_translator->language(),
+                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+      QApplication::installTranslator(&qt_translator);
+  }
+
+  Application clock_app(app);
+
   return app.exec();
 }

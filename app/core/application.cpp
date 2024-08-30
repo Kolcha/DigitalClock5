@@ -12,8 +12,8 @@
 #include "gui/about_dialog.hpp"
 #include "gui/settings_dialog.hpp"
 
-Application::Application(int& argc, char** argv)
-    : QApplication(argc, argv)
+Application::Application(QApplication& app)
+    : _app(app)
     , _pm(this)
 {
   initConfig();
@@ -128,9 +128,9 @@ void Application::initTray()
                         this, &Application::showAboutDialog);
   _tray_menu->addSeparator();
   _tray_menu->addAction(QIcon::fromTheme(u"application-exit"_s),
-                        tr("Quit"), this, &QApplication::quit);
+                        tr("Quit"), &_app, &QApplication::quit);
 
-  _tray_icon.setToolTip(applicationDisplayName());
+  _tray_icon.setToolTip(QApplication::applicationDisplayName());
 }
 
 void Application::createWindows()
@@ -154,7 +154,7 @@ void Application::createWindows()
     wnd->setWindowFlag(Qt::Tool);   // trick to hide app icon from taskbar (Windows only)
 #endif
 
-    wnd->setWindowTitle(QString("%1 %2").arg(applicationDisplayName()).arg(i));
+    wnd->setWindowTitle(QString("%1 %2").arg(QApplication::applicationDisplayName()).arg(i));
 
     connect(wnd.get(), &ClockWindow::saveStateRequested, this, &Application::saveWindowState);
 

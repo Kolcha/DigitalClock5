@@ -15,6 +15,7 @@
 #include "clock_plugin.hpp"
 
 #include "application.hpp"
+#include "translation.hpp"
 #include "gui/plugin_settings_dialog.hpp"
 
 class PluginHandle {
@@ -45,6 +46,7 @@ public:
 
 private:
   std::unique_ptr<QPluginLoader> _loader;
+  std::unique_ptr<QTranslator> _translator;
   std::vector<std::unique_ptr<ClockPluginBase>> _instances;
 };
 
@@ -52,12 +54,18 @@ PluginHandle::PluginHandle(const QString& filename)
     : _loader(std::make_unique<QPluginLoader>(filename))
 {
   _loader->load();
+
+  _translator = findTranslation(id());
+  if (_translator)
+    QApplication::installTranslator(_translator.get());
 }
 
 PluginHandle::~PluginHandle()
 {
   if (_loader)
     _loader->unload();
+  if (_translator)
+    QApplication::removeTranslator(_translator.get());
 }
 
 ClockPluginFactory* PluginHandle::plugin() const

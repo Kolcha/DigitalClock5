@@ -49,6 +49,8 @@ qt_add_executable(${PROJECT_NAME}
     gui/plugin_settings_dialog.hpp
     gui/plugin_settings_dialog.cpp
     gui/plugin_settings_dialog.ui
+    core/translation.cpp
+    core/translation.hpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

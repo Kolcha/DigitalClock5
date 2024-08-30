@@ -25,12 +25,12 @@
 #include "skin_manager.hpp"
 #include "update_checker.hpp"
 
-class Application : public QApplication
+class Application : public QObject
 {
   Q_OBJECT
 
 public:
-  Application(int& argc, char** argv);
+  explicit Application(QApplication& app);
 
   AppConfig& config() { return *_cfg; }
 
@@ -73,6 +73,7 @@ private slots:
   void showAboutDialog();
 
 private:
+  QApplication& _app;
   std::unique_ptr<AppConfig> _cfg;
   ClockTrayIcon _tray_icon;
   std::unique_ptr<QMenu> _tray_menu;
