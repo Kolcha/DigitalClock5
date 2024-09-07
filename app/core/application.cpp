@@ -125,6 +125,8 @@ void Application::initTray()
   using namespace Qt::Literals::StringLiterals;
   _tray_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
                         this, &Application::showSettingsDialog);
+  if (_cfg->global().getNumInstances() == 1)
+    addPositionMenu();
   _tray_menu->addSeparator();
   _tray_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
                         this, &Application::showAboutDialog);
@@ -224,6 +226,32 @@ void Application::startTimers()
   _tick_timer.start(500);
 }
 
+void Application::addPositionMenu()
+{
+  auto pos_menu = _tray_menu->addMenu(tr("Position"));
+  auto t_menu = pos_menu->addMenu(tr("Top"));
+  t_menu->addAction(tr("Left"),   this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignLeft));
+  t_menu->addAction(tr("Middle"), this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignHCenter));
+  t_menu->addAction(tr("Right"),  this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignRight));
+  auto m_menu = pos_menu->addMenu(tr("Middle"));
+  m_menu->addAction(tr("Left"),   this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignLeft));
+  m_menu->addAction(tr("Middle"), this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignHCenter));
+  m_menu->addAction(tr("Right"),  this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignRight));
+  auto b_menu = pos_menu->addMenu(tr("Bottom"));
+  b_menu->addAction(tr("Left"),   this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignLeft));
+  b_menu->addAction(tr("Middle"), this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignHCenter));
+  b_menu->addAction(tr("Right"),  this, &Application::moveWindowToPredefinedPos)
+      ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignRight));
+}
+
 void Application::saveWindowState()
 {
   auto wnd = qobject_cast<ClockWindow*>(sender());
@@ -251,4 +279,11 @@ void Application::showSettingsDialog()
 void Application::showAboutDialog()
 {
   _dm.maybeCreateAndShowDialog<AboutDialog>(0x41697269);
+}
+
+void Application::moveWindowToPredefinedPos()
+{
+  auto act = qobject_cast<QAction*>(sender());
+  Q_ASSERT(act);
+  _windows.front()->moveToPredefinedPos(act->data().value<Qt::Alignment>());
 }

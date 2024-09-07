@@ -43,6 +43,8 @@ public:
   void loadState(const State& s);
 
 public slots:
+  void moveToPredefinedPos(Qt::Alignment a);
+
   void setAnchorPoint(AnchorPoint ap);
   void setOriginPoint(QPoint origin);
 
@@ -85,6 +87,10 @@ protected:
   void mouseReleaseEvent(QMouseEvent* event) override;
   void paintEvent(QPaintEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
+
+private:
+  void updateLastOrigin();
+  void addPositionMenu();
 
 private:
   AnchorPoint _anchor_point = AnchorLeft;

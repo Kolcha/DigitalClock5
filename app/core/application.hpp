@@ -65,12 +65,16 @@ private:
   void loadPlugins();
   void startTimers();
 
+  void addPositionMenu();
+
 private slots:
   void saveWindowState();
   void onTimer();
 
   void showSettingsDialog();
   void showAboutDialog();
+
+  void moveWindowToPredefinedPos();
 
 private:
   QApplication& _app;

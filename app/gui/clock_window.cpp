@@ -7,6 +7,7 @@
 #include "clock_window.hpp"
 
 #include <QMenu>
+#include <QScreen>
 
 #include <QContextMenuEvent>
 #include <QMouseEvent>
@@ -28,6 +29,7 @@ ClockWindow::ClockWindow(QWidget* parent)
   _ctx_menu = new QMenu(this);
   _ctx_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
                        this, &ClockWindow::settingsDialogRequested);
+  addPositionMenu();
   _ctx_menu->addSeparator();
   _ctx_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
                        this, &ClockWindow::aboutDialogRequested);
@@ -55,6 +57,30 @@ void ClockWindow::loadState(const State& s)
   // as practice shown, it is better to avoid negative Y values :(
   _last_origin = s.value("origin", _last_origin).toPoint();
   _anchor_point = (AnchorPoint)s.value("anchor", (int)AnchorLeft).toInt();
+}
+
+void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
+{
+  auto tpos = pos();
+
+  auto sg = screen()->availableGeometry();
+
+  if (a & Qt::AlignLeft)
+    tpos.setX(0);
+  if (a & Qt::AlignHCenter)
+    tpos.setX(sg.center().x() - width()/2);
+  if (a & Qt::AlignRight)
+    tpos.setX(sg.right() - width());
+
+  if (a & Qt::AlignTop)
+    tpos.setY(0);
+  if (a & Qt::AlignVCenter)
+    tpos.setY(sg.center().y() - height()/2);
+  if (a & Qt::AlignBottom)
+    tpos.setY(sg.bottom() - height());
+
+  move(tpos);
+  updateLastOrigin();
 }
 
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
@@ -170,22 +196,7 @@ void ClockWindow::mouseMoveEvent(QMouseEvent* event)
 void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 {
   if (event->button() == Qt::LeftButton) {
-    auto curr_origin = _clock->mapToGlobal(_clock->origin());
-
-    switch (_anchor_point) {
-      case AnchorLeft:
-        _last_origin = curr_origin;
-        break;
-      case AnchorCenter:
-        _last_origin = curr_origin + QPoint(_clock->advance().x(), 0)/2;
-        break;
-      case AnchorRight:
-        _last_origin = curr_origin + QPoint(_clock->advance().x(), 0);
-        break;
-    }
-
-    emit saveStateRequested();
-
+    updateLastOrigin();
     _is_dragging = false;
     event->accept();
   }
@@ -224,4 +235,40 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
       move(pos() + _last_origin - (curr_origin + QPoint(_clock->advance().x(), 0)));
       break;
   }
+}
+
+void ClockWindow::updateLastOrigin()
+{
+  auto curr_origin = _clock->mapToGlobal(_clock->origin());
+
+  switch (_anchor_point) {
+    case AnchorLeft:
+      _last_origin = curr_origin;
+      break;
+    case AnchorCenter:
+      _last_origin = curr_origin + QPoint(_clock->advance().x(), 0)/2;
+      break;
+    case AnchorRight:
+      _last_origin = curr_origin + QPoint(_clock->advance().x(), 0);
+      break;
+  }
+
+  emit saveStateRequested();
+}
+
+void ClockWindow::addPositionMenu()
+{
+  auto pos_menu = _ctx_menu->addMenu(tr("Position"));
+  auto t_menu = pos_menu->addMenu(tr("Top"));
+  t_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignLeft); });
+  t_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignHCenter); });
+  t_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignRight); });
+  auto m_menu = pos_menu->addMenu(tr("Middle"));
+  m_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignLeft); });
+  m_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignHCenter); });
+  m_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignRight); });
+  auto b_menu = pos_menu->addMenu(tr("Bottom"));
+  b_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignLeft); });
+  b_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignHCenter); });
+  b_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignRight); });
 }
