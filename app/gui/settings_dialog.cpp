@@ -225,7 +225,7 @@ void SettingsDialog::on_use_custom_format_clicked(bool checked)
   if (!checked) updateTimeFormat();
 }
 
-void SettingsDialog::on_format_edit_textChanged(const QString& arg1)
+void SettingsDialog::on_format_edit_currentTextChanged(const QString& arg1)
 {
   bool is_multiline = arg1.contains("\\n");
   ui->layout_cfg_label->setEnabled(is_multiline);
@@ -233,7 +233,7 @@ void SettingsDialog::on_format_edit_textChanged(const QString& arg1)
   ui->layout_cfg_help_btn->setEnabled(is_multiline);
 }
 
-void SettingsDialog::on_format_edit_textEdited(const QString& arg1)
+void SettingsDialog::on_format_edit_editTextChanged(const QString& arg1)
 {
   ui->format_apply_btn->setEnabled(!arg1.isEmpty());
 }
@@ -245,7 +245,7 @@ void SettingsDialog::on_format_help_btn_clicked()
 
 void SettingsDialog::on_format_apply_btn_clicked()
 {
-  auto time_format = ui->format_edit->text();
+  auto time_format = ui->format_edit->currentText();
   applyClockOption(&GraphicsDateTimeWidget::setFormat, time_format);
   app->config().window(_curr_idx).appearance().setTimeFormat(time_format);
 }
@@ -296,7 +296,7 @@ void SettingsDialog::updateTimeFormat()
     time_format += ui->rb_ucase_apm->isChecked() ? 'A' : 'a';
   }
 
-  ui->format_edit->setText(time_format);
+  ui->format_edit->setCurrentText(time_format);
   on_format_apply_btn_clicked();
 }
 
@@ -310,6 +310,11 @@ void SettingsDialog::on_time_zone_edit_activated(int index)
 {
   app->config().window(_curr_idx).generic().setTimeZone(ui->time_zone_edit->itemData(index).value<QTimeZone>());
   applyTimeZoneSettings();
+}
+
+void SettingsDialog::on_multi_timezone_help_btn_clicked()
+{
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Multiple-timezones"));
 }
 
 void SettingsDialog::on_font_rbtn_clicked()
@@ -757,7 +762,9 @@ void SettingsDialog::initGeneralTab(int idx)
     ui->seconds_scale_factor_edit->setValue(acfg.getSecondsScaleFactor());
 
   ui->use_custom_format->setChecked(!standard_formats.contains(time_format));
-  ui->format_edit->setText(time_format);
+  ui->format_edit->setCurrentText(time_format);
+  // in case of the same format as default in the UI design file signal is not called
+  on_format_edit_currentTextChanged(time_format);
 
   if (!ui->use_custom_format->isChecked()) {
     ui->rb_12h->setChecked(time_format.contains('h'));

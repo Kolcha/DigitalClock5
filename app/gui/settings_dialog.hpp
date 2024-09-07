@@ -55,8 +55,8 @@ private slots:
   void on_seconds_scale_factor_edit_valueChanged(int arg1);
   void on_use_custom_format_toggled(bool checked);
   void on_use_custom_format_clicked(bool checked);
-  void on_format_edit_textChanged(const QString& arg1);
-  void on_format_edit_textEdited(const QString& arg1);
+  void on_format_edit_currentTextChanged(const QString& arg1);
+  void on_format_edit_editTextChanged(const QString& arg1);
   void on_format_help_btn_clicked();
   void on_format_apply_btn_clicked();
   void on_layout_cfg_edit_textEdited(const QString& arg1);
@@ -69,6 +69,7 @@ private slots:
 
   void on_use_time_zone_clicked(bool checked);
   void on_time_zone_edit_activated(int index);
+  void on_multi_timezone_help_btn_clicked();
 
   // appearance
   void on_font_rbtn_clicked();
