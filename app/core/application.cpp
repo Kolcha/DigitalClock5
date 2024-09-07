@@ -277,6 +277,8 @@ void Application::showSettingsDialog()
 {
   auto wnd = qobject_cast<ClockWindow*>(sender());
   int idx = wnd ? findWindow(wnd) : 0;
+  _windows[idx]->activateWindow();
+  _windows[idx]->raise();
   _dm.maybeCreateAndShowDialog<SettingsDialog>(0xbd480f59, this, idx);
 }
 
