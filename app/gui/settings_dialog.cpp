@@ -138,6 +138,12 @@ void SettingsDialog::on_enable_stay_on_top_clicked(bool checked)
   app->config().global().setStayOnTop(checked);
 }
 
+void SettingsDialog::on_fullscreen_detect_clicked(bool checked)
+{
+  app->config().global().setFullscreenDetect(!checked);
+  applyWindowOption(&ClockWindow::setFullscreenDetect, !checked);
+}
+
 void SettingsDialog::on_enable_transp_for_input_clicked(bool checked)
 {
   app->config().global().setTransparentForMouse(checked);
@@ -711,6 +717,11 @@ void SettingsDialog::initAppGlobalTab()
   ui->enable_autostart->setVisible(false);  // not implemented
 #endif
   ui->enable_stay_on_top->setChecked(gs.getStayOnTop());
+#if defined(Q_OS_WINDOWS)
+  ui->fullscreen_detect->setChecked(!gs.getFullscreenDetect());
+#else
+  ui->fullscreen_detect->setVisible(false); // not implemented
+#endif
   ui->enable_transp_for_input->setChecked(gs.getTransparentForMouse());
 
   ui->enable_multiwindow->setChecked(gs.getNumInstances() > 1);
@@ -731,6 +742,7 @@ void SettingsDialog::initAppGlobalTab()
   setIndexByValue(ui->update_period_edit, gs.getUpdatePeriodDays());
 
   // ui->enable_debug_options->setChecked(impl->config.getEnableDebugOptions());
+  ui->enable_debug_options->setVisible(false);  // no debug options for now
 }
 
 void SettingsDialog::initGeneralTab(int idx)

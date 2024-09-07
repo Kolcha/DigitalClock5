@@ -22,6 +22,7 @@ public:
   CONFIG_OPTION_Q(bool, AppearancePerInstance, false)
 
   CONFIG_OPTION_Q(bool, StayOnTop, true)
+  CONFIG_OPTION_Q(bool, FullscreenDetect, true)
   CONFIG_OPTION_Q(bool, TransparentForMouse, false)
 
   CONFIG_OPTION_Q(bool, CheckForUpdates, true)

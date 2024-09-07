@@ -69,6 +69,7 @@ public slots:
 #if defined(Q_OS_WINDOWS)
   void runStayOnTopHacks();
 #endif
+  void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
 
 signals:
   void saveStateRequested();

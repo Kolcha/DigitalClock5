@@ -85,6 +85,8 @@ void Application::configureWindow(size_t i)
     wnd->setGraphicsEffect(nullptr);
   }
 
+  wnd->setFullscreenDetect(_cfg->global().getFullscreenDetect());
+
   wnd->setTransparentOnHover(_cfg->global().getTransparentOnHover());
   wnd->setOpacityOnHover(_cfg->global().getOpacityOnHover() / 100.);
 }

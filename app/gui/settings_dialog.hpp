@@ -34,6 +34,7 @@ private slots:
   // app global
   void on_enable_autostart_clicked(bool checked);
   void on_enable_stay_on_top_clicked(bool checked);
+  void on_fullscreen_detect_clicked(bool checked);
   void on_enable_transp_for_input_clicked(bool checked);
 
   void on_enable_multiwindow_clicked(bool checked);
