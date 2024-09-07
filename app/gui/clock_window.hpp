@@ -70,6 +70,7 @@ public slots:
 #endif
 #if defined(Q_OS_WINDOWS)
   void runStayOnTopHacks();
+  void surviveWinDHack();
 #endif
   void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
 

@@ -46,3 +46,18 @@ void ClockWindow::runStayOnTopHacks()
     if (!isActiveWindow()) raise();
   }
 }
+
+// should be called once if stay on top is disabled
+// window must be visible when this is called
+void ClockWindow::surviveWinDHack()
+{
+  // keep window visible after Win+D (show desktop)
+  // https://stackoverflow.com/questions/35045060/how-to-keep-window-visible-at-all-times-but-not-force-it-to-be-on-top
+  HWND hWndTmp = FindWindowEx(NULL, NULL, L"Progman", NULL);
+  if (hWndTmp) {
+    hWndTmp = FindWindowEx(hWndTmp, NULL, L"SHELLDLL_DefView", NULL);
+    if (hWndTmp) {
+      SetWindowLongPtr((HWND)this->winId(), GWLP_HWNDPARENT, (LONG_PTR)hWndTmp);
+    }
+  }
+}

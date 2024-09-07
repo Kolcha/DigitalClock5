@@ -185,6 +185,10 @@ void Application::createWindows()
   }
 
   std::ranges::for_each(_windows, [](auto& w) { w->show(); });
+#if defined(Q_OS_WINDOWS)
+  if (!_cfg->global().getStayOnTop())
+    std::ranges::for_each(_windows, [](auto& w) { w->surviveWinDHack(); });
+#endif
 }
 
 void Application::initUpdater()
