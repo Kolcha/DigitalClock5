@@ -15,10 +15,7 @@
 
 #include <gradient_dialog.h>
 
-#include "common_appearance_state.hpp"
-
-AppearanceSettingsWidget::AppearanceSettingsWidget(
-    WidgetPluginBaseImpl* w, SettingsClient& s, StateClient& t, QWidget* parent)
+AppearanceSettingsWidget::AppearanceSettingsWidget(WidgetPluginBaseImpl* w, PluginSettingsStorage& s, StateClient& t, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::AppearanceSettingsWidget)
     , impl(w)
@@ -52,7 +49,7 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(
     ui->tx_options_box->setCurrentIndex(2);
     ui->tx_option->setChecked(cfg.getTextureStretch());
   }
-  ui->tx_per_char->setChecked(cfg.getTexturePerChar());
+  ui->tx_per_char->setChecked(cfg.getTexturePerCharacter());
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
 
   const auto& bg = cfg.getBackground();
@@ -67,7 +64,7 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(
     ui->bg_options_box->setCurrentIndex(2);
     ui->bg_option->setChecked(cfg.getBackgroundStretch());
   }
-  ui->bg_per_char->setChecked(cfg.getBackgroundPerChar());
+  ui->bg_per_char->setChecked(cfg.getBackgroundPerCharacter());
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
 
   QSignalBlocker ah(ui->align_h_box);
@@ -226,51 +223,43 @@ void AppearanceSettingsWidget::on_skin_rbtn_clicked()
 
 void AppearanceSettingsWidget::on_tx_group_clicked(bool checked)
 {
-  CommonAppearanceState state(st);
-
-  QBrush brush(Qt::NoBrush);
-
   if (checked) {
     if (ui->tx_options_box->currentIndex() == 0)
-      brush = QBrush(state.getTextureColor());
+      cfg.setTextureType(AppearanceSectionBase::SolidColor);
 
     if (ui->tx_options_box->currentIndex() == 1)
-      brush = QBrush(state.getTextureGradient());
+      cfg.setTextureType(AppearanceSectionBase::Gradient);
 
     if (ui->tx_options_box->currentIndex() == 2)
-      brush = QBrush(state.getTexturePattern());
+      cfg.setTextureType(AppearanceSectionBase::Pattern);
+  } else {
+    cfg.setTextureType(AppearanceSectionBase::None);
   }
 
-  cfg.setTexture(brush);
-  impl->tx = brush;
+  impl->tx = cfg.getTexture();
 
   if (widget)
-    widget->setTexture(std::move(brush));
+    widget->setTexture(cfg.getTexture());
 }
 
 void AppearanceSettingsWidget::on_tx_options_box_activated(int index)
 {
-  CommonAppearanceState state(st);
   switch (index) {
     case 0: // color
-      cfg.setTexture(state.getTextureColor());
-      impl->tx = state.getTextureColor();
-      if (widget)
-        widget->setTexture(state.getTextureColor());
+      cfg.setTextureType(AppearanceSectionBase::SolidColor);
       break;
     case 1: // gradient
-      cfg.setTexture(state.getTextureGradient());
-      impl->tx = state.getTextureGradient();
-      if (widget)
-        widget->setTexture(state.getTextureGradient());
+      cfg.setTextureType(AppearanceSectionBase::Gradient);
       break;
     case 2: // pattern
-      cfg.setTexture(state.getTexturePattern());
-      impl->tx = state.getTexturePattern();
-      if (widget)
-        widget->setTexture(state.getTexturePattern());
+      cfg.setTextureType(AppearanceSectionBase::Pattern);
       break;
   }
+
+  impl->tx = cfg.getTexture();
+
+  if (widget)
+    widget->setTexture(cfg.getTexture());
 }
 
 void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
@@ -301,15 +290,13 @@ void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
 
 void AppearanceSettingsWidget::tx_select_color()
 {
-  CommonAppearanceState state(st);
-  auto color = QColorDialog::getColor(state.getTextureColor(),
+  auto color = QColorDialog::getColor(cfg.getTextureColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
 
-  cfg.setTexture(color);
-  state.setTextureColor(color);
+  cfg.setTextureColor(color);
   impl->tx = color;
 
   if (widget)
@@ -318,16 +305,14 @@ void AppearanceSettingsWidget::tx_select_color()
 
 void AppearanceSettingsWidget::tx_select_gradient()
 {
-  CommonAppearanceState state(st);
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
-                                              state.getTextureGradient(),
+                                              cfg.getTextureGradient(),
                                               this);
   if (!ok) return;
 
   gradient.setCoordinateMode(QGradient::ObjectMode);
-  cfg.setTexture(gradient);
-  state.setTextureGradient(gradient);
+  cfg.setTextureGradient(gradient);
   impl->tx = gradient;
 
   if (widget)
@@ -336,18 +321,14 @@ void AppearanceSettingsWidget::tx_select_gradient()
 
 void AppearanceSettingsWidget::tx_select_pattern()
 {
-  CommonAppearanceState state(st);
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           _last_path,
+                                           cfg.getTexturePatternFile(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
 
-  _last_path = file;
-
   QPixmap pxm(file);
-  cfg.setTexture(pxm);
-  state.setTexturePattern(pxm);
+  cfg.setTexturePatternFile(file);
   impl->tx = pxm;
 
   if (widget)
@@ -365,7 +346,7 @@ void AppearanceSettingsWidget::tx_pattern_stretch(bool checked)
 
 void AppearanceSettingsWidget::on_tx_per_char_clicked(bool checked)
 {
-  cfg.setTexturePerChar(checked);
+  cfg.setTexturePerCharacter(checked);
   impl->tx_per_char = checked;
 
   if (widget)
@@ -374,51 +355,43 @@ void AppearanceSettingsWidget::on_tx_per_char_clicked(bool checked)
 
 void AppearanceSettingsWidget::on_bg_group_clicked(bool checked)
 {
-  CommonAppearanceState state(st);
-
-  QBrush brush(Qt::NoBrush);
-
   if (checked) {
     if (ui->bg_options_box->currentIndex() == 0)
-      brush = QBrush(state.getBackgroundColor());
+      cfg.setBackgroundType(AppearanceSectionBase::SolidColor);
 
     if (ui->bg_options_box->currentIndex() == 1)
-      brush = QBrush(state.getBackgroundGradient());
+      cfg.setBackgroundType(AppearanceSectionBase::Gradient);
 
     if (ui->bg_options_box->currentIndex() == 2)
-      brush = QBrush(state.getBackgroundPattern());
+      cfg.setBackgroundType(AppearanceSectionBase::Pattern);
+  } else {
+    cfg.setBackgroundType(AppearanceSectionBase::None);
   }
 
-  cfg.setBackground(brush);
-  impl->bg = brush;
+  impl->bg = cfg.getBackground();
 
   if (widget)
-    widget->setBackground(std::move(brush));
+    widget->setBackground(cfg.getBackground());
 }
 
 void AppearanceSettingsWidget::on_bg_options_box_activated(int index)
 {
-  CommonAppearanceState state(st);
   switch (index) {
     case 0: // color
-      cfg.setBackground(state.getBackgroundColor());
-      impl->bg = state.getBackgroundColor();
-      if (widget)
-        widget->setBackground(state.getBackgroundColor());
+      cfg.setBackgroundType(AppearanceSectionBase::SolidColor);
       break;
     case 1: // gradient
-      cfg.setBackground(state.getBackgroundGradient());
-      impl->bg = state.getBackgroundGradient();
-      if (widget)
-        widget->setBackground(state.getBackgroundGradient());
+      cfg.setBackgroundType(AppearanceSectionBase::Gradient);
       break;
     case 2: // pattern
-      cfg.setBackground(state.getBackgroundPattern());
-      impl->bg = state.getBackgroundPattern();
-      if (widget)
-        widget->setBackground(state.getBackgroundPattern());
+      cfg.setBackgroundType(AppearanceSectionBase::Pattern);
       break;
   }
+
+  impl->bg = cfg.getBackground();
+
+  if (widget)
+    widget->setBackground(cfg.getBackground());
 }
 
 void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
@@ -449,15 +422,13 @@ void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
 
 void AppearanceSettingsWidget::bg_select_color()
 {
-  CommonAppearanceState state(st);
-  auto color = QColorDialog::getColor(state.getBackgroundColor(),
+  auto color = QColorDialog::getColor(cfg.getBackgroundColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
 
-  cfg.setBackground(color);
-  state.setBackgroundColor(color);
+  cfg.setBackgroundColor(color);
   impl->bg = color;
 
   if (widget)
@@ -466,16 +437,14 @@ void AppearanceSettingsWidget::bg_select_color()
 
 void AppearanceSettingsWidget::bg_select_gradient()
 {
-  CommonAppearanceState state(st);
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
-                                              state.getBackgroundGradient(),
+                                              cfg.getBackgroundGradient(),
                                               this);
   if (!ok) return;
 
   gradient.setCoordinateMode(QGradient::ObjectMode);
-  cfg.setBackground(gradient);
-  state.setBackgroundGradient(gradient);
+  cfg.setBackgroundGradient(gradient);
   impl->bg = gradient;
 
   if (widget)
@@ -484,18 +453,14 @@ void AppearanceSettingsWidget::bg_select_gradient()
 
 void AppearanceSettingsWidget::bg_select_pattern()
 {
-  CommonAppearanceState state(st);
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           _last_path,
+                                           cfg.getBackgroundPatternFile(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
 
-  _last_path = file;
-
   QPixmap pxm(file);
-  cfg.setBackground(pxm);
-  state.setBackgroundPattern(pxm);
+  cfg.setBackgroundPatternFile(file);
   impl->bg = pxm;
 
   if (widget)
@@ -513,7 +478,7 @@ void AppearanceSettingsWidget::bg_pattern_stretch(bool checked)
 
 void AppearanceSettingsWidget::on_bg_per_char_clicked(bool checked)
 {
-  cfg.setBackgroundPerChar(checked);
+  cfg.setBackgroundPerCharacter(checked);
   impl->bg_per_char = checked;
 
   if (widget)

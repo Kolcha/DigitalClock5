@@ -48,5 +48,5 @@ public:
   void applyAppearanceSettings();
   void repositionWidget();
 
-  void initSettings(const SettingsClient& st);
+  void initSettings(PluginSettingsStorage& st);
 };

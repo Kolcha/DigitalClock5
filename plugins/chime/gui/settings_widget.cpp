@@ -11,7 +11,7 @@
 
 namespace chime {
 
-SettingsWidget::SettingsWidget(SettingsClient& s, StateClient& t,
+SettingsWidget::SettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                ChimePluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::SettingsWidget)

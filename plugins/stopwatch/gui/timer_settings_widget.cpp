@@ -7,7 +7,7 @@
 #include "timer_settings_widget.hpp"
 #include "ui_timer_settings_widget.h"
 
-TimerSettingsWidget::TimerSettingsWidget(SettingsClient& s, StateClient& t,
+TimerSettingsWidget::TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                          StopwatchPluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::TimerSettingsWidget)

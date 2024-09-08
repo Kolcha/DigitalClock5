@@ -6,20 +6,21 @@
 
 #pragma once
 
-#include "plugin_config.hpp"
+#include "config/settings_storage.hpp"
+#include "config/custom_converters.hpp"
 
 #include "date_plugin_impl.hpp"
 
 namespace plugin_impl {
 
-template<class C>
-class DatePluginSettings : public PluginConfig<C> {
+class DatePluginSettings : public SettingsStorageClient {
 public:
-  explicit DatePluginSettings(C& c) : PluginConfig<C>(c) {}
+  explicit DatePluginSettings(ISettingsStorage& st)
+      : SettingsStorageClient("Date", st) {}
 
-  PLG_CONFIG_SEC_OPTION_Q(Date, FormatType, DatePluginImpl::FormatType, DatePluginImpl::System)
-  PLG_CONFIG_SEC_OPTION_Q(Date, FormatSys, QLocale::FormatType, QLocale::LongFormat)
-  PLG_CONFIG_SEC_OPTION_Q(Date, FormatStr, QString, QLocale().dateFormat())
+  CONFIG_OPTION_Q(DatePluginImpl::FormatType, FormatType, DatePluginImpl::System)
+  CONFIG_OPTION_Q(QLocale::FormatType, FormatSys, QLocale::LongFormat)
+  CONFIG_OPTION_Q(QString, FormatStr, QLocale().dateFormat())
 };
 
 } // namespace plugin_impl

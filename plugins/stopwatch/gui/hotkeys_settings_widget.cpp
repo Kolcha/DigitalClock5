@@ -7,7 +7,7 @@
 #include "hotkeys_settings_widget.hpp"
 #include "ui_hotkeys_settings_widget.h"
 
-HotkeysSettingsWidget::HotkeysSettingsWidget(SettingsClient& s, StateClient& t,
+HotkeysSettingsWidget::HotkeysSettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                              StopwatchPluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::HotkeysSettingsWidget)

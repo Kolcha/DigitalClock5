@@ -8,7 +8,7 @@
 
 #include "stopwatch_settings.hpp"
 
-void StopwatchPluginImpl::initSettings(const SettingsClient& s)
+void StopwatchPluginImpl::initSettings(PluginSettingsStorage& s)
 {
   pause_hotkey = std::make_unique<QHotkey>();
   restart_hotkey = std::make_unique<QHotkey>();

@@ -70,7 +70,7 @@ void CountdownTimerPlugin::loadState(const StateClient& st)
 {
 }
 
-void CountdownTimerPlugin::initSettings(const SettingsClient& st)
+void CountdownTimerPlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
   _impl->updateWidgetText();
@@ -120,7 +120,7 @@ void CountdownTimerPlugin::shutdown()
   WidgetPluginBase::shutdown();
 }
 
-QList<QWidget*> CountdownTimerPlugin::customConfigure(SettingsClient& s, StateClient& t)
+QList<QWidget*> CountdownTimerPlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
 {
   auto timer_tab = new TimerSettingsWidget(s, t, _impl.get());
   auto hotkeys_tab = new HotkeysSettingsWidget(s, t, _impl.get());

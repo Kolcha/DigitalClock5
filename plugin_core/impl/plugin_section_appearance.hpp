@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "plugin_config.hpp"
+#include "config/appearance_base.hpp"
 
 #include <QFont>
 
@@ -16,24 +16,18 @@ enum WidgetAppearance { FollowClock, Custom };
 
 namespace plugin_impl {
 
-template<class C>
-class SectionAppearance : public PluginConfig<C> {
+class SectionAppearance : public AppearanceSectionBase {
 public:
-  explicit SectionAppearance(C& c) : PluginConfig<C>(c) {}
+  explicit SectionAppearance(ISettingsStorage& st)
+      : AppearanceSectionBase("Appearance", st) {}
 
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, WidgetPosition, WidgetPosition, Bottom)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, ResizePolicy, ResizePolicy, Autoscale)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, FollowClock, bool, true)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, Alignment, Qt::Alignment, Qt::AlignCenter)
-  PLG_CONFIG_SEC_OPTION_Q(Appearamce, LayoutConfig, QString, QString())
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, UseClockSkin, bool, false)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, CustomFont, QFont, QFont("Comic Sans MS", 72))
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, Texture, QBrush, QColor(112, 96, 240))
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, TextureStretch, bool, false)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, TexturePerChar, bool, true)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, Background, QBrush, QBrush(Qt::NoBrush))
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, BackgroundStretch, bool, false)
-  PLG_CONFIG_SEC_OPTION_Q(Appearance, BackgroundPerChar, bool, false)
+  CONFIG_OPTION_Q(WidgetPosition, WidgetPosition, Bottom)
+  CONFIG_OPTION_Q(ResizePolicy, ResizePolicy, Autoscale)
+  CONFIG_OPTION_Q(bool, FollowClock, true)
+  CONFIG_OPTION_Q(Qt::Alignment, Alignment, Qt::AlignCenter)
+  CONFIG_OPTION_Q(QString, LayoutConfig, QString())
+  CONFIG_OPTION_Q(bool, UseClockSkin, false)
+  CONFIG_OPTION_Q(QFont, CustomFont, QFont("Comic Sans MS", 72))
 };
 
 } // namespace plugin_impl

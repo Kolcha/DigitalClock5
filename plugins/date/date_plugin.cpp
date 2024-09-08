@@ -26,7 +26,7 @@ void DatePlugin::loadState(const StateClient& st)
   Q_UNUSED(st);
 }
 
-void DatePlugin::initSettings(const SettingsClient& st)
+void DatePlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
   _impl->updateWidget();
@@ -41,7 +41,7 @@ void DatePlugin::onTimeChanged(const QDateTime& dt)
   _impl->widget->setDateTime(dt);
 }
 
-QList<QWidget*> DatePlugin::customConfigure(SettingsClient& s, StateClient& t)
+QList<QWidget*> DatePlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
 {
   return { new SettingsWidget(s, t, _impl.get()) };
 }

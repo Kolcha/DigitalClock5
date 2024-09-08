@@ -69,7 +69,7 @@ void StopwatchPlugin::loadState(const StateClient& st)
   _impl->last_elapsed = st.value("last_elapsed", 0).toInt();
 }
 
-void StopwatchPlugin::initSettings(const SettingsClient& st)
+void StopwatchPlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
   WidgetPluginBase::initSettings(st);
@@ -114,7 +114,7 @@ void StopwatchPlugin::tick()
   WidgetPluginBase::tick();
 }
 
-QList<QWidget*> StopwatchPlugin::customConfigure(SettingsClient& s, StateClient& t)
+QList<QWidget*> StopwatchPlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
 {
   auto timer_tab = new TimerSettingsWidget(s, t, _impl.get());
   auto hotkeys_tab = new HotkeysSettingsWidget(s, t, _impl.get());

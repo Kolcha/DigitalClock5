@@ -9,7 +9,7 @@
 #include "countdown_timer_settings.hpp"
 #include "utilities.hpp"
 
-void CountdownTimerPluginImpl::initSettings(const SettingsClient& s)
+void CountdownTimerPluginImpl::initSettings(PluginSettingsStorage& s)
 {
   pause_hotkey = std::make_unique<QHotkey>();
   restart_hotkey = std::make_unique<QHotkey>();

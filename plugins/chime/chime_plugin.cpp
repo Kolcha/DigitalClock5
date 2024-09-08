@@ -19,12 +19,12 @@ ChimePlugin::ChimePlugin()
 
 ChimePlugin::~ChimePlugin() = default;
 
-void ChimePlugin::initSettings(const SettingsClient& st)
+void ChimePlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
 }
 
-QWidget* ChimePlugin::configure(SettingsClient& s, StateClient& t)
+QWidget* ChimePlugin::configure(PluginSettingsStorage& s, StateClient& t)
 {
   return new chime::SettingsWidget(s, t, _impl.get());
 }

@@ -17,7 +17,7 @@ static bool is_quiet_time(const QTime& c_time, const QTime& s_time, const QTime&
          ((QTime(0, 0) <= c_time) && (c_time <= e_time));
 }
 
-void ChimePluginImpl::initSettings(const SettingsClient& st)
+void ChimePluginImpl::initSettings(PluginSettingsStorage& st)
 {
   plugin_impl::ChimePluginSettings cfg(st);
 

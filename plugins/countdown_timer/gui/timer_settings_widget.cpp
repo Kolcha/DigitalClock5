@@ -9,7 +9,7 @@
 
 #include <QFileDialog>
 
-TimerSettingsWidget::TimerSettingsWidget(SettingsClient& s, StateClient& t,
+TimerSettingsWidget::TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                          CountdownTimerPluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::TimerSettingsWidget)

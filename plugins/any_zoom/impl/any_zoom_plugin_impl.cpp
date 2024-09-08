@@ -13,7 +13,7 @@ AnyZoomPluginImpl::AnyZoomPluginImpl(QObject* parent)
 {
 }
 
-void AnyZoomPluginImpl::initSettings(const SettingsClient& st)
+void AnyZoomPluginImpl::initSettings(PluginSettingsStorage& st)
 {
   plugin_impl::AnyZoomPluginSettings cfg(st);
   zoom_x = cfg.getZoomX();

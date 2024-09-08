@@ -49,7 +49,7 @@ void QuickNotePlugin::loadState(const StateClient& st)
   _last_text = st.value("last_text", tr("double click me!")).toString();
 }
 
-QList<QWidget*> QuickNotePlugin::customConfigure(SettingsClient& s, StateClient& t)
+QList<QWidget*> QuickNotePlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
 {
   Q_UNUSED(s);
   Q_UNUSED(t);

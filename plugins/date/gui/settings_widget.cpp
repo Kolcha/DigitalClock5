@@ -4,7 +4,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-SettingsWidget::SettingsWidget(SettingsClient& s, StateClient& t,
+SettingsWidget::SettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                DatePluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::SettingsWidget)

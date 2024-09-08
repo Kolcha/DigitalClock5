@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(chime VERSION 2.0.0 LANGUAGES CXX)
+project(chime VERSION 2.0.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME ChimePlugin
     gui/settings_widget.cpp

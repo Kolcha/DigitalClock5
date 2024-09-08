@@ -8,7 +8,7 @@
 
 #include <QObject>
 
-#include "config/settings_storage.hpp"
+#include "plugin_config.hpp"
 #include "shared_config_keys.hpp"
 
 class AnyZoomPluginImpl : public QObject
@@ -18,7 +18,7 @@ class AnyZoomPluginImpl : public QObject
 public:
   explicit AnyZoomPluginImpl(QObject* parent = nullptr);
 
-  void initSettings(const SettingsClient& st);
+  void initSettings(PluginSettingsStorage& st);
 
   int clock_zoom = 100;
 

@@ -6,86 +6,19 @@
 
 #pragma once
 
+#include "plugin_core_global.hpp"
+
 #include "config/settings_storage.hpp"
-#include "config/custom_converters.hpp"
 
-namespace plugin_impl {
-// convenient settings client class for usage in plugins
-// it can be used as is or inherited and used with macros below
-template<class C>
-class PluginConfig {
+class PLUGIN_CORE_EXPORT PluginSettingsStorage : public SettingsStorageClient,
+                                                 public ISettingsStorage {
 public:
-  template<typename T>
-  using toVariant = C::template toVariant<T>;
+  PluginSettingsStorage(QString prefix, ISettingsStorage& st);
 
-  template<typename T>
-  using fromVariant = C::template fromVariant<T>;
+  void setValue(QString key, QVariant val) override;
+  QVariant value(QString key, QVariant def) const override;
 
-  explicit PluginConfig(C& c) : _c(c) {}
-
-  template<typename T>
-  T get(const QString& k, const QVariant& d) const
-  {
-    return fromVariant<T>{}(_c.value(k, d));
-  }
-
-  template<typename T>
-  void set(const QString& k, const T& v)
-  {
-    _c.setValue(k, toVariant<T>{}(v));
-  }
-
-private:
-  C& _c;
+  // actually should not be used, but still provided for completeness
+  void commitValue(QString key) override;
+  void discardValue(QString key) override;
 };
-
-
-template<class C>
-class PluginConfigSection {
-public:
-  template<typename T>
-  using toVariant = C::template toVariant<T>;
-
-  template<typename T>
-  using fromVariant = C::template fromVariant<T>;
-
-  explicit PluginConfigSection(C& c) : _c(c) {}
-
-  template<typename T>
-  T get(const QString& k, const QVariant& d) const
-  {
-    return fromVariant<T>{}(_c.value(sectionKey(k), d));
-  }
-
-  template<typename T>
-  void set(const QString& k, const T& v)
-  {
-    _c.setValue(sectionKey(k), toVariant<T>{}(v));
-  }
-
-protected:
-  virtual QLatin1String section() const = 0;
-
-private:
-  QString sectionKey(QStringView k) const
-  {
-    return QString("%1/%2").arg(section(), k);
-  }
-
-private:
-  C& _c;
-};
-
-#define PLG_CONFIG_OPTION(type, name, key, def_value) \
-void set##name(const type& val)                       \
-  { this->template set<type>(key, val); }             \
-type get##name() const                                \
-  { return this->template get<type>(key, def_value); }
-
-#define PLG_CONFIG_OPTION_Q(type, name, def_value)    \
-  PLG_CONFIG_OPTION(type, name, QLatin1String(#name), def_value)
-
-#define PLG_CONFIG_SEC_OPTION_Q(sec, name, type, def_value)     \
-  PLG_CONFIG_OPTION(type, name, QLatin1String(#sec"/"#name), def_value)
-
-} // namespace plugin_impl

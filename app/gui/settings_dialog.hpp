@@ -140,5 +140,4 @@ private:
   Ui::SettingsDialog* ui;
   Application* app;
   int _curr_idx;
-  QString _last_path;
 };

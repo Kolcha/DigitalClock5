@@ -10,7 +10,21 @@
 
 #include "clock_common_global.hpp"
 
-class CLOCK_COMMON_EXPORT SettingsStorage {
+// TODO: const &
+class CLOCK_COMMON_EXPORT ISettingsStorage {
+public:
+  virtual ~ISettingsStorage() = default;
+
+  virtual void setValue(QString key, QVariant val) = 0;
+  virtual QVariant value(QString key, QVariant def) const = 0;
+
+  virtual void commitValue(QString key) = 0;
+  virtual void discardValue(QString key) = 0;
+};
+
+
+// TODO: move to app
+class CLOCK_COMMON_EXPORT SettingsStorage : public ISettingsStorage {
 public:
   SettingsStorage() = default;
   explicit SettingsStorage(const QString& filename);
@@ -57,7 +71,7 @@ public:
     T operator()(const QVariant& v) { return qvariant_cast<T>(v); }
   };
 
-  SettingsStorageClient(QString title, SettingsStorage& st);
+  SettingsStorageClient(QString title, ISettingsStorage& st);
   virtual ~SettingsStorageClient() = default;
 
   QString title() const { return _title; }
@@ -69,14 +83,17 @@ protected:
   void setValue(QString key, QVariant val);
   QVariant value(QString key, QVariant def) const;
 
-private:
+  auto& storage() noexcept { return _st; }
+  auto& storage() const noexcept { return _st; }
+
   QString storageKey(QStringView key) const;
 
-  typedef void(SettingsStorage::*op_type)(QString);
+private:
+  typedef void(ISettingsStorage::*op_type)(QString);
   void keysOperation(op_type op);
 
 private:
-  SettingsStorage& _st;
+  ISettingsStorage& _st;
   QSet<QString> _keys;
   QString _title;
 };
@@ -91,22 +108,6 @@ private:
 #define CONFIG_OPTION_Q(type, name, def_value)    \
   CONFIG_OPTION(type, name, QLatin1String(#name), def_value)
 
-// general-purpose settings storage client
-// the same as bove, just set/get value are public
-class CLOCK_COMMON_EXPORT SettingsClient : public SettingsStorageClient {
-public:
-  template<typename T>
-  using toVariant = SettingsStorageClient::toVariant<T>;
-
-  template<typename T>
-  using fromVariant = SettingsStorageClient::fromVariant<T>;
-
-  using SettingsStorageClient::SettingsStorageClient;
-
-  void setValue(QString key, QVariant val);
-  QVariant value(QString key, QVariant def) const;
-};
-
 
 // state client doesn't assume discard operation,
 // all changes are stored permanently
@@ -119,7 +120,7 @@ public:
   template<typename T>
   using fromVariant = SettingsStorageClient::fromVariant<T>;
 
-  StateClient(QString title, SettingsStorage& st);
+  StateClient(QString title, ISettingsStorage& st);
 
   void setValue(QString key, QVariant val);
   QVariant value(QString key, QVariant def) const;
@@ -128,6 +129,6 @@ protected:
   QString storageKey(QStringView key) const;
 
 private:
-  SettingsStorage& _st;
+  ISettingsStorage& _st;
   QString _title;
 };

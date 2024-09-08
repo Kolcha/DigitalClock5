@@ -21,13 +21,13 @@ public:
   void saveState(StateClient& st) const override;
   void loadState(const StateClient& st) override;
 
-  void initSettings(const SettingsClient& st) override;
+  void initSettings(PluginSettingsStorage& st) override;
 
 public slots:
   void onTimeChanged(const QDateTime& dt) override;
 
 protected:
-  QList<QWidget*> customConfigure(SettingsClient& s, StateClient& t) override;
+  QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) override;
 
   std::shared_ptr<GraphicsWidgetBase> createWidget() override;
   void destroyWidget() override;

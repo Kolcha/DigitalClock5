@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "common_appearance_state.hpp"
+#include "sample_brushes.hpp"
 
 #include <QPainter>
 
-QGradient CommonAppearanceState::sample_conical_gradient()
+QGradient sample_conical_gradient()
 {
   QConicalGradient g(0.5, 0.5, 45.0);
   g.setStops({
@@ -22,7 +22,7 @@ QGradient CommonAppearanceState::sample_conical_gradient()
   return g;
 }
 
-QGradient CommonAppearanceState::sample_linear_gradient()
+QGradient sample_linear_gradient()
 {
   QLinearGradient g(0., 0., 0., 1.);
   g.setColorAt(0.0, Qt::transparent);
@@ -32,7 +32,7 @@ QGradient CommonAppearanceState::sample_linear_gradient()
   return g;
 }
 
-QPixmap CommonAppearanceState::sample_pattern()
+QPixmap sample_pattern()
 {
   QPixmap pxm(8, 8);
   pxm.fill(QColor(160, 0, 160));

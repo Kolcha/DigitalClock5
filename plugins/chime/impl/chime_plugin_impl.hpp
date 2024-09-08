@@ -7,10 +7,11 @@
 #pragma once
 
 #include "chime_settings.hpp"
+#include "plugin_config.hpp"
 
 struct ChimePluginImpl
 {
-  void initSettings(const SettingsClient& st);
+  void initSettings(PluginSettingsStorage& st);
   bool isQuietTime(const QTime& t) const;
 
   bool every_hour_enabled = false;

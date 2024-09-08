@@ -7,6 +7,7 @@
 #pragma once
 
 #include "config_sections.hpp"
+#include "plugin_config.hpp"
 
 class AppConfig;
 
@@ -48,7 +49,7 @@ public:
   auto& state(size_t i) const { return _states[i]; }
 
 private:
-  std::vector<SettingsClient> _configs;
+  std::vector<PluginSettingsStorage> _configs;
   std::vector<StateClient> _states;
 };
 

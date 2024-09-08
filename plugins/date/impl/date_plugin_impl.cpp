@@ -8,7 +8,7 @@
 
 #include "date_settings.hpp"
 
-void DatePluginImpl::initSettings(const SettingsClient& st)
+void DatePluginImpl::initSettings(PluginSettingsStorage& st)
 {
   plugin_impl::DatePluginSettings cfg(st);
   format_type = cfg.getFormatType();

@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-project(sample VERSION 0.1.0 LANGUAGES CXX)
+project(sample VERSION 0.1.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME SamplePlugin
     sample_plugin.cpp

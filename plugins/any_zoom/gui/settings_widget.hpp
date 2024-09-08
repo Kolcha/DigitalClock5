@@ -20,7 +20,7 @@ class SettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit SettingsWidget(SettingsClient& s, StateClient& t,
+  explicit SettingsWidget(PluginSettingsStorage& s, StateClient& t,
                           AnyZoomPluginImpl* impl, QWidget* parent = nullptr);
   ~SettingsWidget();
 
@@ -30,6 +30,6 @@ private slots:
 
 private:
   Ui::SettingsWidget* ui;
-  plugin_impl::AnyZoomPluginSettings<SettingsClient> cfg;
+  plugin_impl::AnyZoomPluginSettings cfg;
   AnyZoomPluginImpl* impl;
 };

@@ -8,14 +8,14 @@
 
 #include <QHotkey>
 
-#include "config/settings_storage.hpp"
+#include "plugin_config.hpp"
 #include "skin/graphics_widgets.hpp"
 
 #include "countdown_timer.hpp"
 
 struct CountdownTimerPluginImpl
 {
-  void initSettings(const SettingsClient& s);
+  void initSettings(PluginSettingsStorage& s);
   void applySettings();
 
   void initTimer();

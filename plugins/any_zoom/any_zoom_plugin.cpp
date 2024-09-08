@@ -21,12 +21,12 @@ void AnyZoomPlugin::initSharedSettings(const SharedSettings& s)
   _impl->clock_zoom = s[cs::ScalingH].toInt();  // H and V are the same
 }
 
-void AnyZoomPlugin::initSettings(const SettingsClient& st)
+void AnyZoomPlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
 }
 
-QWidget* AnyZoomPlugin::configure(SettingsClient& s, StateClient& t)
+QWidget* AnyZoomPlugin::configure(PluginSettingsStorage& s, StateClient& t)
 {
   return new SettingsWidget(s, t, _impl.get());
 }

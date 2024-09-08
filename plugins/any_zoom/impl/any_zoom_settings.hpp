@@ -6,17 +6,17 @@
 
 #pragma once
 
-#include "plugin_config.hpp"
+#include "config/settings_storage.hpp"
 
 namespace plugin_impl {
 
-template<class C>
-class AnyZoomPluginSettings : public PluginConfig<C> {
+class AnyZoomPluginSettings : public SettingsStorageClient {
 public:
-  explicit AnyZoomPluginSettings(C& c) : PluginConfig<C>(c) {}
+  explicit AnyZoomPluginSettings(ISettingsStorage& st)
+      : SettingsStorageClient("AnyZoom", st) {}
 
-  PLG_CONFIG_OPTION_Q(int, ZoomX, 125)
-  PLG_CONFIG_OPTION_Q(int, ZoomY, 125)
+  CONFIG_OPTION_Q(int, ZoomX, 125)
+  CONFIG_OPTION_Q(int, ZoomY, 125)
 };
 
 } // namespace plugin_impl

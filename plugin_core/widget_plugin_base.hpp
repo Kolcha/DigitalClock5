@@ -31,9 +31,9 @@ public:
   void initSharedSettings(const SharedSettings& s) override;
 
   // ConfigurablePlugin interface
-  void initSettings(const SettingsClient& st) override;
+  void initSettings(PluginSettingsStorage& st) override;
 
-  QWidget* configure(SettingsClient& s, StateClient& t) final;
+  QWidget* configure(PluginSettingsStorage& s, StateClient& t) final;
 
   // SkinAccessExtension interface
   void initSkin(std::shared_ptr<Skin> skin) override;
@@ -54,7 +54,7 @@ protected:
   // the same as configure() and called by reimplemented configure()
   // should return a set of configuration widgets (tabs)
   // widgets should have window title property set, it is used as tab label
-  virtual QList<QWidget*> customConfigure(SettingsClient& s, StateClient& t) = 0;
+  virtual QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) = 0;
 
   // should create and set initial data to the widget, called on init()
   // plugin is allowed to keep reference to the widget

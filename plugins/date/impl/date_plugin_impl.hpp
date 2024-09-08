@@ -9,7 +9,7 @@
 #include <QLocale>
 #include <QObject>
 
-#include "config/settings_storage.hpp"
+#include "plugin_config.hpp"
 #include "skin/graphics_widgets.hpp"
 
 class DatePluginImpl
@@ -29,7 +29,7 @@ public:
 
   std::shared_ptr<GraphicsDateTimeWidget> widget;
 
-  void initSettings(const SettingsClient& st);
+  void initSettings(PluginSettingsStorage& st);
 
   void updateWidget();
 };

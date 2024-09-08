@@ -8,6 +8,7 @@
 
 #include <QFont>
 
+#include "config/appearance_base.hpp"
 #include "config/settings_storage.hpp"
 
 // even it may look as unnecessary and unused header,
@@ -29,7 +30,7 @@ public:
   CONFIG_OPTION_Q(bool, CheckForBetaVersion, true)
   CONFIG_OPTION_Q(int, UpdatePeriodDays, 7)
 
-  CONFIG_OPTION_Q(bool, TransparentOnHover, true)
+  CONFIG_OPTION_Q(bool, TransparentOnHover, false)
   CONFIG_OPTION_Q(int, OpacityOnHover, 15)
 
   CONFIG_OPTION_Q(QStringList, Plugins, QStringList())
@@ -51,9 +52,9 @@ public:
 
 // per-window settings
 
-class SectionAppearance : public SettingsStorageClient {
+class SectionAppearance : public AppearanceSectionBase {
 public:
-  using SettingsStorageClient::SettingsStorageClient;
+  using AppearanceSectionBase::AppearanceSectionBase;
 
   CONFIG_OPTION_Q(int, ScalingH, 100)
   CONFIG_OPTION_Q(int, ScalingV, 100)
@@ -78,14 +79,6 @@ public:
   CONFIG_OPTION_Q(QString, TimeFormat, QString("HH:mm"))
   CONFIG_OPTION_Q(QString, LayoutConfig, QString())
   CONFIG_OPTION_Q(int, SecondsScaleFactor, 100)
-
-  CONFIG_OPTION_Q(QBrush, Texture, QColor(112, 96, 240))
-  CONFIG_OPTION_Q(bool, TextureStretch, false)
-  CONFIG_OPTION_Q(bool, TexturePerCharacter, true)
-
-  CONFIG_OPTION_Q(QBrush, Background, Qt::NoBrush)
-  CONFIG_OPTION_Q(bool, BackgroundStretch, false)
-  CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false)
 
 private:
   static QFont default_font();

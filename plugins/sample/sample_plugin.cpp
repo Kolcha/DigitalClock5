@@ -36,12 +36,12 @@ void SamplePlugin::loadState(const StateClient& st)
   qDebug() << __FUNCTION__ << st.value("testA", 42);
 }
 
-void SamplePlugin::initSettings(const SettingsClient& st)
+void SamplePlugin::initSettings(PluginSettingsStorage& st)
 {
   qDebug() << __FUNCTION__ << st.value("V1", 25);
 }
 
-QWidget* SamplePlugin::configure(SettingsClient& s, StateClient& t)
+QWidget* SamplePlugin::configure(PluginSettingsStorage& s, StateClient& t)
 {
   qDebug() << __FUNCTION__;
   s.setValue("V1", quintptr(this));

@@ -20,7 +20,7 @@ class HotkeysSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit HotkeysSettingsWidget(SettingsClient& s, StateClient& t,
+  explicit HotkeysSettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                  StopwatchPluginImpl* impl, QWidget* parent = nullptr);
   ~HotkeysSettingsWidget();
 
@@ -30,6 +30,6 @@ private slots:
 
 private:
   Ui::HotkeysSettingsWidget* ui;
-  plugin_impl::StopwatchPluginSettings<SettingsClient> cfg;
+  plugin_impl::StopwatchPluginSettings cfg;
   StopwatchPluginImpl* impl;
 };

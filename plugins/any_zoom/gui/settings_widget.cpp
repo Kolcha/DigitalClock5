@@ -7,7 +7,7 @@
 #include "settings_widget.hpp"
 #include "ui_settings_widget.h"
 
-SettingsWidget::SettingsWidget(SettingsClient& s, StateClient& t,
+SettingsWidget::SettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                AnyZoomPluginImpl* impl, QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::SettingsWidget)

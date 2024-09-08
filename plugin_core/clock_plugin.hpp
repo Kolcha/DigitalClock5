@@ -8,10 +8,10 @@
 
 #include <QObject>
 
-#include "config/settings_storage.hpp"
 #include "skin/skin.hpp"
 
 #include "plugin_core_global.hpp"
+#include "plugin_config.hpp"
 #include "shared_config_keys.hpp"
 
 // generic plugin interface
@@ -105,7 +105,7 @@ public:
   // plugin should not save this reference for the future use
   // called before init() but after loadState()
   // but also called when settings are discarded
-  virtual void initSettings(const SettingsClient& st) = 0;
+  virtual void initSettings(PluginSettingsStorage& st) = 0;
 
   // creates confuration widget
   // should use provided settings and state objects for controls initialization
@@ -120,7 +120,7 @@ public:
   // contain any "OK"/"Cancel" (or whatever else similar) buttons
   // this function can be called for not started (i.e. no init() calls) plugin
   // implementation should be prepared for the such case
-  virtual QWidget* configure(SettingsClient& s, StateClient& t) = 0;
+  virtual QWidget* configure(PluginSettingsStorage& s, StateClient& t) = 0;
 
   // called when dialog was accepted
   virtual void accepted() {}

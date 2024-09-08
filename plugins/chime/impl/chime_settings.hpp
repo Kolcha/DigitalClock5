@@ -6,7 +6,8 @@
 
 #pragma once
 
-#include "plugin_config.hpp"
+#include "config/settings_storage.hpp"
+#include "config/custom_converters.hpp"
 
 #include <QTime>
 #include <QUrl>
@@ -26,56 +27,45 @@ Q_ENUM_NS(Repeat)
 
 namespace plugin_impl {
 
-template<class C>
-class EveryHourSignalSection : public PluginConfigSection<C> {
+class EveryHourSignalSection : public SettingsStorageClient {
 public:
-  explicit EveryHourSignalSection(C& c) : PluginConfigSection<C>(c) {}
+  explicit EveryHourSignalSection(ISettingsStorage& st)
+      : SettingsStorageClient("EveryHour", st) {}
 
-  PLG_CONFIG_OPTION_Q(bool, Enabled, true);
-  PLG_CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/hour_signal.wav"))
-  PLG_CONFIG_OPTION_Q(int, Volume, 90)
-  PLG_CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
-
-protected:
-  QLatin1String section() const override { return QLatin1String("EveryHour"); }
+  CONFIG_OPTION_Q(bool, Enabled, true);
+  CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/hour_signal.wav"))
+  CONFIG_OPTION_Q(int, Volume, 90)
+  CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
 };
 
 
-template<class C>
-class QuarterHourSignalSection : public PluginConfigSection<C> {
+class QuarterHourSignalSection : public SettingsStorageClient {
 public:
-  explicit QuarterHourSignalSection(C& c) : PluginConfigSection<C>(c) {}
+  explicit QuarterHourSignalSection(ISettingsStorage& st)
+      : SettingsStorageClient("QuarterHour", st) {}
 
-  PLG_CONFIG_OPTION_Q(bool, Enabled, false);
-  PLG_CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/quarter_signal.wav"))
-  PLG_CONFIG_OPTION_Q(int, Volume, 90)
-  PLG_CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
-
-protected:
-  QLatin1String section() const override { return QLatin1String("QuarterHour"); }
+  CONFIG_OPTION_Q(bool, Enabled, false);
+  CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/quarter_signal.wav"))
+  CONFIG_OPTION_Q(int, Volume, 90)
+  CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
 };
 
 
-template<class C>
-class QuietHoursSection : public PluginConfigSection<C> {
+class QuietHoursSection : public SettingsStorageClient {
 public:
-  explicit QuietHoursSection(C& c) : PluginConfigSection<C>(c) {}
+  explicit QuietHoursSection(ISettingsStorage& st)
+      : SettingsStorageClient("QuietHours", st) {}
 
-  PLG_CONFIG_OPTION_Q(bool, Enabled, false)
-  PLG_CONFIG_OPTION_Q(QTime, StartTime, QTime(23, 1))
-  PLG_CONFIG_OPTION_Q(QTime, EndTime, QTime(6, 59))
-
-protected:
-  QLatin1String section() const override { return QLatin1String("QuietHours"); }
+  CONFIG_OPTION_Q(bool, Enabled, false)
+  CONFIG_OPTION_Q(QTime, StartTime, QTime(23, 1))
+  CONFIG_OPTION_Q(QTime, EndTime, QTime(6, 59))
 };
 
 
-template<class C>
-class ChimePluginSettings : public PluginConfig<C> {
+class ChimePluginSettings {
 public:
-  explicit ChimePluginSettings(C& c)
-      : PluginConfig<C>(c)
-      , _eh(c)
+  explicit ChimePluginSettings(ISettingsStorage& c)
+      : _eh(c)
       , _qh(c)
       , _qhrs(c)
   {}
@@ -89,9 +79,9 @@ public:
   auto& quietTime() const { return _qhrs; }
 
 private:
-  EveryHourSignalSection<C> _eh;
-  QuarterHourSignalSection<C> _qh;
-  QuietHoursSection<C> _qhrs;
+  EveryHourSignalSection _eh;
+  QuarterHourSignalSection _qh;
+  QuietHoursSection _qhrs;
 };
 
 } // namespace plugin_impl

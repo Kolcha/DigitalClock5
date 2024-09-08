@@ -23,14 +23,14 @@ void WidgetPluginBase::initSharedSettings(const SharedSettings& s)
 
 WidgetPluginBase::~WidgetPluginBase() = default;
 
-void WidgetPluginBase::initSettings(const SettingsClient& st)
+void WidgetPluginBase::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);
   _impl->applyAppearanceSettings();
   _impl->repositionWidget();
 }
 
-QWidget* WidgetPluginBase::configure(SettingsClient& s, StateClient& t)
+QWidget* WidgetPluginBase::configure(PluginSettingsStorage& s, StateClient& t)
 {
   auto tab_widget = new QTabWidget;
   const auto custom_tabs = customConfigure(s, t);

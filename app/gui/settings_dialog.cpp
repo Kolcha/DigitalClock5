@@ -20,14 +20,8 @@
 #include "core/application.hpp"
 #include "platform/autostart.h"
 #include "plugin_list_item_widget.hpp"
-#include "common_appearance_state.hpp"
 
 namespace {
-
-class SettingsDialogState : public CommonAppearanceState {
-public:
-  using CommonAppearanceState::CommonAppearanceState;
-};
 
 int setIndexByValue(QComboBox* box, const QVariant& value)
 {
@@ -413,46 +407,41 @@ void SettingsDialog::on_colorization_strength_edit_valueChanged(int arg1)
 
 void SettingsDialog::on_texture_group_clicked(bool checked)
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
-
-  QBrush brush(Qt::NoBrush);
+  auto& acfg = app->config().window(_curr_idx).appearance();
 
   if (checked) {
     if (ui->tx_options_box->currentIndex() == 0)
-      brush = QBrush(state.getTextureColor());
+      acfg.setTextureType(SectionAppearance::SolidColor);
 
     if (ui->tx_options_box->currentIndex() == 1)
-      brush = QBrush(state.getTextureGradient());
+      acfg.setTextureType(SectionAppearance::Gradient);
 
     if (ui->tx_options_box->currentIndex() == 2)
-      brush = QBrush(state.getTexturePattern());
+      acfg.setTextureType(SectionAppearance::Pattern);
+  } else {
+    acfg.setTextureType(SectionAppearance::None);
   }
 
-  app->config().window(_curr_idx).appearance().setTexture(brush);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), brush);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, brush);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
 }
 
 void SettingsDialog::on_tx_options_box_activated(int index)
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   switch (index) {
     case 0: // color
-      app->config().window(_curr_idx).appearance().setTexture(state.getTextureColor());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureColor());
-      notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTextureColor());
+      acfg.setTextureType(SectionAppearance::SolidColor);
       break;
     case 1: // gradient
-      app->config().window(_curr_idx).appearance().setTexture(state.getTextureGradient());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTextureGradient());
-      notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTextureGradient());
+      acfg.setTextureType(SectionAppearance::Gradient);
       break;
     case 2: // pattern
-      app->config().window(_curr_idx).appearance().setTexture(state.getTexturePattern());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), state.getTexturePattern());
-      notifyOptionChanged(&SettingsChangeTransmitter::setTexture, state.getTexturePattern());
+      acfg.setTextureType(SectionAppearance::Pattern);
       break;
   }
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
 }
 
 void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
@@ -483,45 +472,41 @@ void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
 
 void SettingsDialog::tx_select_color()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
-  auto color = QColorDialog::getColor(state.getTextureColor(),
+  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto color = QColorDialog::getColor(acfg.getTextureColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
-  app->config().window(_curr_idx).appearance().setTexture(color);
-  state.setTextureColor(color);
+  acfg.setTextureColor(color);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), color);
   notifyOptionChanged(&SettingsChangeTransmitter::setTexture, color);
 }
 
 void SettingsDialog::tx_select_gradient()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
-                                              state.getTextureGradient(),
+                                              acfg.getTextureGradient(),
                                               this);
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
-  app->config().window(_curr_idx).appearance().setTexture(gradient);
-  state.setTextureGradient(gradient);
+  acfg.setTextureGradient(gradient);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), gradient);
   notifyOptionChanged(&SettingsChangeTransmitter::setTexture, gradient);
 }
 
 void SettingsDialog::tx_select_pattern()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           _last_path,
+                                           acfg.getTexturePatternFile(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
-  _last_path = file;
   QPixmap pxm(file);
-  app->config().window(_curr_idx).appearance().setTexture(pxm);
-  state.setTexturePattern(pxm);
+  acfg.setTexturePatternFile(file);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), pxm);
   notifyOptionChanged(&SettingsChangeTransmitter::setTexture, pxm);
 }
@@ -542,46 +527,41 @@ void SettingsDialog::on_tx_per_element_cb_clicked(bool checked)
 
 void SettingsDialog::on_background_group_clicked(bool checked)
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
-
-  QBrush brush(Qt::NoBrush);
+  auto& acfg = app->config().window(_curr_idx).appearance();
 
   if (checked) {
     if (ui->bg_options_box->currentIndex() == 0)
-      brush = QBrush(state.getBackgroundColor());
+      acfg.setBackgroundType(SectionAppearance::SolidColor);
 
     if (ui->bg_options_box->currentIndex() == 1)
-      brush = QBrush(state.getBackgroundGradient());
+      acfg.setBackgroundType(SectionAppearance::Gradient);
 
     if (ui->bg_options_box->currentIndex() == 2)
-      brush = QBrush(state.getBackgroundPattern());
+      acfg.setBackgroundType(SectionAppearance::Pattern);
+  } else {
+    acfg.setBackgroundType(SectionAppearance::None);
   }
 
-  app->config().window(_curr_idx).appearance().setBackground(brush);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), brush);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, brush);
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
 }
 
 void SettingsDialog::on_bg_options_box_activated(int index)
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   switch (index) {
     case 0: // color
-      app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundColor());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundColor());
-      notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundColor());
+      acfg.setBackgroundType(SectionAppearance::SolidColor);
       break;
     case 1: // gradient
-      app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundGradient());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundGradient());
-      notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundGradient());
+      acfg.setBackgroundType(SectionAppearance::Gradient);
       break;
     case 2: // pattern
-      app->config().window(_curr_idx).appearance().setBackground(state.getBackgroundPattern());
-      applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), state.getBackgroundPattern());
-      notifyOptionChanged(&SettingsChangeTransmitter::setBackground, state.getBackgroundPattern());
+      acfg.setBackgroundType(SectionAppearance::Pattern);
       break;
   }
+  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
 }
 
 void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
@@ -612,45 +592,41 @@ void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
 
 void SettingsDialog::bg_select_color()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
-  auto color = QColorDialog::getColor(state.getBackgroundColor(),
+  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto color = QColorDialog::getColor(acfg.getBackgroundColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
-  app->config().window(_curr_idx).appearance().setBackground(color);
-  state.setBackgroundColor(color);
+  acfg.setBackgroundColor(color);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), color);
   notifyOptionChanged(&SettingsChangeTransmitter::setBackground, color);
 }
 
 void SettingsDialog::bg_select_gradient()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
-                                              state.getBackgroundGradient(),
+                                              acfg.getBackgroundGradient(),
                                               this);
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
-  app->config().window(_curr_idx).appearance().setBackground(gradient);
-  state.setBackgroundGradient(gradient);
+  acfg.setBackgroundGradient(gradient);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), gradient);
   notifyOptionChanged(&SettingsChangeTransmitter::setBackground, gradient);
 }
 
 void SettingsDialog::bg_select_pattern()
 {
-  SettingsDialogState state(app->config().window(_curr_idx).state());
+  auto& acfg = app->config().window(_curr_idx).appearance();
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           _last_path,
+                                           acfg.getBackgroundPatternFile(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
-  _last_path = file;
   QPixmap pxm(file);
-  app->config().window(_curr_idx).appearance().setBackground(pxm);
-  state.setBackgroundPattern(pxm);
+  acfg.setBackgroundPatternFile(file);
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), pxm);
   notifyOptionChanged(&SettingsChangeTransmitter::setBackground, pxm);
 }

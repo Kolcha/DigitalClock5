@@ -14,7 +14,7 @@ class SettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  SettingsWidget(SettingsClient& s, StateClient& t,
+  SettingsWidget(PluginSettingsStorage& s, StateClient& t,
                  DatePluginImpl* impl, QWidget* parent = nullptr);
   ~SettingsWidget();
 
@@ -28,6 +28,6 @@ private slots:
 
 private:
   Ui::SettingsWidget* ui;
-  plugin_impl::DatePluginSettings<SettingsClient> cfg;
+  plugin_impl::DatePluginSettings cfg;
   DatePluginImpl* impl;
 };

@@ -60,7 +60,7 @@ void SettingsStorage::importSettings(const QVariantHash& s)
 }
 
 
-SettingsStorageClient::SettingsStorageClient(QString title, SettingsStorage& st)
+SettingsStorageClient::SettingsStorageClient(QString title, ISettingsStorage& st)
     : _st(st)
     , _title(std::move(title))
 {
@@ -68,12 +68,12 @@ SettingsStorageClient::SettingsStorageClient(QString title, SettingsStorage& st)
 
 void SettingsStorageClient::commit()
 {
-  keysOperation(&SettingsStorage::commitValue);
+  keysOperation(&ISettingsStorage::commitValue);
 }
 
 void SettingsStorageClient::discard()
 {
-  keysOperation(&SettingsStorage::discardValue);
+  keysOperation(&ISettingsStorage::discardValue);
 }
 
 void SettingsStorageClient::setValue(QString key, QVariant val)
@@ -100,18 +100,7 @@ void SettingsStorageClient::keysOperation(op_type op)
 }
 
 
-void SettingsClient::setValue(QString key, QVariant val)
-{
-  SettingsStorageClient::setValue(std::move(key), std::move(val));
-}
-
-QVariant SettingsClient::value(QString key, QVariant def) const
-{
-  return SettingsStorageClient::value(std::move(key), std::move(def));
-}
-
-
-StateClient::StateClient(QString title, SettingsStorage& st)
+StateClient::StateClient(QString title, ISettingsStorage& st)
     : _st(st)
     , _title(title)
 {

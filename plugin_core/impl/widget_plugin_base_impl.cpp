@@ -54,7 +54,7 @@ void WidgetPluginBaseImpl::repositionWidget()
   }
 }
 
-void WidgetPluginBaseImpl::initSettings(const SettingsClient& st)
+void WidgetPluginBaseImpl::initSettings(PluginSettingsStorage& st)
 {
   plugin_impl::SectionAppearance sa(st);
 
@@ -69,9 +69,9 @@ void WidgetPluginBaseImpl::initSettings(const SettingsClient& st)
 
   tx = sa.getTexture();
   tx_stretch = sa.getTextureStretch();
-  tx_per_char = sa.getTexturePerChar();
+  tx_per_char = sa.getTexturePerCharacter();
 
   bg = sa.getBackground();
   bg_stretch = sa.getBackgroundStretch();
-  bg_per_char = sa.getBackgroundPerChar();
+  bg_per_char = sa.getBackgroundPerCharacter();
 }

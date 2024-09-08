@@ -20,7 +20,7 @@ class TimerSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit TimerSettingsWidget(SettingsClient& s, StateClient& t,
+  explicit TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
                                StopwatchPluginImpl* impl, QWidget* parent = nullptr);
   ~TimerSettingsWidget();
 
@@ -29,6 +29,6 @@ private slots:
 
 private:
   Ui::TimerSettingsWidget* ui;
-  plugin_impl::StopwatchPluginSettings<SettingsClient> cfg;
+  plugin_impl::StopwatchPluginSettings cfg;
   StopwatchPluginImpl* impl;
 };

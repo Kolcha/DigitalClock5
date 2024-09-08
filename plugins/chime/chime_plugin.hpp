@@ -22,9 +22,9 @@ public:
   void saveState(StateClient& st) const override { Q_UNUSED(st); }
   void loadState(const StateClient& st) override { Q_UNUSED(st); }
 
-  void initSettings(const SettingsClient& st) override;
+  void initSettings(PluginSettingsStorage& st) override;
 
-  QWidget* configure(SettingsClient& s, StateClient& t) override;
+  QWidget* configure(PluginSettingsStorage& s, StateClient& t) override;
 
 public slots:
   void init() override;

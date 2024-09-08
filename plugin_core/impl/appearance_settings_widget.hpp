@@ -21,7 +21,7 @@ class AppearanceSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  AppearanceSettingsWidget(WidgetPluginBaseImpl* w, SettingsClient& s,
+  AppearanceSettingsWidget(WidgetPluginBaseImpl* w, PluginSettingsStorage& s,
                            StateClient& t, QWidget* parent = nullptr);
   ~AppearanceSettingsWidget();
 
@@ -66,7 +66,6 @@ private:
   Ui::AppearanceSettingsWidget* ui;
   WidgetPluginBaseImpl* impl;
   GraphicsWidgetBase* widget;
-  plugin_impl::SectionAppearance<SettingsClient> cfg;
-  StateClient& st;
-  QString _last_path;
+  plugin_impl::SectionAppearance cfg;
+  StateClient st;
 };

@@ -10,15 +10,15 @@
 
 namespace plugin_impl {
 
-template<class C>
-class StopwatchPluginSettings : public PluginConfig<C> {
+class StopwatchPluginSettings : public SettingsStorageClient {
 public:
-  explicit StopwatchPluginSettings(C& c) : PluginConfig<C>(c) {}
+  explicit StopwatchPluginSettings(ISettingsStorage& st)
+      : SettingsStorageClient("Stopwatch", st) {}
 
-  PLG_CONFIG_OPTION_Q(bool, HideInactive, false)
+  CONFIG_OPTION_Q(bool, HideInactive, false)
 
-  PLG_CONFIG_OPTION_Q(QString, PauseHotkey, QString())
-  PLG_CONFIG_OPTION_Q(QString, RestartHotkey, QString())
+  CONFIG_OPTION_Q(QString, PauseHotkey, QString())
+  CONFIG_OPTION_Q(QString, RestartHotkey, QString())
 };
 
 } // namespace plugin_impl

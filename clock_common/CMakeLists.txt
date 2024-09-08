@@ -2,16 +2,19 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(ClockCommon VERSION 2.0.0 LANGUAGES CXX)
+project(ClockCommon VERSION 2.0.1 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
+    config/appearance_base.cpp
+    config/appearance_base.hpp
     config/settings_storage.hpp
     config/settings_storage.cpp
     config/custom_converters.hpp
+    config/sample_brushes.cpp
+    config/sample_brushes.hpp
     clock_common_global.hpp
+    state.cpp
     state.hpp
-    common_appearance_state.cpp
-    common_appearance_state.hpp
 )
 
 add_win_rc_file(${PROJECT_NAME} clock_common.rc)
