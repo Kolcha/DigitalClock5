@@ -142,10 +142,10 @@
           <bool>false</bool>
          </property>
          <property name="toolTip">
-          <string>try to stay above fullscreen windows, may work unreliably</string>
+          <string>show clock in fullscreen mode (may not work for some apps)</string>
          </property>
          <property name="text">
-          <string>also above fullscreen windows</string>
+          <string>show in fullscreen mode</string>
          </property>
         </widget>
        </item>
@@ -636,7 +636,7 @@
           <item row="2" column="0" colspan="2">
            <widget class="QCheckBox" name="tx_per_element_cb">
             <property name="text">
-             <string>apply per cha&amp;racter</string>
+             <string>apply per &amp;element</string>
             </property>
            </widget>
           </item>
@@ -826,7 +826,7 @@
           <item row="2" column="0" colspan="2">
            <widget class="QCheckBox" name="bg_per_element_cb">
             <property name="text">
-             <string>apply per cha&amp;racter</string>
+             <string>apply per &amp;element</string>
             </property>
            </widget>
           </item>

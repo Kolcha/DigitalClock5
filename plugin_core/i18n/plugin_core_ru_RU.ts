@@ -113,51 +113,51 @@
         <translation>пользовательский</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="76"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="73"/>
         <source>left</source>
         <comment>alignment</comment>
         <translation>по левому</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="77"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="81"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="74"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="78"/>
         <source>center</source>
         <comment>alignment</comment>
         <translation>по центру</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="78"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="75"/>
         <source>right</source>
         <comment>alignment</comment>
         <translation>по правому</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="80"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="77"/>
         <source>top</source>
         <comment>alignment</comment>
         <translation>по верхнему</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="82"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="79"/>
         <source>bottom</source>
         <comment>alignment</comment>
         <translation>по нижнему</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="285"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="433"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="274"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="406"/>
         <source>follow system theme</source>
         <translation>следовать системной теме</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="295"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="443"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="284"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="416"/>
         <source>stretch instead of tile</source>
         <translation>растянуть вместо замостить</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="343"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="491"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="327"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="459"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Картинки (*.png *.bmp *.jpg)</translation>
     </message>
