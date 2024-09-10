@@ -17,6 +17,8 @@ ClockWindow::ClockWindow(QWidget* parent)
 {
   _layout = new QGridLayout(this);
   _layout->setSizeConstraint(QLayout::SetFixedSize);
+  _layout->setContentsMargins(0, 0, 0, 0);
+  _layout->setSpacing(0);
 
   _clock = new GraphicsDateTimeWidget(this);
   _layout->addWidget(_clock);
@@ -208,6 +210,7 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
   _overlay->resize(event->size());
+  _overlay->raise();  // to make sure that it is always on top
 
   // do not apply anhoring logic during dragging
   if (_is_dragging) return;
