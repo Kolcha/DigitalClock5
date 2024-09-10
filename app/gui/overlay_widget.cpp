@@ -11,6 +11,8 @@
 OverlayWidget::OverlayWidget(QWidget* parent)
     : QWidget(parent)
 {
+  setAttribute(Qt::WA_TransparentForMouseEvents);
+  setAttribute(Qt::WA_TranslucentBackground);
 }
 
 void OverlayWidget::setFrameVisible(bool vis)
