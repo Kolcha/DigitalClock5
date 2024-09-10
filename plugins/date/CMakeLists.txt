@@ -4,7 +4,7 @@
 
 project(date VERSION 2.0.1 LANGUAGES CXX)
 
-qt_add_plugin(${PROJECT_NAME} CLASS_NAME DatePlugin
+qt_add_plugin(${PROJECT_NAME} CLASS_NAME DatePluginFactory
     gui/settings_widget.hpp
     gui/settings_widget.cpp
     gui/settings_widget.ui

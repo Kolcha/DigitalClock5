@@ -4,7 +4,7 @@
 
 project(any_zoom VERSION 3.0.1 LANGUAGES CXX)
 
-qt_add_plugin(${PROJECT_NAME} CLASS_NAME AnyZoomPlugin
+qt_add_plugin(${PROJECT_NAME} CLASS_NAME AnyZoomPluginFactory
     gui/settings_widget.cpp
     gui/settings_widget.hpp
     gui/settings_widget.ui

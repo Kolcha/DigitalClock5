@@ -4,7 +4,7 @@
 
 project(sample VERSION 0.1.1 LANGUAGES CXX)
 
-qt_add_plugin(${PROJECT_NAME} CLASS_NAME SamplePlugin
+qt_add_plugin(${PROJECT_NAME} CLASS_NAME SamplePluginFactory
     sample_plugin.cpp
     sample_plugin.hpp
 )
