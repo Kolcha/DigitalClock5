@@ -39,6 +39,12 @@ void DoubleClickWidget::mouseDoubleClickEvent(QMouseEvent* event)
 }
 
 
+void QuickNotePlugin::initState(StateClient* st)
+{
+  _state = st;
+  loadState(*st);
+}
+
 void QuickNotePlugin::saveState(StateClient& st) const
 {
   st.setValue("last_text", _last_text);
@@ -80,6 +86,7 @@ void QuickNotePlugin::onWidgetClicked()
                                    QLineEdit::Normal, _last_text, &ok);
   if (ok && !str.isEmpty()) {
     _last_text = str;
+    _state->setValue("last_text", str);
     _widget->setText(std::move(str));
   }
 }

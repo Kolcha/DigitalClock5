@@ -13,6 +13,7 @@ class QuickNotePlugin : public WidgetPluginBase
   Q_OBJECT
 
 public:
+  void initState(StateClient* st) override;
   void saveState(StateClient& st) const override;
   void loadState(const StateClient& st) override;
 
@@ -27,6 +28,7 @@ private slots:
 
 private:
   QString _last_text;
+  StateClient* _state = nullptr;
   std::shared_ptr<GraphicsTextWidget> _widget;
 };
 
