@@ -20,7 +20,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network Svg
              OPTIONAL_COMPONENTS Multimedia)
 find_package(Qt6 6.7 REQUIRED COMPONENTS LinguistTools)
 
-qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES en ru_RU zh_CN)
+qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES en ru zh_CN)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 include(clock_utils)

@@ -1,4 +1,4 @@
-"project_id": "712223"
+"project_id": "715677"
 "api_token_env": "CROWDIN_PERSONAL_TOKEN"
 "base_path": "."
 "base_url": "https://api.crowdin.com"
@@ -7,47 +7,14 @@
 
 files: [
   {
-    "source": "app/i18n/digital_clock_en.ts",
-    "translation": "app/i18n/digital_clock_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugin_core/i18n/plugin_core_en.ts",
-    "translation": "plugin_core/i18n/plugin_core_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/any_zoom/i18n/any_zoom_en.ts",
-    "translation": "plugins/any_zoom/i18n/any_zoom_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/chime/i18n/chime_en.ts",
-    "translation": "plugins/chime/i18n/chime_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/countdown_timer/i18n/countdown_timer_en.ts",
-    "translation": "plugins/countdown_timer/i18n/countdown_timer_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/date/i18n/date_en.ts",
-    "translation": "plugins/date/i18n/date_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/quick_note/i18n/quick_note_en.ts",
-    "translation": "plugins/quick_note/i18n/quick_note_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/random_position/i18n/random_position_en.ts",
-    "translation": "plugins/random_position/i18n/random_position_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/spectrum_clock/i18n/spectrum_clock_en.ts",
-    "translation": "plugins/spectrum_clock/i18n/spectrum_clock_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/stopwatch/i18n/stopwatch_en.ts",
-    "translation": "plugins/stopwatch/i18n/stopwatch_%locale_with_underscore%.ts",
-  },
-  {
-    "source": "plugins/var_translucency/i18n/var_translucency_en.ts",
-    "translation": "plugins/var_translucency/i18n/var_translucency_%locale_with_underscore%.ts",
+    "source": "**/*_en.ts",
+    "translation": "%original_path%/%file_name%_%two_letters_code%.ts",
+    "translation_replace": {
+        "_en": "",
+    },
+    "ignore": [
+        "build/**",
+        "plugins/sample/**",
+    ],
   },
 ]
