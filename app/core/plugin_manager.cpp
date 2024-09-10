@@ -377,6 +377,7 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
     // load state and config
     if (auto cp = dynamic_cast<ConfigurablePlugin*>(h.instance(i))) {
       auto& plg_cfg = app->config().plugin(h.id());
+      cp->initState(&plg_cfg.state(i));
       cp->loadState(plg_cfg.state(i));
       cp->initSettings(plg_cfg.config(i));
     }

@@ -96,9 +96,18 @@ class PLUGIN_CORE_EXPORT ConfigurablePlugin {
 public:
   virtual ~ConfigurablePlugin() = default;
 
+  // allows plugin to load/save state if needed
+  // plugin is allowed (and should) save provided pointer for the future use
+  // plugin doesn't take ownership of this, and should not delete the pointer
+  // one the first initialization calls, called before initSettings()
+  // default implementation does nothing, it is provided just for convenience
+  virtual void initState(StateClient* st) {}
+
   // allows to save the state, called before shutdown()
+  [[deprecated("replaced by initState()")]]
   virtual void saveState(StateClient& st) const = 0;
   // allows to load the state, called before init()
+  [[deprecated("replaced by initState()")]]
   virtual void loadState(const StateClient& st) = 0;
 
   // allows plugin to init its structures from saved settings
