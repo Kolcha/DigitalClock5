@@ -12,8 +12,6 @@
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 
-#include <QPainter>
-
 ClockWindow::ClockWindow(QWidget* parent)
     : QWidget(parent)
 {
@@ -24,6 +22,11 @@ ClockWindow::ClockWindow(QWidget* parent)
   _layout->addWidget(_clock);
 
   setLayout(_layout);
+
+  // not in layout! resized manually
+  _overlay = new OverlayWidget(this);
+  _overlay->move({0, 0});
+  _overlay->resize(sizeHint());
 
   using namespace Qt::Literals::StringLiterals;
   _ctx_menu = new QMenu(this);
@@ -114,8 +117,7 @@ void ClockWindow::setScaling(qreal sx, qreal sy)
 
 void ClockWindow::setFrameVisible(bool vis)
 {
-  _frame_visible = vis;
-  update();
+  _overlay->setFrameVisible(vis);
 }
 
 void ClockWindow::setTransparentOnHover(bool en)
@@ -202,20 +204,10 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
   }
 }
 
-void ClockWindow::paintEvent(QPaintEvent* event)
-{
-  QWidget::paintEvent(event);
-
-  if (_frame_visible) {
-    QPainter p(this);
-    p.setPen(QPen(Qt::red, 2, Qt::DotLine, Qt::SquareCap, Qt::MiterJoin));
-    p.drawRect(rect().adjusted(1, 1, -1, -1));
-  }
-}
-
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
+  _overlay->resize(event->size());
 
   // do not apply anhoring logic during dragging
   if (_is_dragging) return;

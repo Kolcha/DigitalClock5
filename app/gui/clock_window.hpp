@@ -11,6 +11,7 @@
 #include <QGridLayout>
 
 #include "skin/graphics_widgets.hpp"
+#include "overlay_widget.hpp"
 #include "state.hpp"
 
 class ClockWindow : public QWidget
@@ -31,7 +32,7 @@ public:
   bool snapToEdge() const { return _snap_to_edge; }
   int snapThreshold() const { return _snap_threshold; }
 
-  bool frameVisible() const { return _frame_visible; }
+  bool frameVisible() const { return _overlay->frameVisible(); }
 
   bool transparentOnHover() const { return _transparent_on_hover; }
   qreal opacityOnHover() const { return _opacity_on_hover; }
@@ -86,7 +87,6 @@ protected:
   void mousePressEvent(QMouseEvent* event) override;
   void mouseMoveEvent(QMouseEvent* event) override;
   void mouseReleaseEvent(QMouseEvent* event) override;
-  void paintEvent(QPaintEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
 
 private:
@@ -99,6 +99,7 @@ private:
 
   QGridLayout* _layout = nullptr;
   GraphicsDateTimeWidget* _clock = nullptr;
+  OverlayWidget* _overlay = nullptr;
 
   bool _is_dragging = false;
   QPoint _drag_pos;
@@ -108,8 +109,6 @@ private:
 
   qreal _sx = 1.0;
   qreal _sy = 1.0;
-
-  bool _frame_visible = false;
 
   QMenu* _ctx_menu;
 
