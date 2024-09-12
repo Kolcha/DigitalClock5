@@ -4,6 +4,8 @@
 
 project(chime VERSION 2.0.1 LANGUAGES CXX)
 
+set(CMAKE_AUTORCC ON)
+
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME ChimePluginFactory
     gui/settings_widget.cpp
     gui/settings_widget.hpp

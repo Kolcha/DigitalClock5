@@ -12,9 +12,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Network Svg
-             OPTIONAL_COMPONENTS Multimedia)
-find_package(Qt6 6.7 REQUIRED COMPONENTS LinguistTools)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Widgets Network Svg
+             OPTIONAL_COMPONENTS Multimedia LinguistTools)
 
 qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES en ru zh_CN)
 

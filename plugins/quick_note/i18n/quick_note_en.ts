@@ -4,23 +4,23 @@
 <context>
     <name>QuickNotePlugin</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="49"/>
+        <location filename="../quick_note_plugin.cpp" line="55"/>
         <source>double click me!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="56"/>
+        <location filename="../quick_note_plugin.cpp" line="62"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="78"/>
+        <location filename="../quick_note_plugin.cpp" line="84"/>
         <source>Quick note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="79"/>
+        <location filename="../quick_note_plugin.cpp" line="85"/>
         <source>Enter the desired note</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28,12 +28,12 @@ Double click the widget to change the text.</source>
 <context>
     <name>QuickNotePluginFactory</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="95"/>
+        <location filename="../quick_note_plugin.cpp" line="102"/>
         <source>Allows to display any short message under the clock.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.hpp" line="43"/>
+        <location filename="../quick_note_plugin.hpp" line="45"/>
         <source>Quick note</source>
         <translation type="unfinished"></translation>
     </message>

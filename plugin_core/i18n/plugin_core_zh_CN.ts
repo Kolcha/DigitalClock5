@@ -89,7 +89,7 @@
     <message>
         <location filename="../impl/appearance_settings_widget.ui" line="206"/>
         <location filename="../impl/appearance_settings_widget.ui" line="265"/>
-        <source>apply per cha&amp;racter</source>
+        <source>apply per &amp;element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

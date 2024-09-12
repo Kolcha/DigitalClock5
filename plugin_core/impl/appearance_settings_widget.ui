@@ -203,7 +203,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="tx_per_char">
         <property name="text">
-         <string>apply per cha&amp;racter</string>
+         <string>apply per &amp;element</string>
         </property>
        </widget>
       </item>
@@ -262,7 +262,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="bg_per_char">
         <property name="text">
-         <string>apply per cha&amp;racter</string>
+         <string>apply per &amp;element</string>
         </property>
        </widget>
       </item>

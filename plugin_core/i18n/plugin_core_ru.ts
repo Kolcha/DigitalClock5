@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU" sourcelanguage="en_US">
+<TS version="2.1" language="ru" sourcelanguage="en_US">
 <context>
     <name>AppearanceSettingsWidget</name>
     <message>
@@ -89,7 +89,7 @@
     <message>
         <location filename="../impl/appearance_settings_widget.ui" line="206"/>
         <location filename="../impl/appearance_settings_widget.ui" line="265"/>
-        <source>apply per cha&amp;racter</source>
+        <source>apply per &amp;element</source>
         <translation>для каждого символа</translation>
     </message>
     <message>

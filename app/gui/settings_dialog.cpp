@@ -67,6 +67,10 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
 {
   ui->setupUi(this);
 
+  // import/export is not implemnted for now
+  ui->import_btn->hide();
+  ui->export_btn->hide();
+
   app->window(_curr_idx)->enableFrame();
 
   QSignalBlocker _(ui->windows_box);
