@@ -9,14 +9,19 @@
 #include <QDir>
 #include <QGraphicsColorizeEffect>
 
+#include <QLibraryInfo>
+
 #include "gui/about_dialog.hpp"
 #include "gui/settings_dialog.hpp"
 
-Application::Application(QApplication& app)
-    : _app(app)
+#include "translation.hpp"
+
+Application::Application(int& argc, char** argv)
+    : QApplication(argc, argv)
     , _pm(this)
 {
   initConfig();
+  loadTranslation();
   initTray();
   createWindows();
   initUpdater();
@@ -115,6 +120,33 @@ void Application::initConfig()
   _sm.setSkinBaseSize(_cfg->limits().getBaseSize());
 }
 
+void Application::loadTranslation()
+{
+  auto locale = _cfg->global().getLocale();
+  const bool detect = locale == "auto";
+
+  auto app_translator = detect ? findTranslation(u"digital_clock") : ::loadTranslation(u"digital_clock", locale);
+  if (app_translator) {
+    QApplication::installTranslator(app_translator.get());
+
+    auto core_translator = detect ? findTranslation(u"plugin_core") : ::loadTranslation(u"plugin_core", locale);
+    if (core_translator) {
+      QApplication::installTranslator(core_translator.get());
+      _translators.push_back(std::move(core_translator));
+    }
+
+    auto qt_translator = std::make_unique<QTranslator>();
+    if (qt_translator->load(QLatin1String("qt_") + app_translator->language(),
+                            QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+      QApplication::installTranslator(qt_translator.get());
+      _translators.push_back(std::move(qt_translator));
+    }
+
+    _active_lang = app_translator->language();
+    _translators.push_back(std::move(app_translator));
+  }
+}
+
 void Application::initTray()
 {
   _tray_icon.setVisible(true);
@@ -132,7 +164,7 @@ void Application::initTray()
                         this, &Application::showAboutDialog);
   _tray_menu->addSeparator();
   _tray_menu->addAction(QIcon::fromTheme(u"application-exit"_s),
-                        tr("Quit"), &_app, &QApplication::quit);
+                        tr("Quit"), qApp, &QApplication::quit);
 
   _tray_icon.setToolTip(QApplication::applicationDisplayName());
 }

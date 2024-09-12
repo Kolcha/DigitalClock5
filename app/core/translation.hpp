@@ -10,3 +10,4 @@
 #include <QTranslator>
 
 std::unique_ptr<QTranslator> findTranslation(QStringView module);
+std::unique_ptr<QTranslator> loadTranslation(QStringView module, QStringView locale);

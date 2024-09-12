@@ -178,6 +178,19 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="translate_lbl">
+            <property name="text">
+             <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki/Translate&quot;&gt;help to translate&lt;/a&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="changelog_lbl">
             <property name="text">
              <string>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;view full changelog&lt;/a&gt;</string>

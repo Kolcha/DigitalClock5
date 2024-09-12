@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
+    <width>499</width>
     <height>361</height>
    </rect>
   </property>
@@ -24,13 +24,6 @@
        <string>App &amp;Global</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,1">
-       <item row="0" column="0" colspan="3">
-        <widget class="QCheckBox" name="enable_autostart">
-         <property name="text">
-          <string>start on &amp;system startup</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0" colspan="3">
         <widget class="QCheckBox" name="enable_transp_for_input">
          <property name="text">
@@ -148,6 +141,33 @@
           <string>show in fullscreen mode</string>
          </property>
         </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="enable_autostart">
+         <property name="text">
+          <string>start on &amp;system startup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <layout class="QHBoxLayout" name="lang_layout" stretch="0,1">
+         <item>
+          <widget class="QToolButton" name="lang_tr_btn">
+           <property name="toolTip">
+            <string>help to translate</string>
+           </property>
+           <property name="icon">
+            <iconset theme="set-language"/>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="lang_list"/>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

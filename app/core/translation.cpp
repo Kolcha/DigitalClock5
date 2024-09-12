@@ -10,8 +10,6 @@
 
 std::unique_ptr<QTranslator> findTranslation(QStringView module)
 {
-  auto translator = std::make_unique<QTranslator>();
-
   for (QString locale : QLocale::system().uiLanguages()) {
     locale = QLocale(locale).name();
     if (locale == QLatin1String("C") ||               // overrideLanguage == "English"
@@ -21,9 +19,17 @@ std::unique_ptr<QTranslator> findTranslation(QStringView module)
     if (locale.contains("ua", Qt::CaseInsensitive))   // Ukrainian,
       locale = QLatin1String("ru_RU");                // use Russian
 
-    if (translator->load(QString(":/i18n/i18n/%1_%2").arg(module, locale)))
+    if (auto translator = loadTranslation(module, locale))
       return translator;
   }
+  return nullptr;
+}
+
+std::unique_ptr<QTranslator> loadTranslation(QStringView module, QStringView locale)
+{
+  auto translator = std::make_unique<QTranslator>();
+  if (translator->load(QString(":/i18n/i18n/%1_%2").arg(module, locale)))
+    return translator;
 
   return nullptr;
 }

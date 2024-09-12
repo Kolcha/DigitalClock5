@@ -121,6 +121,16 @@ void SettingsDialog::on_windows_box_currentIndexChanged(int index)
   initAppearanceTab(index);
 }
 
+void SettingsDialog::on_lang_tr_btn_clicked()
+{
+  QDesktopServices::openUrl(QUrl("https://github.com/Kolcha/DigitalClock5/wiki/Translate"));
+}
+
+void SettingsDialog::on_lang_list_activated(int index)
+{
+  app->config().global().setLocale(ui->lang_list->itemData(index).toString());
+}
+
 void SettingsDialog::on_enable_autostart_clicked(bool checked)
 {
   Q_UNUSED(checked);
@@ -692,6 +702,16 @@ void SettingsDialog::initAppGlobalTab()
 {
   // app global
   SectionAppGlobal& gs = app->config().global();
+  {
+    QSignalBlocker _(ui->lang_list);
+    ui->lang_list->addItem(tr("Automatic"), QString("auto"));
+    QSettings sl(":/langs.ini", QSettings::IniFormat);
+    sl.beginGroup("langs");
+    const auto ll = sl.childKeys();
+    for (const auto& l : ll) ui->lang_list->addItem(sl.value(l).toString(), l);
+    sl.endGroup();
+    setIndexByValue(ui->lang_list, gs.getLocale());
+  }
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
   ui->enable_autostart->setChecked(IsAutoStartEnabled());
 #else

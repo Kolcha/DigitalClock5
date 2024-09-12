@@ -6,3 +6,8 @@ Iconset: Unicons Line vol.5 (https://www.iconfinder.com/iconsets/unicons-line-vo
 Iconset: Unicons Line vol.6 (https://www.iconfinder.com/iconsets/unicons-line-vol-6)
 Author: Iconscout (https://www.iconfinder.com/unicons-iconscout)
 License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication (https://creativecommons.org/publicdomain/zero/1.0/)
+
+Iconset: Ionicons Outline Vol.1 (https://www.iconfinder.com/iconsets/ionicons-outline-vol-1)
+Iconset: Ionicons Outline Vol.2 (https://www.iconfinder.com/iconsets/ionicons-outline-vol-2)
+Author: Ionicons Icons (https://www.iconfinder.com/ionicons-icons)
+License: MIT License (http://opensource.org/licenses/MIT)

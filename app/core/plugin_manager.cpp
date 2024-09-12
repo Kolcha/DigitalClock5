@@ -20,7 +20,7 @@
 
 class PluginHandle {
 public:
-  explicit PluginHandle(const QString& filename);
+  PluginHandle(const QString& filename, const QString& lang);
   ~PluginHandle();
 
   PluginHandle(const PluginHandle&) = delete;
@@ -50,12 +50,12 @@ private:
   std::vector<std::unique_ptr<ClockPluginBase>> _instances;
 };
 
-PluginHandle::PluginHandle(const QString& filename)
+PluginHandle::PluginHandle(const QString& filename, const QString& lang)
     : _loader(std::make_unique<QPluginLoader>(filename))
 {
   _loader->load();
 
-  _translator = findTranslation(id());
+  _translator = loadTranslation(id(), lang);
   if (_translator)
     QApplication::installTranslator(_translator.get());
 }
@@ -187,7 +187,7 @@ ConfigurePluginHandle::ConfigurePluginHandle(Application* app, PluginHandle* h, 
 ConfigurePluginHandle::ConfigurePluginHandle(Application* app, const QString& p, QObject* parent)
     : QObject(parent)
     , _app(app)
-    , _handle(std::make_shared<PluginHandle>(p))
+    , _handle(std::make_shared<PluginHandle>(p, app->activeLang()))
     , _was_loaded(false)
 {
   _handle->createInstances(app->config().global().getNumInstances());
@@ -297,7 +297,7 @@ void PluginManager::Impl::enumerate()
 #endif
   const auto files = d.entryList(QDir::Files);
   for (const auto& f : files) {
-    PluginHandle handle(d.absoluteFilePath(f));
+    PluginHandle handle(d.absoluteFilePath(f), app->activeLang());
     if (auto iface = handle.plugin()) {
       auto metadata = handle.metadata();
       auto id = handle.id();
@@ -322,7 +322,7 @@ void PluginManager::Impl::load(const QString& id)
   if (loaded.contains(id))
     return;
 
-  auto& handle = loaded.emplace(id, iter->second.path).first->second;
+  auto& handle = loaded.emplace(id, PluginHandle{iter->second.path, app->activeLang()}).first->second;
   if (!handle) {
     loaded.erase(id);   // not super-efficient, but easy and still fine
     return;

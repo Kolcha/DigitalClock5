@@ -32,6 +32,9 @@ private slots:
   void on_windows_box_currentIndexChanged(int index);
 
   // app global
+  void on_lang_tr_btn_clicked();
+  void on_lang_list_activated(int index);
+
   void on_enable_autostart_clicked(bool checked);
   void on_enable_stay_on_top_clicked(bool checked);
   void on_fullscreen_detect_clicked(bool checked);

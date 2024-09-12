@@ -19,6 +19,8 @@ class SectionAppGlobal : public SettingsStorageClient {
 public:
   using SettingsStorageClient::SettingsStorageClient;
 
+  CONFIG_OPTION_Q(QString, Locale, QString("auto"))
+
   CONFIG_OPTION_Q(int, NumInstances, 1)
   CONFIG_OPTION_Q(bool, AppearancePerInstance, false)
 

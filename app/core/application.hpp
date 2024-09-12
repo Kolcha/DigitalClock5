@@ -13,6 +13,7 @@
 
 #include <QMenu>
 #include <QTimer>
+#include <QTranslator>
 
 #include "config/app_config.hpp"
 
@@ -25,12 +26,12 @@
 #include "skin_manager.hpp"
 #include "update_checker.hpp"
 
-class Application : public QObject
+class Application : public QApplication
 {
   Q_OBJECT
 
 public:
-  explicit Application(QApplication& app);
+  Application(int& argc, char** argv);
 
   AppConfig& config() { return *_cfg; }
 
@@ -57,8 +58,11 @@ public:
     return _settings_tr[i].get();
   }
 
+  QString activeLang() const { return _active_lang; }
+
 private:
   void initConfig();
+  void loadTranslation();
   void initTray();
   void createWindows();
   void initUpdater();
@@ -77,8 +81,9 @@ private slots:
   void moveWindowToPredefinedPos();
 
 private:
-  QApplication& _app;
   std::unique_ptr<AppConfig> _cfg;
+  std::vector<std::unique_ptr<QTranslator>> _translators;
+  QString _active_lang = "en_US";
   ClockTrayIcon _tray_icon;
   std::unique_ptr<QMenu> _tray_menu;
   // QWidget seems to be non-movable type :(
