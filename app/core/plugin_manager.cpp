@@ -532,6 +532,12 @@ PluginInfo PluginManager::pluginInfo(const QString& id) const
   return info;
 }
 
+void PluginManager::enumeratePlugins()
+{
+  _impl->available.clear();
+  _impl->enumerate();
+}
+
 void PluginManager::loadPlugin(const QString& id)
 {
   _impl->load(id);

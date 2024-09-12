@@ -108,6 +108,7 @@ void SettingsDialog::reject()
   app->configureWindows();
   const auto curr_plugins = app->config().global().getPlugins();
   for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
+  app->retranslateUI();
   QDialog::reject();
 }
 
@@ -129,6 +130,9 @@ void SettingsDialog::on_lang_tr_btn_clicked()
 void SettingsDialog::on_lang_list_activated(int index)
 {
   app->config().global().setLocale(ui->lang_list->itemData(index).toString());
+  app->retranslateUI();
+  ui->retranslateUi(this);
+  initPluginsTab();
 }
 
 void SettingsDialog::on_enable_autostart_clicked(bool checked)

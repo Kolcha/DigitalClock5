@@ -35,6 +35,8 @@ public:
   PluginInfo pluginInfo(const QString& id) const;
 
 public slots:
+  void enumeratePlugins();
+
   void loadPlugin(const QString& id);
   void unloadPlugin(const QString& id);
 

@@ -101,6 +101,19 @@ void Application::configureWindows()
   for (size_t i = 0; i < _windows.size(); i++) configureWindow(i);
 }
 
+void Application::retranslateUI()
+{
+  std::ranges::for_each(_translators, [](auto& t) { QApplication::removeTranslator(t.get()); });
+  _translators.clear();
+  _active_lang = "en_US";
+
+  const auto& plugins = _cfg->global().getPlugins();
+  std::ranges::for_each(plugins, [this](auto& p) { _pm.unloadPlugin(p); });
+  loadTranslation();
+  _pm.enumeratePlugins();
+  std::ranges::for_each(plugins, [this](auto& p) { _pm.loadPlugin(p); });
+}
+
 size_t Application::findWindow(ClockWindow* w) const
 {
   for (size_t i = 0; i < _windows.size(); i++)

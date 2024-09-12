@@ -60,6 +60,9 @@ public:
 
   QString activeLang() const { return _active_lang; }
 
+public slots:
+  void retranslateUI();
+
 private:
   void initConfig();
   void loadTranslation();
