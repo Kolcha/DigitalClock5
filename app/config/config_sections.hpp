@@ -28,6 +28,10 @@ public:
   CONFIG_OPTION_Q(bool, FullscreenDetect, true)
   CONFIG_OPTION_Q(bool, TransparentForMouse, false)
 
+  CONFIG_OPTION_Q(bool, SnapToEdge, true)
+  CONFIG_OPTION_Q(int, SnapThreshold, 15)
+  CONFIG_OPTION_Q(bool, PreventOutOfScreen, true)
+
   CONFIG_OPTION_Q(bool, CheckForUpdates, true)
   CONFIG_OPTION_Q(bool, CheckForBetaVersion, true)
   CONFIG_OPTION_Q(int, UpdatePeriodDays, 7)
@@ -94,7 +98,4 @@ public:
   CONFIG_OPTION_Q(QTimeZone, TimeZone, QTimeZone::systemTimeZone())
 
   CONFIG_OPTION_Q(int, AnchorPoint, 0)
-
-  CONFIG_OPTION_Q(bool, SnapToEdge, true)
-  CONFIG_OPTION_Q(int, SnapThreshold, 15)
 };

@@ -32,6 +32,8 @@ public:
   bool snapToEdge() const { return _snap_to_edge; }
   int snapThreshold() const { return _snap_threshold; }
 
+  bool keepVisible() const { return _keep_visible; }
+
   bool frameVisible() const { return _overlay->frameVisible(); }
 
   bool transparentOnHover() const { return _transparent_on_hover; }
@@ -53,6 +55,8 @@ public slots:
   void disableSnapToEdge() { setSnapToEdge(false, snapThreshold()); }
   void setSnapToEdge(bool enable, int threshold);
   void setSnapThreshold(int thr) { setSnapToEdge(snapToEdge(), thr); }
+
+  void setKeepVisible(bool en);
 
   void setScaling(qreal sx, qreal sy);
 
@@ -87,10 +91,12 @@ protected:
   void mousePressEvent(QMouseEvent* event) override;
   void mouseMoveEvent(QMouseEvent* event) override;
   void mouseReleaseEvent(QMouseEvent* event) override;
+  void moveEvent(QMoveEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
 
 private:
   void updateLastOrigin();
+  void updateWindowPos();
   void addPositionMenu();
 
 private:
@@ -106,6 +112,8 @@ private:
 
   bool _snap_to_edge = true;
   int _snap_threshold = 15;
+
+  bool _keep_visible = true;
 
   qreal _sx = 1.0;
   qreal _sy = 1.0;

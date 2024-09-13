@@ -42,7 +42,7 @@ void Application::configureWindow(size_t i)
   wnd->loadState(wst);
 
   wnd->setAnchorPoint(static_cast<ClockWindow::AnchorPoint>(gcfg.getAnchorPoint()));
-  wnd->setSnapToEdge(gcfg.getSnapToEdge(), gcfg.getSnapThreshold());
+  wnd->setSnapToEdge(_cfg->global().getSnapToEdge(), _cfg->global().getSnapThreshold());
 
   wnd->setScaling(acfg.getScalingH()/100., acfg.getScalingV()/100.);
   wnd->setWindowOpacity(acfg.getOpacity()/100.);

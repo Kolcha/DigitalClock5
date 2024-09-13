@@ -161,6 +161,24 @@ void SettingsDialog::on_enable_transp_for_input_clicked(bool checked)
   app->config().global().setTransparentForMouse(checked);
 }
 
+void SettingsDialog::on_snap_to_edges_clicked(bool checked)
+{
+  app->config().global().setSnapToEdge(checked);
+  applyWindowOption(&ClockWindow::setSnapToEdge, checked, app->config().global().getSnapThreshold());
+}
+
+void SettingsDialog::on_snap_threshold_valueChanged(int arg1)
+{
+  app->config().global().setSnapThreshold(arg1);
+  applyWindowOption(&ClockWindow::setSnapThreshold, arg1);
+}
+
+void SettingsDialog::on_keep_always_visible_clicked(bool checked)
+{
+  app->config().global().setPreventOutOfScreen(checked);
+  applyWindowOption(&ClockWindow::setKeepVisible, checked);
+}
+
 void SettingsDialog::on_enable_multiwindow_clicked(bool checked)
 {
   app->config().global().setNumInstances(checked ? ui->wnd_count_edit->value() : 1);
@@ -733,6 +751,10 @@ void SettingsDialog::initAppGlobalTab()
 #endif
   ui->enable_transp_for_input->setChecked(gs.getTransparentForMouse());
 
+  ui->snap_to_edges->setChecked(gs.getSnapToEdge());
+  ui->snap_threshold->setValue(gs.getSnapThreshold());
+  ui->keep_always_visible->setChecked(gs.getPreventOutOfScreen());
+
   ui->enable_multiwindow->setChecked(gs.getNumInstances() > 1);
   ui->wnd_count_edit->setValue(gs.getNumInstances());
   ui->use_same_appearance->setChecked(!gs.getAppearancePerInstance());
@@ -745,6 +767,7 @@ void SettingsDialog::initAppGlobalTab()
 
   QSignalBlocker _(ui->update_period_edit);
   ui->update_period_edit->addItem(tr("1 day"), 1);
+  ui->update_period_edit->addItem(tr("3 days"), 3);
   ui->update_period_edit->addItem(tr("1 week"), 7);
   ui->update_period_edit->addItem(tr("2 weeks"), 14);
   ui->update_period_edit->addItem(tr("1 month"), 30);

@@ -40,6 +40,10 @@ private slots:
   void on_fullscreen_detect_clicked(bool checked);
   void on_enable_transp_for_input_clicked(bool checked);
 
+  void on_snap_to_edges_clicked(bool checked);
+  void on_snap_threshold_valueChanged(int arg1);
+  void on_keep_always_visible_clicked(bool checked);
+
   void on_enable_multiwindow_clicked(bool checked);
   void on_wnd_count_edit_valueChanged(int arg1);
   void on_use_same_appearance_clicked(bool checked);

@@ -71,14 +71,14 @@ void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
   auto sg = screen()->availableGeometry();
 
   if (a & Qt::AlignLeft)
-    tpos.setX(0);
+    tpos.setX(sg.left());
   if (a & Qt::AlignHCenter)
     tpos.setX(sg.center().x() - width()/2);
   if (a & Qt::AlignRight)
     tpos.setX(sg.right() - width());
 
   if (a & Qt::AlignTop)
-    tpos.setY(0);
+    tpos.setY(sg.top());
   if (a & Qt::AlignVCenter)
     tpos.setY(sg.center().y() - height()/2);
   if (a & Qt::AlignBottom)
@@ -103,6 +103,12 @@ void ClockWindow::setSnapToEdge(bool enable, int threshold)
 {
   _snap_to_edge = enable;
   _snap_threshold = threshold;
+}
+
+void ClockWindow::setKeepVisible(bool en)
+{
+  _keep_visible = en;
+  updateWindowPos();
 }
 
 void ClockWindow::setScaling(qreal sx, qreal sy)
@@ -206,6 +212,12 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
   }
 }
 
+void ClockWindow::moveEvent(QMoveEvent* event)
+{
+  QWidget::moveEvent(event);
+  if (_keep_visible) updateWindowPos();
+}
+
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
@@ -249,6 +261,28 @@ void ClockWindow::updateLastOrigin()
   }
 
   emit saveStateRequested();
+}
+
+void ClockWindow::updateWindowPos()
+{
+  auto tpos = pos();
+
+  auto sg = screen()->geometry();
+
+  if (tpos.x() < sg.left())
+    tpos.setX(sg.left());
+  if (tpos.x() + width() > sg.right())
+    tpos.setX(sg.right() - width());
+
+  if (tpos.y() < sg.top())
+    tpos.setY(sg.top());
+  if (tpos.y() + height() > sg.bottom())
+    tpos.setY(sg.bottom() - height());
+
+  if (tpos != pos()) {
+    move(tpos);
+    updateLastOrigin();
+  }
 }
 
 void ClockWindow::addPositionMenu()
