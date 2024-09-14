@@ -83,6 +83,9 @@ private slots:
 
   void moveWindowToPredefinedPos();
 
+  void maybeCheckForUpdate();
+  void handleNewVersion(QVersionNumber v, QDate d, QUrl l);
+
 private:
   std::unique_ptr<AppConfig> _cfg;
   std::vector<std::unique_ptr<QTranslator>> _translators;
@@ -97,6 +100,7 @@ private:
   PluginManager _pm;
   DialogManager<quint64> _dm;
   std::unique_ptr<UpdateChecker> _update_checker;
+  std::unique_ptr<QTimer> _update_timer;
   // settings bridge
   std::vector<std::unique_ptr<SettingsChangeTransmitter>> _settings_tr;
   std::vector<std::unique_ptr<SettingsChangeListener>> _settings_rcv;

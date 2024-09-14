@@ -54,69 +54,87 @@
         <translation>Mais informações</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="75"/>
+        <location filename="../gui/about_dialog.cpp" line="89"/>
         <source>version: %1</source>
         <translation>versão: %1</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="77"/>
+        <location filename="../gui/about_dialog.cpp" line="91"/>
         <source>build date: %1</source>
         <translation>data de compilação: %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/about_dialog.cpp" line="105"/>
+        <source>New version available.
+Click here to download.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="171"/>
+        <location filename="../core/application.cpp" line="172"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="176"/>
+        <location filename="../core/application.cpp" line="177"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="180"/>
+        <location filename="../core/application.cpp" line="181"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="280"/>
+        <location filename="../core/application.cpp" line="282"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="281"/>
+        <location filename="../core/application.cpp" line="283"/>
         <source>Top</source>
         <translation>Topo</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="282"/>
-        <location filename="../core/application.cpp" line="289"/>
-        <location filename="../core/application.cpp" line="296"/>
+        <location filename="../core/application.cpp" line="284"/>
+        <location filename="../core/application.cpp" line="291"/>
+        <location filename="../core/application.cpp" line="298"/>
         <source>Left</source>
         <translation>Esquerda</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="284"/>
-        <location filename="../core/application.cpp" line="288"/>
-        <location filename="../core/application.cpp" line="291"/>
-        <location filename="../core/application.cpp" line="298"/>
+        <location filename="../core/application.cpp" line="286"/>
+        <location filename="../core/application.cpp" line="290"/>
+        <location filename="../core/application.cpp" line="293"/>
+        <location filename="../core/application.cpp" line="300"/>
         <source>Middle</source>
         <translation>Meio</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="286"/>
-        <location filename="../core/application.cpp" line="293"/>
-        <location filename="../core/application.cpp" line="300"/>
+        <location filename="../core/application.cpp" line="288"/>
+        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="302"/>
         <source>Right</source>
         <translation>Direita</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="297"/>
         <source>Bottom</source>
         <translation>Fundo</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="359"/>
+        <source>%1 Update</source>
+        <translation>%1 Atualização</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="360"/>
+        <source>Update available: %1 (%2).
+Click this message to download.</source>
+        <translation>Atualização disponível: %1 (%2).
+Clique nesta mensagem para descarregar.</translation>
     </message>
 </context>
 <context>

@@ -54,69 +54,88 @@
         <translation>Информация на других сайтах</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="75"/>
+        <location filename="../gui/about_dialog.cpp" line="89"/>
         <source>version: %1</source>
         <translation>версия: %1</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="77"/>
+        <location filename="../gui/about_dialog.cpp" line="91"/>
         <source>build date: %1</source>
         <translation>дата сборки: %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/about_dialog.cpp" line="105"/>
+        <source>New version available.
+Click here to download.</source>
+        <translation>Доступна новая версия.
+Щелкните здесь чтобы загрузить.</translation>
     </message>
 </context>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="171"/>
+        <location filename="../core/application.cpp" line="172"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="176"/>
+        <location filename="../core/application.cpp" line="177"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="180"/>
+        <location filename="../core/application.cpp" line="181"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="280"/>
+        <location filename="../core/application.cpp" line="282"/>
         <source>Position</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="281"/>
+        <location filename="../core/application.cpp" line="283"/>
         <source>Top</source>
         <translation>Верх</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="282"/>
-        <location filename="../core/application.cpp" line="289"/>
-        <location filename="../core/application.cpp" line="296"/>
+        <location filename="../core/application.cpp" line="284"/>
+        <location filename="../core/application.cpp" line="291"/>
+        <location filename="../core/application.cpp" line="298"/>
         <source>Left</source>
         <translation>Лево</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="284"/>
-        <location filename="../core/application.cpp" line="288"/>
-        <location filename="../core/application.cpp" line="291"/>
-        <location filename="../core/application.cpp" line="298"/>
+        <location filename="../core/application.cpp" line="286"/>
+        <location filename="../core/application.cpp" line="290"/>
+        <location filename="../core/application.cpp" line="293"/>
+        <location filename="../core/application.cpp" line="300"/>
         <source>Middle</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="286"/>
-        <location filename="../core/application.cpp" line="293"/>
-        <location filename="../core/application.cpp" line="300"/>
+        <location filename="../core/application.cpp" line="288"/>
+        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="302"/>
         <source>Right</source>
         <translation>Право</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="297"/>
         <source>Bottom</source>
         <translation>Низ</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="359"/>
+        <source>%1 Update</source>
+        <translation>Обновление %1</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="360"/>
+        <source>Update available: %1 (%2).
+Click this message to download.</source>
+        <translation>Доступно обновление: %1 (%2).
+Щелкните здесь чтобы начать загрузку.</translation>
     </message>
 </context>
 <context>

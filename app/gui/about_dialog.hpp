@@ -7,8 +7,21 @@
 #pragma once
 
 #include <QDialog>
+#include <QLabel>
 
-class QLabel;
+class ClickableLabel : public QLabel
+{
+  Q_OBJECT
+
+public:
+  explicit ClickableLabel(QWidget* parent = nullptr);
+
+signals:
+  void clicked();
+
+protected:
+  void mouseReleaseEvent(QMouseEvent* event) override;
+};
 
 namespace Ui {
 class AboutDialog;
@@ -27,5 +40,5 @@ protected:
 
 private:
   Ui::AboutDialog* ui;
-  QLabel* _u_btn;
+  ClickableLabel* _u_btn;
 };

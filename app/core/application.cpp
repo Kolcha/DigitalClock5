@@ -8,6 +8,7 @@
 
 #include <QDir>
 #include <QGraphicsColorizeEffect>
+#include <QDesktopServices>
 
 #include <QLibraryInfo>
 
@@ -244,6 +245,13 @@ void Application::initUpdater()
   _update_checker = std::make_unique<UpdateChecker>();
   _update_checker->setCheckForBeta(_cfg->global().getCheckForBetaVersion());
 
+  connect(_update_checker.get(), &UpdateChecker::newVersion, this, &Application::handleNewVersion);
+
+  _update_timer = std::make_unique<QTimer>();
+  _update_timer->setSingleShot(true);
+
+  connect(_update_timer.get(), &QTimer::timeout, this, &Application::maybeCheckForUpdate);
+
   auto save_last_update = [this]() {
     StateImpl app_state(_cfg->state());
     app_state.setValue("LastUpdateCheck", QDateTime::currentDateTime());
@@ -252,13 +260,7 @@ void Application::initUpdater()
   connect(_update_checker.get(), &UpdateChecker::newVersion, this, save_last_update);
   connect(_update_checker.get(), &UpdateChecker::upToDate, this, save_last_update);
 
-  const StateImpl app_state(_cfg->state());
-  const auto& last_update = app_state.value("LastUpdateCheck",
-                                            QDateTime(QDate(2013, 6, 18), QTime(11, 20, 5), QTimeZone::utc()))
-                                .toDateTime();
-  const auto update_period = _cfg->global().getUpdatePeriodDays();
-  if (last_update.daysTo(QDateTime::currentDateTime()) >= update_period)
-    _update_checker->checkForUpdates();
+  _update_timer->start(std::chrono::seconds(40));
 }
 
 void Application::loadPlugins()
@@ -337,4 +339,26 @@ void Application::moveWindowToPredefinedPos()
   auto act = qobject_cast<QAction*>(sender());
   Q_ASSERT(act);
   _windows.front()->moveToPredefinedPos(act->data().value<Qt::Alignment>());
+}
+
+void Application::maybeCheckForUpdate()
+{
+  const StateImpl app_state(_cfg->state());
+  const auto& last_update = app_state.value("LastUpdateCheck",
+                                            QDateTime(QDate(2013, 6, 18), QTime(11, 20, 5), QTimeZone::utc()))
+                                .toDateTime();
+  const auto update_period = _cfg->global().getUpdatePeriodDays();
+  if (last_update.daysTo(QDateTime::currentDateTime()) >= update_period)
+    _update_checker->checkForUpdates();
+}
+
+void Application::handleNewVersion(QVersionNumber v, QDate d, QUrl l)
+{
+  disconnect(&_tray_icon, &QSystemTrayIcon::messageClicked, nullptr, nullptr);
+  _tray_icon.showMessage(
+        tr("%1 Update").arg(qApp->applicationName()),
+        tr("Update available: %1 (%2).\nClick this message to download.")
+            .arg(v.toString(), QLocale().toString(d, QLocale::ShortFormat)),
+        QSystemTrayIcon::Information, -1);
+  connect(&_tray_icon, &QSystemTrayIcon::messageClicked, [=] () { QDesktopServices::openUrl(l); });
 }

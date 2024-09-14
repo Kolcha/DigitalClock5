@@ -54,69 +54,87 @@
         <translation>更多信息</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="75"/>
+        <location filename="../gui/about_dialog.cpp" line="89"/>
         <source>version: %1</source>
         <translation>版本：%1</translation>
     </message>
     <message>
-        <location filename="../gui/about_dialog.cpp" line="77"/>
+        <location filename="../gui/about_dialog.cpp" line="91"/>
         <source>build date: %1</source>
         <translation>创建日期：%1</translation>
+    </message>
+    <message>
+        <location filename="../gui/about_dialog.cpp" line="105"/>
+        <source>New version available.
+Click here to download.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="171"/>
+        <location filename="../core/application.cpp" line="172"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="176"/>
+        <location filename="../core/application.cpp" line="177"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="180"/>
+        <location filename="../core/application.cpp" line="181"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="280"/>
+        <location filename="../core/application.cpp" line="282"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="281"/>
+        <location filename="../core/application.cpp" line="283"/>
         <source>Top</source>
         <translation>顶部</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="282"/>
-        <location filename="../core/application.cpp" line="289"/>
-        <location filename="../core/application.cpp" line="296"/>
+        <location filename="../core/application.cpp" line="284"/>
+        <location filename="../core/application.cpp" line="291"/>
+        <location filename="../core/application.cpp" line="298"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="284"/>
-        <location filename="../core/application.cpp" line="288"/>
-        <location filename="../core/application.cpp" line="291"/>
-        <location filename="../core/application.cpp" line="298"/>
+        <location filename="../core/application.cpp" line="286"/>
+        <location filename="../core/application.cpp" line="290"/>
+        <location filename="../core/application.cpp" line="293"/>
+        <location filename="../core/application.cpp" line="300"/>
         <source>Middle</source>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="286"/>
-        <location filename="../core/application.cpp" line="293"/>
-        <location filename="../core/application.cpp" line="300"/>
+        <location filename="../core/application.cpp" line="288"/>
+        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="302"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="297"/>
         <source>Bottom</source>
         <translation>底部</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="359"/>
+        <source>%1 Update</source>
+        <translation>%1 更新</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="360"/>
+        <source>Update available: %1 (%2).
+Click this message to download.</source>
+        <translation>有可用更新: %1 (%2)
+点击此消息下载。</translation>
     </message>
 </context>
 <context>

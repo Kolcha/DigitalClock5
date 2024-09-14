@@ -10,6 +10,7 @@
 #include <QDate>
 #include <QLocale>
 #include <QSysInfo>
+#include <QDesktopServices>
 
 #include "core/build_date.hpp"
 #include "core/update_checker.hpp"
@@ -54,6 +55,19 @@ static QString buildCompatibilityString()
                                        QSysInfo::buildCpuArchitecture());
 }
 
+
+ClickableLabel::ClickableLabel(QWidget* parent)
+  : QLabel(parent)
+{
+}
+
+void ClickableLabel::mouseReleaseEvent(QMouseEvent* event)
+{
+  QLabel::mouseReleaseEvent(event);
+  emit clicked();
+}
+
+
 AboutDialog::AboutDialog(QWidget* parent)
   : QDialog(parent)
   , ui(new Ui::AboutDialog)
@@ -79,15 +93,17 @@ AboutDialog::AboutDialog(QWidget* parent)
   ui->app_ver_lbl->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
   ui->info_tab_layout->setAlignment(ui->app_ver_lbl, Qt::AlignCenter);
 
-  _u_btn = new QLabel(ui->info_tab);
+  _u_btn = new ClickableLabel(ui->info_tab);
   _u_btn->setAlignment(Qt::AlignCenter);
 
   auto uc = new UpdateChecker(this);
   connect(uc, &UpdateChecker::upToDate, _u_btn, [this]() {
     _u_btn->setPixmap(QIcon::fromTheme("checkmark").pixmap(_u_btn->height() - 2));
   });
-  connect(uc, &UpdateChecker::newVersion, _u_btn, [this]() {
+  connect(uc, &UpdateChecker::newVersion, _u_btn, [this](auto, auto, auto l) {
     _u_btn->setPixmap(QIcon::fromTheme("update-none").pixmap(_u_btn->height() - 2));
+    _u_btn->setToolTip(tr("New version available.\nClick here to download."));
+    connect(_u_btn, &ClickableLabel::clicked, _u_btn, [l]() { QDesktopServices::openUrl(l); });
   });
   uc->checkForUpdates();
 }
