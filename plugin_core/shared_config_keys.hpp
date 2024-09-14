@@ -44,6 +44,9 @@ enum SharedConfigKeys {
   Background,
   BackgroundStretch,
   BackgroundPerCharacter,
+
+  UseSystemForeground,
+  UseSystemBackground,
 };
 
 Q_ENUM_NS(SharedConfigKeys)

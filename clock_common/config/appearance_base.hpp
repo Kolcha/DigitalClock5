@@ -26,6 +26,7 @@ public:
 
   using SettingsStorageClient::SettingsStorageClient;
 
+  CONFIG_OPTION_Q(bool, UseSystemForeground, false)
   QBrush getTexture() const;
   CONFIG_OPTION_Q(CustomizationType, TextureType, SolidColor)
   CONFIG_OPTION_Q(QColor, TextureColor, QColor(112, 96, 240))
@@ -34,7 +35,9 @@ public:
   CONFIG_OPTION_Q(QString, TexturePatternFile, QString())
   CONFIG_OPTION_Q(bool, TextureStretch, false)
   CONFIG_OPTION_Q(bool, TexturePerCharacter, true)
+  bool shouldUseSystemForeground() const;
 
+  CONFIG_OPTION_Q(bool, UseSystemBackground, false)
   QBrush getBackground() const;
   CONFIG_OPTION_Q(CustomizationType, BackgroundType, None)
   CONFIG_OPTION_Q(QColor, BackgroundColor, QColor(0, 0, 0, 160))
@@ -43,4 +46,5 @@ public:
   CONFIG_OPTION_Q(QString, BackgroundPatternFile, QString())
   CONFIG_OPTION_Q(bool, BackgroundStretch, false)
   CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false)
+  bool shouldUseSystemBackground() const;
 };

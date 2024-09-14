@@ -69,10 +69,12 @@ OPTION_CHANGE_NOTIFIER_R(CustomSeparators, QString)
 OPTION_CHANGE_NOTIFIER_R(TimeFormat, QString)
 OPTION_CHANGE_NOTIFIER_V(SecondsScaleFactor, int)
 
+OPTION_CHANGE_NOTIFIER_V(UseSystemForeground, bool)
 OPTION_CHANGE_NOTIFIER_R(Texture, QBrush)
 OPTION_CHANGE_NOTIFIER_V(TextureStretch, bool)
 OPTION_CHANGE_NOTIFIER_V(TexturePerCharacter, bool)
 
+OPTION_CHANGE_NOTIFIER_V(UseSystemBackground, bool)
 OPTION_CHANGE_NOTIFIER_R(Background, QBrush)
 OPTION_CHANGE_NOTIFIER_V(BackgroundStretch, bool)
 OPTION_CHANGE_NOTIFIER_V(BackgroundPerCharacter, bool)
@@ -108,10 +110,12 @@ void SettingsChangeReceiver::onOptionChanged(cs::SharedConfigKeys opt, const QVa
     HANDLE_OPTION_CHANGE(val, TimeFormat, QString)
     HANDLE_OPTION_CHANGE(val, SecondsScaleFactor, int)
 
+    HANDLE_OPTION_CHANGE(val, UseSystemForeground, bool)
     HANDLE_OPTION_CHANGE(val, Texture, QBrush)
     HANDLE_OPTION_CHANGE(val, TextureStretch, bool)
     HANDLE_OPTION_CHANGE(val, TexturePerCharacter, bool)
 
+    HANDLE_OPTION_CHANGE(val, UseSystemBackground, bool)
     HANDLE_OPTION_CHANGE(val, Background, QBrush)
     HANDLE_OPTION_CHANGE(val, BackgroundStretch, bool)
     HANDLE_OPTION_CHANGE(val, BackgroundPerCharacter, bool)

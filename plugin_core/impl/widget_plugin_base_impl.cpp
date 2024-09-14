@@ -21,12 +21,18 @@ void WidgetPluginBaseImpl::applyAppearanceSettings()
     widget->setTexture(skin_cfg[cs::Texture].value<QBrush>(),
                        skin_cfg[cs::TextureStretch].toBool(),
                        skin_cfg[cs::TexturePerCharacter].toBool());
+    widget->setUseSystemForeground(widget->texture().style() == Qt::SolidPattern &&
+                                   skin_cfg[cs::UseSystemForeground].toBool());
     widget->setBackground(skin_cfg[cs::Background].value<QBrush>(),
                           skin_cfg[cs::BackgroundStretch].toBool(),
                           skin_cfg[cs::BackgroundPerCharacter].toBool());
+    widget->setUseSystemBackground(widget->background().style() == Qt::SolidPattern &&
+                                   skin_cfg[cs::UseSystemBackground].toBool());
   } else {
     widget->setTexture(tx, tx_stretch, tx_per_char);
     widget->setBackground(bg, bg_stretch, bg_per_char);
+    widget->setUseSystemForeground(tx.style() == Qt::SolidPattern && use_sys_fg);
+    widget->setUseSystemBackground(bg.style() == Qt::SolidPattern && use_sys_bg);
   }
 
   widget->setLayoutConfig(layout_cfg);
@@ -74,4 +80,7 @@ void WidgetPluginBaseImpl::initSettings(PluginSettingsStorage& st)
   bg = sa.getBackground();
   bg_stretch = sa.getBackgroundStretch();
   bg_per_char = sa.getBackgroundPerCharacter();
+
+  use_sys_fg = sa.getUseSystemForeground();
+  use_sys_bg = sa.getUseSystemBackground();
 }

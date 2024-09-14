@@ -47,6 +47,7 @@ private slots:
   void on_tx_group_clicked(bool checked);
   void on_tx_options_box_activated(int index);
   void on_tx_options_box_currentIndexChanged(int index);
+  void tx_use_system_color(bool use);
   void tx_select_color();
   void tx_select_gradient();
   void tx_select_pattern();
@@ -56,6 +57,7 @@ private slots:
   void on_bg_group_clicked(bool checked);
   void on_bg_options_box_activated(int index);
   void on_bg_options_box_currentIndexChanged(int index);
+  void bg_use_system_color(bool use);
   void bg_select_color();
   void bg_select_gradient();
   void bg_select_pattern();

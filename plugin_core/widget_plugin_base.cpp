@@ -90,6 +90,9 @@ void WidgetPluginBase::onOptionChanged(clock_settings::SharedConfigKeys opt, con
 
   // handle only minimal set of settings
   switch (opt) {
+    case cs::UseSystemForeground:
+      _impl->widget->setUseSystemForeground(val.toBool());
+      break;
     case cs::Texture:
       _impl->widget->setTexture(val.value<QBrush>());
       break;
@@ -98,6 +101,9 @@ void WidgetPluginBase::onOptionChanged(clock_settings::SharedConfigKeys opt, con
       break;
     case cs::TexturePerCharacter:
       _impl->widget->setTexturePerChar(val.toBool());
+      break;
+    case cs::UseSystemBackground:
+      _impl->widget->setUseSystemBackground(val.toBool());
       break;
     case cs::Background:
       _impl->widget->setBackground(val.value<QBrush>());

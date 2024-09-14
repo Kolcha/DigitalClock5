@@ -401,9 +401,11 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
       ss[cs::CustomSeparators] = wcfg.getCustomSeparators();
       ss[cs::TimeFormat] = wcfg.getTimeFormat();
       ss[cs::SecondsScaleFactor] = wcfg.getSecondsScaleFactor();
+      ss[cs::UseSystemForeground] = wcfg.getUseSystemForeground();
       ss[cs::Texture] = wcfg.getTexture();
       ss[cs::TextureStretch] = wcfg.getTextureStretch();
       ss[cs::TexturePerCharacter] = wcfg.getTexturePerCharacter();
+      ss[cs::UseSystemBackground] = wcfg.getUseSystemBackground();
       ss[cs::Background] = wcfg.getBackground();
       ss[cs::BackgroundStretch] = wcfg.getBackgroundStretch();
       ss[cs::BackgroundPerCharacter] = wcfg.getBackgroundPerCharacter();
@@ -414,9 +416,11 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
       auto wnd = app->window(i)->clock();
       sa->initSkin(wnd->skin());
       SkinAccessExtension::AppearanceSettings as;
+      as[cs::UseSystemForeground] = wnd->useSystemForeground();
       as[cs::Texture] = wnd->texture();
       as[cs::TextureStretch] = wnd->textureStretch();
       as[cs::TexturePerCharacter] = wnd->texturePerChar();
+      as[cs::UseSystemBackground] = wnd->useSystemBackground();
       as[cs::Background] = wnd->background();
       as[cs::BackgroundStretch] = wnd->backgroundStretch();
       as[cs::BackgroundPerCharacter] = wnd->backgroundPerChar();

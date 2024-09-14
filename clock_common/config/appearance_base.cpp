@@ -31,6 +31,11 @@ QPixmap AppearanceSectionBase::getTexturePattern() const
   return sample_pattern();
 }
 
+bool AppearanceSectionBase::shouldUseSystemForeground() const
+{
+  return getTextureType() == SolidColor && getUseSystemForeground();
+}
+
 QBrush AppearanceSectionBase::getBackground() const
 {
   switch (getBackgroundType()) {
@@ -52,4 +57,9 @@ QPixmap AppearanceSectionBase::getBackgroundPattern() const
   if (QFile::exists(getBackgroundPatternFile()))
     return QPixmap(getBackgroundPatternFile());
   return sample_pattern();
+}
+
+bool AppearanceSectionBase::shouldUseSystemBackground() const
+{
+  return getBackgroundType() == SolidColor && getUseSystemBackground();
 }

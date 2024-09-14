@@ -148,6 +148,11 @@ void SettingsChangeListener::onSecondsScaleFactorChanged(int s)
   _wnd->clock()->setSecondsScaleFactor(s/100.);
 }
 
+void SettingsChangeListener::onUseSystemForegroundChanged(bool use)
+{
+  _wnd->clock()->setUseSystemForeground(use);
+}
+
 void SettingsChangeListener::onTextureChanged(const QBrush& tx)
 {
   _wnd->clock()->setTexture(tx);
@@ -161,6 +166,11 @@ void SettingsChangeListener::onTextureStretchChanged(bool en)
 void SettingsChangeListener::onTexturePerCharacterChanged(bool en)
 {
   _wnd->clock()->setTexturePerChar(en);
+}
+
+void SettingsChangeListener::onUseSystemBackgroundChanged(bool use)
+{
+  _wnd->clock()->setUseSystemBackground(use);
 }
 
 void SettingsChangeListener::onBackgroundChanged(const QBrush& bg)

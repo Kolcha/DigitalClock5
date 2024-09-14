@@ -42,10 +42,12 @@ public slots:
   void setTimeFormat(const QString& s);
   void setSecondsScaleFactor(int s);
 
+  void setUseSystemForeground(bool use);
   void setTexture(const QBrush& tx);
   void setTextureStretch(bool en);
   void setTexturePerCharacter(bool en);
 
+  void setUseSystemBackground(bool use);
   void setBackground(const QBrush& bg);
   void setBackgroundStretch(bool en);
   void setBackgroundPerCharacter(bool en);
@@ -89,10 +91,12 @@ protected:
   virtual void onTimeFormatChanged(const QString& s) = 0;
   virtual void onSecondsScaleFactorChanged(int s) = 0;
 
+  virtual void onUseSystemForegroundChanged(bool use) = 0;
   virtual void onTextureChanged(const QBrush& tx) = 0;
   virtual void onTextureStretchChanged(bool en) = 0;
   virtual void onTexturePerCharacterChanged(bool en) = 0;
 
+  virtual void onUseSystemBackgroundChanged(bool use) = 0;
   virtual void onBackgroundChanged(const QBrush& bg) = 0;
   virtual void onBackgroundStretchChanged(bool en) = 0;
   virtual void onBackgroundPerCharacterChanged(bool en) = 0;

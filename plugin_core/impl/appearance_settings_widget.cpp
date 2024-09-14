@@ -47,7 +47,6 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(WidgetPluginBaseImpl* w, Plug
   }
   if (tx.style() == Qt::TexturePattern) {
     ui->tx_options_box->setCurrentIndex(2);
-    ui->tx_option->setChecked(cfg.getTextureStretch());
   }
   ui->tx_per_char->setChecked(cfg.getTexturePerCharacter());
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
@@ -62,7 +61,6 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(WidgetPluginBaseImpl* w, Plug
   }
   if (bg.style() == Qt::TexturePattern) {
     ui->bg_options_box->setCurrentIndex(2);
-    ui->bg_option->setChecked(cfg.getBackgroundStretch());
   }
   ui->bg_per_char->setChecked(cfg.getBackgroundPerCharacter());
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
@@ -238,8 +236,10 @@ void AppearanceSettingsWidget::on_tx_group_clicked(bool checked)
 
   impl->tx = cfg.getTexture();
 
-  if (widget)
+  if (widget) {
     widget->setTexture(cfg.getTexture());
+    widget->setUseSystemForeground(cfg.shouldUseSystemForeground());
+  }
 }
 
 void AppearanceSettingsWidget::on_tx_options_box_activated(int index)
@@ -258,8 +258,10 @@ void AppearanceSettingsWidget::on_tx_options_box_activated(int index)
 
   impl->tx = cfg.getTexture();
 
-  if (widget)
+  if (widget) {
     widget->setTexture(cfg.getTexture());
+    widget->setUseSystemForeground(cfg.shouldUseSystemForeground());
+  }
 }
 
 void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
@@ -272,8 +274,9 @@ void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
     case 0: // color
       connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_color);
       ui->tx_option->setText(tr("follow system theme"));
-      // ui->tx_option->show();
-      // connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::applySystemColor);
+      ui->tx_option->show();
+      ui->tx_option->setChecked(cfg.getUseSystemForeground());
+      connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::tx_use_system_color);
       break;
     case 1: // gradient
       connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_gradient);
@@ -283,9 +286,19 @@ void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
       connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_pattern);
       ui->tx_option->setText(tr("stretch instead of tile"));
       ui->tx_option->show();
+      ui->tx_option->setChecked(cfg.getTextureStretch());
       connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::tx_pattern_stretch);
       break;
   }
+}
+
+void AppearanceSettingsWidget::tx_use_system_color(bool use)
+{
+  cfg.setUseSystemForeground(use);
+  impl->use_sys_fg = use;
+
+  if (widget)
+    widget->setUseSystemForeground(use);
 }
 
 void AppearanceSettingsWidget::tx_select_color()
@@ -370,8 +383,10 @@ void AppearanceSettingsWidget::on_bg_group_clicked(bool checked)
 
   impl->bg = cfg.getBackground();
 
-  if (widget)
+  if (widget) {
     widget->setBackground(cfg.getBackground());
+    widget->setUseSystemBackground(cfg.shouldUseSystemBackground());
+  }
 }
 
 void AppearanceSettingsWidget::on_bg_options_box_activated(int index)
@@ -390,8 +405,10 @@ void AppearanceSettingsWidget::on_bg_options_box_activated(int index)
 
   impl->bg = cfg.getBackground();
 
-  if (widget)
+  if (widget) {
     widget->setBackground(cfg.getBackground());
+    widget->setUseSystemBackground(cfg.shouldUseSystemBackground());
+  }
 }
 
 void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
@@ -404,8 +421,9 @@ void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
     case 0: // color
       connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_color);
       ui->bg_option->setText(tr("follow system theme"));
-      // ui->bg_option->show();
-      // connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::applySystemColor);
+      ui->bg_option->show();
+      ui->bg_option->setChecked(cfg.getUseSystemBackground());
+      connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::bg_use_system_color);
       break;
     case 1: // gradient
       connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_gradient);
@@ -415,9 +433,19 @@ void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
       connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_pattern);
       ui->bg_option->setText(tr("stretch instead of tile"));
       ui->bg_option->show();
+      ui->bg_option->setChecked(cfg.getBackgroundStretch());
       connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::bg_pattern_stretch);
       break;
   }
+}
+
+void AppearanceSettingsWidget::bg_use_system_color(bool use)
+{
+  cfg.setUseSystemBackground(use);
+  impl->use_sys_bg = use;
+
+  if (widget)
+    widget->setUseSystemBackground(use);
 }
 
 void AppearanceSettingsWidget::bg_select_color()

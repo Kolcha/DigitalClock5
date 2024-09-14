@@ -45,6 +45,9 @@ public:
   bool bg_stretch = false;
   bool bg_per_char = false;
 
+  bool use_sys_fg = false;
+  bool use_sys_bg = false;
+
   void applyAppearanceSettings();
   void repositionWidget();
 

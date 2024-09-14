@@ -44,10 +44,12 @@ protected:
   void onTimeFormatChanged(const QString& s) override;
   void onSecondsScaleFactorChanged(int s) override;
 
+  void onUseSystemForegroundChanged(bool use) override;
   void onTextureChanged(const QBrush& tx) override;
   void onTextureStretchChanged(bool en) override;
   void onTexturePerCharacterChanged(bool en) override;
 
+  void onUseSystemBackgroundChanged(bool use) override;
   void onBackgroundChanged(const QBrush& bg) override;
   void onBackgroundStretchChanged(bool en) override;
   void onBackgroundPerCharacterChanged(bool en) override;

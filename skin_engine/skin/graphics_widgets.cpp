@@ -6,6 +6,7 @@
 
 #include "graphics_widgets.hpp"
 
+#include <QEvent>
 #include <QPainter>
 
 GraphicsWidgetBase::GraphicsWidgetBase(std::shared_ptr<GraphicsBase> gr, QWidget* parent)
@@ -113,13 +114,31 @@ void GraphicsWidgetBase::setLayoutConfig(QString lcfg)
 
 void GraphicsWidgetBase::setBackground(QBrush b, bool stretch, bool per_char)
 {
+  if (_sys_bg) return;
+  _last_bg = b;
   _gt->setBackground(std::move(b), stretch, per_char);
   update();
 }
 
 void GraphicsWidgetBase::setTexture(QBrush b, bool stretch, bool per_char)
 {
+  if (_sys_fg) return;
+  _last_tx = b;
   _gt->setTexture(std::move(b), stretch, per_char);
+  update();
+}
+
+void GraphicsWidgetBase::setUseSystemBackground(bool use)
+{
+  _sys_bg = use;
+  _gt->setBackground(use ? palette().window() : _last_bg);
+  update();
+}
+
+void GraphicsWidgetBase::setUseSystemForeground(bool use)
+{
+  _sys_fg = use;
+  _gt->setTexture(use ? palette().windowText() : _last_tx);
   update();
 }
 
@@ -161,6 +180,18 @@ void GraphicsWidgetBase::paintEvent(QPaintEvent* event)
   p.setRenderHint(QPainter::SmoothPixmapTransform);
   p.translate(-_gt->rect().topLeft());
   _gt->draw(&p);
+}
+
+bool GraphicsWidgetBase::event(QEvent* e)
+{
+  if (e->type() == QEvent::PaletteChange) {
+    if (_sys_bg)
+      _gt->setBackground(palette().window());
+    if (_sys_fg)
+      _gt->setTexture(palette().windowText());
+    update();
+  }
+  return QWidget::event(e);
 }
 
 

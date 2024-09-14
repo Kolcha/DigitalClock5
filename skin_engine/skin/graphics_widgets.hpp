@@ -59,6 +59,9 @@ public:
   bool backgroundPerChar() const { return _gt->backgroundPerChar(); }
   bool texturePerChar() const { return _gt->texturePerChar(); }
 
+  bool useSystemBackground() const { return _sys_bg; }
+  bool useSystemForeground() const { return _sys_fg; }
+
   // ---------------------
 
   void setSkin(std::shared_ptr<Skin> skin);
@@ -78,6 +81,8 @@ public slots:
 
   void setAlignment(Qt::Alignment a);
   void setLayoutConfig(QString lcfg);
+
+  // ---------------------
 
   void setBackground(QBrush b, bool stretch, bool per_char);
 
@@ -115,8 +120,14 @@ public slots:
     setTexture(texture(), textureStretch(), en);
   }
 
+  // ---------------------
+
+  void setUseSystemBackground(bool use);
+  void setUseSystemForeground(bool use);
+
 protected:
   void paintEvent(QPaintEvent* event) override;
+  bool event(QEvent* e) override;
 
 private:
   std::shared_ptr<GraphicsBase> _gt;
@@ -127,6 +138,11 @@ private:
   qreal _sy = 1.0;
 
   QString _lcfg;
+
+  QBrush _last_bg;
+  QBrush _last_tx;
+  bool _sys_bg = false;
+  bool _sys_fg = false;
 };
 
 

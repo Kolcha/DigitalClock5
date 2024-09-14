@@ -78,9 +78,11 @@ void Application::configureWindow(size_t i)
   clock->setTexture(acfg.getTexture(),
                     acfg.getTextureStretch(),
                     acfg.getTexturePerCharacter());
+  clock->setUseSystemForeground(acfg.shouldUseSystemForeground());
   clock->setBackground(acfg.getBackground(),
                        acfg.getBackgroundStretch(),
                        acfg.getBackgroundPerCharacter());
+  clock->setUseSystemBackground(acfg.shouldUseSystemBackground());
 
   if (acfg.getApplyColorization()) {
     auto effect = new QGraphicsColorizeEffect;

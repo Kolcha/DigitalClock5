@@ -459,7 +459,9 @@ void SettingsDialog::on_texture_group_clicked(bool checked)
   }
 
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, acfg.shouldUseSystemForeground());
   notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, acfg.shouldUseSystemForeground());
 }
 
 void SettingsDialog::on_tx_options_box_activated(int index)
@@ -476,8 +478,11 @@ void SettingsDialog::on_tx_options_box_activated(int index)
       acfg.setTextureType(SectionAppearance::Pattern);
       break;
   }
+
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, acfg.shouldUseSystemForeground());
   notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, acfg.shouldUseSystemForeground());
 }
 
 void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
@@ -486,12 +491,17 @@ void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
   disconnect(ui->tx_option, &QCheckBox::clicked, nullptr, nullptr);
   ui->tx_option->hide();
 
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+
   switch (index) {
     case 0: // color
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_color);
       ui->tx_option->setText(tr("follow system theme"));
-      // ui->tx_option->show();
-      // connect(ui->tx_option, &QCheckBox::clicked, this, &SettingsDialog::applySystemColor);
+      ui->tx_option->show();
+      ui->tx_option->setChecked(acfg.getUseSystemForeground());
+      ui->tx_btn->setDisabled(acfg.shouldUseSystemForeground());
+      connect(ui->tx_option, &QCheckBox::toggled, ui->tx_btn, &QWidget::setDisabled);
+      connect(ui->tx_option, &QCheckBox::clicked, this, &SettingsDialog::tx_use_system_color);
       break;
     case 1: // gradient
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_gradient);
@@ -501,9 +511,18 @@ void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_pattern);
       ui->tx_option->setText(tr("stretch instead of tile"));
       ui->tx_option->show();
+      ui->tx_option->setChecked(acfg.getTextureStretch());
       connect(ui->tx_option, &QCheckBox::clicked, this, &SettingsDialog::tx_pattern_stretch);
       break;
   }
+}
+
+void SettingsDialog::tx_use_system_color(bool use)
+{
+  app->config().window(_curr_idx).appearance().setUseSystemForeground(use);
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, use);
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, use);
+  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, app->window(_curr_idx)->clock()->texture());
 }
 
 void SettingsDialog::tx_select_color()
@@ -579,7 +598,9 @@ void SettingsDialog::on_background_group_clicked(bool checked)
   }
 
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, acfg.shouldUseSystemBackground());
   notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, acfg.shouldUseSystemBackground());
 }
 
 void SettingsDialog::on_bg_options_box_activated(int index)
@@ -596,8 +617,11 @@ void SettingsDialog::on_bg_options_box_activated(int index)
       acfg.setBackgroundType(SectionAppearance::Pattern);
       break;
   }
+
   applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, acfg.shouldUseSystemBackground());
   notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, acfg.shouldUseSystemBackground());
 }
 
 void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
@@ -606,12 +630,17 @@ void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
   disconnect(ui->bg_option, &QCheckBox::clicked, nullptr, nullptr);
   ui->bg_option->hide();
 
+  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+
   switch (index) {
     case 0: // color
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_color);
       ui->bg_option->setText(tr("follow system theme"));
-      // ui->bg_option->show();
-      // connect(ui->bg_option, &QCheckBox::clicked, this, &SettingsDialog::applySystemColor);
+      ui->bg_option->show();
+      ui->bg_option->setChecked(acfg.getUseSystemBackground());
+      ui->bg_btn->setDisabled(acfg.shouldUseSystemBackground());
+      connect(ui->bg_option, &QCheckBox::toggled, ui->bg_btn, &QWidget::setDisabled);
+      connect(ui->bg_option, &QCheckBox::clicked, this, &SettingsDialog::bg_use_system_color);
       break;
     case 1: // gradient
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_gradient);
@@ -621,9 +650,18 @@ void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_pattern);
       ui->bg_option->setText(tr("stretch instead of tile"));
       ui->bg_option->show();
+      ui->bg_option->setChecked(acfg.getBackgroundStretch());
       connect(ui->bg_option, &QCheckBox::clicked, this, &SettingsDialog::bg_pattern_stretch);
       break;
   }
+}
+
+void SettingsDialog::bg_use_system_color(bool use)
+{
+  app->config().window(_curr_idx).appearance().setUseSystemBackground(use);
+  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, use);
+  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, use);
+  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, app->window(_curr_idx)->clock()->background());
 }
 
 void SettingsDialog::bg_select_color()
@@ -884,7 +922,6 @@ void SettingsDialog::initAppearanceTab(int idx)
   }
   if (tx.style() == Qt::TexturePattern) {
     ui->tx_options_box->setCurrentIndex(2);
-    ui->tx_option->setChecked(acfg.getTextureStretch());
   }
   ui->tx_per_element_cb->setChecked(acfg.getTexturePerCharacter());
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
@@ -899,7 +936,6 @@ void SettingsDialog::initAppearanceTab(int idx)
   }
   if (bg.style() == Qt::TexturePattern) {
     ui->bg_options_box->setCurrentIndex(2);
-    ui->bg_option->setChecked(acfg.getBackgroundStretch());
   }
   ui->bg_per_element_cb->setChecked(acfg.getBackgroundPerCharacter());
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
