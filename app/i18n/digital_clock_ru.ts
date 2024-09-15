@@ -74,64 +74,64 @@ Click here to download.</source>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="172"/>
+        <location filename="../core/application.cpp" line="174"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="177"/>
+        <location filename="../core/application.cpp" line="179"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="181"/>
+        <location filename="../core/application.cpp" line="183"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="282"/>
+        <location filename="../core/application.cpp" line="284"/>
         <source>Position</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="283"/>
+        <location filename="../core/application.cpp" line="285"/>
         <source>Top</source>
         <translation>Верх</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="284"/>
-        <location filename="../core/application.cpp" line="291"/>
-        <location filename="../core/application.cpp" line="298"/>
+        <location filename="../core/application.cpp" line="286"/>
+        <location filename="../core/application.cpp" line="293"/>
+        <location filename="../core/application.cpp" line="300"/>
         <source>Left</source>
         <translation>Лево</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="286"/>
-        <location filename="../core/application.cpp" line="290"/>
-        <location filename="../core/application.cpp" line="293"/>
-        <location filename="../core/application.cpp" line="300"/>
+        <location filename="../core/application.cpp" line="288"/>
+        <location filename="../core/application.cpp" line="292"/>
+        <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="302"/>
         <source>Middle</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="288"/>
-        <location filename="../core/application.cpp" line="295"/>
-        <location filename="../core/application.cpp" line="302"/>
+        <location filename="../core/application.cpp" line="290"/>
+        <location filename="../core/application.cpp" line="297"/>
+        <location filename="../core/application.cpp" line="304"/>
         <source>Right</source>
         <translation>Право</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="297"/>
+        <location filename="../core/application.cpp" line="299"/>
         <source>Bottom</source>
         <translation>Низ</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="359"/>
+        <location filename="../core/application.cpp" line="361"/>
         <source>%1 Update</source>
         <translation>Обновление %1</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="360"/>
+        <location filename="../core/application.cpp" line="362"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>Доступно обновление: %1 (%2).
@@ -536,50 +536,50 @@ Click this message to download.</source>
         <translation>окно %1</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="492"/>
-        <location filename="../gui/settings_dialog.cpp" line="612"/>
+        <location filename="../gui/settings_dialog.cpp" line="499"/>
+        <location filename="../gui/settings_dialog.cpp" line="638"/>
         <source>follow system theme</source>
         <translation>следовать системной теме</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="502"/>
-        <location filename="../gui/settings_dialog.cpp" line="622"/>
+        <location filename="../gui/settings_dialog.cpp" line="512"/>
+        <location filename="../gui/settings_dialog.cpp" line="651"/>
         <source>stretch instead of tile</source>
         <translation>растянуть вместо замостить</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="542"/>
-        <location filename="../gui/settings_dialog.cpp" line="662"/>
+        <location filename="../gui/settings_dialog.cpp" line="561"/>
+        <location filename="../gui/settings_dialog.cpp" line="700"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Картинки (*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="733"/>
+        <location filename="../gui/settings_dialog.cpp" line="771"/>
         <source>Automatic</source>
         <translation>Автоматически</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="769"/>
+        <location filename="../gui/settings_dialog.cpp" line="807"/>
         <source>1 day</source>
         <translation>1 день</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="770"/>
+        <location filename="../gui/settings_dialog.cpp" line="808"/>
         <source>3 days</source>
         <translation>3 дня</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="771"/>
+        <location filename="../gui/settings_dialog.cpp" line="809"/>
         <source>1 week</source>
         <translation>1 неделя</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="772"/>
+        <location filename="../gui/settings_dialog.cpp" line="810"/>
         <source>2 weeks</source>
         <translation>2 недели</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="773"/>
+        <location filename="../gui/settings_dialog.cpp" line="811"/>
         <source>1 month</source>
         <translation>1 месяц</translation>
     </message>

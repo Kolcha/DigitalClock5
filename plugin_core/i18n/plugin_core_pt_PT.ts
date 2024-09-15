@@ -113,51 +113,51 @@
         <translation>parsonalizado</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="73"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="71"/>
         <source>left</source>
         <comment>alignment</comment>
         <translation>esquerda</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="74"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="78"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="72"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="76"/>
         <source>center</source>
         <comment>alignment</comment>
         <translation>centro</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="75"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="73"/>
         <source>right</source>
         <comment>alignment</comment>
         <translation>direita</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="77"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="75"/>
         <source>top</source>
         <comment>alignment</comment>
         <translation>topo</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="79"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="77"/>
         <source>bottom</source>
         <comment>alignment</comment>
         <translation>fundo</translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="274"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="406"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="276"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="423"/>
         <source>follow system theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="284"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="416"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="287"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="434"/>
         <source>stretch instead of tile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="327"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="459"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="340"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="487"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Imagens (*.png *.bmp *.jpg)</translation>
     </message>
