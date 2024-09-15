@@ -3,6 +3,7 @@ Digital Clock 5
 
 [![GitHub License](https://img.shields.io/github/license/Kolcha/DigitalClock5)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![SourceForge Downloads](https://img.shields.io/sourceforge/dm/digitalclock4)](https://sourceforge.net/projects/digitalclock4/files)
+[![Crowdin](https://badges.crowdin.net/digital-clock-5/localized.svg)](https://crowdin.com/project/digital-clock-5)
 
 This is "next" version of my [Digital Clock 4](https://github.com/Kolcha/DigitalClock4). It has completely new written from scratch skin engine (but old skins are supported) which adds many new features and possibilities giving even more flexibility in customization.
 
