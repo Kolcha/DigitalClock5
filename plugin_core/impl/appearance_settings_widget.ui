@@ -300,22 +300,6 @@
  <resources/>
  <connections>
   <connection>
-   <sender>appear_custom</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>font_select</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>113</x>
-     <y>297</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>224</x>
-     <y>161</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>resize_fixed</sender>
    <signal>toggled(bool)</signal>
    <receiver>align_group</receiver>
@@ -376,22 +360,6 @@
     <hint type="destinationlabel">
      <x>208</x>
      <y>149</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>font_rbtn</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>appearance_group</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>151</x>
-     <y>155</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>55</x>
-     <y>222</y>
     </hint>
    </hints>
   </connection>

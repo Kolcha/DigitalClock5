@@ -27,7 +27,7 @@ public:
   CONFIG_OPTION_Q(Qt::Alignment, Alignment, Qt::AlignCenter)
   CONFIG_OPTION_Q(QString, LayoutConfig, QString())
   CONFIG_OPTION_Q(bool, UseClockSkin, false)
-  CONFIG_OPTION_Q(QFont, CustomFont, QFont("Comic Sans MS", 72))
+  CONFIG_OPTION_Q(QFont, CustomFont, QFont("Comic Sans MS", 24))
 };
 
 } // namespace plugin_impl
