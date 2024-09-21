@@ -94,7 +94,10 @@ void LinearLayout::alignItems(const GlyphList& glyphs) const
 
 void HLayout::updatePos(Glyph& curr, const Glyph& prev) const
 {
-  curr.setPos(prev.pos() + QPointF(prev.advance().x() + spacing(), 0));
+  if (ignoreAdvance())
+    curr.setPos({prev.geometry().right() + spacing() - curr.rect().left(), prev.pos().y()});
+  else
+    curr.setPos(prev.pos() + QPointF(prev.advance().x() + spacing(), 0));
 }
 
 void HLayout::updateAdv(QPointF& adv, const Glyph& curr) const
@@ -140,7 +143,10 @@ void HLayout::resizeGlyph(Glyph& g, const QRectF& br) const
 
 void VLayout::updatePos(Glyph& curr, const Glyph& prev) const
 {
-  curr.setPos(prev.pos() + QPointF(0, -curr.advance().y() + spacing()));
+  if (ignoreAdvance())
+    curr.setPos({prev.pos().x(), prev.geometry().bottom() + spacing() - curr.rect().top()});
+  else
+    curr.setPos(prev.pos() + QPointF(0, -curr.advance().y() + spacing()));
 }
 
 void VLayout::updateAdv(QPointF& adv, const Glyph& curr) const

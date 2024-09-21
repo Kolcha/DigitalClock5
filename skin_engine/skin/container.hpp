@@ -63,10 +63,14 @@ public:
 
   qreal spacing() const { return _spacing; }
 
+  bool ignoreAdvance() const { return _ignore_advance; }
+
   Qt::Alignment alignment() const { return _align; }
   Qt::Alignment alignment(size_t i) const { return _item_a.value(i, _align); }
 
   void setSpacing(qreal spacing) { _spacing = spacing; }
+
+  void setIgnoreAdvance(bool ignore) { _ignore_advance = ignore; }
 
   void setAlignment(Qt::Alignment align) { _align = align; }
   void setAlignment(size_t i, Qt::Alignment a) { _item_a[i] = a; }
@@ -85,6 +89,7 @@ private:
   QRectF _rect;
   QPointF _adv;
   qreal _spacing = 0;
+  bool _ignore_advance = false;
   Qt::Alignment _align = Qt::AlignBaseline | Qt::AlignLeft;
   QHash<size_t, Qt::Alignment> _item_a;
 };
