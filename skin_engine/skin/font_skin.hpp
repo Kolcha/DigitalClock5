@@ -12,7 +12,7 @@
 
 #include <QFont>
 
-class SKIN_ENGINE_EXPORT FontSkin : public SkinBase {
+class SKIN_ENGINE_EXPORT FontSkin : public Skin {
 public:
   explicit FontSkin(QFont font);
 

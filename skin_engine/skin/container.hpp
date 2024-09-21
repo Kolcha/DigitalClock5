@@ -25,7 +25,7 @@ class SKIN_ENGINE_EXPORT ContainerImplBase : public Skin::Glyph {
 public:
   explicit ContainerImplBase(std::shared_ptr<Algorithm> algo);
 
-  QRectF rect() const override { return _rect; }
+  QRectF rect() const override { return _rect.marginsAdded(_mgs); }
   QPointF advance() const override { return _adv; }
 
   void draw(QPainter* p) const override;
@@ -38,6 +38,10 @@ public:
 
   auto algorithm() const { return _algo; }
 
+  QMarginsF margins() const { return _mgs; }
+  // no geometry update propagation!
+  void setMargins(QMarginsF mgs) { _mgs = std::move(mgs); }
+
   void updateGeometry();
 
 private:
@@ -46,6 +50,7 @@ private:
   // cache geometry data
   QRectF _rect;
   QPointF _adv;
+  QMarginsF _mgs;
 };
 
 
@@ -138,6 +143,14 @@ public:
   auto algorithm() const
   {
     return std::static_pointer_cast<AlgorithmType>(_impl->algorithm());
+  }
+
+  QMarginsF margins() const { return _impl->margins(); }
+
+  void setMargins(QMarginsF mgs)
+  {
+    _impl->setMargins(std::move(mgs));
+    Glyph::updateGeometry();
   }
 
   // no implicit geometry updates propagation

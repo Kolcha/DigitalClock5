@@ -53,6 +53,7 @@ Glyph::Glyph(std::shared_ptr<Skin::Glyph> g)
     , _t(std::make_shared<Transform>())
     , _a(std::make_shared<Appearance>())
 {
+  _g->subscribe(this);
   _t->subscribe(this);
   _a->subscribe(this);
   updateGeometry();
@@ -62,12 +63,15 @@ Glyph::~Glyph()
 {
   _a->unsubscribe(this);
   _t->unsubscribe(this);
+  _g->unsubscribe(this);
 }
 
 void Glyph::setGlyph(std::shared_ptr<Skin::Glyph> g)
 {
   if (_g == g) return;
+  if (_g) _g->unsubscribe(this);
   _g = std::move(g);
+  if (_g) _g->subscribe(this);
   updateGeometry();
   dropCachedData();
 }
@@ -182,6 +186,12 @@ void Glyph::draw(QPainter* p) const
 
 void Glyph::onAppearanceChanged()
 {
+  dropCachedData();
+}
+
+void Glyph::onGeometryChanged()
+{
+  updateGeometry();
   dropCachedData();
 }
 

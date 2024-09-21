@@ -34,6 +34,11 @@ void GraphicsBase::setLineSpacing(qreal spacing)
   _tg.updateGeometry();
 }
 
+void GraphicsBase::setMargins(QMarginsF margins)
+{
+  _tg.setMargins(std::move(margins));
+}
+
 void GraphicsBase::setAlignment(Qt::Alignment a)
 {
   _tg.algorithm()->setAlignment(a);

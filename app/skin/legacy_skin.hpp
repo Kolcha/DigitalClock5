@@ -8,6 +8,7 @@
 
 #include "skin/skin.hpp"
 
+// TODO: convert it to "pure factory"
 class LegacySkin : public Skin {
 public:
   bool hasAlternateSeparator() const override
@@ -17,11 +18,13 @@ public:
 
   bool supportsCustomSeparator() const override { return false; }
 
-  std::shared_ptr<Glyph> glyph(char32_t c) const override
+protected:
+  std::shared_ptr<Glyph> create(char32_t c) const override
   {
     return _glyphs.value(c, nullptr);
   }
 
+public:
   void addGlyph(char32_t c, std::shared_ptr<Glyph> g)
   {
     _glyphs[c] = std::move(g);

@@ -90,6 +90,13 @@ void GraphicsWidgetBase::setLineSpacing(qreal spacing)
   update();
 }
 
+void GraphicsWidgetBase::setMargins(QMarginsF margins)
+{
+  _gt->setMargins(std::move(margins));
+  updateGeometry();
+  update();
+}
+
 void GraphicsWidgetBase::setScaling(qreal sx, qreal sy)
 {
   _sx = sx;

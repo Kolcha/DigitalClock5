@@ -23,6 +23,8 @@ public:
   qreal charSpacing() const { return _char_spacing; }
   qreal lineSpacing() const { return _line_spacing; }
 
+  QMarginsF margins() const { return _tg.margins(); }
+
   Qt::Alignment alignment() const { return _tg.algorithm()->alignment(); }
   Qt::Alignment alignment(size_t i) const
   { return _tg.algorithm()->alignment(i); }
@@ -49,6 +51,8 @@ public:
 
   void setCharSpacing(qreal spacing);
   void setLineSpacing(qreal spacing);
+
+  void setMargins(QMarginsF margins);
 
   void setAlignment(Qt::Alignment a);
   void setAlignment(size_t i, Qt::Alignment a);

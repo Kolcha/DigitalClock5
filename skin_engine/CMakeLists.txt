@@ -20,6 +20,7 @@ qt_add_library(${PROJECT_NAME} SHARED
     skin/image_glyph.cpp
     skin/image_glyph.hpp
     skin/observable.hpp
+    skin/skin.cpp
     skin/skin.hpp
     skin_engine_global.hpp
 )

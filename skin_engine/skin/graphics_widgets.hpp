@@ -36,6 +36,8 @@ public:
   qreal charSpacing() const { return _gt->charSpacing(); }
   qreal lineSpacing() const { return _gt->lineSpacing(); }
 
+  QMarginsF margins() const { return _gt->margins(); }
+
   qreal scalingX() const { return _sx; }
   qreal scalingY() const { return _sy; }
 
@@ -74,6 +76,8 @@ public slots:
 
   void setCharSpacing(qreal spacing);
   void setLineSpacing(qreal spacing);
+
+  void setMargins(QMarginsF margins);
 
   void setScalingX(qreal sx) { setScaling(sx, scalingY()); }
   void setScalingY(qreal sy) { setScaling(scalingX(), sy); }

@@ -13,8 +13,17 @@
 #include <QRect>
 
 #include "skin_engine_global.hpp"
+#include "observable.hpp"
 
 class QPainter;
+
+class SKIN_ENGINE_EXPORT GeometryChangeListener {
+public:
+  virtual ~GeometryChangeListener() = default;
+
+  virtual void onGeometryChanged() = 0;
+};
+
 
 class SKIN_ENGINE_EXPORT Skin {
 public:
@@ -24,7 +33,7 @@ public:
   virtual bool hasAlternateSeparator() const = 0;
   virtual bool supportsCustomSeparator() const = 0;
 
-  class Glyph {
+  class Glyph : public Observable<GeometryChangeListener> {
   public:
     virtual ~Glyph() = default;
 
@@ -35,22 +44,18 @@ public:
     virtual void draw(QPainter* p) const = 0;
   };
 
-  virtual std::shared_ptr<Glyph> glyph(char32_t c) const = 0;
-};
+  std::shared_ptr<Glyph> glyph(char32_t c) const;
 
+  QMarginsF margins() const { return _mgs; }
 
-class SKIN_ENGINE_EXPORT SkinBase : public Skin {
-public:
-  std::shared_ptr<Glyph> glyph(char32_t c) const override
-  {
-    auto& cached_glyph = _cache[c];
-    if (!cached_glyph) cached_glyph = create(c);
-    return cached_glyph;
-  }
+  void setMargins(QMarginsF mgs);
 
 protected:
   virtual std::shared_ptr<Glyph> create(char32_t c) const = 0;
 
 private:
-  mutable QHash<char32_t, std::shared_ptr<Glyph>> _cache;
+  QMarginsF _mgs;
+
+  class DecoratedGlyph;
+  mutable QHash<char32_t, std::shared_ptr<DecoratedGlyph>> _cache;
 };

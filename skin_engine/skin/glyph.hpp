@@ -63,7 +63,8 @@ private:
 
 
 // non-shareable, as has unique data such as position
-class SKIN_ENGINE_EXPORT Glyph : public AppearanceChangeListener {
+class SKIN_ENGINE_EXPORT Glyph : public AppearanceChangeListener,
+                                 public GeometryChangeListener {
 public:
   Glyph() = default;
   explicit Glyph(std::shared_ptr<Skin::Glyph> g);
@@ -124,7 +125,8 @@ public:
   void draw(QPainter* p) const;
 
   // listeners
-  void onAppearanceChanged();
+  void onAppearanceChanged() override;
+  void onGeometryChanged() override;
 
 protected:
   void updateGeometry();
