@@ -11,6 +11,8 @@ void WidgetPluginBaseImpl::applyAppearanceSettings()
   if (!widget)
     return;
 
+  custom_skin->setMargins(char_margins);
+
   if (use_clock_skin)
     widget->setSkin(skin);
   else
@@ -34,6 +36,14 @@ void WidgetPluginBaseImpl::applyAppearanceSettings()
     widget->setUseSystemForeground(tx.style() == Qt::SolidPattern && use_sys_fg);
     widget->setUseSystemBackground(bg.style() == Qt::SolidPattern && use_sys_bg);
   }
+
+  widget->setMargins(text_margins);
+
+  widget->setIgnoreAX(ignore_ax);
+  widget->setIgnoreAY(ignore_ay);
+
+  widget->setCharSpacing(spacing_h);
+  widget->setLineSpacing(spacing_v);
 
   widget->setLayoutConfig(layout_cfg);
 }
@@ -83,4 +93,13 @@ void WidgetPluginBaseImpl::initSettings(PluginSettingsStorage& st)
 
   use_sys_fg = sa.getUseSystemForeground();
   use_sys_bg = sa.getUseSystemBackground();
+
+  char_margins = sa.getCharMargins();
+  text_margins = sa.getTextMargins();
+
+  ignore_ax = sa.getIgnoreAX();
+  ignore_ay = sa.getIgnoreAY();
+
+  spacing_h = sa.getSpacingH();
+  spacing_v = sa.getSpacingV();
 }

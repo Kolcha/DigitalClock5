@@ -7,7 +7,6 @@
 #pragma once
 
 #include <QFont>
-#include <QMargins>
 
 #include "config/appearance_base.hpp"
 #include "config/settings_storage.hpp"
@@ -66,16 +65,7 @@ public:
   CONFIG_OPTION_Q(int, ScalingH, 100)
   CONFIG_OPTION_Q(int, ScalingV, 100)
 
-  CONFIG_OPTION_Q(int, SpacingH, 4)
-  CONFIG_OPTION_Q(int, SpacingV, 4)
-
   CONFIG_OPTION_Q(int, LayoutSpacing, 0)
-
-  CONFIG_OPTION_Q(QMarginsF, CharMargins, QMarginsF())
-  CONFIG_OPTION_Q(QMarginsF, TextMargins, QMarginsF())
-
-  CONFIG_OPTION_Q(bool, IgnoreAX, false)
-  CONFIG_OPTION_Q(bool, IgnoreAY, false)
 
   CONFIG_OPTION_Q(int, Opacity, 80)
 
@@ -92,7 +82,6 @@ public:
   CONFIG_OPTION_Q(QString, CustomSeparators, QString())
 
   CONFIG_OPTION_Q(QString, TimeFormat, QString("HH:mm"))
-  CONFIG_OPTION_Q(QString, LayoutConfig, QString())
   CONFIG_OPTION_Q(int, SecondsScaleFactor, 100)
 
 private:

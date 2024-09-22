@@ -9,6 +9,7 @@
 #include <QTabWidget>
 
 #include "impl/appearance_settings_widget.hpp"
+#include "impl/geometry_settings_widget.hpp"
 #include "impl/widget_plugin_base_impl.hpp"
 
 WidgetPluginBase::WidgetPluginBase()
@@ -41,7 +42,9 @@ QWidget* WidgetPluginBase::configure(PluginSettingsStorage& s, StateClient& t)
   }
   // add common tab at the end
   auto common_tab = new AppearanceSettingsWidget(_impl.get(), s, t);
+  auto geomet_tab = new GeometrySettingsWidget(_impl.get(), s, t);
   tab_widget->addTab(common_tab, common_tab->windowTitle());
+  tab_widget->addTab(geomet_tab, geomet_tab->windowTitle());
   return tab_widget;
 }
 

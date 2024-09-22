@@ -114,6 +114,11 @@ void GraphicsBase::setTexture(QBrush b, bool stretch, bool per_char)
   update();
 }
 
+void GraphicsBase::rebuildLayout()
+{
+  rebuild();
+}
+
 void GraphicsBase::rebuild()
 {
   if (!_skin) {

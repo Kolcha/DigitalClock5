@@ -753,8 +753,7 @@ void SettingsDialog::onCharMarginsChanged()
 {
   QMarginsF m(ui->m_char_l->value(), ui->m_char_t->value(), ui->m_char_r->value(), ui->m_char_b->value());
   app->window(_curr_idx)->clock()->skin()->setMargins(m);   // skin is shared if required
-  for (const auto& wnd : app->windows())
-    wnd->clock()->setDateTime(QDateTime::currentDateTimeUtc());   // to trigger geometry update
+  applyClockOption(&GraphicsDateTimeWidget::rebuildLayout);
   app->config().window(_curr_idx).appearance().setCharMargins(m);
 }
 

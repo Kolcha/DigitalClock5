@@ -47,4 +47,15 @@ public:
   CONFIG_OPTION_Q(bool, BackgroundStretch, false)
   CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false)
   bool shouldUseSystemBackground() const;
+
+  CONFIG_OPTION_Q(int, SpacingH, 4)
+  CONFIG_OPTION_Q(int, SpacingV, 4)
+
+  CONFIG_OPTION_Q(QMarginsF, CharMargins, QMarginsF())
+  CONFIG_OPTION_Q(QMarginsF, TextMargins, QMarginsF())
+
+  CONFIG_OPTION_Q(bool, IgnoreAX, false)
+  CONFIG_OPTION_Q(bool, IgnoreAY, false)
+
+  CONFIG_OPTION_Q(QString, LayoutConfig, QString())
 };

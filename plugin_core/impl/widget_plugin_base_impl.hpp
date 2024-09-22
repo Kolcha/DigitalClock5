@@ -48,6 +48,15 @@ public:
   bool use_sys_fg = false;
   bool use_sys_bg = false;
 
+  QMarginsF char_margins;
+  QMarginsF text_margins;
+
+  bool ignore_ax = false;
+  bool ignore_ay = false;
+
+  int spacing_h = 0;
+  int spacing_v = 0;
+
   void applyAppearanceSettings();
   void repositionWidget();
 

@@ -57,6 +57,13 @@ void GraphicsWidgetBase::setSkin(std::shared_ptr<Skin> skin)
   update();
 }
 
+void GraphicsWidgetBase::rebuildLayout()
+{
+  _gt->rebuildLayout();
+  updateGeometry();
+  update();
+}
+
 void GraphicsWidgetBase::setAutoResizePolicy(AutoResizePolicy rp)
 {
   switch (rp) {

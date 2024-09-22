@@ -75,6 +75,8 @@ signals:
   void skinChanged(std::shared_ptr<Skin> skin);
 
 public slots:
+  void rebuildLayout();
+
   void setAutoResizePolicy(AutoResizePolicy rp);
 
   void setCharSpacing(qreal spacing);

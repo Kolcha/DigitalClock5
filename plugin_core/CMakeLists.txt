@@ -19,6 +19,9 @@ qt_add_library(${PROJECT_NAME} SHARED
     impl/appearance_settings_widget.cpp
     impl/appearance_settings_widget.hpp
     impl/appearance_settings_widget.ui
+    impl/geometry_settings_widget.cpp
+    impl/geometry_settings_widget.hpp
+    impl/geometry_settings_widget.ui
     impl/widget_plugin_base_impl.cpp
     impl/widget_plugin_base_impl.hpp
 )

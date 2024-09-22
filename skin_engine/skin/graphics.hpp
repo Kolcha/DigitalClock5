@@ -108,6 +108,8 @@ public:
 
   void draw(QPainter* p) const { _tg.draw(p); }
 
+  void rebuildLayout();
+
 protected:
   auto charAppearance() const { return _char_a; }
   auto textAppearance() const { return _text_a; }
