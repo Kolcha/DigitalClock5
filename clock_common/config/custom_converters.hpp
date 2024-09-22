@@ -7,6 +7,7 @@
 #pragma once
 
 #include <QBrush>
+#include <QMargins>
 #include <QString>
 #include <QTimeZone>
 #include <QVariant>
@@ -61,6 +62,31 @@ struct SettingsStorageClient::fromVariant<QTimeZone> {
   QTimeZone operator ()(const QVariant& v)
   {
     return QTimeZone(fromVariant<QString>()(v).toLatin1());
+  }
+};
+
+// serialize QMargins as string
+template<>
+struct SettingsStorageClient::toVariant<QMarginsF> {
+  QVariant operator()(const QMarginsF& v)
+  {
+    auto ms = QString("%1,%2,%3,%4")
+                  .arg(v.left()).arg(v.top())
+                  .arg(v.right()).arg(v.bottom());
+    return toVariant<QString>()(ms);
+  }
+};
+
+template<>
+struct SettingsStorageClient::fromVariant<QMarginsF> {
+  QMarginsF operator()(const QVariant& v)
+  {
+    auto ms = fromVariant<QString>()(v).split(',');
+    qreal l = ms.size() > 0 ? ms[0].toFloat() : 0.0;
+    qreal t = ms.size() > 1 ? ms[1].toFloat() : 0.0;
+    qreal r = ms.size() > 2 ? ms[2].toFloat() : 0.0;
+    qreal b = ms.size() > 3 ? ms[3].toFloat() : 0.0;
+    return ms.empty() ? QMarginsF() : QMarginsF(l, t, r, b);
   }
 };
 

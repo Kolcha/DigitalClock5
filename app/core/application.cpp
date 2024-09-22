@@ -48,9 +48,15 @@ void Application::configureWindow(size_t i)
   wnd->setScaling(acfg.getScalingH()/100., acfg.getScalingV()/100.);
   wnd->setWindowOpacity(acfg.getOpacity()/100.);
 
+  wnd->layout()->setSpacing(acfg.getLayoutSpacing());
+
   auto clock = wnd->clock();
   clock->setCharSpacing(acfg.getSpacingH());
   clock->setLineSpacing(acfg.getSpacingV());
+  clock->setMargins(acfg.getTextMargins());
+
+  clock->setIgnoreAX(acfg.getIgnoreAX());
+  clock->setIgnoreAY(acfg.getIgnoreAY());
 
   clock->setTimeZone(gcfg.getTimeZone());
 
@@ -59,6 +65,7 @@ void Application::configureWindow(size_t i)
     auto skin = acfg.getUseFontInsteadOfSkin() ?
                     _sm.loadSkin(acfg.getFont()) :
                     _sm.loadSkin(acfg.getSkin());
+    skin->setMargins(acfg.getCharMargins());
     clock->setSkin(std::move(skin));
   } else {
     // share skin

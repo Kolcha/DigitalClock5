@@ -25,6 +25,9 @@ public:
 
   QMarginsF margins() const { return _tg.margins(); }
 
+  bool ignoreAX() const { return _ignore_ax; }
+  bool ignoreAY() const { return _ignore_ay; }
+
   Qt::Alignment alignment() const { return _tg.algorithm()->alignment(); }
   Qt::Alignment alignment(size_t i) const
   { return _tg.algorithm()->alignment(i); }
@@ -53,6 +56,9 @@ public:
   void setLineSpacing(qreal spacing);
 
   void setMargins(QMarginsF margins);
+
+  void setIgnoreAX(bool ignore);
+  void setIgnoreAY(bool ignore);
 
   void setAlignment(Qt::Alignment a);
   void setAlignment(size_t i, Qt::Alignment a);
@@ -130,6 +136,9 @@ private:
   bool _tx_s = false;
   bool _bg_pc = false;
   bool _tx_pc = true;
+
+  bool _ignore_ax = false;
+  bool _ignore_ay = false;
 };
 
 

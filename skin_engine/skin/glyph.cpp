@@ -53,7 +53,7 @@ Glyph::Glyph(std::shared_ptr<Skin::Glyph> g)
     , _t(std::make_shared<Transform>())
     , _a(std::make_shared<Appearance>())
 {
-  _g->subscribe(this);
+  if (_g) _g->subscribe(this);
   _t->subscribe(this);
   _a->subscribe(this);
   updateGeometry();
@@ -63,7 +63,7 @@ Glyph::~Glyph()
 {
   _a->unsubscribe(this);
   _t->unsubscribe(this);
-  _g->unsubscribe(this);
+  if (_g) _g->unsubscribe(this);
 }
 
 void Glyph::setGlyph(std::shared_ptr<Skin::Glyph> g)

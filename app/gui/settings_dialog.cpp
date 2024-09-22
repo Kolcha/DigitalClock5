@@ -749,6 +749,45 @@ void SettingsDialog::on_vs_edit_valueChanged(int arg1)
   app->config().window(_curr_idx).appearance().setSpacingV(arg1);
 }
 
+void SettingsDialog::onCharMarginsChanged()
+{
+  QMarginsF m(ui->m_char_l->value(), ui->m_char_t->value(), ui->m_char_r->value(), ui->m_char_b->value());
+  app->window(_curr_idx)->clock()->skin()->setMargins(m);   // skin is shared if required
+  for (const auto& wnd : app->windows())
+    wnd->clock()->setDateTime(QDateTime::currentDateTimeUtc());   // to trigger geometry update
+  app->config().window(_curr_idx).appearance().setCharMargins(m);
+}
+
+void SettingsDialog::onTextMarginsChanged()
+{
+  QMarginsF m(ui->m_text_l->value(), ui->m_text_t->value(), ui->m_text_r->value(), ui->m_text_b->value());
+  applyClockOption(&GraphicsDateTimeWidget::setMargins, m);
+  app->config().window(_curr_idx).appearance().setTextMargins(m);
+}
+
+void SettingsDialog::on_ignore_ax_clicked(bool checked)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setIgnoreAX, checked);
+  app->config().window(_curr_idx).appearance().setIgnoreAX(checked);
+}
+
+void SettingsDialog::on_ignore_ay_clicked(bool checked)
+{
+  applyClockOption(&GraphicsDateTimeWidget::setIgnoreAY, checked);
+  app->config().window(_curr_idx).appearance().setIgnoreAY(checked);
+}
+
+void SettingsDialog::on_layout_spacing_edit_valueChanged(int arg1)
+{
+  if (app->config().global().getAppearancePerInstance()) {
+    app->window(_curr_idx)->layout()->setSpacing(arg1);
+  } else {
+    for (const auto& wnd : app->windows())
+      wnd->layout()->setSpacing(arg1);
+  }
+  app->config().window(_curr_idx).appearance().setLayoutSpacing(arg1);
+}
+
 void SettingsDialog::onPluginStateChanged(const QString& id, bool enabled)
 {
   auto current_plugins = app->config().global().getPlugins();
@@ -951,8 +990,34 @@ void SettingsDialog::initAppearanceTab(int idx)
 
 void SettingsDialog::initMiscTab(int idx)
 {
-  Q_UNUSED(idx);
-  ui->tabWidget->tabBar()->setTabVisible(3, false);
+  SectionAppearance& acfg = app->config().window(idx).appearance();
+
+  const auto& cm = acfg.getCharMargins();
+  ui->m_char_l->setValue(cm.left());
+  ui->m_char_t->setValue(cm.top());
+  ui->m_char_r->setValue(cm.right());
+  ui->m_char_b->setValue(cm.bottom());
+
+  connect(ui->m_char_l, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
+  connect(ui->m_char_t, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
+  connect(ui->m_char_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
+  connect(ui->m_char_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
+
+  const auto& tm = acfg.getTextMargins();
+  ui->m_text_l->setValue(tm.left());
+  ui->m_text_t->setValue(tm.top());
+  ui->m_text_r->setValue(tm.right());
+  ui->m_text_b->setValue(tm.bottom());
+
+  connect(ui->m_text_l, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
+  connect(ui->m_text_t, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
+  connect(ui->m_text_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
+  connect(ui->m_text_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
+
+  ui->ignore_ax->setChecked(acfg.getIgnoreAX());
+  ui->ignore_ay->setChecked(acfg.getIgnoreAY());
+
+  ui->layout_spacing_edit->setValue(acfg.getLayoutSpacing());
 }
 
 void SettingsDialog::initPluginsTab()

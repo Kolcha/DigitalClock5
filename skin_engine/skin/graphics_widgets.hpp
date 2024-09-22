@@ -38,6 +38,9 @@ public:
 
   QMarginsF margins() const { return _gt->margins(); }
 
+  bool ignoreAX() const { return _gt->ignoreAX(); }
+  bool ignoreAY() const { return _gt->ignoreAY(); }
+
   qreal scalingX() const { return _sx; }
   qreal scalingY() const { return _sy; }
 
@@ -78,6 +81,9 @@ public slots:
   void setLineSpacing(qreal spacing);
 
   void setMargins(QMarginsF margins);
+
+  void setIgnoreAX(bool ignore);
+  void setIgnoreAY(bool ignore);
 
   void setScalingX(qreal sx) { setScaling(sx, scalingY()); }
   void setScalingY(qreal sy) { setScaling(scalingX(), sy); }

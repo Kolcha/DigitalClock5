@@ -122,6 +122,11 @@ private slots:
   void on_vs_edit_valueChanged(int arg1);
 
   // misc
+  void onCharMarginsChanged();
+  void onTextMarginsChanged();
+  void on_ignore_ax_clicked(bool checked);
+  void on_ignore_ay_clicked(bool checked);
+  void on_layout_spacing_edit_valueChanged(int arg1);
 
   // plugins
   void onPluginStateChanged(const QString& id, bool enabled);

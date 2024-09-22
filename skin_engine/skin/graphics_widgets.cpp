@@ -97,6 +97,20 @@ void GraphicsWidgetBase::setMargins(QMarginsF margins)
   update();
 }
 
+void GraphicsWidgetBase::setIgnoreAX(bool ignore)
+{
+  _gt->setIgnoreAX(ignore);
+  updateGeometry();
+  update();
+}
+
+void GraphicsWidgetBase::setIgnoreAY(bool ignore)
+{
+  _gt->setIgnoreAY(ignore);
+  updateGeometry();
+  update();
+}
+
 void GraphicsWidgetBase::setScaling(qreal sx, qreal sy)
 {
   _sx = sx;

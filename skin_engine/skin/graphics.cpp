@@ -39,6 +39,19 @@ void GraphicsBase::setMargins(QMarginsF margins)
   _tg.setMargins(std::move(margins));
 }
 
+void GraphicsBase::setIgnoreAX(bool ignore)
+{
+  _ignore_ax = ignore;
+  rebuild();
+}
+
+void GraphicsBase::setIgnoreAY(bool ignore)
+{
+  _ignore_ay = ignore;
+  _tg.algorithm()->setIgnoreAdvance(_ignore_ay);
+  _tg.updateGeometry();
+}
+
 void GraphicsBase::setAlignment(Qt::Alignment a)
 {
   _tg.algorithm()->setAlignment(a);
@@ -162,6 +175,7 @@ void GraphicsText::buildLayout()
 
     auto line_c = std::make_shared<HContainerGlyph>();
     line_c->algorithm()->setSpacing(charSpacing());
+    line_c->algorithm()->setIgnoreAdvance(ignoreAX());
 
     for (const auto c : code_points) {
       auto sg = skin()->glyph(c);
@@ -419,12 +433,14 @@ void GraphicsDateTime::rebuildLayout(const auto& dt_tokens)
       token_c->transform()->setTransform(*iter);
 
     token_c->algorithm()->setSpacing(charSpacing());
+    token_c->algorithm()->setIgnoreAdvance(ignoreAX());
     token_c->updateGeometry();
     line_c->addGlyph(std::move(token_c));
     line_v.push_back(std::move(token_v));
   }
 
   line_c->algorithm()->setSpacing(charSpacing());
+  line_c->algorithm()->setIgnoreAdvance(ignoreAX());
   line_c->updateGeometry();
   vcontainer().addGlyph(std::move(line_c));
 
@@ -439,6 +455,7 @@ void GraphicsDateTime::updateLayout(const auto& dt_tokens)
   for (const auto& t : dt_tokens) {
     auto& curr_line = static_cast<HContainerGlyph&>(*vcontainer()[cl]);
     curr_line.algorithm()->setSpacing(charSpacing());
+    curr_line.algorithm()->setIgnoreAdvance(ignoreAX());
 
     if (t.key.front() == '\n') {
       curr_line.updateGeometry();
@@ -460,6 +477,7 @@ void GraphicsDateTime::updateLayout(const auto& dt_tokens)
       if (auto iter = _tt.find(t.key); iter != _tt.end())
         new_token->transform()->setTransform(*iter);
       new_token->algorithm()->setSpacing(charSpacing());
+      new_token->algorithm()->setIgnoreAdvance(ignoreAX());
       new_token->updateGeometry();
       curr_line[ct] = std::move(new_token);
     } else {
@@ -473,6 +491,7 @@ void GraphicsDateTime::updateLayout(const auto& dt_tokens)
       else
         curr_token.transform()->setTransform(QTransform());
       curr_token.algorithm()->setSpacing(charSpacing());
+      curr_token.algorithm()->setIgnoreAdvance(ignoreAX());
       curr_token.updateGeometry();
     }
 
