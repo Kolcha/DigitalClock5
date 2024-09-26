@@ -142,16 +142,16 @@ void GraphicsWidgetBase::setLayoutConfig(QString lcfg)
 
 void GraphicsWidgetBase::setBackground(QBrush b, bool stretch, bool per_char)
 {
-  if (_sys_bg) return;
   _last_bg = b;
+  if (_sys_bg) return;
   _gt->setBackground(std::move(b), stretch, per_char);
   update();
 }
 
 void GraphicsWidgetBase::setTexture(QBrush b, bool stretch, bool per_char)
 {
-  if (_sys_fg) return;
   _last_tx = b;
+  if (_sys_fg) return;
   _gt->setTexture(std::move(b), stretch, per_char);
   update();
 }

@@ -271,7 +271,8 @@ struct PluginManager::Impl {
   std::unordered_map<QString, PluginInfo> available;
   std::unordered_map<QString, PluginHandle> loaded;
 
-  std::vector<std::unique_ptr<ChangeRetransmitter>> cfg_sinks;
+  std::vector<std::unique_ptr<ChangeRetransmitter>> cfg_sinks_clk;  // from clock to plugins
+  std::vector<std::unique_ptr<ChangeRetransmitter>> cfg_sinks_plg;  // to clock/plugins
 
   QTimer timer;   // independent timer for periodic tick() calls
 
@@ -450,13 +451,17 @@ void PluginManager::Impl::connectEverything(const PluginHandle& h)
     if (auto sp = dynamic_cast<SettingsPlugin*>(h.instance(i))) {
       if (mdata.value("settings_listener", false).toBool()) {
         auto idx = h.plugin()->perClockInstance() ? i : 0;
-        QObject::connect(cfg_sinks[idx].get(), &ChangeRetransmitter::optionChanged,
+        QObject::connect(cfg_sinks_clk[idx].get(), &ChangeRetransmitter::optionChanged,
+                         sp, &SettingsPlugin::onOptionChanged);
+        QObject::connect(cfg_sinks_plg[idx].get(), &ChangeRetransmitter::optionChanged,
                          sp, &SettingsPlugin::onOptionChanged);
       }
       if (mdata.value("settings_notifier", false).toBool()) {
         auto idx = h.plugin()->perClockInstance() ? i : 0;
         QObject::connect(sp, &SettingsPlugin::optionChanged,
-                         cfg_sinks[idx].get(), &ChangeRetransmitter::optionChanged);
+                         cfg_sinks_clk[idx].get(), &ChangeRetransmitter::optionChanged);
+        QObject::connect(sp, &SettingsPlugin::optionChanged,
+                         cfg_sinks_plg[idx].get(), &ChangeRetransmitter::optionChanged);
       }
     }
     // skin access extension
@@ -489,30 +494,34 @@ void PluginManager::init()
 {
   _impl->enumerate();
 
-  for (int i = 0; i < _impl->app->config().global().getNumInstances(); i++)
-    _impl->cfg_sinks.push_back(std::make_unique<ChangeRetransmitter>());
+  for (int i = 0; i < _impl->app->config().global().getNumInstances(); i++) {
+    _impl->cfg_sinks_clk.push_back(std::make_unique<ChangeRetransmitter>());
+    _impl->cfg_sinks_plg.push_back(std::make_unique<ChangeRetransmitter>());
+  }
 
   // settings sync with the clock
   bool same_appearance = !_impl->app->config().global().getAppearancePerInstance();
   if (same_appearance) {
     // clock 0 -> all sinks
-    for (const auto& s : _impl->cfg_sinks) {
+    for (const auto& s : _impl->cfg_sinks_clk) {
       connect(_impl->app->settingsTransmitter(0), &SettingsChangeTransmitter::optionChanged,
               s.get(), &ChangeRetransmitter::optionChanged);
     }
     // sink 0 -> all clocks
     for (const auto& l : _impl->app->settingsListeners()) {
-      connect(_impl->cfg_sinks[0].get(), &ChangeRetransmitter::optionChanged,
+      connect(_impl->cfg_sinks_plg[0].get(), &ChangeRetransmitter::optionChanged,
               l.get(), &SettingsChangeListener::onOptionChanged);
     }
   } else {
     // one-to-one
-    for (size_t i = 0; i < _impl->cfg_sinks.size(); i++) {
+    Q_ASSERT(_impl->cfg_sinks_clk.size() == _impl->cfg_sinks_plg.size());
+    for (size_t i = 0; i < _impl->cfg_sinks_clk.size(); i++) {
       auto cl = _impl->app->settingsListener(i);
       auto ct = _impl->app->settingsTransmitter(i);
-      auto ss = _impl->cfg_sinks[i].get();
-      connect(ss, &ChangeRetransmitter::optionChanged, cl, &SettingsChangeListener::onOptionChanged);
-      connect(ct, &SettingsChangeTransmitter::optionChanged, ss, &ChangeRetransmitter::optionChanged);
+      auto ci = _impl->cfg_sinks_clk[i].get();
+      auto po = _impl->cfg_sinks_plg[i].get();
+      connect(po, &ChangeRetransmitter::optionChanged, cl, &SettingsChangeListener::onOptionChanged);
+      connect(ct, &SettingsChangeTransmitter::optionChanged, ci, &ChangeRetransmitter::optionChanged);
     }
   }
 
