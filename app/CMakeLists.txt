@@ -85,6 +85,10 @@ if (APPLE)
         COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
             "${CMAKE_BINARY_DIR}/skins" "${PROJECT_NAME}.app/Contents/Resources/skins"
     )
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+            "${CMAKE_BINARY_DIR}/textures" "${PROJECT_NAME}.app/Contents/Resources/textures"
+    )
 endif()
 
 target_win_deploy_qt(${PROJECT_NAME} ${PROJECT_NAME}.exe)

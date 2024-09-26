@@ -557,7 +557,7 @@ void SettingsDialog::tx_select_pattern()
   auto& acfg = app->config().window(_curr_idx).appearance();
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           acfg.getTexturePatternFile(),
+                                           acfg.lastTexturePatternPath(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
   QPixmap pxm(file);
@@ -696,7 +696,7 @@ void SettingsDialog::bg_select_pattern()
   auto& acfg = app->config().window(_curr_idx).appearance();
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           acfg.getBackgroundPatternFile(),
+                                           acfg.lastBackgroundPatternPath(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
   QPixmap pxm(file);

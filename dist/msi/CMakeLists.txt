@@ -9,6 +9,7 @@ set(WIX_SRC_FILES
     main.wxs
     app_files.wxs
     skins.wxs
+    textures.wxs
 )
 
 set_property(GLOBAL PROPERTY JOB_POOLS single_job=1)
@@ -31,6 +32,11 @@ add_custom_target(deploy_qt COMMENT "Deploying Qt")
 add_custom_command(TARGET deploy_qt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
         "${CMAKE_BINARY_DIR}/skins" "${MSI_SRC_DIR}/skins"
+)
+
+add_custom_command(TARGET deploy_qt POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+        "${CMAKE_BINARY_DIR}/textures" "${MSI_SRC_DIR}/textures"
 )
 
 function(target_win_deploy_qt _target _out_file)

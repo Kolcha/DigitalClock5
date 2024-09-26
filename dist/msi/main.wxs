@@ -58,6 +58,7 @@ SPDX-License-Identifier: MIT
     <Feature Id="Complete" Level="1">
       <ComponentGroupRef Id="AppFiles" />
       <ComponentGroupRef Id="Skins" />
+      <ComponentGroupRef Id="Textures" />
       <ComponentGroupRef Id="Extras" />
     </Feature>
 

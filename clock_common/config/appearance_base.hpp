@@ -36,6 +36,7 @@ public:
   CONFIG_OPTION_Q(bool, TextureStretch, false)
   CONFIG_OPTION_Q(bool, TexturePerCharacter, true)
   bool shouldUseSystemForeground() const;
+  QString lastTexturePatternPath() const;
 
   CONFIG_OPTION_Q(bool, UseSystemBackground, false)
   QBrush getBackground() const;
@@ -47,6 +48,7 @@ public:
   CONFIG_OPTION_Q(bool, BackgroundStretch, false)
   CONFIG_OPTION_Q(bool, BackgroundPerCharacter, false)
   bool shouldUseSystemBackground() const;
+  QString lastBackgroundPatternPath() const;
 
   CONFIG_OPTION_Q(int, SpacingH, 4)
   CONFIG_OPTION_Q(int, SpacingV, 4)

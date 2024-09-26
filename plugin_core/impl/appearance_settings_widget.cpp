@@ -336,7 +336,7 @@ void AppearanceSettingsWidget::tx_select_pattern()
 {
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           cfg.getTexturePatternFile(),
+                                           cfg.lastTexturePatternPath(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
 
@@ -483,7 +483,7 @@ void AppearanceSettingsWidget::bg_select_pattern()
 {
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           cfg.getBackgroundPatternFile(),
+                                           cfg.lastBackgroundPatternPath(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
 
