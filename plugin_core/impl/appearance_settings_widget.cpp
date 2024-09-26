@@ -276,17 +276,21 @@ void AppearanceSettingsWidget::on_tx_options_box_currentIndexChanged(int index)
       ui->tx_option->setText(tr("follow system theme"));
       ui->tx_option->show();
       ui->tx_option->setChecked(cfg.getUseSystemForeground());
+      ui->tx_btn->setDisabled(cfg.getUseSystemForeground());
+      connect(ui->tx_option, &QCheckBox::toggled, ui->tx_btn, &QWidget::setDisabled);
       connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::tx_use_system_color);
       break;
     case 1: // gradient
       connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_gradient);
       ui->tx_option->hide();
+      ui->tx_btn->setEnabled(true);
       break;
     case 2: // pattern
       connect(ui->tx_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::tx_select_pattern);
       ui->tx_option->setText(tr("stretch instead of tile"));
       ui->tx_option->show();
       ui->tx_option->setChecked(cfg.getTextureStretch());
+      ui->tx_btn->setEnabled(true);
       connect(ui->tx_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::tx_pattern_stretch);
       break;
   }
@@ -423,17 +427,21 @@ void AppearanceSettingsWidget::on_bg_options_box_currentIndexChanged(int index)
       ui->bg_option->setText(tr("follow system theme"));
       ui->bg_option->show();
       ui->bg_option->setChecked(cfg.getUseSystemBackground());
+      ui->bg_btn->setDisabled(cfg.getUseSystemBackground());
+      connect(ui->bg_option, &QCheckBox::toggled, ui->bg_btn, &QWidget::setDisabled);
       connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::bg_use_system_color);
       break;
     case 1: // gradient
       connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_gradient);
       ui->bg_option->hide();
+      ui->bg_btn->setEnabled(true);
       break;
     case 2: // pattern
       connect(ui->bg_btn, &QToolButton::clicked, this, &AppearanceSettingsWidget::bg_select_pattern);
       ui->bg_option->setText(tr("stretch instead of tile"));
       ui->bg_option->show();
       ui->bg_option->setChecked(cfg.getBackgroundStretch());
+      ui->bg_btn->setEnabled(true);
       connect(ui->bg_option, &QCheckBox::clicked, this, &AppearanceSettingsWidget::bg_pattern_stretch);
       break;
   }
