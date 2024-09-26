@@ -228,57 +228,57 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="24"/>
-        <source>App &amp;Global</source>
+        <source>App Global</source>
         <translation>Глобальные</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="114"/>
-        <source>start on &amp;system startup</source>
+        <source>start on system startup</source>
         <translation>запускать при старте системы</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="161"/>
-        <source>stay on &amp;top of other windows</source>
+        <source>stay on top of other windows</source>
         <translation>поверх всех окон</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="107"/>
-        <source>transparent for m&amp;ouse events</source>
+        <source>transparent for mouse events</source>
         <translation>прозрачность для мыши</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="40"/>
-        <source>become almost transparent on mouse &amp;hover</source>
+        <source>become almost transparent on mouse hover</source>
         <translation>изменять прозрачность при наведении мыши</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="33"/>
-        <source>&amp;hide completely</source>
+        <source>hide completely</source>
         <translation>полностью скрыть</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="144"/>
-        <source>enable multiple &amp;clocks</source>
+        <source>enable multiple clocks</source>
         <translation>включить несколько часов</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="70"/>
-        <source>same appea&amp;rance</source>
+        <source>same appearance</source>
         <translation>одинаковый вид</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="121"/>
-        <source>check for &amp;updates every</source>
+        <source>check for updates every</source>
         <translation>Проверять обновления каждые</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="80"/>
-        <source>include &amp;beta</source>
+        <source>include beta</source>
         <translation>включая бета</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="168"/>
-        <source>enable &amp;debug options</source>
+        <source>enable debug options</source>
         <translation>опции для отладки</translation>
     </message>
     <message>
@@ -298,12 +298,12 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="229"/>
-        <source>&amp;Format</source>
+        <source>Format</source>
         <translation>Формат</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="272"/>
-        <source>custo&amp;m format</source>
+        <source>custom format</source>
         <translation>пользовательский формат</translation>
     </message>
     <message>
@@ -313,12 +313,12 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="418"/>
-        <source>layout &amp;config string (useful only for multiline formats)</source>
+        <source>layout config string (useful only for multiline formats)</source>
         <translation>строка разметки (только для многострочных форматов)</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="351"/>
-        <source>custom separators (will be used instead of &apos;&amp;:&apos;)</source>
+        <source>custom separators (will be used instead of &apos;:&apos;)</source>
         <translation>пользовательские разделители (вместо &apos;:&apos;)</translation>
     </message>
     <message>
@@ -328,27 +328,27 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="373"/>
-        <source>make seco&amp;nds smaller,</source>
+        <source>make seconds smaller,</source>
         <translation>сделать секунды меньше,</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="396"/>
-        <source>of clock&apos;s &amp;height</source>
+        <source>of clock&apos;s height</source>
         <translation>высоты часов</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="464"/>
-        <source>&amp;12h</source>
+        <source>12h</source>
         <translation>12-часовой</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="491"/>
-        <source>&amp;24h</source>
+        <source>24h</source>
         <translation>24-часовой</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="474"/>
-        <source>leading &amp;zero</source>
+        <source>leading zero</source>
         <translation>начальный ноль</translation>
     </message>
     <message>
@@ -373,57 +373,57 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="437"/>
-        <source>display time in another time &amp;zone</source>
+        <source>display time in another time zone</source>
         <translation>показывать время в другом часовом поясе</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="481"/>
-        <source>show &amp;seconds</source>
+        <source>show seconds</source>
         <translation>показывать секунды</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="517"/>
-        <source>show AM&amp;/PM</source>
+        <source>show AM/PM</source>
         <translation>показывать AM/PM</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="527"/>
-        <source>add space &amp;before AM/PM</source>
+        <source>add space before AM/PM</source>
         <translation>добавить пробел перед AM/PM</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="534"/>
-        <source>&amp;uppercase</source>
+        <source>uppercase</source>
         <translation>заглавные</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="544"/>
-        <source>&amp;lowercase</source>
+        <source>lowercase</source>
         <translation>строчные</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="598"/>
-        <source>&amp;Appearance</source>
+        <source>Appearance</source>
         <translation>Вид</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="607"/>
-        <source>fo&amp;nt</source>
+        <source>font</source>
         <translation>шрифт</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="640"/>
-        <source>s&amp;kin</source>
+        <source>skin</source>
         <translation>стиль</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="663"/>
-        <source>flashing sepa&amp;rator</source>
+        <source>flashing separator</source>
         <translation>мигающий разделитель</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="670"/>
-        <source>&amp;texture</source>
+        <source>texture</source>
         <translation>текстура</translation>
     </message>
     <message>
@@ -447,22 +447,22 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings_dialog.ui" line="712"/>
         <location filename="../gui/settings_dialog.ui" line="902"/>
-        <source>apply per &amp;element</source>
+        <source>apply per element</source>
         <translation>для каждого символа</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="767"/>
-        <source>&amp;opacity</source>
+        <source>opacity</source>
         <translation>непрозрачность</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="777"/>
-        <source>s&amp;caling</source>
+        <source>scaling</source>
         <translation>увеличение</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="809"/>
-        <source>&amp;colorize</source>
+        <source>colorize</source>
         <translation>раскрасить</translation>
     </message>
     <message>
@@ -472,7 +472,7 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="860"/>
-        <source>&amp;background</source>
+        <source>background</source>
         <translation>фон</translation>
     </message>
     <message>
@@ -482,17 +482,17 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="918"/>
-        <source>&amp;left</source>
+        <source>left</source>
         <translation>по левому</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="928"/>
-        <source>&amp;center</source>
+        <source>center</source>
         <translation>по центру</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="935"/>
-        <source>&amp;right</source>
+        <source>right</source>
         <translation>по правому</translation>
     </message>
     <message>
@@ -502,22 +502,22 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="951"/>
-        <source>&amp;H:</source>
+        <source>H:</source>
         <translation>Г:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="971"/>
-        <source>&amp;V:</source>
+        <source>V:</source>
         <translation>В:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="995"/>
-        <source>&amp;Misc</source>
+        <source>Misc</source>
         <translation>Разное</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="1000"/>
-        <source>&amp;Plugins</source>
+        <source>Plugins</source>
         <translation>Плагины</translation>
     </message>
     <message>

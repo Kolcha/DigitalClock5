@@ -168,7 +168,7 @@
    <item row="2" column="1" rowspan="2">
     <widget class="QGroupBox" name="tx_group">
      <property name="title">
-      <string>&amp;texture</string>
+      <string>texture</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -203,7 +203,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="tx_per_char">
         <property name="text">
-         <string>apply per &amp;element</string>
+         <string>apply per element</string>
         </property>
        </widget>
       </item>
@@ -220,7 +220,7 @@
    <item row="2" column="2" rowspan="2">
     <widget class="QGroupBox" name="bg_group">
      <property name="title">
-      <string>&amp;background</string>
+      <string>background</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -262,7 +262,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="bg_per_char">
         <property name="text">
-         <string>apply per &amp;element</string>
+         <string>apply per element</string>
         </property>
        </widget>
       </item>

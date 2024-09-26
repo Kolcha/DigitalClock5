@@ -65,7 +65,7 @@
     </message>
     <message>
         <location filename="../impl/appearance_settings_widget.ui" line="171"/>
-        <source>&amp;texture</source>
+        <source>texture</source>
         <translation>текстура</translation>
     </message>
     <message>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../impl/appearance_settings_widget.ui" line="206"/>
         <location filename="../impl/appearance_settings_widget.ui" line="265"/>
-        <source>apply per &amp;element</source>
+        <source>apply per element</source>
         <translation>для каждого символа</translation>
     </message>
     <message>
         <location filename="../impl/appearance_settings_widget.ui" line="223"/>
-        <source>&amp;background</source>
+        <source>background</source>
         <translation>фон</translation>
     </message>
     <message>
