@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 function(add_win_rc_file _target _file)
   if (WIN32)
     set(BUILD_NUMBER 0)
