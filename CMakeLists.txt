@@ -17,7 +17,7 @@ find_package(Qt6 6.7 REQUIRED COMPONENTS Widgets Network Svg
 
 qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES en ru pt_PT zh_CN)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(clock_utils)
 
 set(CLOCK_PROJECT_NAME ${PROJECT_NAME})
