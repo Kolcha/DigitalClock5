@@ -31,28 +31,6 @@ QString copyrightString(const PluginInfo& info)
   return {};
 }
 
-QIcon pluginIcon(const PluginInfo& info)
-{
-  const auto known_names = {
-      QString(":/icons/%1").arg(info.id),
-      QString(":/%1/icon").arg(info.id),
-      QString(":/%1/logo").arg(info.id),
-  };
-
-  const auto known_exts = {"svg", "png"};
-
-  for (const auto& p : known_names) {
-    for (const auto& e : known_exts) {
-      auto fn = QString("%1.%2").arg(p, e);
-      if (QFile::exists(fn)) {
-        return QIcon(fn);
-      }
-    }
-  }
-
-  return QIcon::fromTheme("plugins");
-}
-
 } // namespace
 
 PluginInfoDialog::PluginInfoDialog(QWidget* parent)
@@ -80,7 +58,7 @@ PluginInfoDialog::~PluginInfoDialog()
 
 void PluginInfoDialog::SetInfo(const PluginInfo& info)
 {
-  ui->icon_label->setPixmap(pluginIcon(info).pixmap(96));
+  ui->icon_label->setPixmap(info.icon);
   ui->name_value->setText(info.title);
   ui->version_value->setText(
       tr("version: %1")

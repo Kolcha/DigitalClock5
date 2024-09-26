@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <QPixmap>
 #include <QVariantHash>
 
 struct PluginInfo {
@@ -17,4 +18,5 @@ struct PluginInfo {
   bool multiinstance;
   bool enabled;
   QVariantHash metadata;
+  QPixmap icon;
 };

@@ -305,11 +305,8 @@ void PluginManager::Impl::enumerate()
       auto& info = available[id];
       info.path = handle.file();
       info.id = id;
-      info.title = iface->title();
-      info.description = iface->description();
       info.configurable = metadata.value("configurable", false).toBool();
       info.multiinstance = iface->perClockInstance();
-      info.metadata = std::move(metadata);
     }
   }
 }
@@ -473,6 +470,46 @@ void PluginManager::Impl::connectEverything(const PluginHandle& h)
 }
 
 
+namespace {
+
+QIcon plugin_icon(QStringView id)
+{
+  const auto known_names = {
+      QString(":/icons/%1").arg(id),
+      QString(":/%1/icon").arg(id),
+      QString(":/%1/logo").arg(id),
+  };
+
+  const auto known_exts = {"svg", "png"};
+
+  for (const auto& p : known_names) {
+    for (const auto& e : known_exts) {
+      auto fn = QString("%1.%2").arg(p, e);
+      if (QFile::exists(fn)) {
+        return QIcon(fn);
+      }
+    }
+  }
+
+  return QIcon::fromTheme("plugins");
+}
+
+
+void fill_plugin_info(const PluginHandle& handle, PluginInfo& info)
+{
+  if (auto iface = handle.plugin()) {
+    info.title = iface->title();
+    info.description = iface->description();
+    info.metadata = handle.metadata();
+    // QIcon doesn't load file on creation, just save the path
+    // so, when plugin unloads, icon file becomes unavailable
+    info.icon = plugin_icon(handle.id()).pixmap(96);
+  }
+}
+
+} // namespace
+
+
 PluginManager::PluginManager(Application* app, QObject* parent)
     : QObject(parent)
     , _impl(std::make_unique<Impl>())
@@ -539,8 +576,10 @@ QStringList PluginManager::availablePlugins() const
 PluginInfo PluginManager::pluginInfo(const QString& id) const
 {
   PluginInfo info;
-  if (auto iter = _impl->available.find(id); iter != _impl->available.end())
+  if (auto iter = _impl->available.find(id); iter != _impl->available.end()) {
     info = iter->second;
+    fill_plugin_info({info.path, _impl->app->activeLang()}, info);
+  }
   info.enabled = _impl->loaded.contains(id);
   return info;
 }
