@@ -16,6 +16,8 @@ if (WIN32)
         win/fullscreen_detect.cpp
         win/fullscreen_detect.hpp
         win/mouse_tracker.cpp
+        win/system_theme_tracker.cpp
+        win/system_theme_tracker.hpp
     )
 endif()
 

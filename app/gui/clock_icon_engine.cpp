@@ -9,6 +9,12 @@
 #include <QtCore/QTime>
 #include <QtGui/QPainter>
 
+ClockIconEngine::ClockIconEngine(QColor color)
+  : QIconEngine()
+  , m_color(std::move(color))
+{
+}
+
 void ClockIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state)
 {
   Q_UNUSED(mode);
@@ -23,7 +29,7 @@ void ClockIconEngine::paint(QPainter* painter, const QRect& rect, QIcon::Mode mo
 
   painter->save();
   painter->setRenderHint(QPainter::Antialiasing);
-  painter->setPen(QPen(QColor(101, 99, 255), pw));
+  painter->setPen(QPen(m_color, pw));
 
   painter->drawEllipse(QRectF(rect).adjusted(pw, pw, -pw, -pw));
   painter->translate(rect.center());
