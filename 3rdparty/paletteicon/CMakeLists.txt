@@ -18,7 +18,7 @@ qt_add_plugin(paletteicon CLASS_NAME PaletteIconPlugin
     paletteicon/plugin.cpp
 )
 
-target_link_libraries(paletteicon PRIVATE Qt::Gui Qt::Svg)
+target_link_libraries(paletteicon PRIVATE Qt6::Gui Qt6::Svg)
 
 target_compile_definitions(paletteicon PRIVATE QT_DEPRECATED_WARNINGS)
 

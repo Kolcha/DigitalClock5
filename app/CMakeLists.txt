@@ -66,7 +66,7 @@ configure_file(version.hpp.in version.hpp @ONLY)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gradient_dialog)
 target_link_libraries(${PROJECT_NAME} PRIVATE PluginCore SkinEngine ClockCommon)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Widgets Qt::Network Qt::Svg)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Network Qt6::Svg)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_BUNDLE_NAME "Digital Clock"
