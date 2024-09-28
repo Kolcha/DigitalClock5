@@ -10,6 +10,10 @@ qt_add_executable(${PROJECT_NAME}
     config/config_sections.cpp
     config/app_config.hpp
     config/app_config.cpp
+    config/dc4_to_dc5.cpp
+    config/dc4_to_dc5.hpp
+    config/serialization.cpp
+    config/serialization.hpp
     gui/clock_window.hpp
     gui/clock_window.cpp
     core/application.hpp
