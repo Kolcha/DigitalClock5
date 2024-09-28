@@ -17,10 +17,29 @@
 
 #include "translation.hpp"
 
+namespace {
+
+// replace link color with regular text color, as it is blue in most cases
+// and this looks terrible, especially with dark backgrounds/themes
+// unfortunately, palette must be set at application level to affect links
+bool updatePaletteLinkColors()
+{
+  if (auto pal = QApplication::palette(); pal.link() != pal.windowText()) {
+    pal.setBrush(QPalette::Link, pal.windowText());
+    pal.setBrush(QPalette::LinkVisited, pal.link());
+    QApplication::setPalette(pal);
+    return true;
+  }
+  return false;
+}
+
+} // namespace
+
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
     , _pm(this)
 {
+  updatePaletteLinkColors();
   initConfig();
   loadTranslation();
   initTray();
@@ -122,6 +141,15 @@ void Application::retranslateUI()
   loadTranslation();
   _pm.enumeratePlugins();
   std::ranges::for_each(plugins, [this](auto& p) { _pm.loadPlugin(p); });
+}
+
+bool Application::event(QEvent* e)
+{
+  if (e->type() == QEvent::ApplicationPaletteChange) {
+    if (updatePaletteLinkColors())
+      return true;
+  }
+  return QApplication::event(e);
 }
 
 size_t Application::findWindow(ClockWindow* w) const

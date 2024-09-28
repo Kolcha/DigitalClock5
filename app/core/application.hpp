@@ -63,6 +63,9 @@ public:
 public slots:
   void retranslateUI();
 
+protected:
+  bool event(QEvent* e) override;
+
 private:
   void initConfig();
   void loadTranslation();
