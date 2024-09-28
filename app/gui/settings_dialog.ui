@@ -88,9 +88,6 @@
            <property name="toolTip">
             <string>help to translate</string>
            </property>
-           <property name="icon">
-            <iconset theme="set-language"/>
-           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -246,9 +243,6 @@
          </item>
          <item row="1" column="2">
           <widget class="QToolButton" name="format_help_btn">
-           <property name="icon">
-            <iconset theme="help-hint"/>
-           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -357,9 +351,6 @@
          </item>
          <item row="3" column="2">
           <widget class="QToolButton" name="custom_seps_help_btn">
-           <property name="icon">
-            <iconset theme="help-hint"/>
-           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -404,9 +395,6 @@
          </item>
          <item row="2" column="2">
           <widget class="QToolButton" name="layout_cfg_help_btn">
-           <property name="icon">
-            <iconset theme="help-hint"/>
-           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -554,9 +542,6 @@
           <widget class="QToolButton" name="multi_timezone_help_btn">
            <property name="enabled">
             <bool>false</bool>
-           </property>
-           <property name="icon">
-            <iconset theme="help-hint"/>
            </property>
            <property name="autoRaise">
             <bool>true</bool>

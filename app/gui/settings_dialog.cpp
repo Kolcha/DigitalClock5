@@ -806,6 +806,7 @@ void SettingsDialog::onPluginStateChanged(const QString& id, bool enabled)
 
 void SettingsDialog::initAppGlobalTab()
 {
+  ui->lang_tr_btn->setIcon(QIcon(":/icons/set-language.svg"));
   // app global
   SectionAppGlobal& gs = app->config().global();
   {
@@ -859,6 +860,11 @@ void SettingsDialog::initAppGlobalTab()
 
 void SettingsDialog::initGeneralTab(int idx)
 {
+  ui->format_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
+  ui->custom_seps_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
+  ui->layout_cfg_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
+  ui->multi_timezone_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
+
   SectionGeneric& gcfg = app->config().window(idx).generic();
   SectionAppearance& acfg = app->config().window(idx).appearance();
 

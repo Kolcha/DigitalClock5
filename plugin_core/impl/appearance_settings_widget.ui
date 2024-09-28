@@ -83,8 +83,8 @@
         </item>
         <item>
          <widget class="QToolButton" name="layout_cfg_help_btn">
-          <property name="icon">
-           <iconset theme="help-hint"/>
+          <property name="autoRaise">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

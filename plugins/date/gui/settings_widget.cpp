@@ -18,6 +18,7 @@ SettingsWidget::SettingsWidget(PluginSettingsStorage& s, StateClient& t,
     , impl(impl)
 {
   ui->setupUi(this);
+  ui->str_format_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
 
   ui->sys_format_rbtn->setChecked(cfg.getFormatType() == DatePluginImpl::System);
   ui->str_format_rbtn->setChecked(cfg.getFormatType() == DatePluginImpl::Custom);

@@ -24,6 +24,7 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(WidgetPluginBaseImpl* w, Plug
     , st(t)
 {
   ui->setupUi(this);
+  ui->layout_cfg_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
 
   ui->pos_bottom->setChecked(cfg.getWidgetPosition() == WidgetPosition::Bottom);
   ui->pos_right->setChecked(cfg.getWidgetPosition() == WidgetPosition::Right);

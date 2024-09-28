@@ -98,10 +98,10 @@ AboutDialog::AboutDialog(QWidget* parent)
 
   auto uc = new UpdateChecker(this);
   connect(uc, &UpdateChecker::upToDate, _u_btn, [this]() {
-    _u_btn->setPixmap(QIcon::fromTheme("checkmark").pixmap(_u_btn->height() - 2));
+    _u_btn->setPixmap(QIcon(":/icons/checkmark.svg").pixmap(_u_btn->height() - 2));
   });
   connect(uc, &UpdateChecker::newVersion, _u_btn, [this](auto, auto, auto l) {
-    _u_btn->setPixmap(QIcon::fromTheme("update-none").pixmap(_u_btn->height() - 2));
+    _u_btn->setPixmap(QIcon(":/icons/update-none.svg").pixmap(_u_btn->height() - 2));
     _u_btn->setToolTip(tr("New version available.\nClick here to download."));
     connect(_u_btn, &ClickableLabel::clicked, _u_btn, [l]() { QDesktopServices::openUrl(l); });
   });

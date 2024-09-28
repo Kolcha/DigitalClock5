@@ -32,14 +32,14 @@ ClockWindow::ClockWindow(QWidget* parent)
 
   using namespace Qt::Literals::StringLiterals;
   _ctx_menu = new QMenu(this);
-  _ctx_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
+  _ctx_menu->addAction(QIcon(":/icons/configure.svg"), tr("Settings"),
                        this, &ClockWindow::settingsDialogRequested);
   addPositionMenu();
   _ctx_menu->addSeparator();
-  _ctx_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
+  _ctx_menu->addAction(QIcon(":/icons/help-about.svg"), tr("About"),
                        this, &ClockWindow::aboutDialogRequested);
   _ctx_menu->addSeparator();
-  _ctx_menu->addAction(QIcon::fromTheme(u"application-exit"_s), tr("Quit"),
+  _ctx_menu->addAction(QIcon(":/icons/application-exit.svg"), tr("Quit"),
                        this, &ClockWindow::appExitRequested);
 }
 

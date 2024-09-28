@@ -178,15 +178,15 @@ void Application::initTray()
   _tray_icon.setContextMenu(_tray_menu.get());
 
   using namespace Qt::Literals::StringLiterals;
-  _tray_menu->addAction(QIcon::fromTheme(u"configure"_s), tr("Settings"),
+  _tray_menu->addAction(QIcon(":/icons/configure.svg"), tr("Settings"),
                         this, &Application::showSettingsDialog);
   if (_cfg->global().getNumInstances() == 1)
     addPositionMenu();
   _tray_menu->addSeparator();
-  _tray_menu->addAction(QIcon::fromTheme(u"help-about"_s), tr("About"),
+  _tray_menu->addAction(QIcon(":/icons/help-about.svg"), tr("About"),
                         this, &Application::showAboutDialog);
   _tray_menu->addSeparator();
-  _tray_menu->addAction(QIcon::fromTheme(u"application-exit"_s),
+  _tray_menu->addAction(QIcon(":/icons/application-exit.svg"),
                         tr("Quit"), qApp, &QApplication::quit);
 
   _tray_icon.setToolTip(QApplication::applicationDisplayName());

@@ -143,9 +143,6 @@
       </item>
       <item row="1" column="2">
        <widget class="QToolButton" name="str_format_help_btn">
-        <property name="icon">
-         <iconset theme="help-hint"/>
-        </property>
         <property name="autoRaise">
          <bool>true</bool>
         </property>

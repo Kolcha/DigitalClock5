@@ -491,7 +491,7 @@ QIcon plugin_icon(QStringView id)
     }
   }
 
-  return QIcon::fromTheme("plugins");
+  return QIcon(":/icons/plugins.svg");
 }
 
 

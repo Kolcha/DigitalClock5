@@ -64,18 +64,10 @@
     </spacer>
    </item>
    <item>
-    <widget class="QToolButton" name="config_btn">
-     <property name="icon">
-      <iconset theme="configure"/>
-     </property>
-    </widget>
+    <widget class="QToolButton" name="config_btn"/>
    </item>
    <item>
-    <widget class="QToolButton" name="info_btn">
-     <property name="icon">
-      <iconset theme="help-about"/>
-     </property>
-    </widget>
+    <widget class="QToolButton" name="info_btn"/>
    </item>
   </layout>
  </widget>

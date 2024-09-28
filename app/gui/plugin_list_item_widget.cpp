@@ -14,6 +14,8 @@ PluginListItemWidget::PluginListItemWidget(QWidget* parent)
     , ui(new Ui::PluginListItemWidget)
 {
   ui->setupUi(this);
+  ui->config_btn->setIcon(QIcon(":/icons/configure.svg"));
+  ui->info_btn->setIcon(QIcon(":/icons/help-about.svg"));
 }
 
 PluginListItemWidget::~PluginListItemWidget()

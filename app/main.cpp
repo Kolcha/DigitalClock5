@@ -12,10 +12,6 @@
 int main(int argc, char *argv[])
 {
   using namespace Qt::Literals::StringLiterals;
-  // set system icon theme as fallback
-  auto system_theme = QIcon::themeName();
-  QIcon::setThemeName(u"unicons-line"_s);
-  QIcon::setFallbackThemeName(system_theme);
 
   QApplication::setApplicationName(QString::fromLatin1(APP_PROJECT_NAME));
   QApplication::setApplicationDisplayName(u"Digital Clock 5"_s);
@@ -23,7 +19,7 @@ int main(int argc, char *argv[])
   QApplication::setOrganizationName(u"NickKorotysh"_s);
   QApplication::setOrganizationDomain(u"kolcha.github.com"_s);
   QApplication::setDesktopFileName(QString::fromLatin1(APP_IDENTIFIER));
-  QApplication::setWindowIcon(QIcon::fromTheme("clock"));
+  QApplication::setWindowIcon(QIcon(":/icons/clock.svg"));
 #ifdef Q_OS_MACOS
   QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
