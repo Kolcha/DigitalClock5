@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(PluginCore VERSION 2.1.1 LANGUAGES CXX)
+project(PluginCore VERSION 2.1.2 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
     plugin_core_global.hpp

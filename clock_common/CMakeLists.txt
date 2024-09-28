@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(ClockCommon VERSION 2.0.1 LANGUAGES CXX)
+project(ClockCommon VERSION 2.0.2 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
     config/appearance_base.cpp
