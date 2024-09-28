@@ -47,12 +47,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="19"/>
+        <location filename="../gui/settings_widget.cpp" line="25"/>
         <source>long system format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="20"/>
+        <location filename="../gui/settings_widget.cpp" line="26"/>
         <source>short system format</source>
         <translation type="unfinished"></translation>
     </message>

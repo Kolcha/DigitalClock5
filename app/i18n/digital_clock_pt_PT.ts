@@ -73,64 +73,64 @@ Click here to download.</source>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="174"/>
+        <location filename="../core/application.cpp" line="181"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="179"/>
+        <location filename="../core/application.cpp" line="186"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="183"/>
+        <location filename="../core/application.cpp" line="190"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="284"/>
+        <location filename="../core/application.cpp" line="291"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="285"/>
+        <location filename="../core/application.cpp" line="292"/>
         <source>Top</source>
         <translation>Topo</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="286"/>
         <location filename="../core/application.cpp" line="293"/>
         <location filename="../core/application.cpp" line="300"/>
+        <location filename="../core/application.cpp" line="307"/>
         <source>Left</source>
         <translation>Esquerda</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="288"/>
-        <location filename="../core/application.cpp" line="292"/>
         <location filename="../core/application.cpp" line="295"/>
+        <location filename="../core/application.cpp" line="299"/>
         <location filename="../core/application.cpp" line="302"/>
+        <location filename="../core/application.cpp" line="309"/>
         <source>Middle</source>
         <translation>Meio</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="290"/>
         <location filename="../core/application.cpp" line="297"/>
         <location filename="../core/application.cpp" line="304"/>
+        <location filename="../core/application.cpp" line="311"/>
         <source>Right</source>
         <translation>Direita</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="299"/>
+        <location filename="../core/application.cpp" line="306"/>
         <source>Bottom</source>
         <translation>Fundo</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="361"/>
+        <location filename="../core/application.cpp" line="368"/>
         <source>%1 Update</source>
         <translation>%1 Atualização</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="362"/>
+        <location filename="../core/application.cpp" line="369"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>Atualização disponível: %1 (%2).
@@ -200,12 +200,12 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>Sobre o módulo</translation>
     </message>
     <message>
-        <location filename="../gui/plugin_info_dialog.cpp" line="86"/>
+        <location filename="../gui/plugin_info_dialog.cpp" line="64"/>
         <source>version: %1</source>
         <translation>versão: %1</translation>
     </message>
     <message>
-        <location filename="../gui/plugin_info_dialog.cpp" line="87"/>
+        <location filename="../gui/plugin_info_dialog.cpp" line="65"/>
         <source>unknown</source>
         <translation>desconhecido</translation>
     </message>
@@ -481,6 +481,8 @@ Clique nesta mensagem para descarregar.</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="918"/>
+        <location filename="../gui/settings_dialog.ui" line="1008"/>
+        <location filename="../gui/settings_dialog.ui" line="1092"/>
         <source>left</source>
         <translation>esquerda</translation>
     </message>
@@ -491,6 +493,8 @@ Clique nesta mensagem para descarregar.</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="935"/>
+        <location filename="../gui/settings_dialog.ui" line="1040"/>
+        <location filename="../gui/settings_dialog.ui" line="1130"/>
         <source>right</source>
         <translation>direita</translation>
     </message>
@@ -515,17 +519,54 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>Vários</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.ui" line="1000"/>
+        <location filename="../gui/settings_dialog.ui" line="1001"/>
+        <source>extra space around characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1024"/>
+        <location filename="../gui/settings_dialog.ui" line="1111"/>
+        <source>top</source>
+        <translation>Topo</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1056"/>
+        <location filename="../gui/settings_dialog.ui" line="1149"/>
+        <source>bottom</source>
+        <translation>Fundo</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1085"/>
+        <source>extra space around widget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1168"/>
+        <source>ignore horizontal spacing defined by characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1175"/>
+        <source>ignore vertical spacing defined by characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1184"/>
+        <source>layout spacing (space between widgets)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_dialog.ui" line="1236"/>
         <source>Plugins</source>
         <translation>Módulos</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.ui" line="1015"/>
+        <location filename="../gui/settings_dialog.ui" line="1251"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.ui" line="1022"/>
+        <location filename="../gui/settings_dialog.ui" line="1258"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
@@ -536,49 +577,49 @@ Clique nesta mensagem para descarregar.</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="499"/>
-        <location filename="../gui/settings_dialog.cpp" line="638"/>
+        <location filename="../gui/settings_dialog.cpp" line="640"/>
         <source>follow system theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="512"/>
-        <location filename="../gui/settings_dialog.cpp" line="651"/>
+        <location filename="../gui/settings_dialog.cpp" line="513"/>
+        <location filename="../gui/settings_dialog.cpp" line="654"/>
         <source>stretch instead of tile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="561"/>
-        <location filename="../gui/settings_dialog.cpp" line="700"/>
+        <location filename="../gui/settings_dialog.cpp" line="563"/>
+        <location filename="../gui/settings_dialog.cpp" line="704"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Imagens (*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="771"/>
+        <location filename="../gui/settings_dialog.cpp" line="813"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="807"/>
+        <location filename="../gui/settings_dialog.cpp" line="849"/>
         <source>1 day</source>
         <translation>1 dia</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="808"/>
+        <location filename="../gui/settings_dialog.cpp" line="850"/>
         <source>3 days</source>
         <translation>3 dias</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="809"/>
+        <location filename="../gui/settings_dialog.cpp" line="851"/>
         <source>1 week</source>
         <translation>1 semana</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="810"/>
+        <location filename="../gui/settings_dialog.cpp" line="852"/>
         <source>2 weeks</source>
         <translation>2 semanas</translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.cpp" line="811"/>
+        <location filename="../gui/settings_dialog.cpp" line="853"/>
         <source>1 month</source>
         <translation type="unfinished"></translation>
     </message>

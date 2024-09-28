@@ -145,27 +145,94 @@
     </message>
     <message>
         <location filename="../impl/appearance_settings_widget.cpp" line="276"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="423"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="427"/>
         <source>follow system theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="287"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="434"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="290"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="441"/>
         <source>stretch instead of tile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../impl/appearance_settings_widget.cpp" line="340"/>
-        <location filename="../impl/appearance_settings_widget.cpp" line="487"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="344"/>
+        <location filename="../impl/appearance_settings_widget.cpp" line="495"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Imagens (*.png *.bmp *.jpg)</translation>
     </message>
 </context>
 <context>
+    <name>GeometrySettingsWidget</name>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="14"/>
+        <source>Geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="20"/>
+        <source>extra space around characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="27"/>
+        <location filename="../impl/geometry_settings_widget.ui" line="98"/>
+        <source>left</source>
+        <translation>esquerda</translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="43"/>
+        <location filename="../impl/geometry_settings_widget.ui" line="117"/>
+        <source>top</source>
+        <translation>topo</translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="59"/>
+        <location filename="../impl/geometry_settings_widget.ui" line="136"/>
+        <source>right</source>
+        <translation>direita</translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="75"/>
+        <location filename="../impl/geometry_settings_widget.ui" line="155"/>
+        <source>bottom</source>
+        <translation>fundo</translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="91"/>
+        <source>extra space around widget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="174"/>
+        <source>ignore horizontal spacing defined by characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="181"/>
+        <source>ignore vertical spacing defined by characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="190"/>
+        <source>spacing:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="197"/>
+        <source>horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../impl/geometry_settings_widget.ui" line="217"/>
+        <source>vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WidgetPluginBase</name>
     <message>
-        <location filename="../widget_plugin_base.cpp" line="39"/>
+        <location filename="../widget_plugin_base.cpp" line="40"/>
         <source>Plugin</source>
         <translation type="unfinished"></translation>
     </message>
