@@ -18,6 +18,8 @@ GraphicsBase::GraphicsBase()
 void GraphicsBase::setSkin(std::shared_ptr<Skin> skin)
 {
   _skin = std::move(skin);
+  _tg.clear();
+  clearLayout();
   rebuild();
 }
 
