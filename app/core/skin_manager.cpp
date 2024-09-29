@@ -71,6 +71,10 @@ std::unique_ptr<Skin> SkinManager::loadSkin(const QString& id) const
 {
   if (auto iter = _impl->loaders.find(id); iter != _impl->loaders.end())
     return iter->skin();
+  // search skin by name as fallback
+  for (auto iter = _impl->loaders.begin(); iter != _impl->loaders.end(); ++iter)
+    if (iter->title() == id)
+      return iter->skin();
   return nullptr;
 }
 

@@ -74,8 +74,12 @@ QVariantHash mapFromDC4(const QVariantMap& settings, int idx)
       dc5s[QString("Window%1/appearance/SeparatorFlashes").arg(idx)] = v.toBool();
     if (k == "clock/plugins")
       dc5s["app_global/Plugins"] = v.toStringList();
-    if (k == "clock/time_format")
-      dc5s[QString("Window%1/appearance/TimeFormat").arg(idx)] = v.toString();
+    if (k == "clock/time_format") {
+      auto fmt = v.toString();
+      if (fmt.isEmpty())
+        fmt = QLocale().timeFormat(QLocale::ShortFormat);
+      dc5s[QString("Window%1/appearance/TimeFormat").arg(idx)] = fmt;
+    }
     if (k == "clock/alignment") {
       dc5s[QString("Window%1/generic/AnchorPoint").arg(idx)] = map_alignment(v.toInt());
       dc5s[QString("state/window/%1/anchor").arg(idx)] = map_alignment(v.toInt());
@@ -105,8 +109,8 @@ QVariantHash mapFromDC4(const QVariantMap& settings, int idx)
     if (k == "skin/font")
       dc5s[QString("Window%1/appearance/Font").arg(idx)] = v.value<QFont>();
     if (k == "skin/zoom") {
-      dc5s[QString("Window%1/appearance/ScalingH").arg(idx)] = static_cast<int>(v.toReal());
-      dc5s[QString("Window%1/appearance/ScalingV").arg(idx)] = static_cast<int>(v.toReal());
+      dc5s[QString("Window%1/appearance/ScalingH").arg(idx)] = static_cast<int>(v.toReal() * 100);
+      dc5s[QString("Window%1/appearance/ScalingV").arg(idx)] = static_cast<int>(v.toReal() * 100);
     }
     if (k == "skin/color")
       dc5s[QString("Window%1/appearance/TextureColor").arg(idx)] = v.value<QColor>();
@@ -183,18 +187,20 @@ QVariantHash mapFromDC4(const QVariantMap& settings, int idx)
     if (k == "window/transparent_on_hover")
       dc5s["app_global/TransparentOnHover"] = v.toBool();
     if (k == "window/opacity_on_hover")
-      dc5s["app_global/OpacityOnHover"] = static_cast<int>(v.toReal());
+      dc5s["app_global/OpacityOnHover"] = static_cast<int>(v.toReal() * 100);
     if (k == "window/hover_buttons")
       ;   // unsupported, not implemented
     if (k == "window/move_step")
       ;   // unsupported, not implemented
     if (k == "window/show_taskbar_icon")
       ;   // unsupported, not implemented
-
-    // state
-    if (k == QString("state/%1/position").arg(idx))
-      dc5s[QString("state/window/%1/origin").arg(idx)] = v.toPoint();
   }
+
+  if (!dc5s.isEmpty()) {
+    dc5s[QString("Window%1/appearance/UseSystemForeground").arg(idx)] = false;
+    dc5s[QString("Window%1/appearance/UseSystemBackground").arg(idx)] = false;
+  }
+
   return dc5s;
 }
 
