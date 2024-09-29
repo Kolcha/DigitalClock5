@@ -57,6 +57,8 @@ qt_add_executable(${PROJECT_NAME}
     core/translation.hpp
     gui/overlay_widget.cpp
     gui/overlay_widget.hpp
+    skin/error_skin.cpp
+    skin/error_skin.hpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

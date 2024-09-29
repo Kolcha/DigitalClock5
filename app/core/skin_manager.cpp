@@ -12,6 +12,8 @@
 #include "skin/font_skin.hpp"
 #include "skin/legacy_skin.hpp"
 
+#include "skin/error_skin.hpp"
+
 struct SkinManager::Impl {
   QHash<QString, LegacySkinLoader> loaders;
   QSet<QString> user_skins;
@@ -75,7 +77,7 @@ std::unique_ptr<Skin> SkinManager::loadSkin(const QString& id) const
   for (auto iter = _impl->loaders.begin(); iter != _impl->loaders.end(); ++iter)
     if (iter->title() == id)
       return iter->skin();
-  return nullptr;
+  return std::make_unique<ErrorSkin>();
 }
 
 QStringList SkinManager::availableSkins() const
