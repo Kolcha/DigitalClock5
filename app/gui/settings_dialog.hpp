@@ -141,6 +141,13 @@ private:
   void initMiscTab(int idx);
   void initPluginsTab();
 
+  void initControlsState();
+
+  void fillLanguagesList();
+  void fillUpdatePeriodsList();
+  void fillTimeZonesList();
+  void fillSkinsList();
+
   void applySkin(std::shared_ptr<Skin> skin);
   void applyTimeZoneSettings();
   void applyColorization();
@@ -152,6 +159,8 @@ private:
 
   template<typename Method, typename... Args>
   void notifyOptionChanged(Method method, Args&&... args);
+
+  void reloadSettings(std::function<void()> act);
 
 private:
   Ui::SettingsDialog* ui;

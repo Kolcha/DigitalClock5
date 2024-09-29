@@ -77,11 +77,12 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
   ui->windows_box->setCurrentIndex(_curr_idx);
   ui->windows_box->setVisible(app->config().global().getNumInstances() > 1);
 
-  initAppGlobalTab();
-  initGeneralTab(_curr_idx);
-  initAppearanceTab(_curr_idx);
-  initMiscTab(_curr_idx);
-  initPluginsTab();
+  fillLanguagesList();
+  fillUpdatePeriodsList();
+  fillTimeZonesList();
+  fillSkinsList();
+
+  initControlsState();
 }
 
 SettingsDialog::~SettingsDialog()
@@ -104,13 +105,7 @@ void SettingsDialog::accept()
 
 void SettingsDialog::reject()
 {
-  const auto prev_plugins = app->config().global().getPlugins();
-  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
-  app->config().storage().discardAll();
-  app->configureWindows();
-  const auto curr_plugins = app->config().global().getPlugins();
-  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
-  app->retranslateUI();
+  reloadSettings([this]() { app->config().storage().discardAll(); });
   QDialog::reject();
 }
 
@@ -132,22 +127,8 @@ void SettingsDialog::on_import_btn_clicked()
 
   if (settings.isEmpty()) return;
 
-  for (auto iter = settings.begin(); iter != settings.end(); ++iter)
-    qDebug() << iter.key() << iter.value();
-
-  const auto prev_plugins = app->config().global().getPlugins();
-  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
-  app->config().storage().importSettings(settings);
-  app->configureWindows();
-  const auto curr_plugins = app->config().global().getPlugins();
-  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
-  app->retranslateUI();
-
-  initAppGlobalTab();
-  initGeneralTab(_curr_idx);
-  initAppearanceTab(_curr_idx);
-  initMiscTab(_curr_idx);
-  initPluginsTab();
+  reloadSettings([&, this]() { app->config().storage().importSettings(settings); });
+  initControlsState();
 }
 
 void SettingsDialog::on_export_btn_clicked()
@@ -854,17 +835,7 @@ void SettingsDialog::initAppGlobalTab()
   ui->lang_tr_btn->setIcon(QIcon(":/icons/set-language.svg"));
   // app global
   SectionAppGlobal& gs = app->config().global();
-  {
-    QSignalBlocker _(ui->lang_list);
-    ui->lang_list->clear();
-    ui->lang_list->addItem(tr("Automatic"), QString("auto"));
-    QSettings sl(":/langs.ini", QSettings::IniFormat);
-    sl.beginGroup("langs");
-    const auto ll = sl.childKeys();
-    for (const auto& l : ll) ui->lang_list->addItem(sl.value(l).toString(), l);
-    sl.endGroup();
-    setIndexByValue(ui->lang_list, gs.getLocale());
-  }
+  setIndexByValue(ui->lang_list, gs.getLocale());
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
   ui->enable_autostart->setChecked(IsAutoStartEnabled());
 #else
@@ -892,13 +863,6 @@ void SettingsDialog::initAppGlobalTab()
   ui->enable_autoupdate->setChecked(gs.getCheckForUpdates());
   ui->check_for_beta->setChecked(gs.getCheckForBetaVersion());
 
-  QSignalBlocker _(ui->update_period_edit);
-  ui->update_period_edit->clear();
-  ui->update_period_edit->addItem(tr("1 day"), 1);
-  ui->update_period_edit->addItem(tr("3 days"), 3);
-  ui->update_period_edit->addItem(tr("1 week"), 7);
-  ui->update_period_edit->addItem(tr("2 weeks"), 14);
-  ui->update_period_edit->addItem(tr("1 month"), 30);
   setIndexByValue(ui->update_period_edit, gs.getUpdatePeriodDays());
 
   // ui->enable_debug_options->setChecked(impl->config.getEnableDebugOptions());
@@ -960,17 +924,6 @@ void SettingsDialog::initGeneralTab(int idx)
   connect(ui->rb_ucase_apm, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
   connect(ui->rb_lcase_apm, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
 
-  auto now = QDateTime::currentDateTimeUtc();
-  ui->time_zone_edit->clear();
-  for (const auto& tz_id : QTimeZone::availableTimeZoneIds()) {
-    QTimeZone tz(tz_id);
-    ui->time_zone_edit->addItem(tz_name(tz), QVariant::fromValue(tz));
-    auto tooltip = QString("%1 (%2)").arg(
-                     tz.displayName(now, QTimeZone::LongName),
-                     tz.displayName(now, QTimeZone::OffsetName));
-    ui->time_zone_edit->setItemData(ui->time_zone_edit->count() - 1, tooltip, Qt::ToolTipRole);
-  }
-
   ui->use_time_zone->setChecked(!gcfg.getShowLocalTime());
   ui->time_zone_edit->setCurrentText(tz_name(gcfg.getTimeZone()));
 }
@@ -981,24 +934,6 @@ void SettingsDialog::initAppearanceTab(int idx)
 
   ui->font_rbtn->setChecked(acfg.getUseFontInsteadOfSkin());
   ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
-
-  auto locale_cmp = [](QStringView lhs, QStringView rhs) { return QString::localeAwareCompare(lhs, rhs) < 0; };
-  std::multimap<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
-
-  const auto avail_skins = app->skinManager().availableSkins();
-  for (const auto& s : avail_skins)
-    sorted_skins.insert({app->skinManager().metadata(s)["name"], s});
-  ui->skin_cbox->clear();
-  for (const auto& [t, s] : std::as_const(sorted_skins))
-    ui->skin_cbox->addItem(t, s);
-
-  auto user_fnt = ui->skin_cbox->font();
-  user_fnt.setItalic(true);
-  for (int i = 0; i < ui->skin_cbox->count(); i++) {
-    auto s = ui->skin_cbox->itemData(i).toString();
-    if (app->skinManager().isUserSkin(s))
-      ui->skin_cbox->setItemData(i, user_fnt, Qt::FontRole);
-  }
 
   ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
   ui->skin_cbox->setCurrentText(app->skinManager().metadata(acfg.getSkin())["name"]);
@@ -1107,6 +1042,72 @@ void SettingsDialog::initPluginsTab()
   }
 }
 
+void SettingsDialog::initControlsState()
+{
+  initAppGlobalTab();
+  initGeneralTab(_curr_idx);
+  initAppearanceTab(_curr_idx);
+  initMiscTab(_curr_idx);
+  initPluginsTab();
+}
+
+void SettingsDialog::fillLanguagesList()
+{
+  QSignalBlocker _(ui->lang_list);
+  ui->lang_list->addItem(tr("Automatic"), QString("auto"));
+  QSettings sl(":/langs.ini", QSettings::IniFormat);
+  sl.beginGroup("langs");
+  const auto ll = sl.childKeys();
+  for (const auto& l : ll) ui->lang_list->addItem(sl.value(l).toString(), l);
+  sl.endGroup();
+}
+
+void SettingsDialog::fillUpdatePeriodsList()
+{
+  QSignalBlocker _(ui->update_period_edit);
+  ui->update_period_edit->addItem(tr("1 day"), 1);
+  ui->update_period_edit->addItem(tr("3 days"), 3);
+  ui->update_period_edit->addItem(tr("1 week"), 7);
+  ui->update_period_edit->addItem(tr("2 weeks"), 14);
+  ui->update_period_edit->addItem(tr("1 month"), 30);
+}
+
+void SettingsDialog::fillTimeZonesList()
+{
+  QSignalBlocker _(ui->time_zone_edit);
+  auto now = QDateTime::currentDateTimeUtc();
+  for (const auto& tz_id : QTimeZone::availableTimeZoneIds()) {
+    QTimeZone tz(tz_id);
+    ui->time_zone_edit->addItem(tz_name(tz), QVariant::fromValue(tz));
+    auto tooltip = QString("%1 (%2)").arg(
+        tz.displayName(now, QTimeZone::LongName),
+        tz.displayName(now, QTimeZone::OffsetName));
+    ui->time_zone_edit->setItemData(ui->time_zone_edit->count() - 1, tooltip, Qt::ToolTipRole);
+  }
+}
+
+void SettingsDialog::fillSkinsList()
+{
+  QSignalBlocker _(ui->skin_cbox);
+  auto locale_cmp = [](QStringView lhs, QStringView rhs) { return QString::localeAwareCompare(lhs, rhs) < 0; };
+  std::multimap<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
+
+  const auto avail_skins = app->skinManager().availableSkins();
+  for (const auto& s : avail_skins)
+    sorted_skins.insert({app->skinManager().metadata(s)["name"], s});
+
+  for (const auto& [t, s] : std::as_const(sorted_skins))
+    ui->skin_cbox->addItem(t, s);
+
+  auto user_fnt = ui->skin_cbox->font();
+  user_fnt.setItalic(true);
+  for (int i = 0; i < ui->skin_cbox->count(); i++) {
+    auto s = ui->skin_cbox->itemData(i).toString();
+    if (app->skinManager().isUserSkin(s))
+      ui->skin_cbox->setItemData(i, user_fnt, Qt::FontRole);
+  }
+}
+
 void SettingsDialog::applySkin(std::shared_ptr<Skin> skin)
 {
   applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
@@ -1197,4 +1198,15 @@ void SettingsDialog::notifyOptionChanged(Method method, Args&&... args)
     for (const auto& t : app->settingsTransmitters())
       (*t.*method)(std::forward<Args>(args)...);
   }
+}
+
+void SettingsDialog::reloadSettings(std::function<void()> act)
+{
+  const auto prev_plugins = app->config().global().getPlugins();
+  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
+  act();
+  app->configureWindows();
+  const auto curr_plugins = app->config().global().getPlugins();
+  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
+  app->retranslateUI();
 }
