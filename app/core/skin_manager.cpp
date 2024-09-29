@@ -19,6 +19,8 @@ struct SkinManager::Impl {
   QSet<QString> user_skins;
 
   void reload();
+
+  const LegacySkinLoader* find(const QString& id) const;
 };
 
 void SkinManager::Impl::reload()
@@ -56,6 +58,17 @@ void SkinManager::Impl::reload()
       loaders.remove(id);
 }
 
+const LegacySkinLoader* SkinManager::Impl::find(const QString& id) const
+{
+  if (auto iter = loaders.find(id); iter != loaders.end())
+    return &iter.value();
+  // search skin by name as fallback
+  for (auto iter = loaders.begin(); iter != loaders.end(); ++iter)
+    if (iter->title() == id)
+      return &iter.value();
+  return nullptr;
+}
+
 SkinManager::SkinManager()
     : _impl(std::make_unique<Impl>())
 {
@@ -71,12 +84,8 @@ std::unique_ptr<Skin> SkinManager::loadSkin(const QFont& font) const
 
 std::unique_ptr<Skin> SkinManager::loadSkin(const QString& id) const
 {
-  if (auto iter = _impl->loaders.find(id); iter != _impl->loaders.end())
+  if (auto iter = _impl->find(id))
     return iter->skin();
-  // search skin by name as fallback
-  for (auto iter = _impl->loaders.begin(); iter != _impl->loaders.end(); ++iter)
-    if (iter->title() == id)
-      return iter->skin();
   return std::make_unique<ErrorSkin>();
 }
 
@@ -87,7 +96,7 @@ QStringList SkinManager::availableSkins() const
 
 SkinManager::Metadata SkinManager::metadata(const QString& id) const
 {
-  if (auto iter = _impl->loaders.find(id); iter != _impl->loaders.end())
+  if (auto iter = _impl->find(id))
     return iter->metadata();
   return {};
 }

@@ -134,7 +134,7 @@ void SettingsDialog::on_import_btn_clicked()
 void SettingsDialog::on_export_btn_clicked()
 {
   auto filename = QFileDialog::getSaveFileName(this, tr("Export settings"),
-                                               QDir::home().filePath("digital_clock_5.dc5"),
+                                               QDir::home().filePath("clock_settings.dc5"),
                                                tr("Digital Clock 5 Settings (*.dc5)"));
   if (filename.isEmpty()) return;
   QVariantHash settings;
