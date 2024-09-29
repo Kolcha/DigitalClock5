@@ -51,12 +51,14 @@ private:
 
 std::shared_ptr<Skin::Glyph> Skin::glyph(char32_t c) const
 {
-  auto& cached_glyph = _cache[c];
-  if (!cached_glyph) {
-    if (auto g = create(c)) {
-      cached_glyph = std::make_shared<DecoratedGlyph>(std::move(g));
-      cached_glyph->setMargins(_mgs);
-    }
+  if (auto iter = _cache.find(c); iter != _cache.end())
+    return iter.value();
+
+  std::shared_ptr<DecoratedGlyph> cached_glyph;
+  if (auto g = create(c)) {
+    cached_glyph = std::make_shared<DecoratedGlyph>(std::move(g));
+    cached_glyph->setMargins(_mgs);
+    _cache[c] = cached_glyph;
   }
   return cached_glyph;
 }
@@ -64,7 +66,9 @@ std::shared_ptr<Skin::Glyph> Skin::glyph(char32_t c) const
 void Skin::setMargins(QMarginsF mgs)
 {
   if (_mgs == mgs) return;
-  for (auto& g : std::as_const(_cache))
+  for (auto& g : std::as_const(_cache)) {
+    Q_ASSERT(g);
     g->setMargins(mgs);
+  }
   _mgs = std::move(mgs);
 }
