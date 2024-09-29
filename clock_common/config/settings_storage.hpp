@@ -55,7 +55,7 @@ public:
 
 private:
   QSettings _storage;
-  QVariantHash _runtime;
+  mutable QVariantHash _runtime;  // cache
 };
 
 

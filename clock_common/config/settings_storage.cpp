@@ -21,7 +21,9 @@ QVariant SettingsStorage::value(QString key, QVariant def) const
   auto iter = _runtime.find(key);
   if (iter != _runtime.end())
     return *iter;
-  return _storage.value(key, def);
+  auto val = _storage.value(key, def);
+  _runtime[key] = val;
+  return val;
 }
 
 void SettingsStorage::commitValue(QString key)
@@ -50,8 +52,7 @@ void SettingsStorage::discardAll()
 
 void SettingsStorage::exportSettings(QVariantHash& s) const
 {
-  const auto keys = _storage.allKeys();
-  for (const auto& k : keys) s[k] = _storage.value(k);
+  s.insert(_runtime);
 }
 
 void SettingsStorage::importSettings(const QVariantHash& s)

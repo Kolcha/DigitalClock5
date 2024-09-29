@@ -29,6 +29,9 @@ public slots:
   void reject() override;
 
 private slots:
+  void on_import_btn_clicked();
+  void on_export_btn_clicked();
+
   void on_windows_box_currentIndexChanged(int index);
 
   // app global

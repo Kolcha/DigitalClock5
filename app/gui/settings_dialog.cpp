@@ -17,6 +17,8 @@
 
 #include <gradient_dialog.h>
 
+#include "config/dc4_to_dc5.hpp"
+#include "config/serialization.hpp"
 #include "core/application.hpp"
 #include "platform/autostart.h"
 #include "plugin_list_item_widget.hpp"
@@ -67,10 +69,6 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
 {
   ui->setupUi(this);
 
-  // import/export is not implemnted for now
-  ui->import_btn->hide();
-  ui->export_btn->hide();
-
   app->window(_curr_idx)->enableFrame();
 
   QSignalBlocker _(ui->windows_box);
@@ -114,6 +112,53 @@ void SettingsDialog::reject()
   for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
   app->retranslateUI();
   QDialog::reject();
+}
+
+void SettingsDialog::on_import_btn_clicked()
+{
+  auto filename = QFileDialog::getOpenFileName(this, tr("Import settings"),
+                                               QDir::homePath(),
+                                               tr("Digital Clock Settings (*.dc5 *.dcs)"));
+  if (filename.isEmpty()) return;
+
+  auto ext = QFileInfo(filename).suffix().toLower();
+
+  QVariantHash settings;
+
+  if (ext == "dc5")
+    dc5::importFromFile(settings, filename);
+  if (ext == "dcs")
+    compat::importFromFile(settings, filename, _curr_idx);
+
+  if (settings.isEmpty()) return;
+
+  for (auto iter = settings.begin(); iter != settings.end(); ++iter)
+    qDebug() << iter.key() << iter.value();
+
+  const auto prev_plugins = app->config().global().getPlugins();
+  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
+  app->config().storage().importSettings(settings);
+  app->configureWindows();
+  const auto curr_plugins = app->config().global().getPlugins();
+  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
+  app->retranslateUI();
+
+  initAppGlobalTab();
+  initGeneralTab(_curr_idx);
+  initAppearanceTab(_curr_idx);
+  initMiscTab(_curr_idx);
+  initPluginsTab();
+}
+
+void SettingsDialog::on_export_btn_clicked()
+{
+  auto filename = QFileDialog::getSaveFileName(this, tr("Export settings"),
+                                               QDir::home().filePath("digital_clock_5.dc5"),
+                                               tr("Digital Clock 5 Settings (*.dc5)"));
+  if (filename.isEmpty()) return;
+  QVariantHash settings;
+  app->config().storage().exportSettings(settings);
+  dc5::exportToFile(settings, filename);
 }
 
 void SettingsDialog::on_windows_box_currentIndexChanged(int index)
@@ -811,6 +856,7 @@ void SettingsDialog::initAppGlobalTab()
   SectionAppGlobal& gs = app->config().global();
   {
     QSignalBlocker _(ui->lang_list);
+    ui->lang_list->clear();
     ui->lang_list->addItem(tr("Automatic"), QString("auto"));
     QSettings sl(":/langs.ini", QSettings::IniFormat);
     sl.beginGroup("langs");
@@ -847,6 +893,7 @@ void SettingsDialog::initAppGlobalTab()
   ui->check_for_beta->setChecked(gs.getCheckForBetaVersion());
 
   QSignalBlocker _(ui->update_period_edit);
+  ui->update_period_edit->clear();
   ui->update_period_edit->addItem(tr("1 day"), 1);
   ui->update_period_edit->addItem(tr("3 days"), 3);
   ui->update_period_edit->addItem(tr("1 week"), 7);
@@ -914,6 +961,7 @@ void SettingsDialog::initGeneralTab(int idx)
   connect(ui->rb_lcase_apm, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
 
   auto now = QDateTime::currentDateTimeUtc();
+  ui->time_zone_edit->clear();
   for (const auto& tz_id : QTimeZone::availableTimeZoneIds()) {
     QTimeZone tz(tz_id);
     ui->time_zone_edit->addItem(tz_name(tz), QVariant::fromValue(tz));
@@ -940,6 +988,7 @@ void SettingsDialog::initAppearanceTab(int idx)
   const auto avail_skins = app->skinManager().availableSkins();
   for (const auto& s : avail_skins)
     sorted_skins.insert({app->skinManager().metadata(s)["name"], s});
+  ui->skin_cbox->clear();
   for (const auto& [t, s] : std::as_const(sorted_skins))
     ui->skin_cbox->addItem(t, s);
 
