@@ -52,6 +52,8 @@ void SettingsStorage::discardAll()
 
 void SettingsStorage::exportSettings(QVariantHash& s) const
 {
+  const auto keys = _storage.allKeys();
+  for (const auto& k : keys) s[k] = _storage.value(k);
   s.insert(_runtime);
 }
 
