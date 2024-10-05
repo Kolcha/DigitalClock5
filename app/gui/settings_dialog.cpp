@@ -111,7 +111,7 @@ void SettingsDialog::reject()
 
 void SettingsDialog::on_import_btn_clicked()
 {
-  auto filename = QFileDialog::getOpenFileName(this, tr("Import settings"),
+  auto filename = QFileDialog::getOpenFileName(this, tr("Import settings from ..."),
                                                QDir::homePath(),
                                                tr("Digital Clock Settings (*.dc5 *.dcs)"));
   if (filename.isEmpty()) return;
@@ -133,7 +133,7 @@ void SettingsDialog::on_import_btn_clicked()
 
 void SettingsDialog::on_export_btn_clicked()
 {
-  auto filename = QFileDialog::getSaveFileName(this, tr("Export settings"),
+  auto filename = QFileDialog::getSaveFileName(this, tr("Export settings to ..."),
                                                QDir::home().filePath("clock_settings.dc5"),
                                                tr("Digital Clock 5 Settings (*.dc5)"));
   if (filename.isEmpty()) return;

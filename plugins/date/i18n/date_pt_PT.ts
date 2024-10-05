@@ -47,12 +47,12 @@
         <translation>yyyy-MM-dd&apos;\nsemana&apos;: WW&apos;\ndia&apos;: J</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="25"/>
+        <location filename="../gui/settings_widget.cpp" line="26"/>
         <source>long system format</source>
         <translation>longo</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="26"/>
+        <location filename="../gui/settings_widget.cpp" line="27"/>
         <source>short system format</source>
         <translation>curto</translation>
     </message>
