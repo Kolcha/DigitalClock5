@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(SkinEngine VERSION 2.0.2 LANGUAGES CXX)
+project(SkinEngine VERSION 2.0.3 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
     skin/container.cpp
