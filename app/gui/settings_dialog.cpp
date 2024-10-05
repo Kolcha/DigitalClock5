@@ -174,17 +174,20 @@ void SettingsDialog::on_enable_autostart_clicked(bool checked)
 void SettingsDialog::on_enable_stay_on_top_clicked(bool checked)
 {
   app->config().global().setStayOnTop(checked);
+  std::ranges::for_each(app->windows(), [=](auto& w) { w->setStayOnTop(checked); });
 }
 
 void SettingsDialog::on_fullscreen_detect_clicked(bool checked)
 {
   app->config().global().setFullscreenDetect(!checked);
-  applyWindowOption(&ClockWindow::setFullscreenDetect, !checked);
+  std::ranges::for_each(app->windows(), [=](auto& w) { w->setFullscreenDetect(!checked); });
+  on_enable_stay_on_top_clicked(app->config().global().getStayOnTop());
 }
 
 void SettingsDialog::on_enable_transp_for_input_clicked(bool checked)
 {
   app->config().global().setTransparentForMouse(checked);
+  std::ranges::for_each(app->windows(), [=](auto& w) { w->setTransparentForInput(checked); });
 }
 
 void SettingsDialog::on_snap_to_edges_clicked(bool checked)
@@ -842,7 +845,7 @@ void SettingsDialog::initAppGlobalTab()
   ui->enable_autostart->setVisible(false);  // not implemented
 #endif
   ui->enable_stay_on_top->setChecked(gs.getStayOnTop());
-#if defined(Q_OS_WINDOWS)
+#if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
   ui->fullscreen_detect->setChecked(!gs.getFullscreenDetect());
 #else
   ui->fullscreen_detect->setVisible(false); // not implemented

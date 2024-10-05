@@ -18,7 +18,8 @@ ClockWindow::ClockWindow(QWidget* parent)
   setAttribute(Qt::WA_NativeWindow);
   setAttribute(Qt::WA_DontCreateNativeAncestors);
 #if defined(Q_OS_MACOS)
-  hideInMissionControl();
+  setHiddenInMissionControl(true);
+  setVisibleOnAllDesktops(true);
 #endif
   _layout = new QGridLayout(this);
   _layout->setSizeConstraint(QLayout::SetFixedSize);

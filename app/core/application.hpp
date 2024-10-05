@@ -76,6 +76,7 @@ private:
   void startTimers();
 
   void addPositionMenu();
+  void setPlatformWindowFlags(ClockWindow* wnd);
 
 private slots:
   void saveWindowState();

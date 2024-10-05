@@ -75,12 +75,15 @@ public slots:
 #endif
 #if defined(Q_OS_WINDOWS)
   void runStayOnTopHacks();
-  void surviveWinDHack();
 #endif
 #if defined(Q_OS_MACOS)
-  void hideInMissionControl();
+  void setHiddenInMissionControl(bool en);
+  void setVisibleOnAllDesktops(bool en);
 #endif
   void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
+
+  void setStayOnTop(bool en);
+  void setTransparentForInput(bool en);
 
 signals:
   void saveStateRequested();
@@ -130,4 +133,5 @@ private:
   QScreen* _last_screen = nullptr;
   QSet<QString> _fullscreen_ignore_list;
   bool _detect_fullscreen = true;
+  bool _should_stay_on_top = true;
 };

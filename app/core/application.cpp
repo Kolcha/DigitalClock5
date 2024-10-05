@@ -120,6 +120,7 @@ void Application::configureWindow(size_t i)
   }
 
   wnd->setFullscreenDetect(_cfg->global().getFullscreenDetect());
+  setPlatformWindowFlags(wnd);
 
   wnd->setTransparentOnHover(_cfg->global().getTransparentOnHover());
   wnd->setOpacityOnHover(_cfg->global().getOpacityOnHover() / 100.);
@@ -231,12 +232,6 @@ void Application::createWindows()
     wnd->setWindowFlag(Qt::FramelessWindowHint);
     wnd->setAttribute(Qt::WA_TranslucentBackground);
 
-    if (_cfg->global().getStayOnTop()) {
-      wnd->setWindowFlag(Qt::WindowStaysOnTopHint);
-      wnd->setWindowFlag(Qt::BypassWindowManagerHint);
-    }
-    if (_cfg->global().getTransparentForMouse())
-      wnd->setWindowFlag(Qt::WindowTransparentForInput);
 #ifdef Q_OS_WINDOWS
     wnd->setWindowFlag(Qt::Tool);   // trick to hide app icon from taskbar (Windows only)
 #endif
@@ -254,9 +249,7 @@ void Application::createWindows()
     connect(&_mouse_tracker, &MouseTracker::mousePositionChanged, wnd.get(), &ClockWindow::handleMouseMove);
 #endif
 #if defined(Q_OS_WINDOWS)
-    if (_cfg->global().getStayOnTop()) {
-      connect(&_time_timer, &QTimer::timeout, wnd.get(), &ClockWindow::runStayOnTopHacks);
-    }
+    connect(&_time_timer, &QTimer::timeout, wnd.get(), &ClockWindow::runStayOnTopHacks);
 #endif
 
     _windows.push_back(std::move(wnd));
@@ -268,10 +261,8 @@ void Application::createWindows()
   }
 
   std::ranges::for_each(_windows, [](auto& w) { w->show(); });
-#if defined(Q_OS_WINDOWS)
-  if (!_cfg->global().getStayOnTop())
-    std::ranges::for_each(_windows, [](auto& w) { w->surviveWinDHack(); });
-#endif
+  // window flags/properties must be applied to visible window
+  for (auto& w : _windows) setPlatformWindowFlags(w.get());
 }
 
 void Application::initUpdater()
@@ -338,6 +329,15 @@ void Application::addPositionMenu()
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignHCenter));
   b_menu->addAction(tr("Right"),  this, &Application::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignRight));
+}
+
+void Application::setPlatformWindowFlags(ClockWindow* wnd)
+{
+  // many platform-specific flags require visible window
+  if (!wnd->isVisible()) return;
+
+  wnd->setStayOnTop(_cfg->global().getStayOnTop());
+  wnd->setTransparentForInput(_cfg->global().getTransparentForMouse());
 }
 
 void Application::saveWindowState()

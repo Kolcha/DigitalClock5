@@ -17,9 +17,36 @@ static void SetCollectionBehavior(NSWindow* window, NSUInteger flag, bool on)
     [window setCollectionBehavior:[window collectionBehavior] & (~flag)];
 }
 
+static void SetVisibleInFullscreen(NSWindow* window, bool vis)
+{
+  SetCollectionBehavior(window, NSWindowCollectionBehaviorFullScreenNone, !vis);
+  SetCollectionBehavior(window, NSWindowCollectionBehaviorFullScreenAuxiliary, vis);
+}
 
-void ClockWindow::hideInMissionControl()
+
+void ClockWindow::setHiddenInMissionControl(bool en)
 {
   NSView* view = reinterpret_cast<NSView*>(winId());
-  SetCollectionBehavior(view.window, NSWindowCollectionBehaviorTransient, true);
+  SetCollectionBehavior(view.window, NSWindowCollectionBehaviorManaged, !en);
+  SetCollectionBehavior(view.window, NSWindowCollectionBehaviorTransient, en);
+}
+
+void ClockWindow::setVisibleOnAllDesktops(bool en)
+{
+  NSView* view = reinterpret_cast<NSView*>(winId());
+  SetCollectionBehavior(view.window, NSWindowCollectionBehaviorCanJoinAllSpaces, en);
+  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
+}
+
+void ClockWindow::setStayOnTop(bool en)
+{
+  NSView* view = reinterpret_cast<NSView*>(winId());
+  [view.window setLevel: en ? NSFloatingWindowLevel : NSNormalWindowLevel];
+  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
+}
+
+void ClockWindow::setTransparentForInput(bool en)
+{
+  NSView* view = reinterpret_cast<NSView*>(winId());
+  [view.window setIgnoresMouseEvents: en];
 }
