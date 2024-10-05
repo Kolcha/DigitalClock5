@@ -6,13 +6,15 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_sources(${PROJECT_NAME} PRIVATE
     autostart.h
+    clock_native_window.hpp
 )
 
 if (WIN32)
     target_sources(${PROJECT_NAME} PRIVATE
         mouse_tracker.hpp
         win/autostart_win.cpp
-        win/clock_window.cpp
+        win/clock_native_window.cpp
+        win/clock_native_window.hpp
         win/fullscreen_detect.cpp
         win/fullscreen_detect.hpp
         win/mouse_tracker.cpp
@@ -25,7 +27,8 @@ if (APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         mouse_tracker.hpp
         mac/autostart_mac.cpp
-        mac/clock_window.mm
+        mac/clock_native_window.hpp
+        mac/clock_native_window.mm
         mac/mouse_tracker.mm
     )
 endif()

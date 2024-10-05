@@ -73,17 +73,10 @@ public slots:
   // handler should be public to keep only one instance of that tracker
   void handleMouseMove(const QPoint& global_pos);
 #endif
-#if defined(Q_OS_WINDOWS)
-  void runStayOnTopHacks();
-#endif
-#if defined(Q_OS_MACOS)
-  void setHiddenInMissionControl(bool en);
-  void setVisibleOnAllDesktops(bool en);
-#endif
-  void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
+  virtual void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
 
-  void setStayOnTop(bool en);
-  void setTransparentForInput(bool en);
+  virtual void setStayOnTop(bool en);
+  virtual void setTransparentForInput(bool en);
 
 signals:
   void saveStateRequested();
@@ -129,6 +122,7 @@ private:
   bool _transparent_on_hover = true;
   qreal _opacity_on_hover = 0.15;
 
+protected:
   // used by stay on top hacks, but types are not platform-dependent
   QScreen* _last_screen = nullptr;
   QSet<QString> _fullscreen_ignore_list;

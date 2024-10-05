@@ -18,7 +18,7 @@
 #include "config/app_config.hpp"
 
 #include "gui/clock_tray_icon.hpp"
-#include "gui/clock_window.hpp"
+#include "platform/clock_native_window.hpp"
 #include "platform/mouse_tracker.hpp"
 #include "dialog_manager.hpp"
 #include "plugin_manager.hpp"
@@ -97,7 +97,7 @@ private:
   ClockTrayIcon _tray_icon;
   std::unique_ptr<QMenu> _tray_menu;
   // QWidget seems to be non-movable type :(
-  std::vector<std::unique_ptr<ClockWindow>> _windows;
+  std::vector<std::unique_ptr<ClockNativeWindow>> _windows;
   QTimer _time_timer;
   QTimer _tick_timer;
   SkinManager _sm;

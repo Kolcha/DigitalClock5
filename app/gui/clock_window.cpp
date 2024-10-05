@@ -6,21 +6,37 @@
 
 #include "clock_window.hpp"
 
+#include <QApplication>
+
 #include <QMenu>
 #include <QScreen>
 
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 
+namespace {
+
+// this wrapper function allows to change window flag on runtime as it should be
+// after setWindowFlag() call widget becomes hidden, and must be shown explicitly
+// show() activates the widget, so previous becomes inactive, this is annoying...
+// so, remember the current active widget and restore it after changing the flag
+void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set)
+{
+  QWidget* aw = QApplication::activeWindow();
+  bool last_visible = wnd->isVisible();
+  wnd->setWindowFlag(flag, set);
+  if (last_visible != wnd->isVisible()) wnd->show();
+  if (aw) aw->activateWindow();
+}
+
+} // namespace
+
 ClockWindow::ClockWindow(QWidget* parent)
     : QWidget(parent)
 {
   setAttribute(Qt::WA_NativeWindow);
   setAttribute(Qt::WA_DontCreateNativeAncestors);
-#if defined(Q_OS_MACOS)
-  setHiddenInMissionControl(true);
-  setVisibleOnAllDesktops(true);
-#endif
+
   _layout = new QGridLayout(this);
   _layout->setSizeConstraint(QLayout::SetFixedSize);
   _layout->setContentsMargins(0, 0, 0, 0);
@@ -172,6 +188,17 @@ void ClockWindow::handleMouseMove(const QPoint& global_pos)
   setProperty("dc_mouse_entered", entered);
 }
 #endif
+
+void ClockWindow::setStayOnTop(bool en)
+{
+  _should_stay_on_top = en;
+  wrap_set_window_flag(this, Qt::WindowStaysOnTopHint, en);
+}
+
+void ClockWindow::setTransparentForInput(bool en)
+{
+  wrap_set_window_flag(this, Qt::WindowTransparentForInput, en);
+}
 
 void ClockWindow::contextMenuEvent(QContextMenuEvent* event)
 {

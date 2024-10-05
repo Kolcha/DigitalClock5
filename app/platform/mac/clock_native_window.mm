@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "gui/clock_window.hpp"
+#include "clock_native_window.hpp"
 
 #import <AppKit/NSWindow.h>
 
@@ -24,29 +24,31 @@ static void SetVisibleInFullscreen(NSWindow* window, bool vis)
 }
 
 
-void ClockWindow::setHiddenInMissionControl(bool en)
+ClockNativeWindow::ClockNativeWindow(QWidget* parent)
+    : ClockWindow(parent)
+{
+  setHiddenInMissionControl(true);
+  setVisibleOnAllDesktops(true);
+}
+
+void ClockNativeWindow::setStayOnTop(bool en)
+{
+  ClockWindow::setStayOnTop(en);
+
+  NSView* view = reinterpret_cast<NSView*>(winId());
+  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
+}
+
+void ClockNativeWindow::setHiddenInMissionControl(bool en)
 {
   NSView* view = reinterpret_cast<NSView*>(winId());
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorManaged, !en);
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorTransient, en);
 }
 
-void ClockWindow::setVisibleOnAllDesktops(bool en)
+void ClockNativeWindow::setVisibleOnAllDesktops(bool en)
 {
   NSView* view = reinterpret_cast<NSView*>(winId());
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorCanJoinAllSpaces, en);
   SetVisibleInFullscreen(view.window, !_detect_fullscreen);
-}
-
-void ClockWindow::setStayOnTop(bool en)
-{
-  NSView* view = reinterpret_cast<NSView*>(winId());
-  [view.window setLevel: en ? NSFloatingWindowLevel : NSNormalWindowLevel];
-  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
-}
-
-void ClockWindow::setTransparentForInput(bool en)
-{
-  NSView* view = reinterpret_cast<NSView*>(winId());
-  [view.window setIgnoresMouseEvents: en];
 }
