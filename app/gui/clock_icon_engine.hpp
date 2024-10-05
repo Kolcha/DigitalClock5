@@ -18,6 +18,9 @@ public:
 
   QIconEngine* clone() const override;
 
+  QList<QSize> availableSizes(QIcon::Mode mode = QIcon::Normal,
+                              QIcon::State state = QIcon::Off) override;
+
 private:
   QColor m_color;
 };

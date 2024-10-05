@@ -66,3 +66,10 @@ QIconEngine* ClockIconEngine::clone() const
 {
   return new ClockIconEngine;
 }
+
+QList<QSize> ClockIconEngine::availableSizes(QIcon::Mode mode, QIcon::State state)
+{
+  // actual values don't matter, just workaround to make tray icon visible on KDE
+  // return set of common sizes, and one ridiculously large, to "be on safe side"
+  return {{16, 16}, {22, 22}, {24, 24}, {32, 32}, {64, 64}, {128, 128}, {512, 512}};
+}
