@@ -24,6 +24,7 @@ endif()
 if (APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         mac/autostart_mac.cpp
+        mac/clock_window.mm
         mac/mouse_tracker.mm
     )
 endif()

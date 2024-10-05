@@ -77,6 +77,9 @@ public slots:
   void runStayOnTopHacks();
   void surviveWinDHack();
 #endif
+#if defined(Q_OS_MACOS)
+  void hideInMissionControl();
+#endif
   void setFullscreenDetect(bool en) { _detect_fullscreen = en; }
 
 signals:

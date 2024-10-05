@@ -15,6 +15,11 @@
 ClockWindow::ClockWindow(QWidget* parent)
     : QWidget(parent)
 {
+  setAttribute(Qt::WA_NativeWindow);
+  setAttribute(Qt::WA_DontCreateNativeAncestors);
+#if defined(Q_OS_MACOS)
+  hideInMissionControl();
+#endif
   _layout = new QGridLayout(this);
   _layout->setSizeConstraint(QLayout::SetFixedSize);
   _layout->setContentsMargins(0, 0, 0, 0);
@@ -215,6 +220,7 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 void ClockWindow::moveEvent(QMoveEvent* event)
 {
   QWidget::moveEvent(event);
+  if (!isVisible()) return;
   if (_keep_visible) updateWindowPos();
 }
 
