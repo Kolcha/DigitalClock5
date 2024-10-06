@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="179"/>
+        <location filename="../countdown_timer_plugin.cpp" line="171"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12,12 +12,12 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="199"/>
+        <location filename="../countdown_timer_plugin.cpp" line="191"/>
         <source>Just a countdown timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="63"/>
+        <location filename="../countdown_timer_plugin.hpp" line="60"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>

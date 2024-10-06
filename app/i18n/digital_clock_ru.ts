@@ -34,10 +34,6 @@
         <translation>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/issues&quot;&gt;сообщить об ошибке/предложить функцию&lt;/a&gt;</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki/Translate&quot;&gt;help to translate&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki/Translate&quot;&gt;помочь с переводом&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../gui/about_dialog.ui" line="183"/>
         <source>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;view full changelog&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;полный список изменений&lt;/a&gt;</translation>
@@ -140,54 +136,54 @@ Click this message to download.</source>
 <context>
     <name>ClockWindow</name>
     <message>
-        <location filename="../gui/clock_window.cpp" line="41"/>
+        <location filename="../gui/clock_window.cpp" line="57"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="45"/>
+        <location filename="../gui/clock_window.cpp" line="61"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="48"/>
+        <location filename="../gui/clock_window.cpp" line="64"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="297"/>
+        <location filename="../gui/clock_window.cpp" line="324"/>
         <source>Position</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="298"/>
+        <location filename="../gui/clock_window.cpp" line="325"/>
         <source>Top</source>
         <translation>Верх</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="299"/>
-        <location filename="../gui/clock_window.cpp" line="303"/>
-        <location filename="../gui/clock_window.cpp" line="307"/>
+        <location filename="../gui/clock_window.cpp" line="326"/>
+        <location filename="../gui/clock_window.cpp" line="330"/>
+        <location filename="../gui/clock_window.cpp" line="334"/>
         <source>Left</source>
         <translation>Лево</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="300"/>
-        <location filename="../gui/clock_window.cpp" line="302"/>
-        <location filename="../gui/clock_window.cpp" line="304"/>
-        <location filename="../gui/clock_window.cpp" line="308"/>
+        <location filename="../gui/clock_window.cpp" line="327"/>
+        <location filename="../gui/clock_window.cpp" line="329"/>
+        <location filename="../gui/clock_window.cpp" line="331"/>
+        <location filename="../gui/clock_window.cpp" line="335"/>
         <source>Middle</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="301"/>
-        <location filename="../gui/clock_window.cpp" line="305"/>
-        <location filename="../gui/clock_window.cpp" line="309"/>
+        <location filename="../gui/clock_window.cpp" line="328"/>
+        <location filename="../gui/clock_window.cpp" line="332"/>
+        <location filename="../gui/clock_window.cpp" line="336"/>
         <source>Right</source>
         <translation>Право</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="306"/>
+        <location filename="../gui/clock_window.cpp" line="333"/>
         <source>Bottom</source>
         <translation>Низ</translation>
     </message>

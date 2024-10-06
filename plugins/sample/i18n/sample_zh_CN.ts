@@ -4,12 +4,12 @@
 <context>
     <name>SamplePluginFactory</name>
     <message>
-        <location filename="../sample_plugin.cpp" line="91"/>
+        <location filename="../sample_plugin.cpp" line="80"/>
         <source>Test plugin just for debugging and testing purposes. Also can be used as minimal example. Does nothing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sample_plugin.hpp" line="50"/>
+        <location filename="../sample_plugin.hpp" line="47"/>
         <source>Sample Plugin</source>
         <translation type="unfinished"></translation>
     </message>

@@ -22,14 +22,14 @@
 <context>
     <name>StopwatchPluginFactory</name>
     <message>
-        <location filename="../stopwatch_plugin.cpp" line="158"/>
+        <location filename="../stopwatch_plugin.cpp" line="146"/>
         <source>Very simple stopwatch.
 Single click to start/pause.
 Double click to reset/restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stopwatch_plugin.hpp" line="55"/>
+        <location filename="../stopwatch_plugin.hpp" line="52"/>
         <source>Stopwatch</source>
         <translation type="unfinished"></translation>
     </message>

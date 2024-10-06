@@ -9,7 +9,7 @@
         <translation>Permite definir um aumento qualquer do relógio, até mesmo valores diferentes para o eixo do X e do Y.</translation>
     </message>
     <message>
-        <location filename="../any_zoom_plugin.hpp" line="50"/>
+        <location filename="../any_zoom_plugin.hpp" line="47"/>
         <source>Any zoom</source>
         <translation>Qualquer aumento</translation>
     </message>

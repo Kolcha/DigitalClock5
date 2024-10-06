@@ -9,7 +9,7 @@
         <translation>在设定的时段进行报时。</translation>
     </message>
     <message>
-        <location filename="../chime_plugin.hpp" line="50"/>
+        <location filename="../chime_plugin.hpp" line="47"/>
         <source>Chime</source>
         <translation>报时</translation>
     </message>

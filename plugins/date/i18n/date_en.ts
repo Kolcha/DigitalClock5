@@ -4,12 +4,12 @@
 <context>
     <name>DatePluginFactory</name>
     <message>
-        <location filename="../date_plugin.cpp" line="71"/>
+        <location filename="../date_plugin.cpp" line="61"/>
         <source>Allows to display current date under the clock.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../date_plugin.hpp" line="49"/>
+        <location filename="../date_plugin.hpp" line="46"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>

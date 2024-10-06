@@ -9,7 +9,7 @@
         <translation>任意缩放时钟尺寸，可设置不同的横纵缩放比例。</translation>
     </message>
     <message>
-        <location filename="../any_zoom_plugin.hpp" line="50"/>
+        <location filename="../any_zoom_plugin.hpp" line="47"/>
         <source>Any zoom</source>
         <translation>任意缩放</translation>
     </message>

@@ -9,7 +9,7 @@
         <translation>Toca o sino num período selecionado.</translation>
     </message>
     <message>
-        <location filename="../chime_plugin.hpp" line="50"/>
+        <location filename="../chime_plugin.hpp" line="47"/>
         <source>Chime</source>
         <translation>Tocar o Sino</translation>
     </message>
