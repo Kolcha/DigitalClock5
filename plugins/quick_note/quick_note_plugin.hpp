@@ -14,8 +14,6 @@ class QuickNotePlugin : public WidgetPluginBase
 
 public:
   void initState(StateClient* st) override;
-  void saveState(StateClient& st) const override;
-  void loadState(const StateClient& st) override;
 
 protected:
   QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) override;

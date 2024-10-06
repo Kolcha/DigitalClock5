@@ -16,16 +16,6 @@ DatePlugin::DatePlugin()
 
 DatePlugin::~DatePlugin() = default;
 
-void DatePlugin::saveState(StateClient& st) const
-{
-  Q_UNUSED(st);
-}
-
-void DatePlugin::loadState(const StateClient& st)
-{
-  Q_UNUSED(st);
-}
-
 void DatePlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);

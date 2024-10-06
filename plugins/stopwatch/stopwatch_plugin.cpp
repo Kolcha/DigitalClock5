@@ -57,18 +57,6 @@ StopwatchPlugin::StopwatchPlugin()
 
 StopwatchPlugin::~StopwatchPlugin() = default;
 
-void StopwatchPlugin::saveState(StateClient& st) const
-{
-  st.setValue("last_active", _impl->tracker->isActive());
-  st.setValue("last_elapsed", _impl->tracker->elapsed());
-}
-
-void StopwatchPlugin::loadState(const StateClient& st)
-{
-  _impl->last_active = st.value("last_active", false).toBool();
-  _impl->last_elapsed = st.value("last_elapsed", 0).toInt();
-}
-
 void StopwatchPlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);

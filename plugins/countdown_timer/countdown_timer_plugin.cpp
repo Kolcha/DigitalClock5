@@ -62,14 +62,6 @@ CountdownTimerPlugin::CountdownTimerPlugin()
 
 CountdownTimerPlugin::~CountdownTimerPlugin() = default;
 
-void CountdownTimerPlugin::saveState(StateClient& st) const
-{
-}
-
-void CountdownTimerPlugin::loadState(const StateClient& st)
-{
-}
-
 void CountdownTimerPlugin::initSettings(PluginSettingsStorage& st)
 {
   _impl->initSettings(st);

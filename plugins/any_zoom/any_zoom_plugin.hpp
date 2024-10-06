@@ -20,9 +20,6 @@ public:
 
   void initSharedSettings(const SharedSettings& s) override;
 
-  void saveState(StateClient& st) const override { Q_UNUSED(st); }
-  void loadState(const StateClient& st) override { Q_UNUSED(st); }
-
   void initSettings(PluginSettingsStorage& st) override;
 
   QWidget* configure(PluginSettingsStorage& s, StateClient& t) override;

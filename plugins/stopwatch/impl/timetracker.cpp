@@ -39,7 +39,7 @@ void Timetracker::stop()
   if (!timer_.isValid())
     return;
 
-  last_elapsed_ = timer_.elapsed() / 1000;
+  last_elapsed_ += timer_.elapsed() / 1000;
   timer_.invalidate();
   emit activityChanged(timer_.isValid());
 }

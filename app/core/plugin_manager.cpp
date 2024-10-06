@@ -340,14 +340,6 @@ void PluginManager::Impl::unload(const QString& id)
   if (iter == loaded.end())
     return;
 
-  // save state
-  if (available[id].configurable) {
-    for (size_t i = 0; i < iter->second.instances().size(); i++) {
-      if (auto cp = dynamic_cast<ConfigurablePlugin*>(iter->second.instance(i)))
-        cp->saveState(app->config().plugin(id).state(i));
-    }
-  }
-
   std::ranges::for_each(iter->second.instances(), [](auto& p) { p->shutdown(); });
 
   loaded.erase(iter);
@@ -376,7 +368,6 @@ void PluginManager::Impl::initAllInterfaces(const PluginHandle& h)
     if (auto cp = dynamic_cast<ConfigurablePlugin*>(h.instance(i))) {
       auto& plg_cfg = app->config().plugin(h.id());
       cp->initState(&plg_cfg.state(i));
-      cp->loadState(plg_cfg.state(i));
       cp->initSettings(plg_cfg.config(i));
     }
     // provide shared settings

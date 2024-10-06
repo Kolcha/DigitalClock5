@@ -103,13 +103,6 @@ public:
   // default implementation does nothing, it is provided just for convenience
   virtual void initState(StateClient* st) {}
 
-  // allows to save the state, called before shutdown()
-  [[deprecated("replaced by initState()")]]
-  virtual void saveState(StateClient& st) const = 0;
-  // allows to load the state, called before init()
-  [[deprecated("replaced by initState()")]]
-  virtual void loadState(const StateClient& st) = 0;
-
   // allows plugin to init its structures from saved settings
   // plugin should not save this reference for the future use
   // called before init() but after loadState()

@@ -25,17 +25,6 @@ void SamplePlugin::initSharedSettings(const SharedSettings& s)
   qDebug() << __FUNCTION__;
 }
 
-void SamplePlugin::saveState(StateClient& st) const
-{
-  st.setValue("testA", 84);
-  qDebug() << __FUNCTION__;
-}
-
-void SamplePlugin::loadState(const StateClient& st)
-{
-  qDebug() << __FUNCTION__ << st.value("testA", 42);
-}
-
 void SamplePlugin::initSettings(PluginSettingsStorage& st)
 {
   qDebug() << __FUNCTION__ << st.value("V1", 25);

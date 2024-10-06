@@ -18,9 +18,6 @@ public:
   DatePlugin();
   ~DatePlugin();
 
-  void saveState(StateClient& st) const override;
-  void loadState(const StateClient& st) override;
-
   void initSettings(PluginSettingsStorage& st) override;
 
 public slots:

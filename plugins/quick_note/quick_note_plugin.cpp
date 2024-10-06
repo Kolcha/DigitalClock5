@@ -42,17 +42,7 @@ void DoubleClickWidget::mouseDoubleClickEvent(QMouseEvent* event)
 void QuickNotePlugin::initState(StateClient* st)
 {
   _state = st;
-  loadState(*st);
-}
-
-void QuickNotePlugin::saveState(StateClient& st) const
-{
-  st.setValue("last_text", _last_text);
-}
-
-void QuickNotePlugin::loadState(const StateClient& st)
-{
-  _last_text = st.value("last_text", tr("double click me!")).toString();
+  _last_text = st->value("last_text", tr("double click me!")).toString();
 }
 
 QList<QWidget*> QuickNotePlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
