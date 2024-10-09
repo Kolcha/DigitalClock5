@@ -134,9 +134,6 @@ initial file was generated with the next command:
       <Component Id="cmp80E75174A493DF4F7221EE7BB7D63064" Directory="dirF6F536CAC2A521B870028196D039D8E6" Guid="{746C2A9F-BD8C-442F-B211-137F02C27D45}">
         <File Id="filEFFDA27E448FAD84740AEA7FE5939725" KeyPath="yes" Source="$(var.MySource)\plugins\tls\qcertonlybackend.dll" />
       </Component>
-      <Component Id="cmpE9BF22AEB8AE6A5CFB0DB26232C2CD61" Directory="dirF6F536CAC2A521B870028196D039D8E6" Guid="{73A3CCAD-82C1-4948-BD5B-8DA3C119B5E3}">
-        <File Id="fil023BCBF0FB0B5C3FAC402BC8068500A8" KeyPath="yes" Source="$(var.MySource)\plugins\tls\qopensslbackend.dll" />
-      </Component>
       <Component Id="cmpB13A54C5786E2EC7794076753CFAF572" Directory="dirF6F536CAC2A521B870028196D039D8E6" Guid="{F35528A8-1561-418D-BB38-CA642A9DF68B}">
         <File Id="filF3708D10267E65BA5C8EBA8876CB7461" KeyPath="yes" Source="$(var.MySource)\plugins\tls\qschannelbackend.dll" />
       </Component>

@@ -12,7 +12,7 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
       - name: Checkout repository
@@ -31,7 +31,8 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.7.*"
+          version: "6.8.*"
+          arch: 'win64_msvc2022_64'
           archives: qtbase qtsvg qttools qttranslations
           modules: qtimageformats qtmultimedia
 
