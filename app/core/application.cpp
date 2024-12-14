@@ -78,7 +78,9 @@ void Application::configureWindow(size_t i)
   clock->setIgnoreAX(acfg.getIgnoreAX());
   clock->setIgnoreAY(acfg.getIgnoreAY());
 
-  if (!gcfg.getShowLocalTime())
+  if (gcfg.getShowLocalTime())
+    clock->setTimeZone(QDateTime::currentDateTime().timeZone());
+  else
     clock->setTimeZone(gcfg.getTimeZone());
 
   // load skin
