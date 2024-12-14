@@ -77,7 +77,8 @@ void Application::configureWindow(size_t i)
   clock->setIgnoreAX(acfg.getIgnoreAX());
   clock->setIgnoreAY(acfg.getIgnoreAY());
 
-  clock->setTimeZone(gcfg.getTimeZone());
+  if (!gcfg.getShowLocalTime())
+    clock->setTimeZone(gcfg.getTimeZone());
 
   // load skin
   if (i == 0 || _cfg->global().getAppearancePerInstance()) {
