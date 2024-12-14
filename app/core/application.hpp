@@ -100,6 +100,7 @@ private:
   std::vector<std::unique_ptr<ClockNativeWindow>> _windows;
   QTimer _time_timer;
   QTimer _tick_timer;
+  QTimeZone _local_tz;
   SkinManager _sm;
   PluginManager _pm;
   DialogManager<quint64> _dm;

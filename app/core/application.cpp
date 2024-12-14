@@ -37,6 +37,7 @@ bool updatePaletteLinkColors()
 
 Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
+    , _local_tz(QTimeZone::systemTimeZone())
     , _pm(this)
 {
   updatePaletteLinkColors();
@@ -356,6 +357,18 @@ void Application::onTimer()
   auto now = QDateTime::currentDateTime();
   for (const auto& w : _windows)
     w->clock()->setDateTime(now);
+
+  // there is no "time zone changed" event,
+  // so, track local time zone changes manually
+  if (now.timeZone() == _local_tz)
+    return;
+
+  _local_tz = now.timeZone();
+
+  for (size_t i = 0; i < _windows.size(); i++) {
+    if (_cfg->window(i).generic().getShowLocalTime())
+      _windows[i]->clock()->setTimeZone(_local_tz);
+  }
 }
 
 void Application::showSettingsDialog()
