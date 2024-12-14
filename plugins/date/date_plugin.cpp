@@ -28,6 +28,8 @@ void DatePlugin::onTimeChanged(const QDateTime& dt)
   _impl->last_dt = dt;
   if (!_impl->widget)
     return;
+  if (_impl->widget->currentTimeZone() != dt.timeZone())
+    _impl->widget->setTimeZone(dt.timeZone());
   _impl->widget->setDateTime(dt);
 }
 
