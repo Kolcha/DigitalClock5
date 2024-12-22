@@ -68,64 +68,64 @@ Click here to download.</source>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="210"/>
+        <location filename="../core/application.cpp" line="214"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="215"/>
+        <location filename="../core/application.cpp" line="219"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="219"/>
+        <location filename="../core/application.cpp" line="223"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="310"/>
+        <location filename="../core/application.cpp" line="314"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="311"/>
+        <location filename="../core/application.cpp" line="315"/>
         <source>Top</source>
         <translation>Topo</translation>
-    </message>
-    <message>
-        <location filename="../core/application.cpp" line="312"/>
-        <location filename="../core/application.cpp" line="319"/>
-        <location filename="../core/application.cpp" line="326"/>
-        <source>Left</source>
-        <translation>Esquerda</translation>
-    </message>
-    <message>
-        <location filename="../core/application.cpp" line="314"/>
-        <location filename="../core/application.cpp" line="318"/>
-        <location filename="../core/application.cpp" line="321"/>
-        <location filename="../core/application.cpp" line="328"/>
-        <source>Middle</source>
-        <translation>Meio</translation>
     </message>
     <message>
         <location filename="../core/application.cpp" line="316"/>
         <location filename="../core/application.cpp" line="323"/>
         <location filename="../core/application.cpp" line="330"/>
+        <source>Left</source>
+        <translation>Esquerda</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="318"/>
+        <location filename="../core/application.cpp" line="322"/>
+        <location filename="../core/application.cpp" line="325"/>
+        <location filename="../core/application.cpp" line="332"/>
+        <source>Middle</source>
+        <translation>Meio</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="320"/>
+        <location filename="../core/application.cpp" line="327"/>
+        <location filename="../core/application.cpp" line="334"/>
         <source>Right</source>
         <translation>Direita</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="325"/>
+        <location filename="../core/application.cpp" line="329"/>
         <source>Bottom</source>
         <translation>Fundo</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="396"/>
+        <location filename="../core/application.cpp" line="412"/>
         <source>%1 Update</source>
         <translation>%1 Atualização</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="397"/>
+        <location filename="../core/application.cpp" line="413"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>Atualização disponível: %1 (%2).

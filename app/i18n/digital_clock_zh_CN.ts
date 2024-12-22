@@ -68,64 +68,64 @@ Click here to download.</source>
 <context>
     <name>Application</name>
     <message>
-        <location filename="../core/application.cpp" line="210"/>
+        <location filename="../core/application.cpp" line="214"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="215"/>
+        <location filename="../core/application.cpp" line="219"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="219"/>
+        <location filename="../core/application.cpp" line="223"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="310"/>
+        <location filename="../core/application.cpp" line="314"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="311"/>
+        <location filename="../core/application.cpp" line="315"/>
         <source>Top</source>
         <translation>顶部</translation>
-    </message>
-    <message>
-        <location filename="../core/application.cpp" line="312"/>
-        <location filename="../core/application.cpp" line="319"/>
-        <location filename="../core/application.cpp" line="326"/>
-        <source>Left</source>
-        <translation>左</translation>
-    </message>
-    <message>
-        <location filename="../core/application.cpp" line="314"/>
-        <location filename="../core/application.cpp" line="318"/>
-        <location filename="../core/application.cpp" line="321"/>
-        <location filename="../core/application.cpp" line="328"/>
-        <source>Middle</source>
-        <translation>中</translation>
     </message>
     <message>
         <location filename="../core/application.cpp" line="316"/>
         <location filename="../core/application.cpp" line="323"/>
         <location filename="../core/application.cpp" line="330"/>
+        <source>Left</source>
+        <translation>左</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="318"/>
+        <location filename="../core/application.cpp" line="322"/>
+        <location filename="../core/application.cpp" line="325"/>
+        <location filename="../core/application.cpp" line="332"/>
+        <source>Middle</source>
+        <translation>中</translation>
+    </message>
+    <message>
+        <location filename="../core/application.cpp" line="320"/>
+        <location filename="../core/application.cpp" line="327"/>
+        <location filename="../core/application.cpp" line="334"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="325"/>
+        <location filename="../core/application.cpp" line="329"/>
         <source>Bottom</source>
         <translation>底部</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="396"/>
+        <location filename="../core/application.cpp" line="412"/>
         <source>%1 Update</source>
         <translation>%1 更新</translation>
     </message>
     <message>
-        <location filename="../core/application.cpp" line="397"/>
+        <location filename="../core/application.cpp" line="413"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>有可用更新: %1 (%2)

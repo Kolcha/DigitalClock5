@@ -4,7 +4,7 @@
 <context>
     <name>DatePluginFactory</name>
     <message>
-        <location filename="../date_plugin.cpp" line="61"/>
+        <location filename="../date_plugin.cpp" line="63"/>
         <source>Allows to display current date under the clock.</source>
         <translation>Permite mostrar a data atual por baixo do relógio.</translation>
     </message>
