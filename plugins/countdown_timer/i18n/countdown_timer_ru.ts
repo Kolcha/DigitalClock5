@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="171"/>
+        <location filename="../countdown_timer_plugin.cpp" line="230"/>
         <source>Countdown timer</source>
         <translation>Таймер обратного отсчёта</translation>
     </message>
@@ -12,18 +12,18 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="191"/>
+        <location filename="../countdown_timer_plugin.cpp" line="260"/>
         <source>Just a countdown timer.</source>
         <translation>Простой таймер обратного отсчёта.</translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="60"/>
+        <location filename="../countdown_timer_plugin.hpp" line="70"/>
         <source>Countdown timer</source>
         <translation>Таймер обратного отсчёта</translation>
     </message>
 </context>
 <context>
-    <name>HotkeysSettingsWidget</name>
+    <name>countdown_timer::HotkeysSettingsWidget</name>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="14"/>
         <source>Hotkeys</source>
@@ -41,7 +41,7 @@
     </message>
 </context>
 <context>
-    <name>TimerSettingsWidget</name>
+    <name>countdown_timer::TimerSettingsWidget</name>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="14"/>
         <source>Timer</source>
@@ -120,14 +120,102 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation>показывать сообщение по истечении времени</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="133"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="136"/>
         <source>Open File</source>
         <translation>Выбор файла</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="135"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="138"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation>Звуки (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
+    </message>
+</context>
+<context>
+    <name>countdown_timer::countdown_timer::HotkeysSettingsWidget</name>
+    <message>
+        <source>Hotkeys</source>
+        <translation type="obsolete">Горячие клавиши</translation>
+    </message>
+    <message>
+        <source>pause timer</source>
+        <translation type="obsolete">приостановить таймер</translation>
+    </message>
+    <message>
+        <source>restart timer</source>
+        <translation type="obsolete">перезапустить таймер</translation>
+    </message>
+</context>
+<context>
+    <name>countdown_timer::countdown_timer::TimerSettingsWidget</name>
+    <message>
+        <source>Timer</source>
+        <translation type="obsolete">Таймер</translation>
+    </message>
+    <message>
+        <source>target time</source>
+        <translation type="obsolete">конкретное время</translation>
+    </message>
+    <message>
+        <source>interval</source>
+        <translation type="obsolete">интервал</translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="obsolete">часы</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="obsolete">минуты</translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="obsolete">секунды</translation>
+    </message>
+    <message>
+        <source>minimum days count to show</source>
+        <translation type="obsolete">минимальное количество дней для отображения</translation>
+    </message>
+    <message>
+        <source>If remaining days count less than this value, days will not be shown.
+Set this to -1 to never show days count, or to 0 to always show.</source>
+        <translation type="obsolete">Если количество оставшихся дней меньше данного значения, дни не будут отображаться.
+Установите данное значение в -1 чтобы никогда не отображать дни, или в 0 чтобы отображать всегда.</translation>
+    </message>
+    <message>
+        <source>also hide hours</source>
+        <translation type="obsolete">также скрывать часы</translation>
+    </message>
+    <message>
+        <source>restart on double click</source>
+        <translation type="obsolete">перезапуск по двойному клику</translation>
+    </message>
+    <message>
+        <source>auto-restart countdown</source>
+        <translation type="obsolete">перезапуск таймера</translation>
+    </message>
+    <message>
+        <source>hide timer when it is not active</source>
+        <translation type="obsolete">скрывать неактивный таймер</translation>
+    </message>
+    <message>
+        <source>reverse counting</source>
+        <translation type="obsolete">обратный счет</translation>
+    </message>
+    <message>
+        <source>chime when countdown finishes</source>
+        <translation type="obsolete">сигнал по истечению таймера</translation>
+    </message>
+    <message>
+        <source>show custom message on timeout</source>
+        <translation type="obsolete">показывать сообщение по истечении времени</translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="obsolete">Выбор файла</translation>
+    </message>
+    <message>
+        <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
+        <translation type="obsolete">Звуки (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
     </message>
 </context>
 </TS>

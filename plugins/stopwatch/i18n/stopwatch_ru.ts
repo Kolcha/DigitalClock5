@@ -2,7 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru" sourcelanguage="en_US">
 <context>
-    <name>HotkeysSettingsWidget</name>
+    <name>StopwatchPluginFactory</name>
+    <message>
+        <location filename="../stopwatch_plugin.cpp" line="186"/>
+        <source>Very simple stopwatch.
+Single click to start/pause.
+Double click to reset/restart.</source>
+        <translation>Очень простой секундомер.
+Один клик для запуска/остановки.
+Двойной клик для сброса/перезапуска.</translation>
+    </message>
+    <message>
+        <location filename="../stopwatch_plugin.hpp" line="67"/>
+        <source>Stopwatch</source>
+        <translation>Секундомер</translation>
+    </message>
+</context>
+<context>
+    <name>timetracker::HotkeysSettingsWidget</name>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="14"/>
         <source>Hotkeys</source>
@@ -20,24 +37,7 @@
     </message>
 </context>
 <context>
-    <name>StopwatchPluginFactory</name>
-    <message>
-        <location filename="../stopwatch_plugin.cpp" line="146"/>
-        <source>Very simple stopwatch.
-Single click to start/pause.
-Double click to reset/restart.</source>
-        <translation>Очень простой секундомер.
-Один клик для запуска/остановки.
-Двойной клик для сброса/перезапуска.</translation>
-    </message>
-    <message>
-        <location filename="../stopwatch_plugin.hpp" line="52"/>
-        <source>Stopwatch</source>
-        <translation>Секундомер</translation>
-    </message>
-</context>
-<context>
-    <name>TimerSettingsWidget</name>
+    <name>timetracker::TimerSettingsWidget</name>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="14"/>
         <source>Timer</source>
@@ -47,6 +47,32 @@ Double click to reset/restart.</source>
         <location filename="../gui/timer_settings_widget.ui" line="20"/>
         <source>hide timer when it is not active</source>
         <translation>скрывать неактивный таймер</translation>
+    </message>
+</context>
+<context>
+    <name>timetracker::timetracker::HotkeysSettingsWidget</name>
+    <message>
+        <source>Hotkeys</source>
+        <translation type="obsolete">Горячие клавиши</translation>
+    </message>
+    <message>
+        <source>pause timer</source>
+        <translation type="obsolete">приостановить таймер</translation>
+    </message>
+    <message>
+        <source>restart timer</source>
+        <translation type="obsolete">перезапустить таймер</translation>
+    </message>
+</context>
+<context>
+    <name>timetracker::timetracker::TimerSettingsWidget</name>
+    <message>
+        <source>Timer</source>
+        <translation type="obsolete">Таймер</translation>
+    </message>
+    <message>
+        <source>hide timer when it is not active</source>
+        <translation type="obsolete">скрывать неактивный таймер</translation>
     </message>
 </context>
 </TS>

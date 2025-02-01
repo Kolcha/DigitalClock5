@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="171"/>
+        <location filename="../countdown_timer_plugin.cpp" line="230"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12,18 +12,18 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="191"/>
+        <location filename="../countdown_timer_plugin.cpp" line="260"/>
         <source>Just a countdown timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="60"/>
+        <location filename="../countdown_timer_plugin.hpp" line="70"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>HotkeysSettingsWidget</name>
+    <name>countdown_timer::HotkeysSettingsWidget</name>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="14"/>
         <source>Hotkeys</source>
@@ -41,7 +41,7 @@
     </message>
 </context>
 <context>
-    <name>TimerSettingsWidget</name>
+    <name>countdown_timer::TimerSettingsWidget</name>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="14"/>
         <source>Timer</source>
@@ -119,12 +119,12 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="133"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="136"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="135"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="138"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation type="unfinished"></translation>
     </message>

@@ -4,32 +4,43 @@
 <context>
     <name>AnyZoomPluginFactory</name>
     <message>
-        <location filename="../any_zoom_plugin.cpp" line="62"/>
+        <location filename="../any_zoom_plugin.cpp" line="58"/>
         <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
         <translation>Permite definir um aumento qualquer do relógio, até mesmo valores diferentes para o eixo do X e do Y.</translation>
     </message>
     <message>
-        <location filename="../any_zoom_plugin.hpp" line="47"/>
+        <location filename="../any_zoom_plugin.hpp" line="53"/>
         <source>Any zoom</source>
         <translation>Qualquer aumento</translation>
     </message>
 </context>
 <context>
-    <name>SettingsWidget</name>
+    <name>any_zoom::AnyZoom</name>
     <message>
-        <location filename="../gui/settings_widget.ui" line="14"/>
+        <source>Any zoom</source>
+        <translation type="vanished">Qualquer aumento</translation>
+    </message>
+    <message>
+        <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
+        <translation type="vanished">Permite definir um aumento qualquer do relógio, até mesmo valores diferentes para o eixo do X e do Y.</translation>
+    </message>
+</context>
+<context>
+    <name>any_zoom::ZoomDialog</name>
+    <message>
+        <location filename="../gui/zoom_dialog.ui" line="14"/>
         <source>Zoom</source>
         <translation>Aumento</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="55"/>
-        <source>Y zoom:</source>
-        <translation>Aumento Y:</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings_widget.ui" line="97"/>
+        <location filename="../gui/zoom_dialog.ui" line="20"/>
         <source>X zoom:</source>
         <translation>Aumento X:</translation>
+    </message>
+    <message>
+        <location filename="../gui/zoom_dialog.ui" line="62"/>
+        <source>Y zoom:</source>
+        <translation>Aumento Y:</translation>
     </message>
 </context>
 </TS>

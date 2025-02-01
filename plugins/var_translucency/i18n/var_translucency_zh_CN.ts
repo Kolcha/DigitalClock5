@@ -4,8 +4,8 @@
 <context>
     <name>VarTranslucencyPluginFactory</name>
     <message>
-        <location filename="../var_translucency_plugin.cpp" line="76"/>
-        <source>Changes clock opacity level during time.</source>
+        <location filename="../var_translucency_plugin.cpp" line="71"/>
+        <source>Changes clock opacity level with time.</source>
         <translation>随时间改变时钟的透明度。</translation>
     </message>
     <message>

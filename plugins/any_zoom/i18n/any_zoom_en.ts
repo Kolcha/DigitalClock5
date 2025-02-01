@@ -4,31 +4,31 @@
 <context>
     <name>AnyZoomPluginFactory</name>
     <message>
-        <location filename="../any_zoom_plugin.cpp" line="62"/>
+        <location filename="../any_zoom_plugin.cpp" line="58"/>
         <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../any_zoom_plugin.hpp" line="47"/>
+        <location filename="../any_zoom_plugin.hpp" line="53"/>
         <source>Any zoom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SettingsWidget</name>
+    <name>any_zoom::ZoomDialog</name>
     <message>
-        <location filename="../gui/settings_widget.ui" line="14"/>
+        <location filename="../gui/zoom_dialog.ui" line="14"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="55"/>
-        <source>Y zoom:</source>
+        <location filename="../gui/zoom_dialog.ui" line="20"/>
+        <source>X zoom:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="97"/>
-        <source>X zoom:</source>
+        <location filename="../gui/zoom_dialog.ui" line="62"/>
+        <source>Y zoom:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -4,18 +4,18 @@
 <context>
     <name>DatePluginFactory</name>
     <message>
-        <location filename="../date_plugin.cpp" line="63"/>
+        <location filename="../date_plugin.cpp" line="82"/>
         <source>Allows to display current date under the clock.</source>
         <translation>在时钟下显示当前日期。</translation>
     </message>
     <message>
-        <location filename="../date_plugin.hpp" line="46"/>
+        <location filename="../date_plugin.hpp" line="52"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
 </context>
 <context>
-    <name>SettingsWidget</name>
+    <name>plugin::date::SettingsWidget</name>
     <message>
         <location filename="../gui/settings_widget.ui" line="14"/>
         <source>Date</source>
@@ -47,12 +47,12 @@
         <translation>yyyy-MM-dd&apos;\n第&apos; WW &apos;周&apos; &apos;\n第&apos; J &apos;天&apos;</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="26"/>
+        <location filename="../gui/settings_widget.cpp" line="23"/>
         <source>long system format</source>
         <translation>长日期格式</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="27"/>
+        <location filename="../gui/settings_widget.cpp" line="24"/>
         <source>short system format</source>
         <translation>短日期格式</translation>
     </message>

@@ -4,61 +4,61 @@
 <context>
     <name>ChimePluginFactory</name>
     <message>
-        <location filename="../chime_plugin.cpp" line="98"/>
+        <location filename="../chime_plugin.cpp" line="111"/>
         <source>Chimes with selected period.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chime_plugin.hpp" line="47"/>
+        <location filename="../chime_plugin.hpp" line="50"/>
         <source>Chime</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>chime::SettingsWidget</name>
+    <name>chime::SettingsDialog</name>
     <message>
-        <location filename="../gui/settings_widget.ui" line="17"/>
+        <location filename="../gui/settings_dialog.ui" line="14"/>
         <source>Chime Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="26"/>
+        <location filename="../gui/settings_dialog.ui" line="26"/>
         <source>Sounds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="32"/>
+        <location filename="../gui/settings_dialog.ui" line="32"/>
         <source>Hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="63"/>
+        <location filename="../gui/settings_dialog.ui" line="63"/>
         <source>Quarter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="97"/>
+        <location filename="../gui/settings_dialog.ui" line="97"/>
         <source>Quiet time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="103"/>
+        <location filename="../gui/settings_dialog.ui" line="103"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="25"/>
-        <location filename="../gui/settings_widget.cpp" line="28"/>
+        <location filename="../gui/settings_dialog.cpp" line="39"/>
+        <location filename="../gui/settings_dialog.cpp" line="42"/>
         <source>Once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="26"/>
+        <location filename="../gui/settings_dialog.cpp" line="40"/>
         <source>1-12 times</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.cpp" line="29"/>
+        <location filename="../gui/settings_dialog.cpp" line="43"/>
         <source>1-3 times</source>
         <translation type="unfinished"></translation>
     </message>

@@ -4,8 +4,8 @@
 <context>
     <name>SpectrumClockPluginFactory</name>
     <message>
-        <location filename="../spectrum_clock_plugin.cpp" line="51"/>
-        <source>Changes clock color during time.</source>
+        <location filename="../spectrum_clock_plugin.cpp" line="47"/>
+        <source>Changes clock color with time.</source>
         <translation>随时间改变时钟颜色。</translation>
     </message>
 </context>

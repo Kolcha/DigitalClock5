@@ -9,8 +9,8 @@
         <translation>Переменная прозрачность</translation>
     </message>
     <message>
-        <location filename="../var_translucency_plugin.cpp" line="76"/>
-        <source>Changes clock opacity level during time.</source>
+        <location filename="../var_translucency_plugin.cpp" line="71"/>
+        <source>Changes clock opacity level with time.</source>
         <translation>Изменяет уровень прозрачности часов со временем.</translation>
     </message>
 </context>

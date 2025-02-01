@@ -4,32 +4,43 @@
 <context>
     <name>AnyZoomPluginFactory</name>
     <message>
-        <location filename="../any_zoom_plugin.cpp" line="62"/>
+        <location filename="../any_zoom_plugin.cpp" line="58"/>
         <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
         <translation>任意缩放时钟尺寸，可设置不同的横纵缩放比例。</translation>
     </message>
     <message>
-        <location filename="../any_zoom_plugin.hpp" line="47"/>
+        <location filename="../any_zoom_plugin.hpp" line="53"/>
         <source>Any zoom</source>
         <translation>任意缩放</translation>
     </message>
 </context>
 <context>
-    <name>SettingsWidget</name>
+    <name>any_zoom::AnyZoom</name>
     <message>
-        <location filename="../gui/settings_widget.ui" line="14"/>
+        <source>Any zoom</source>
+        <translation type="vanished">任意缩放</translation>
+    </message>
+    <message>
+        <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
+        <translation type="vanished">任意缩放时钟尺寸，可设置不同的横纵缩放比例</translation>
+    </message>
+</context>
+<context>
+    <name>any_zoom::ZoomDialog</name>
+    <message>
+        <location filename="../gui/zoom_dialog.ui" line="14"/>
         <source>Zoom</source>
         <translation>缩放</translation>
     </message>
     <message>
-        <location filename="../gui/settings_widget.ui" line="55"/>
-        <source>Y zoom:</source>
-        <translation>纵向缩放比例：</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings_widget.ui" line="97"/>
+        <location filename="../gui/zoom_dialog.ui" line="20"/>
         <source>X zoom:</source>
         <translation>横向缩放比例：</translation>
+    </message>
+    <message>
+        <location filename="../gui/zoom_dialog.ui" line="62"/>
+        <source>Y zoom:</source>
+        <translation>纵向缩放比例：</translation>
     </message>
 </context>
 </TS>
