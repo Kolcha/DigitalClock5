@@ -118,9 +118,11 @@ bool SettingsDialog::event(QEvent* e)
 
 void SettingsDialog::on_import_btn_clicked()
 {
+  // *INDENT-OFF*
   auto filename = QFileDialog::getOpenFileName(this, tr("Import settings from ..."),
                                                QDir::homePath(),
                                                tr("Digital Clock Settings (*.dc5 *.dcs)"));
+  // *INDENT-ON*
   if (filename.isEmpty()) return;
 
   auto ext = QFileInfo(filename).suffix().toLower();
@@ -142,9 +144,11 @@ void SettingsDialog::on_import_btn_clicked()
 
 void SettingsDialog::on_export_btn_clicked()
 {
+  // *INDENT-OFF*
   auto filename = QFileDialog::getSaveFileName(this, tr("Export settings to ..."),
                                                QDir::home().filePath("clock_settings.dc5"),
                                                tr("Digital Clock 5 Settings (*.dc5)"));
+  // *INDENT-ON*
   if (filename.isEmpty()) return;
   QVariantHash settings;
   app->settings()->exportSettings(settings);
@@ -545,9 +549,11 @@ void SettingsDialog::tx_select_gradient()
 {
   auto& acfg = *app->config()->instance(_curr_idx);
   bool ok = false;
+  // *INDENT-OFF*
   auto gradient = GradientDialog::getGradient(&ok,
                                               acfg.getTextureGradient(),
                                               this);
+  // *INDENT-ON*
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
   acfg.setTextureGradient(gradient);
@@ -557,10 +563,12 @@ void SettingsDialog::tx_select_gradient()
 void SettingsDialog::tx_select_pattern()
 {
   auto& acfg = *app->config()->instance(_curr_idx);
+  // *INDENT-OFF*
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
                                            acfg.getTexturePattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
+  // *INDENT-ON*
   if (file.isEmpty()) return;
   acfg.setTexturePattern(file);
   emit instanceOptionChanged(_curr_idx, opt::TexturePattern, file);
@@ -652,9 +660,11 @@ void SettingsDialog::bg_select_gradient()
 {
   auto& acfg = *app->config()->instance(_curr_idx);
   bool ok = false;
+  // *INDENT-OFF*
   auto gradient = GradientDialog::getGradient(&ok,
                                               acfg.getBackgroundGradient(),
                                               this);
+  // *INDENT-ON*
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
   acfg.setBackgroundGradient(gradient);
@@ -664,10 +674,12 @@ void SettingsDialog::bg_select_gradient()
 void SettingsDialog::bg_select_pattern()
 {
   auto& acfg = *app->config()->instance(_curr_idx);
+  // *INDENT-OFF*
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
                                            acfg.getBackgroundPattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
+  // *INDENT-ON*
   if (file.isEmpty()) return;
   acfg.setBackgroundPattern(file);
   emit instanceOptionChanged(_curr_idx, opt::BackgroundPattern, file);
@@ -915,8 +927,7 @@ void SettingsDialog::initPluginsTab()
   ui->plugins_list->clear();
 
   auto plugins = app->getPluginManager()->plugins();
-  auto by_name = [](const PluginHandle& a, const PluginHandle& b)
-  {
+  auto by_name = [](const PluginHandle& a, const PluginHandle& b) {
     return QString::localeAwareCompare(a.name(), b.name()) < 0;
   };
   std::sort(plugins.begin(), plugins.end(), by_name);
@@ -927,14 +938,14 @@ void SettingsDialog::initPluginsTab()
     widget->SetVersion(p.metadata().value("version", "0.0.0").toString());
     widget->SetConfigurable(p.isConfigurable());
     widget->SetChecked(p.isActive());
-
+    // *INDENT-OFF*
     connect(widget, &PluginListItemWidget::StateChanged,
             this, [this, p](bool checked) { onPluginStateChanged(p, checked); });
     connect(widget, &PluginListItemWidget::ConfigureRequested,
             [this, ph = p]() mutable { ph.configure(this, _curr_idx); });
     connect(widget, &PluginListItemWidget::InfoDialogRequested,
             this, [this, p]() { showPluginInfoDialog(p); });
-
+    // *INDENT-ON*
     auto item = new QListWidgetItem;
     item->setSizeHint(widget->sizeHint());
     ui->plugins_list->addItem(item);
@@ -1001,8 +1012,8 @@ void SettingsDialog::fillTimeZonesList()
     QTimeZone tz(tz_id);
     ui->time_zone_edit->addItem(tz_name(tz), QVariant::fromValue(tz));
     auto tooltip = QString("%1 (%2)").arg(
-        tz.displayName(now, QTimeZone::LongName),
-        tz.displayName(now, QTimeZone::OffsetName));
+                     tz.displayName(now, QTimeZone::LongName),
+                     tz.displayName(now, QTimeZone::OffsetName));
     ui->time_zone_edit->setItemData(ui->time_zone_edit->count() - 1, tooltip, Qt::ToolTipRole);
   }
 }

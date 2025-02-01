@@ -89,8 +89,10 @@ SkinInfoList SkinManagerImpl::infoList() const
   const auto lst = list();
 
   SkinInfoList info_list(lst.size());
+  // *INDENT-OFF*
   std::ranges::transform(lst, info_list.begin(),
                          [this](const auto& i) { return info(i); });
+  // *INDENT-ON*
   return info_list;
 }
 

@@ -13,8 +13,8 @@
 namespace plugin::date {
 
 SettingsWidget::SettingsWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::SettingsWidget)
+  : QWidget(parent)
+  , ui(new Ui::SettingsWidget)
 {
   ui->setupUi(this);
   ui->str_format_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));

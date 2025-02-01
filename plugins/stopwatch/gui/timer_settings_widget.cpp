@@ -10,8 +10,8 @@
 namespace timetracker {
 
 TimerSettingsWidget::TimerSettingsWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::TimerSettingsWidget)
+  : QWidget(parent)
+  , ui(new Ui::TimerSettingsWidget)
 {
   ui->setupUi(this);
 }

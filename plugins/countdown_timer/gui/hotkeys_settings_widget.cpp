@@ -10,8 +10,8 @@
 namespace countdown_timer {
 
 HotkeysSettingsWidget::HotkeysSettingsWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::HotkeysSettingsWidget)
+  : QWidget(parent)
+  , ui(new Ui::HotkeysSettingsWidget)
 {
   ui->setupUi(this);
 }

@@ -79,7 +79,7 @@ protected:
   }
 
   std::unique_ptr<plugin::text::PluginConfig> createConfig(
-      std::unique_ptr<PluginSettingsBackend> b) const override
+    std::unique_ptr<PluginSettingsBackend> b) const override
   {
     using countdown_timer::CountdownTimerPluginConfig;
     return std::make_unique<CountdownTimerPluginConfig>(std::move(b));

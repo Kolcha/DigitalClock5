@@ -258,11 +258,13 @@ void ClockApplication::maybeCheckForUpdate()
 void ClockApplication::handleNewVersion(const QVersionNumber& v, const QDate& d, const QUrl& l)
 {
   disconnect(_tray_icon.get(), &QSystemTrayIcon::messageClicked, nullptr, nullptr);
+  // *INDENT-OFF*
   _tray_icon->showMessage(
         tr("%1 Update").arg(qApp->applicationName()),
         tr("Update available: %1 (%2).\nClick this message to download.")
             .arg(v.toString(), QLocale().toString(d, QLocale::ShortFormat)),
         QSystemTrayIcon::Information, -1);
+  // *INDENT-ON*
   connect(_tray_icon.get(), &QSystemTrayIcon::messageClicked, [=] () { QDesktopServices::openUrl(l); });
 }
 
@@ -437,6 +439,7 @@ void ClockApplication::addPositionMenu()
 {
   auto pos_menu = _tray_menu->addMenu(tr("Position"));
   auto t_menu = pos_menu->addMenu(tr("Top"));
+  // *INDENT-OFF*
   t_menu->addAction(tr("Left"),   this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignLeft));
   t_menu->addAction(tr("Middle"), this, &ClockApplication::moveWindowToPredefinedPos)
@@ -457,4 +460,5 @@ void ClockApplication::addPositionMenu()
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignHCenter));
   b_menu->addAction(tr("Right"),  this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignRight));
+  // *INDENT-ON*
 }

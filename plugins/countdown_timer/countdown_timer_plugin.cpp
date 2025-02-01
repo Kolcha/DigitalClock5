@@ -35,7 +35,7 @@ protected:
 
 
 CountdownTimerWidget::CountdownTimerWidget(QWidget* parent)
-    : SkinnedTextWidget(parent)
+  : SkinnedTextWidget(parent)
 {
 }
 
@@ -57,8 +57,8 @@ void CountdownTimerWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 
 CountdownTimerPlugin::CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg)
-    : TextPluginInstanceBase(*cfg)
-    , _cfg(cfg)
+  : TextPluginInstanceBase(*cfg)
+  , _cfg(cfg)
 {
 }
 

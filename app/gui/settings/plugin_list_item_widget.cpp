@@ -8,8 +8,8 @@
 #include "ui_plugin_list_item_widget.h"
 
 PluginListItemWidget::PluginListItemWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::PluginListItemWidget)
+  : QWidget(parent)
+  , ui(new Ui::PluginListItemWidget)
 {
   ui->setupUi(this);
   ui->config_btn->setIcon(QIcon(":/icons/configure.svg"));

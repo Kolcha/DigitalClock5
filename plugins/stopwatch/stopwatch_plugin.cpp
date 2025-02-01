@@ -41,7 +41,7 @@ protected:
 
 
 StopwatchWidget::StopwatchWidget(QWidget* parent)
-    : SkinnedTextWidget(parent)
+  : SkinnedTextWidget(parent)
 {
 }
 
@@ -63,8 +63,8 @@ void StopwatchWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 
 StopwatchPlugin::StopwatchPlugin(const StopwatchInstanceConfig* cfg, size_t idx)
-    : TextPluginInstanceBase(*cfg)
-    , _cfg(cfg)
+  : TextPluginInstanceBase(*cfg)
+  , _cfg(cfg)
 {
   // TRICK! instance-dependant property names
   std::snprintf(_last_elapsed_prop, sizeof(_last_elapsed_prop), "%s_%zu", PROP_STATE_ELAPSED, idx);

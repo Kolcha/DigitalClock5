@@ -15,8 +15,8 @@
 namespace chime {
 
 SoundDialog::SoundDialog(QWidget* parent)
-    : QDialog(parent)
-    , ui(new Ui::SoundDialog)
+  : QDialog(parent)
+  , ui(new Ui::SoundDialog)
 {
   ui->setupUi(this);
 

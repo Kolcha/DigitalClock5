@@ -30,8 +30,8 @@ int setIndexByValue(QComboBox* box, const QVariant& value)
 namespace plugin::text::impl {
 
 AppearanceSettingsWidget::AppearanceSettingsWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::AppearanceSettingsWidget)
+  : QWidget(parent)
+  , ui(new Ui::AppearanceSettingsWidget)
 {
   ui->setupUi(this);
   ui->layout_cfg_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
@@ -243,9 +243,11 @@ void AppearanceSettingsWidget::tx_select_color()
 void AppearanceSettingsWidget::tx_select_gradient()
 {
   bool ok = false;
+  // *INDENT-OFF*
   auto gradient = GradientDialog::getGradient(&ok,
                                               cfg->getTextureGradient(),
                                               this);
+  // *INDENT-ON*
   if (!ok) return;
 
   gradient.setCoordinateMode(QGradient::ObjectMode);
@@ -255,10 +257,12 @@ void AppearanceSettingsWidget::tx_select_gradient()
 
 void AppearanceSettingsWidget::tx_select_pattern()
 {
+  // *INDENT-OFF*
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
                                            cfg->getTexturePattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
+  // *INDENT-ON*
   if (file.isEmpty()) return;
 
   cfg->setTexturePattern(file);
@@ -348,9 +352,11 @@ void AppearanceSettingsWidget::bg_select_color()
 void AppearanceSettingsWidget::bg_select_gradient()
 {
   bool ok = false;
+  // *INDENT-OFF*
   auto gradient = GradientDialog::getGradient(&ok,
                                               cfg->getBackgroundGradient(),
                                               this);
+  // *INDENT-ON*
   if (!ok) return;
 
   gradient.setCoordinateMode(QGradient::ObjectMode);
@@ -360,10 +366,12 @@ void AppearanceSettingsWidget::bg_select_gradient()
 
 void AppearanceSettingsWidget::bg_select_pattern()
 {
+  // *INDENT-OFF*
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
                                            cfg->getBackgroundPattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
+  // *INDENT-ON*
   if (file.isEmpty()) return;
 
   cfg->setBackgroundPattern(file);

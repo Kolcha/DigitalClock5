@@ -142,8 +142,10 @@ std::unique_ptr<Renderable> LinesRenderer::draw(Lines&& lines, const Options& op
     return nullptr;
 
   LayoutItemsContainer items(lines.size());
+  // *INDENT-OFF*
   std::transform(lines.begin(), lines.end(), items.begin(),
                  [](auto&& l) { return std::make_unique<Item>(std::move(l)); });
+  // *INDENT-ON*
 
   auto first_non_scalable = find_first_non_scalable_item(items.begin(), items.end(), opt);
   auto [min_x, max_x] = find_min_max_x(items, opt, first_non_scalable != items.end());

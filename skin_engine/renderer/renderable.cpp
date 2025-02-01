@@ -12,10 +12,12 @@ static QRectF calculate_rect(const CompositeRenderable::ContainerType& c)
 {
   QRectF rect;
   if (!c.empty()) {
+    // *INDENT-OFF*
     rect = std::transform_reduce(c.begin(), c.end(),
                                  c.front()->geometry(),
                                  std::bit_or{},
                                  [](const auto& r) { return r->geometry(); });
+    // *INDENT-ON*
   }
   return rect;
 }

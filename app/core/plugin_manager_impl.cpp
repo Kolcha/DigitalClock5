@@ -215,8 +215,10 @@ void PluginHandleImpl::onOptionChanged(ClockPluginInstance* inst, opt::InstanceO
 void PluginHandleImpl::initSettingsPlugin(ClockPluginInstance* inst, size_t idx) const
 {
   if (auto sp = qobject_cast<SettingsPluginInstance*>(inst)) {
+    // *INDENT-OFF*
     QObject::connect(sp, &SettingsPluginInstance::optionChanged,
                      [this, idx](auto&&... args) { _pm->changeOption(idx, args...); });
+    // *INDENT-ON*
     sp->init(_pm->_curr_settings[idx]);
   }
 }

@@ -12,8 +12,8 @@
 namespace countdown_timer {
 
 TimerSettingsWidget::TimerSettingsWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::TimerSettingsWidget)
+  : QWidget(parent)
+  , ui(new Ui::TimerSettingsWidget)
 {
   ui->setupUi(this);
 }
@@ -133,9 +133,11 @@ void TimerSettingsWidget::on_chime_on_timeout_clicked(bool checked)
 
 void TimerSettingsWidget::on_browse_sound_btn_clicked()
 {
+  // *INDENT-OFF*
   QString filename = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                   QDir::homePath(),
                                                   tr("Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)"));
+  // *INDENT-ON*
   if (filename.isEmpty()) return;
 
   cfg->setChimeSoundFile(filename);

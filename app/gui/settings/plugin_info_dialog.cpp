@@ -27,8 +27,8 @@ QString copyrightString(const PluginHandle& ph)
 
   if (auto iter = md.find("author"); iter != md.end())
     return QString("(c) %1 %2")
-        .arg(lastModified(ph.fileName()).date().year())
-        .arg(iter.value().toString());
+           .arg(lastModified(ph.fileName()).date().year())
+           .arg(iter.value().toString());
 
   return {};
 }
@@ -36,8 +36,8 @@ QString copyrightString(const PluginHandle& ph)
 } // namespace
 
 PluginInfoDialog::PluginInfoDialog(const PluginHandle& ph, QWidget* parent)
-    : QDialog(parent)
-    , ui(new Ui::PluginInfoDialog)
+  : QDialog(parent)
+  , ui(new Ui::PluginInfoDialog)
 {
   ui->setupUi(this);
 
@@ -54,9 +54,8 @@ PluginInfoDialog::PluginInfoDialog(const PluginHandle& ph, QWidget* parent)
 
   ui->icon_label->setPixmap(ph.icon().pixmap(96));
   ui->name_value->setText(ph.name());
-  ui->version_value->setText(
-      tr("version: %1")
-          .arg(ph.metadata().value("version", tr("unknown")).toString()));
+  auto version = ph.metadata().value("version", tr("unknown")).toString();
+  ui->version_value->setText(tr("version: %1").arg(version));
   ui->description_value->setText(ph.description());
   ui->copyright_label->setText(copyrightString(ph));
 }

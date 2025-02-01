@@ -76,7 +76,7 @@ protected:
   }
 
   std::unique_ptr<plugin::text::PluginConfig> createConfig(
-      std::unique_ptr<PluginSettingsBackend> b) const override
+    std::unique_ptr<PluginSettingsBackend> b) const override
   {
     using timetracker::StopwatchPluginConfig;
     return std::make_unique<StopwatchPluginConfig>(std::move(b));

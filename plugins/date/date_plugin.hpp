@@ -61,7 +61,7 @@ protected:
   }
 
   std::unique_ptr<PluginConfig> createConfig(
-      std::unique_ptr<PluginSettingsBackend> b) const override
+    std::unique_ptr<PluginSettingsBackend> b) const override
   {
     return std::make_unique<plugin::date::DatePluginConfig>(std::move(b));
   }
