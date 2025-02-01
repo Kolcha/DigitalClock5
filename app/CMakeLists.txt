@@ -34,9 +34,20 @@ qt_add_executable(${PROJECT_NAME}
     core/tray_icon_manager_impl.hpp
     core/update_checker.cpp
     core/update_checker.hpp
-    gui/about_dialog.cpp
-    gui/about_dialog.hpp
-    gui/about_dialog.ui
+    gui/about/about_dialog.cpp
+    gui/about/about_dialog.hpp
+    gui/about/about_dialog.ui
+    gui/about/logo_label.cpp
+    gui/about/logo_label.hpp
+    gui/settings/plugin_info_dialog.cpp
+    gui/settings/plugin_info_dialog.hpp
+    gui/settings/plugin_info_dialog.ui
+    gui/settings/plugin_list_item_widget.cpp
+    gui/settings/plugin_list_item_widget.hpp
+    gui/settings/plugin_list_item_widget.ui
+    gui/settings/settings_dialog.cpp
+    gui/settings/settings_dialog.hpp
+    gui/settings/settings_dialog.ui
     gui/clock_icon_engine.cpp
     gui/clock_icon_engine.hpp
     gui/clock_tray_icon.cpp
@@ -45,17 +56,6 @@ qt_add_executable(${PROJECT_NAME}
     gui/clock_widget.hpp
     gui/clock_window.cpp
     gui/clock_window.hpp
-    gui/logo_label.cpp
-    gui/logo_label.hpp
-    gui/plugin_info_dialog.cpp
-    gui/plugin_info_dialog.hpp
-    gui/plugin_info_dialog.ui
-    gui/plugin_list_item_widget.cpp
-    gui/plugin_list_item_widget.hpp
-    gui/plugin_list_item_widget.ui
-    gui/settings_dialog.cpp
-    gui/settings_dialog.hpp
-    gui/settings_dialog.ui
     skin/error_skin.cpp
     skin/error_skin.hpp
     skin/legacy_skin.cpp

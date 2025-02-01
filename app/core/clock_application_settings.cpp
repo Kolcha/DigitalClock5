@@ -14,8 +14,8 @@
 #include "gui/clock_widget.hpp"
 #include "gui/clock_window.hpp"
 #include "renderer/font_skin.hpp"
-#include "renderer/texture.hpp"
-#include "layout_config_parser.hpp"
+#include "utilities/layout_config_parser.hpp"
+#include "utilities/texture.hpp"
 
 void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVariant& val)
 {

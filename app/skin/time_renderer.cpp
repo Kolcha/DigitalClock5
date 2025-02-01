@@ -7,7 +7,7 @@
 #include "renderer/item.hpp"
 #include "renderer/layout.hpp"
 
-#include "common/datetime_formatter.hpp"
+#include "utilities/datetime_formatter.hpp"
 
 class LinesBuilder : public DateTimeStringBuilder
 {

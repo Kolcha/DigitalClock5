@@ -20,11 +20,11 @@
 #include "core/translation.hpp"
 #include "core/tray_icon_manager_impl.hpp"
 #include "core/update_checker.hpp"
-#include "gui/about_dialog.hpp"
+#include "gui/about/about_dialog.hpp"
 #include "gui/clock_tray_icon.hpp"
 #include "gui/clock_widget.hpp"
 #include "gui/clock_window.hpp"
-#include "gui/settings_dialog.hpp"
+#include "gui/settings/settings_dialog.hpp"
 #include "platform/mouse_tracker.hpp"
 
 namespace {

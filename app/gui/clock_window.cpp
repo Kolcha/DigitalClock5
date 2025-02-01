@@ -16,7 +16,7 @@
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 
-#include "common/settings.hpp"
+#include "config/settings.hpp"
 #include "platform/clock_native_window.hpp"
 
 #include "clock_widget.hpp"

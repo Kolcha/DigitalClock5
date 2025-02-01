@@ -6,7 +6,7 @@
 
 #include "date_plugin.hpp"
 
-#include "common/datetime_formatter.hpp"
+#include "utilities/datetime_formatter.hpp"
 
 #include "gui/settings_widget.hpp"
 

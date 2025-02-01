@@ -22,10 +22,10 @@ qt_add_library(${PROJECT_NAME} SHARED
     renderer/skin.hpp
     renderer/skin_base.cpp
     renderer/skin_base.hpp
-    renderer/texture.cpp
-    renderer/texture.hpp
-    layout_config_parser.cpp
-    layout_config_parser.hpp
+    utilities/layout_config_parser.cpp
+    utilities/layout_config_parser.hpp
+    utilities/texture.cpp
+    utilities/texture.hpp
     scale_factor.hpp
     skin_engine_global.hpp
     skinned_widget.cpp

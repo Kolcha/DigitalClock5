@@ -7,7 +7,7 @@
 #include <map>
 #include <memory>
 
-#include "common/settings.hpp"
+#include "config/settings.hpp"
 
 class AppState final
 {

@@ -12,10 +12,10 @@
 #include <memory>
 
 #include "common/instance_options.hpp"
-#include "common/settings.hpp"
 #include "common/skin_manager.hpp"
 #include "common/tray_icon_manager.hpp"
 #include "config/global_options.hpp"
+#include "config/settings.hpp"
 #include "config/settings_backend_impl.hpp"
 
 #include "dialog_manager.hpp"

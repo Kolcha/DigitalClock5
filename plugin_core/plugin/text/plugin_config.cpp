@@ -4,7 +4,7 @@
 
 #include "plugin_config.hpp"
 
-#include "renderer/texture.hpp"
+#include "utilities/texture.hpp"
 
 namespace plugin::text {
 

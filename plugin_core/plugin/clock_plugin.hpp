@@ -12,7 +12,7 @@
 
 #include "common/instance_options.hpp"
 #include "common/instance_options_hash.hpp"
-#include "common/settings.hpp"
+#include "config/settings.hpp"
 
 // --------------------------------------
 // plugin instance interfaces

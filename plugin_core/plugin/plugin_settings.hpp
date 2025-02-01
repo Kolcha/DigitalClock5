@@ -6,7 +6,7 @@
 
 #include "plugin_core_global.hpp"
 
-#include "common/settings.hpp"
+#include "config/settings.hpp"
 
 class PLUGIN_CORE_EXPORT PluginSettingsBackend : public SettingsBackend
 {

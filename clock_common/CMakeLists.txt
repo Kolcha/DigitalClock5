@@ -5,19 +5,19 @@
 project(ClockCommon VERSION 2.1.0 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
-    common/config_base.cpp
-    common/config_base.hpp
-    common/datetime_formatter.cpp
-    common/datetime_formatter.hpp
     common/instance_options.hpp
     common/instance_options_hash.hpp
-    common/settings.cpp
-    common/settings.hpp
     common/skin_manager.cpp
     common/skin_manager.hpp
     common/tray_icon_manager.cpp
     common/tray_icon_manager.hpp
-    common/variant_converters.hpp
+    config/config_base.cpp
+    config/config_base.hpp
+    config/settings.cpp
+    config/settings.hpp
+    config/variant_converters.hpp
+    utilities/datetime_formatter.cpp
+    utilities/datetime_formatter.hpp
     clock_common_global.hpp
 )
 

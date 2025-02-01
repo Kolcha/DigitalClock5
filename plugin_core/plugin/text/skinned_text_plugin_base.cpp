@@ -11,8 +11,8 @@
 
 #include "common/skin_manager.hpp"
 #include "renderer/font_skin.hpp"
-#include "renderer/texture.hpp"
-#include "layout_config_parser.hpp"
+#include "utilities/layout_config_parser.hpp"
+#include "utilities/texture.hpp"
 
 #include "impl/settings_dialog.hpp"
 

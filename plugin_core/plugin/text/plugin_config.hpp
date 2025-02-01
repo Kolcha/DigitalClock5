@@ -13,9 +13,9 @@
 #include <QtGui/QFont>
 #include <QtGui/QGradient>
 
-#include "common/config_base.hpp"
 #include "common/instance_options.hpp"
-#include "common/variant_converters.hpp"
+#include "config/config_base.hpp"
+#include "config/variant_converters.hpp"
 #include "plugin/plugin_settings.hpp"
 #include "renderer/renderer.hpp"
 

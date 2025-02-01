@@ -22,8 +22,8 @@
 #include "core/clock_application.hpp"
 #include "core/plugin_manager_impl.hpp"
 #include "gui/clock_window.hpp"
-#include "gui/plugin_info_dialog.hpp"
 #include "platform/autostart.h"
+#include "plugin_info_dialog.hpp"
 #include "plugin_list_item_widget.hpp"
 
 namespace {

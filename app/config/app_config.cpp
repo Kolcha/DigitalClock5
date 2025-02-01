@@ -10,7 +10,7 @@
 #include <QtGui/QFont>
 
 #include "renderer/renderer.hpp"
-#include "renderer/texture.hpp"
+#include "utilities/texture.hpp"
 
 GlobalConfig::GlobalConfig(std::unique_ptr<SettingsStorage> st, QObject* parent)
   : QObject(parent)

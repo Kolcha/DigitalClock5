@@ -11,8 +11,8 @@
 #include <QTime>
 #include <QUrl>
 
-#include "common/config_base.hpp"
-#include "common/variant_converters.hpp"
+#include "config/config_base.hpp"
+#include "config/variant_converters.hpp"
 
 namespace chime {
 

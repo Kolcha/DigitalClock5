@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "common/config_base.hpp"
+#include "config/config_base.hpp"
 
 namespace any_zoom {
 

@@ -291,7 +291,7 @@
   <customwidget>
    <class>LogoLabel</class>
    <extends>QLabel</extends>
-   <header>gui/logo_label.hpp</header>
+   <header>gui/about/logo_label.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
