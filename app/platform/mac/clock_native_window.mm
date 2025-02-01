@@ -8,6 +8,14 @@
 
 #import <AppKit/NSWindow.h>
 
+namespace {
+
+// postpone applying window flags for a few ticks
+// it is known that even isVisible() returns true,
+// manipulations on winId() may have no effect...
+static constexpr const int max_ticks = 2;
+
+} // namespace
 
 static void SetCollectionBehavior(NSWindow* window, NSUInteger flag, bool on)
 {
@@ -23,32 +31,68 @@ static void SetVisibleInFullscreen(NSWindow* window, bool vis)
   SetCollectionBehavior(window, NSWindowCollectionBehaviorFullScreenAuxiliary, vis);
 }
 
-
-ClockNativeWindow::ClockNativeWindow(QWidget* parent)
-    : ClockWindow(parent)
+inline void setVisibleInFullscreen(NSView* view, bool en)
 {
-  setHiddenInMissionControl(true);
-  setVisibleOnAllDesktops(true);
+  SetVisibleInFullscreen(view.window, en);
 }
 
-void ClockNativeWindow::setStayOnTop(bool en)
+static void setHiddenInMissionControl(NSView* view, bool en)
 {
-  ClockWindow::setStayOnTop(en);
-
-  NSView* view = reinterpret_cast<NSView*>(winId());
-  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
-}
-
-void ClockNativeWindow::setHiddenInMissionControl(bool en)
-{
-  NSView* view = reinterpret_cast<NSView*>(winId());
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorManaged, !en);
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorTransient, en);
 }
 
-void ClockNativeWindow::setVisibleOnAllDesktops(bool en)
+static void setVisibleOnAllDesktops(NSView* view, bool en)
 {
-  NSView* view = reinterpret_cast<NSView*>(winId());
   SetCollectionBehavior(view.window, NSWindowCollectionBehaviorCanJoinAllSpaces, en);
-  SetVisibleInFullscreen(view.window, !_detect_fullscreen);
+}
+
+
+void ClockWindow::platformOneTimeFlags()
+{
+  // this is called in constructor, so window is not yet visible
+  // calling winId() is unsafe, so postpone setting window flags
+  _data->should_apply_hidden_in_mc = true;
+  _data->should_apply_on_all_desktops = true;
+}
+
+void ClockWindow::platformTick()
+{
+  bool need_to_set_flag =
+      _data->should_apply_on_top_fullscreen ||
+      _data->should_apply_hidden_in_mc ||
+      _data->should_apply_on_all_desktops;
+
+  if (need_to_set_flag && isVisible() && _data->ticks_count++ >= max_ticks) {
+    NSView* view = reinterpret_cast<NSView*>(winId());
+
+    if (_data->should_apply_on_all_desktops) {
+      setVisibleOnAllDesktops(view, true);
+      _data->should_apply_on_all_desktops = false;
+    }
+
+    if (_data->should_apply_hidden_in_mc) {
+      setHiddenInMissionControl(view, true);
+      _data->should_apply_hidden_in_mc = false;
+    }
+
+    if (_data->should_apply_on_top_fullscreen) {
+      setVisibleInFullscreen(view, _data->should_stay_on_top && !_data->detect_fullscreen);
+      _data->should_apply_on_top_fullscreen = false;
+    }
+
+    _data->ticks_count = 0;
+  }
+}
+
+void ClockWindow::platformStayOnTop(bool enabled)
+{
+  _data->should_stay_on_top = enabled;
+  _data->should_apply_on_top_fullscreen = true;
+}
+
+void ClockWindow::platformFullScreenDetect(bool enabled)
+{
+  _data->detect_fullscreen = enabled;
+  _data->should_apply_on_top_fullscreen = true;
 }

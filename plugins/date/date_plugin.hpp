@@ -6,45 +6,65 @@
 
 #pragma once
 
-#include "widget_plugin_base.hpp"
+#include "plugin/text/skinned_text_plugin_base.hpp"
 
-class DatePluginImpl;
+#include "impl/date_settings.hpp"
 
-class DatePlugin : public WidgetPluginBase
+using namespace plugin::text;
+using plugin::date::DatePluginInstanceConfig;
+
+class DatePlugin : public TextPluginInstanceBase
 {
   Q_OBJECT
 
 public:
-  DatePlugin();
-  ~DatePlugin();
-
-  void initSettings(PluginSettingsStorage& st) override;
+  DatePlugin(const DatePluginInstanceConfig* cfg);
 
 public slots:
-  void onTimeChanged(const QDateTime& dt) override;
+  void startup() override;
+
+  void update(const QDateTime& dt) override;
+
+  void onDateFormatChanged();
 
 protected:
-  QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) override;
-
-  std::shared_ptr<GraphicsWidgetBase> createWidget() override;
-  void destroyWidget() override;
+  QString text() const override { return _date_str; }
 
 private:
-  std::unique_ptr<DatePluginImpl> _impl;
+  void updateDateFmt();
+  void updateDateStr();
+
+private:
+  const DatePluginInstanceConfig* _cfg;
+  QDateTime _last_date;
+  QString _date_fmt;
+  QString _date_str;
 };
 
 
-class DatePluginFactory : public ClockPluginFactory
+class DatePluginFactory : public TextPluginBase
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "date.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "date.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
-
-  QString title() const override { return tr("Date"); }
+  QString name() const override { return tr("Date"); }
   QString description() const override;
 
-  bool perClockInstance() const noexcept override { return true; }
+protected:
+  Instance createInstance(size_t idx) const override
+  {
+    auto cfg = qobject_cast<DatePluginInstanceConfig*>(instanceConfig(idx));
+    Q_ASSERT(cfg);
+    return std::make_unique<DatePlugin>(cfg);
+  }
+
+  std::unique_ptr<PluginConfig> createConfig(
+      std::unique_ptr<PluginSettingsBackend> b) const override
+  {
+    return std::make_unique<plugin::date::DatePluginConfig>(std::move(b));
+  }
+
+  QVector<QWidget*> configPagesBeforeCommonPages() override;
 };

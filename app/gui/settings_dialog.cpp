@@ -8,18 +8,21 @@
 #include "ui_settings_dialog.h"
 
 #include <QDesktopServices>
+#include <QSettings>
 
 #include <QColorDialog>
 #include <QFileDialog>
 #include <QFontDialog>
 
-#include <QGraphicsColorizeEffect>
-
 #include <gradient_dialog.h>
 
+#include "config/app_config.hpp"
 #include "config/dc4_to_dc5.hpp"
 #include "config/serialization.hpp"
-#include "core/application.hpp"
+#include "core/clock_application.hpp"
+#include "core/plugin_manager_impl.hpp"
+#include "gui/clock_window.hpp"
+#include "gui/plugin_info_dialog.hpp"
 #include "platform/autostart.h"
 #include "plugin_list_item_widget.hpp"
 
@@ -48,20 +51,9 @@ QString tz_name(const QTimeZone& tz)
   return QString::fromLatin1(tz.id());
 }
 
-QFont actual_font(const QFont& fnt)
-{
-  QFont res_font = fnt;
-  QFontInfo fi(fnt);
-  res_font.setFamily(fi.family());
-  res_font.setPointSizeF(fi.pointSizeF());
-  res_font.setStyle(fi.style());
-  res_font.setStyleHint(fi.styleHint());
-  return res_font;
-}
-
 } // namespace
 
-SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
+SettingsDialog::SettingsDialog(ClockApplication* app, size_t idx, QWidget* parent)
   : QDialog(parent)
   , ui(new Ui::SettingsDialog)
   , app(app)
@@ -72,15 +64,19 @@ SettingsDialog::SettingsDialog(Application* app, int idx, QWidget* parent)
   app->window(_curr_idx)->enableFrame();
 
   QSignalBlocker _(ui->windows_box);
-  for (int i = 0; i < app->config().global().getNumInstances(); i++)
+  const auto act_insts = app->config()->global()->getActiveInstancesList();
+  for (auto i : act_insts)
     ui->windows_box->addItem(tr("window %1").arg(i+1));
   ui->windows_box->setCurrentIndex(_curr_idx);
-  ui->windows_box->setVisible(app->config().global().getNumInstances() > 1);
+  ui->windows_box->setVisible(act_insts.size() > 1);
 
   fillLanguagesList();
   fillUpdatePeriodsList();
   fillTimeZonesList();
   fillSkinsList();
+
+  fillTextureTypes(ui->tx_options_box);
+  fillTextureTypes(ui->bg_options_box);
 
   initControlsState();
 }
@@ -99,14 +95,25 @@ void SettingsDialog::accept()
     SetAutoStart(ui->enable_autostart->isChecked());
   }
 #endif
-  app->config().storage().commitAll();
+  if (_settings_imported)
+    app->settings()->commitAll();
   QDialog::accept();
 }
 
 void SettingsDialog::reject()
 {
-  reloadSettings([this]() { app->config().storage().discardAll(); });
+  if (_settings_imported)
+    app->settings()->discardAll();
   QDialog::reject();
+}
+
+bool SettingsDialog::event(QEvent* e)
+{
+  if (e->type() == QEvent::LanguageChange) {
+    ui->retranslateUi(this);
+    initPluginsTab();
+  }
+  return QDialog::event(e);
 }
 
 void SettingsDialog::on_import_btn_clicked()
@@ -127,7 +134,9 @@ void SettingsDialog::on_import_btn_clicked()
 
   if (settings.isEmpty()) return;
 
-  reloadSettings([&, this]() { app->config().storage().importSettings(settings); });
+  app->settings()->importSettings(settings);
+  _settings_imported = true;
+  app->reloadConfig();
   initControlsState();
 }
 
@@ -138,7 +147,7 @@ void SettingsDialog::on_export_btn_clicked()
                                                tr("Digital Clock 5 Settings (*.dc5)"));
   if (filename.isEmpty()) return;
   QVariantHash settings;
-  app->config().storage().exportSettings(settings);
+  app->settings()->exportSettings(settings);
   dc5::exportToFile(settings, filename);
 }
 
@@ -159,10 +168,9 @@ void SettingsDialog::on_lang_tr_btn_clicked()
 
 void SettingsDialog::on_lang_list_activated(int index)
 {
-  app->config().global().setLocale(ui->lang_list->itemData(index).toString());
-  app->retranslateUI();
-  ui->retranslateUi(this);
-  initPluginsTab();
+  auto loc = ui->lang_list->itemData(index).toString();
+  app->config()->global()->setLocale(loc);
+  emit globalOptionChanged(opt::Locale, loc);
 }
 
 void SettingsDialog::on_enable_autostart_clicked(bool checked)
@@ -173,100 +181,116 @@ void SettingsDialog::on_enable_autostart_clicked(bool checked)
 
 void SettingsDialog::on_enable_stay_on_top_clicked(bool checked)
 {
-  app->config().global().setStayOnTop(checked);
-  std::ranges::for_each(app->windows(), [=](auto& w) { w->setStayOnTop(checked); });
+  app->config()->global()->setStayOnTop(checked);
+  emit globalOptionChanged(opt::StayOnTop, checked);
 }
 
 void SettingsDialog::on_fullscreen_detect_clicked(bool checked)
 {
-  app->config().global().setFullscreenDetect(!checked);
-  std::ranges::for_each(app->windows(), [=](auto& w) { w->setFullscreenDetect(!checked); });
-  on_enable_stay_on_top_clicked(app->config().global().getStayOnTop());
+  app->config()->global()->setFullscreenDetect(!checked);
+  emit globalOptionChanged(opt::FullscreenDetect, !checked);
 }
 
 void SettingsDialog::on_enable_transp_for_input_clicked(bool checked)
 {
-  app->config().global().setTransparentForMouse(checked);
-  std::ranges::for_each(app->windows(), [=](auto& w) { w->setTransparentForInput(checked); });
+  app->config()->global()->setTransparentForMouse(checked);
+  emit globalOptionChanged(opt::TransparentForMouse, checked);
 }
 
 void SettingsDialog::on_snap_to_edges_clicked(bool checked)
 {
-  app->config().global().setSnapToEdge(checked);
-  applyWindowOption(&ClockWindow::setSnapToEdge, checked, app->config().global().getSnapThreshold());
+  app->config()->global()->setSnapToEdge(checked);
+  emit globalOptionChanged(opt::SnapToEdge, checked);
 }
 
 void SettingsDialog::on_snap_threshold_valueChanged(int arg1)
 {
-  app->config().global().setSnapThreshold(arg1);
-  applyWindowOption(&ClockWindow::setSnapThreshold, arg1);
+  app->config()->global()->setSnapThreshold(arg1);
+  emit globalOptionChanged(opt::SnapThreshold, arg1);
 }
 
 void SettingsDialog::on_keep_always_visible_clicked(bool checked)
 {
-  app->config().global().setPreventOutOfScreen(checked);
-  applyWindowOption(&ClockWindow::setKeepVisible, checked);
+  app->config()->global()->setPreventOutOfScreen(checked);
+  emit globalOptionChanged(opt::PreventOutOfScreen, checked);
 }
 
 void SettingsDialog::on_enable_multiwindow_clicked(bool checked)
 {
-  app->config().global().setNumInstances(checked ? ui->wnd_count_edit->value() : 1);
+  QVector<size_t> l;
+  if (checked) {
+    for (int i = 0; i < ui->wnd_count_edit->value(); i++)
+      l.push_back(i);
+  } else {
+    l.push_back(0);
+  }
+  app->config()->global()->setActiveInstancesList(l);
+  emit globalOptionChanged(opt::ActiveInstances, QVariant::fromValue(l));
 }
 
 void SettingsDialog::on_wnd_count_edit_valueChanged(int arg1)
 {
-  app->config().global().setNumInstances(arg1);
+  QVector<size_t> l;
+  for (int i = 0; i < arg1; i++)
+    l.push_back(i);
+  app->config()->global()->setActiveInstancesList(l);
+  emit globalOptionChanged(opt::ActiveInstances, QVariant::fromValue(l));
 }
 
 void SettingsDialog::on_use_same_appearance_clicked(bool checked)
 {
-  app->config().global().setAppearancePerInstance(!checked);
+  app->config()->global()->setOptionsSharing(checked);
+  emit globalOptionChanged(opt::OptionsSharing, checked);
 }
 
 void SettingsDialog::on_transparent_on_hover_clicked(bool checked)
 {
-  app->config().global().setTransparentOnHover(checked);
-  applyWindowOption(&ClockWindow::setTransparentOnHover, checked);
+  app->config()->global()->setTransparentOnHover(checked);
+  emit globalOptionChanged(opt::TransparentOnHover, checked);
 }
 
 void SettingsDialog::on_hide_on_mouse_hover_clicked(bool checked)
 {
   int opacity = checked ? 0 : 15;
-  app->config().global().setOpacityOnHover(opacity);
-  applyWindowOption(&ClockWindow::setOpacityOnHover, opacity / 100.);
+  app->config()->global()->setOpacityOnHover(opacity);
+  emit globalOptionChanged(opt::OpacityOnHover, opacity);
 }
 
 void SettingsDialog::on_enable_autoupdate_clicked(bool checked)
 {
-  app->config().global().setCheckForUpdates(checked);
+  app->config()->global()->setCheckForUpdates(checked);
+  emit globalOptionChanged(opt::CheckForUpdates, checked);
 }
 
 void SettingsDialog::on_update_period_edit_activated(int index)
 {
   int period = ui->update_period_edit->itemData(index).toInt();
-  app->config().global().setUpdatePeriodDays(period);
+  app->config()->global()->setUpdatePeriodDays(period);
+  emit globalOptionChanged(opt::UpdatePeriodDays, period);
 }
 
 void SettingsDialog::on_check_for_beta_clicked(bool checked)
 {
-  app->config().global().setCheckForBetaVersion(checked);
+  app->config()->global()->setCheckForBetaVersion(checked);
+  emit globalOptionChanged(opt::CheckForBetaVersion, checked);
 }
 
 void SettingsDialog::on_enable_debug_options_clicked(bool checked)
 {
+  Q_UNUSED(checked);
+  // no debug options implemented
 }
 
 void SettingsDialog::on_smaller_seconds_clicked(bool checked)
 {
-  int v = checked ? ui->seconds_scale_factor_edit->value() : 100;
-  on_seconds_scale_factor_edit_valueChanged(v);
+  app->config()->instance(_curr_idx)->setSmallerSeconds(checked);
+  emit instanceOptionChanged(_curr_idx, opt::SmallerSeconds, checked);
 }
 
 void SettingsDialog::on_seconds_scale_factor_edit_valueChanged(int arg1)
 {
-  qreal ssf = arg1 / 100.;
-  applyClockOption(&GraphicsDateTimeWidget::setSecondsScaleFactor, ssf);
-  app->config().window(_curr_idx).appearance().setSecondsScaleFactor(arg1);
+  app->config()->instance(_curr_idx)->setSecondsSize(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::SmallerSeconds, arg1);
 }
 
 void SettingsDialog::on_use_custom_format_toggled(bool checked)
@@ -305,14 +329,14 @@ void SettingsDialog::on_format_help_btn_clicked()
 void SettingsDialog::on_format_apply_btn_clicked()
 {
   auto time_format = ui->format_edit->currentText();
-  applyClockOption(&GraphicsDateTimeWidget::setFormat, time_format);
-  app->config().window(_curr_idx).appearance().setTimeFormat(time_format);
+  app->config()->instance(_curr_idx)->setTimeFormat(time_format);
+  emit instanceOptionChanged(_curr_idx, opt::TimeFormat, time_format);
 }
 
 void SettingsDialog::on_layout_cfg_edit_textEdited(const QString& arg1)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setLayoutConfig, arg1);
-  app->config().window(_curr_idx).appearance().setLayoutConfig(arg1);
+  app->config()->instance(_curr_idx)->setLayoutConfig(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::LayoutConfig, arg1);
 }
 
 void SettingsDialog::on_layout_cfg_help_btn_clicked()
@@ -322,14 +346,14 @@ void SettingsDialog::on_layout_cfg_help_btn_clicked()
 
 void SettingsDialog::on_use_custom_seps_clicked(bool checked)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setUseCustomSeparators, checked);
-  app->config().window(_curr_idx).appearance().setUseCustomSeparators(checked);
+  app->config()->instance(_curr_idx)->setUseCustomSeparators(checked);
+  emit instanceOptionChanged(_curr_idx, opt::UseCustomSeparators, checked);
 }
 
 void SettingsDialog::on_custom_seps_edit_textEdited(const QString& arg1)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setCustomSeparators, arg1);
-  app->config().window(_curr_idx).appearance().setCustomSeparators(arg1);
+  app->config()->instance(_curr_idx)->setCustomSeparators(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::CustomSeparators, arg1);
 }
 
 void SettingsDialog::on_custom_seps_help_btn_clicked()
@@ -361,14 +385,15 @@ void SettingsDialog::updateTimeFormat()
 
 void SettingsDialog::on_use_time_zone_clicked(bool checked)
 {
-  app->config().window(_curr_idx).generic().setShowLocalTime(!checked);
-  applyTimeZoneSettings();
+  app->config()->instance(_curr_idx)->setShowLocalTime(!checked);
+  emit instanceOptionChanged(_curr_idx, opt::ShowLocalTime, !checked);
 }
 
 void SettingsDialog::on_time_zone_edit_activated(int index)
 {
-  app->config().window(_curr_idx).generic().setTimeZone(ui->time_zone_edit->itemData(index).value<QTimeZone>());
-  applyTimeZoneSettings();
+  auto tz = ui->time_zone_edit->itemData(index).value<QTimeZone>();
+  app->config()->instance(_curr_idx)->setTimeZone(tz);
+  emit instanceOptionChanged(_curr_idx, opt::TimeZone, QVariant::fromValue(tz));
 }
 
 void SettingsDialog::on_multi_timezone_help_btn_clicked()
@@ -378,140 +403,87 @@ void SettingsDialog::on_multi_timezone_help_btn_clicked()
 
 void SettingsDialog::on_font_rbtn_clicked()
 {
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
-  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getFont());
-  applySkin(skin);
-  acfg.setUseFontInsteadOfSkin(true);
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, true);
+  app->config()->instance(_curr_idx)->setUseSkin(false);
+  emit instanceOptionChanged(_curr_idx, opt::UseSkin, false);
 }
 
 void SettingsDialog::on_select_font_btn_clicked()
 {
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  InstanceConfig& acfg = *app->config()->instance(_curr_idx);
   bool ok = false;
-  QFont fnt = QFontDialog::getFont(&ok, actual_font(acfg.getFont()), this);
+  QFont fnt = QFontDialog::getFont(&ok, acfg.getFont(), this);
   if (!ok) return;
-  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(fnt);
-  applySkin(skin);
   acfg.setFont(fnt);
-  notifyOptionChanged(&SettingsChangeTransmitter::setFont, fnt);
+  emit instanceOptionChanged(_curr_idx, opt::Font, fnt);
 }
 
 void SettingsDialog::on_skin_rbtn_clicked()
 {
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
-  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(acfg.getSkin());
-  applySkin(skin);
-  acfg.setUseFontInsteadOfSkin(false);
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseFontInsteadOfSkin, false);
+  app->config()->instance(_curr_idx)->setUseSkin(true);
+  emit instanceOptionChanged(_curr_idx, opt::UseSkin, true);
 }
 
 void SettingsDialog::on_skin_cbox_activated(int index)
 {
   QString skin_name = ui->skin_cbox->itemData(index).toString();
-  std::shared_ptr<Skin> skin = app->skinManager().loadSkin(skin_name);
-  applySkin(skin);
-  app->config().window(_curr_idx).appearance().setSkin(skin_name);
-  notifyOptionChanged(&SettingsChangeTransmitter::setSkin, skin_name);
+  app->config()->instance(_curr_idx)->setSkin(skin_name);
+  emit instanceOptionChanged(_curr_idx, opt::Skin, skin_name);
 }
 
 void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setFlashSeparator, checked);
-  app->config().window(_curr_idx).appearance().setSeparatorFlashes(checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setSeparatorFlashes, checked);
+  app->config()->instance(_curr_idx)->setFlashingSeparator(checked);
+  emit instanceOptionChanged(_curr_idx, opt::FlashingSeparator, checked);
 }
 
 void SettingsDialog::on_scaling_edit_valueChanged(int arg1)
 {
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
-  applyWindowOption(&ClockWindow::setScaling, arg1/100., arg1/100.);
-  acfg.setScalingH(arg1);
-  acfg.setScalingV(arg1);
-  notifyOptionChanged(&SettingsChangeTransmitter::setScalingH, arg1);
-  notifyOptionChanged(&SettingsChangeTransmitter::setScalingV, arg1);
+  app->config()->instance(_curr_idx)->setScaling(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::Scaling, arg1);
 }
 
 void SettingsDialog::on_opacity_edit_valueChanged(int arg1)
 {
-  applyWindowOption(&ClockWindow::setWindowOpacity, arg1/100.);
-  app->config().window(_curr_idx).appearance().setOpacity(arg1);
-  notifyOptionChanged(&SettingsChangeTransmitter::setOpacity, arg1);
+  app->config()->instance(_curr_idx)->setOpacity(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::Opacity, arg1);
 }
 
 void SettingsDialog::on_colorize_group_clicked(bool checked)
 {
-  if (checked) {
-    applyColorization();
-  } else {
-    applyWindowOption(&ClockWindow::setGraphicsEffect, nullptr);
-  }
-  app->config().window(_curr_idx).appearance().setApplyColorization(checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setApplyColorization, checked);
+  app->config()->instance(_curr_idx)->setColorizationEnabled(checked);
+  emit instanceOptionChanged(_curr_idx, opt::ColorizationEnabled, checked);
 }
 
 void SettingsDialog::on_select_colorization_color_clicked()
 {
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  InstanceConfig& acfg = *app->config()->instance(_curr_idx);
   auto color = QColorDialog::getColor(acfg.getColorizationColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
   acfg.setColorizationColor(color);
-  updateColorization();
-  notifyOptionChanged(&SettingsChangeTransmitter::setColorizationColor, color);
+  emit instanceOptionChanged(_curr_idx, opt::ColorizationColor, color);
 }
 
 void SettingsDialog::on_colorization_strength_edit_valueChanged(int arg1)
 {
-  app->config().window(_curr_idx).appearance().setColorizationStrength(arg1/100.);
-  updateColorization();
-  notifyOptionChanged(&SettingsChangeTransmitter::setColorizationStrength, arg1/100.);
+  app->config()->instance(_curr_idx)->setColorizationStrength(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::ColorizationStrength, arg1);
 }
 
 void SettingsDialog::on_texture_group_clicked(bool checked)
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
-
-  if (checked) {
-    if (ui->tx_options_box->currentIndex() == 0)
-      acfg.setTextureType(SectionAppearance::SolidColor);
-
-    if (ui->tx_options_box->currentIndex() == 1)
-      acfg.setTextureType(SectionAppearance::Gradient);
-
-    if (ui->tx_options_box->currentIndex() == 2)
-      acfg.setTextureType(SectionAppearance::Pattern);
-  } else {
-    acfg.setTextureType(SectionAppearance::None);
-  }
-
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, acfg.shouldUseSystemForeground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, acfg.shouldUseSystemForeground());
+  auto tx_tt = checked ? ui->tx_options_box->currentData().value<tx::TextureType>() : tx::None;
+  app->config()->instance(_curr_idx)->setTextureType(tx_tt);
+  emit instanceOptionChanged(_curr_idx, opt::TextureType, tx_tt);
 }
 
 void SettingsDialog::on_tx_options_box_activated(int index)
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
-  switch (index) {
-    case 0: // color
-      acfg.setTextureType(SectionAppearance::SolidColor);
-      break;
-    case 1: // gradient
-      acfg.setTextureType(SectionAppearance::Gradient);
-      break;
-    case 2: // pattern
-      acfg.setTextureType(SectionAppearance::Pattern);
-      break;
-  }
-
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), acfg.getTexture());
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, acfg.shouldUseSystemForeground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, acfg.getTexture());
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, acfg.shouldUseSystemForeground());
+  auto tx_tt = ui->tx_options_box->itemData(index).value<tx::TextureType>();
+  app->config()->instance(_curr_idx)->setTextureType(tx_tt);
+  emit instanceOptionChanged(_curr_idx, opt::TextureType, tx_tt);
 }
 
 void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
@@ -520,28 +492,31 @@ void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
   disconnect(ui->tx_option, &QCheckBox::clicked, nullptr, nullptr);
   ui->tx_option->hide();
 
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  const InstanceConfig& acfg = *app->config()->instance(_curr_idx);
 
-  switch (index) {
-    case 0: // color
+  switch (ui->tx_options_box->itemData(index).value<tx::TextureType>()) {
+    case tx::None:
+      // do nothing, just to make clang happy...
+      break;
+    case tx::Color:
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_color);
       ui->tx_option->setText(tr("follow system theme"));
       ui->tx_option->show();
-      ui->tx_option->setChecked(acfg.getUseSystemForeground());
-      ui->tx_btn->setDisabled(acfg.getUseSystemForeground());
+      ui->tx_option->setChecked(acfg.getTextureColorUseTheme());
+      ui->tx_btn->setDisabled(acfg.getTextureColorUseTheme());
       connect(ui->tx_option, &QCheckBox::toggled, ui->tx_btn, &QWidget::setDisabled);
       connect(ui->tx_option, &QCheckBox::clicked, this, &SettingsDialog::tx_use_system_color);
       break;
-    case 1: // gradient
+    case tx::Gradient:
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_gradient);
       ui->tx_option->hide();
       ui->tx_btn->setEnabled(true);
       break;
-    case 2: // pattern
+    case tx::Pattern:
       connect(ui->tx_btn, &QToolButton::clicked, this, &SettingsDialog::tx_select_pattern);
       ui->tx_option->setText(tr("stretch instead of tile"));
       ui->tx_option->show();
-      ui->tx_option->setChecked(acfg.getTextureStretch());
+      ui->tx_option->setChecked(!acfg.getTexturePatternTile());
       ui->tx_btn->setEnabled(true);
       connect(ui->tx_option, &QCheckBox::clicked, this, &SettingsDialog::tx_pattern_stretch);
       break;
@@ -550,28 +525,25 @@ void SettingsDialog::on_tx_options_box_currentIndexChanged(int index)
 
 void SettingsDialog::tx_use_system_color(bool use)
 {
-  app->config().window(_curr_idx).appearance().setUseSystemForeground(use);
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemForeground, use);
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemForeground, use);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, app->window(_curr_idx)->clock()->texture());
+  app->config()->instance(_curr_idx)->setTextureColorUseTheme(use);
+  emit instanceOptionChanged(_curr_idx, opt::TextureColorUseTheme, use);
 }
 
 void SettingsDialog::tx_select_color()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   auto color = QColorDialog::getColor(acfg.getTextureColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
   acfg.setTextureColor(color);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), color);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, color);
+  emit instanceOptionChanged(_curr_idx, opt::TextureColor, color);
 }
 
 void SettingsDialog::tx_select_gradient()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
                                               acfg.getTextureGradient(),
@@ -579,80 +551,46 @@ void SettingsDialog::tx_select_gradient()
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
   acfg.setTextureGradient(gradient);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), gradient);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, gradient);
+  emit instanceOptionChanged(_curr_idx, opt::TextureGradient, QVariant::fromValue(gradient));
 }
 
 void SettingsDialog::tx_select_pattern()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           acfg.lastTexturePatternPath(),
+                                           acfg.getTexturePattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
-  QPixmap pxm(file);
-  acfg.setTexturePatternFile(file);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setTexture), pxm);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexture, pxm);
+  acfg.setTexturePattern(file);
+  emit instanceOptionChanged(_curr_idx, opt::TexturePattern, file);
 }
 
 void SettingsDialog::tx_pattern_stretch(bool checked)
 {
-  app->config().window(_curr_idx).appearance().setTextureStretch(checked);
-  applyClockOption(&GraphicsDateTimeWidget::setTextureStretch, checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTextureStretch, checked);
+  app->config()->instance(_curr_idx)->setTexturePatternTile(!checked);
+  emit instanceOptionChanged(_curr_idx, opt::TexturePatternTile, !checked);
 }
 
 void SettingsDialog::on_tx_per_element_cb_clicked(bool checked)
 {
-  app->config().window(_curr_idx).appearance().setTexturePerCharacter(checked);
-  applyClockOption(&GraphicsDateTimeWidget::setTexturePerChar, checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setTexturePerCharacter, checked);
+  auto tx_ct = checked ? LinesRenderer::PerChar : LinesRenderer::AllText;
+  app->config()->instance(_curr_idx)->setTextureCustomization(tx_ct);
+  emit instanceOptionChanged(_curr_idx, opt::TextureCustomization, tx_ct);
 }
 
 void SettingsDialog::on_background_group_clicked(bool checked)
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
-
-  if (checked) {
-    if (ui->bg_options_box->currentIndex() == 0)
-      acfg.setBackgroundType(SectionAppearance::SolidColor);
-
-    if (ui->bg_options_box->currentIndex() == 1)
-      acfg.setBackgroundType(SectionAppearance::Gradient);
-
-    if (ui->bg_options_box->currentIndex() == 2)
-      acfg.setBackgroundType(SectionAppearance::Pattern);
-  } else {
-    acfg.setBackgroundType(SectionAppearance::None);
-  }
-
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, acfg.shouldUseSystemBackground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, acfg.shouldUseSystemBackground());
+  auto bg_tt = checked ? ui->bg_options_box->currentData().value<tx::TextureType>() : tx::None;
+  app->config()->instance(_curr_idx)->setBackgroundType(bg_tt);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundType, bg_tt);
 }
 
 void SettingsDialog::on_bg_options_box_activated(int index)
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
-  switch (index) {
-    case 0: // color
-      acfg.setBackgroundType(SectionAppearance::SolidColor);
-      break;
-    case 1: // gradient
-      acfg.setBackgroundType(SectionAppearance::Gradient);
-      break;
-    case 2: // pattern
-      acfg.setBackgroundType(SectionAppearance::Pattern);
-      break;
-  }
-
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), acfg.getBackground());
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, acfg.shouldUseSystemBackground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, acfg.getBackground());
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, acfg.shouldUseSystemBackground());
+  auto bg_tt = ui->bg_options_box->itemData(index).value<tx::TextureType>();
+  app->config()->instance(_curr_idx)->setBackgroundType(bg_tt);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundType, bg_tt);
 }
 
 void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
@@ -661,28 +599,31 @@ void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
   disconnect(ui->bg_option, &QCheckBox::clicked, nullptr, nullptr);
   ui->bg_option->hide();
 
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
+  const InstanceConfig& acfg = *app->config()->instance(_curr_idx);
 
-  switch (index) {
-    case 0: // color
+  switch (ui->bg_options_box->itemData(index).value<tx::TextureType>()) {
+    case tx::None:
+      // do nothing, just to make clang happy...
+      break;
+    case tx::Color:
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_color);
       ui->bg_option->setText(tr("follow system theme"));
       ui->bg_option->show();
-      ui->bg_option->setChecked(acfg.getUseSystemBackground());
-      ui->bg_btn->setDisabled(acfg.getUseSystemBackground());
+      ui->bg_option->setChecked(acfg.getBackgroundColorUseTheme());
+      ui->bg_btn->setDisabled(acfg.getBackgroundColorUseTheme());
       connect(ui->bg_option, &QCheckBox::toggled, ui->bg_btn, &QWidget::setDisabled);
       connect(ui->bg_option, &QCheckBox::clicked, this, &SettingsDialog::bg_use_system_color);
       break;
-    case 1: // gradient
+    case tx::Gradient:
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_gradient);
       ui->bg_option->hide();
       ui->bg_btn->setEnabled(true);
       break;
-    case 2: // pattern
+    case tx::Pattern:
       connect(ui->bg_btn, &QToolButton::clicked, this, &SettingsDialog::bg_select_pattern);
       ui->bg_option->setText(tr("stretch instead of tile"));
       ui->bg_option->show();
-      ui->bg_option->setChecked(acfg.getBackgroundStretch());
+      ui->bg_option->setChecked(!acfg.getBackgroundPatternTile());
       ui->bg_btn->setEnabled(true);
       connect(ui->bg_option, &QCheckBox::clicked, this, &SettingsDialog::bg_pattern_stretch);
       break;
@@ -691,28 +632,25 @@ void SettingsDialog::on_bg_options_box_currentIndexChanged(int index)
 
 void SettingsDialog::bg_use_system_color(bool use)
 {
-  app->config().window(_curr_idx).appearance().setUseSystemBackground(use);
-  applyClockOption(&GraphicsDateTimeWidget::setUseSystemBackground, use);
-  notifyOptionChanged(&SettingsChangeTransmitter::setUseSystemBackground, use);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, app->window(_curr_idx)->clock()->background());
+  app->config()->instance(_curr_idx)->setBackgroundColorUseTheme(use);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundColorUseTheme, use);
 }
 
 void SettingsDialog::bg_select_color()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   auto color = QColorDialog::getColor(acfg.getBackgroundColor(),
                                       this,
                                       QString(),
                                       QColorDialog::ShowAlphaChannel);
   if (!color.isValid()) return;
   acfg.setBackgroundColor(color);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), color);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, color);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundColor, color);
 }
 
 void SettingsDialog::bg_select_gradient()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   bool ok = false;
   auto gradient = GradientDialog::getGradient(&ok,
                                               acfg.getBackgroundGradient(),
@@ -720,124 +658,98 @@ void SettingsDialog::bg_select_gradient()
   if (!ok) return;
   gradient.setCoordinateMode(QGradient::ObjectMode);
   acfg.setBackgroundGradient(gradient);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), gradient);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, gradient);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundGradient, QVariant::fromValue(gradient));
 }
 
 void SettingsDialog::bg_select_pattern()
 {
-  auto& acfg = app->config().window(_curr_idx).appearance();
+  auto& acfg = *app->config()->instance(_curr_idx);
   auto file = QFileDialog::getOpenFileName(this,
                                            QString(),
-                                           acfg.lastBackgroundPatternPath(),
+                                           acfg.getBackgroundPattern(),
                                            tr("Images (*.png *.bmp *.jpg)"));
   if (file.isEmpty()) return;
-  QPixmap pxm(file);
-  acfg.setBackgroundPatternFile(file);
-  applyClockOption(qOverload<QBrush>(&GraphicsDateTimeWidget::setBackground), pxm);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackground, pxm);
+  acfg.setBackgroundPattern(file);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundPattern, file);
 }
 
 void SettingsDialog::bg_pattern_stretch(bool checked)
 {
-  app->config().window(_curr_idx).appearance().setBackgroundStretch(checked);
-  applyClockOption(&GraphicsDateTimeWidget::setBackgroundStretch, checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackgroundStretch, checked);
+  app->config()->instance(_curr_idx)->setBackgroundPatternTile(!checked);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundPatternTile, !checked);
 }
 
 void SettingsDialog::on_bg_per_element_cb_clicked(bool checked)
 {
-  app->config().window(_curr_idx).appearance().setBackgroundPerCharacter(checked);
-  applyClockOption(&GraphicsDateTimeWidget::setBackgroundPerChar, checked);
-  notifyOptionChanged(&SettingsChangeTransmitter::setBackgroundPerCharacter, checked);
+  auto bg_ct = checked ? LinesRenderer::PerChar : LinesRenderer::AllText;
+  app->config()->instance(_curr_idx)->setBackgroundCustomization(bg_ct);
+  emit instanceOptionChanged(_curr_idx, opt::BackgroundCustomization, bg_ct);
 }
 
 void SettingsDialog::on_anchor_left_clicked()
 {
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorLeft);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorLeft);
+  app->window(_curr_idx)->setAnchorPoint(ClockWindow::AnchorLeft);
 }
 
 void SettingsDialog::on_anchor_center_clicked()
 {
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorCenter);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorCenter);
+  app->window(_curr_idx)->setAnchorPoint(ClockWindow::AnchorCenter);
 }
 
 void SettingsDialog::on_anchor_right_clicked()
 {
-  applyWindowOption(&ClockWindow::setAnchorPoint, ClockWindow::AnchorRight);
-  app->config().window(_curr_idx).generic().setAnchorPoint(ClockWindow::AnchorRight);
+  app->window(_curr_idx)->setAnchorPoint(ClockWindow::AnchorRight);
 }
 
 void SettingsDialog::on_hs_edit_valueChanged(int arg1)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setCharSpacing, arg1);
-  app->config().window(_curr_idx).appearance().setSpacingH(arg1);
+  app->config()->instance(_curr_idx)->setCharSpacing(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::CharSpacing, arg1);
 }
 
 void SettingsDialog::on_vs_edit_valueChanged(int arg1)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setLineSpacing, arg1);
-  app->config().window(_curr_idx).appearance().setSpacingV(arg1);
+  app->config()->instance(_curr_idx)->setLineSpacing(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::LineSpacing, arg1);
 }
 
 void SettingsDialog::onCharMarginsChanged()
 {
   QMarginsF m(ui->m_char_l->value(), ui->m_char_t->value(), ui->m_char_r->value(), ui->m_char_b->value());
-  app->window(_curr_idx)->clock()->skin()->setMargins(m);   // skin is shared if required
-  applyClockOption(&GraphicsDateTimeWidget::rebuildLayout);
-  app->config().window(_curr_idx).appearance().setCharMargins(m);
+  app->config()->instance(_curr_idx)->setCharMargins(m);
+  emit instanceOptionChanged(_curr_idx, opt::CharMargins, QVariant::fromValue(m));
 }
 
 void SettingsDialog::onTextMarginsChanged()
 {
   QMarginsF m(ui->m_text_l->value(), ui->m_text_t->value(), ui->m_text_r->value(), ui->m_text_b->value());
-  applyClockOption(&GraphicsDateTimeWidget::setMargins, m);
-  app->config().window(_curr_idx).appearance().setTextMargins(m);
+  app->config()->instance(_curr_idx)->setWidgetMargins(m.toMargins());
+  emit instanceOptionChanged(_curr_idx, opt::WidgetMargins, QVariant::fromValue(m.toMargins()));
 }
 
-void SettingsDialog::on_ignore_ax_clicked(bool checked)
+void SettingsDialog::on_true_per_char_clicked(bool checked)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setIgnoreAX, checked);
-  app->config().window(_curr_idx).appearance().setIgnoreAX(checked);
+  app->config()->instance(_curr_idx)->setTruePerCharRendering(checked);
+  emit instanceOptionChanged(_curr_idx, opt::TruePerCharRendering, checked);
 }
 
-void SettingsDialog::on_ignore_ay_clicked(bool checked)
+void SettingsDialog::on_respect_line_spacing_clicked(bool checked)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setIgnoreAY, checked);
-  app->config().window(_curr_idx).appearance().setIgnoreAY(checked);
+  app->config()->instance(_curr_idx)->setRespectLineSpacing(checked);
+  emit instanceOptionChanged(_curr_idx, opt::RespectLineSpacing, checked);
 }
 
 void SettingsDialog::on_layout_spacing_edit_valueChanged(int arg1)
 {
-  if (app->config().global().getAppearancePerInstance()) {
-    app->window(_curr_idx)->layout()->setSpacing(arg1);
-  } else {
-    for (const auto& wnd : app->windows())
-      wnd->layout()->setSpacing(arg1);
-  }
-  app->config().window(_curr_idx).appearance().setLayoutSpacing(arg1);
-}
-
-void SettingsDialog::onPluginStateChanged(const QString& id, bool enabled)
-{
-  auto current_plugins = app->config().global().getPlugins();
-  if (enabled) {
-    current_plugins.append(id);
-    app->pluginManager().loadPlugin(id);
-  } else {
-    current_plugins.removeAll(id);
-    app->pluginManager().unloadPlugin(id);
-  }
-  app->config().global().setPlugins(current_plugins);
+  app->config()->instance(_curr_idx)->setLayoutSpacing(arg1);
+  emit instanceOptionChanged(_curr_idx, opt::LayoutSpacing, arg1);
 }
 
 void SettingsDialog::initAppGlobalTab()
 {
   ui->lang_tr_btn->setIcon(QIcon(":/icons/set-language.svg"));
   // app global
-  SectionAppGlobal& gs = app->config().global();
+  const GlobalConfig& gs = *app->config()->global();
   setIndexByValue(ui->lang_list, gs.getLocale());
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
   ui->enable_autostart->setChecked(IsAutoStartEnabled());
@@ -856,9 +768,10 @@ void SettingsDialog::initAppGlobalTab()
   ui->snap_threshold->setValue(gs.getSnapThreshold());
   ui->keep_always_visible->setChecked(gs.getPreventOutOfScreen());
 
-  ui->enable_multiwindow->setChecked(gs.getNumInstances() > 1);
-  ui->wnd_count_edit->setValue(gs.getNumInstances());
-  ui->use_same_appearance->setChecked(!gs.getAppearancePerInstance());
+  const auto act_insts = gs.getActiveInstancesList();
+  ui->enable_multiwindow->setChecked(act_insts.size() > 1);
+  ui->wnd_count_edit->setValue(act_insts.size());
+  ui->use_same_appearance->setChecked(gs.getOptionsSharing());
 
   ui->transparent_on_hover->setChecked(gs.getTransparentOnHover());
   ui->hide_on_mouse_hover->setChecked(gs.getOpacityOnHover() == 0);
@@ -868,25 +781,23 @@ void SettingsDialog::initAppGlobalTab()
 
   setIndexByValue(ui->update_period_edit, gs.getUpdatePeriodDays());
 
-  // ui->enable_debug_options->setChecked(impl->config.getEnableDebugOptions());
   ui->enable_debug_options->setVisible(false);  // no debug options for now
 }
 
-void SettingsDialog::initGeneralTab(int idx)
+void SettingsDialog::initGeneralTab(size_t idx)
 {
   ui->format_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
   ui->custom_seps_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
   ui->layout_cfg_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
   ui->multi_timezone_help_btn->setIcon(QIcon(":/icons/help-hint.svg"));
 
-  SectionGeneric& gcfg = app->config().window(idx).generic();
-  SectionAppearance& acfg = app->config().window(idx).appearance();
+  const InstanceConfig& acfg = *app->config()->instance(idx);
 
   QString time_format = acfg.getTimeFormat();
 
-  ui->smaller_seconds->setChecked(acfg.getSecondsScaleFactor() < 100);
+  ui->smaller_seconds->setChecked(acfg.getSmallerSeconds());
   if (ui->smaller_seconds->isChecked())
-    ui->seconds_scale_factor_edit->setValue(acfg.getSecondsScaleFactor());
+    ui->seconds_scale_factor_edit->setValue(acfg.getSecondsSize());
 
   ui->use_custom_format->setChecked(!standard_formats.contains(time_format));
   ui->format_edit->setCurrentText(time_format);
@@ -911,8 +822,8 @@ void SettingsDialog::initGeneralTab(int idx)
   on_use_custom_format_toggled(ui->use_custom_format->isChecked());
 
   ui->use_custom_seps->setChecked(acfg.getUseCustomSeparators());
-  ui->use_custom_seps->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
-  ui->custom_seps_edit->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
+  // ui->use_custom_seps->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
+  // ui->custom_seps_edit->setEnabled(app->window(idx)->clock()->skin()->supportsCustomSeparator());
   ui->custom_seps_edit->setText(acfg.getCustomSeparators());
 
   ui->layout_cfg_edit->setText(acfg.getLayoutConfig());
@@ -927,66 +838,49 @@ void SettingsDialog::initGeneralTab(int idx)
   connect(ui->rb_ucase_apm, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
   connect(ui->rb_lcase_apm, &QRadioButton::clicked, this, &SettingsDialog::updateTimeFormat);
 
-  ui->use_time_zone->setChecked(!gcfg.getShowLocalTime());
-  ui->time_zone_edit->setCurrentText(tz_name(gcfg.getTimeZone()));
+  ui->use_time_zone->setChecked(!acfg.getShowLocalTime());
+  ui->time_zone_edit->setCurrentText(tz_name(acfg.getTimeZone()));
 }
 
-void SettingsDialog::initAppearanceTab(int idx)
+void SettingsDialog::initAppearanceTab(size_t idx)
 {
-  SectionAppearance& acfg = app->config().window(idx).appearance();
+  const InstanceConfig& acfg = *app->config()->instance(idx);
 
-  ui->font_rbtn->setChecked(acfg.getUseFontInsteadOfSkin());
-  ui->skin_rbtn->setChecked(!acfg.getUseFontInsteadOfSkin());
+  ui->font_rbtn->setChecked(!acfg.getUseSkin());
+  ui->skin_rbtn->setChecked(acfg.getUseSkin());
 
   ui->skin_cbox->setCurrentIndex(-1);   // if skin is available, next line will update the index
-  ui->skin_cbox->setCurrentText(app->skinManager().metadata(acfg.getSkin())["name"]);
+  ui->skin_cbox->setCurrentText(app->getSkinManager()->info(acfg.getSkin()).metadata["name"]);
 
-  ui->is_separator_flashes->setChecked(acfg.getSeparatorFlashes());
-  ui->scaling_edit->setValue(acfg.getScalingH());
+  ui->is_separator_flashes->setChecked(acfg.getFlashingSeparator());
+  ui->scaling_edit->setValue(acfg.getScaling());
   ui->opacity_edit->setValue(acfg.getOpacity());
-  ui->colorize_group->setChecked(acfg.getApplyColorization());
-  ui->colorization_strength_edit->setValue(qRound(acfg.getColorizationStrength() * 100));
+  ui->colorize_group->setChecked(acfg.getColorizationEnabled());
+  ui->colorization_strength_edit->setValue(acfg.getColorizationStrength());
 
-  auto tx = acfg.getTexture();
-  ui->texture_group->setChecked(tx.style() != Qt::NoBrush);
-  if (tx.style() == Qt::SolidPattern) {
-    ui->tx_options_box->setCurrentIndex(0);
-  }
-  if (tx.gradient() != nullptr) {
-    ui->tx_options_box->setCurrentIndex(1);
-  }
-  if (tx.style() == Qt::TexturePattern) {
-    ui->tx_options_box->setCurrentIndex(2);
-  }
-  ui->tx_per_element_cb->setChecked(acfg.getTexturePerCharacter());
+  ui->texture_group->setChecked(acfg.getTextureType() != tx::None);
+  if (acfg.getTextureType() != tx::None)
+    setIndexByValue(ui->tx_options_box, QVariant::fromValue(acfg.getTextureType()));
+  ui->tx_per_element_cb->setChecked(acfg.getTextureCustomization() == LinesRenderer::PerChar);
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
 
-  auto bg = acfg.getBackground();
-  ui->background_group->setChecked(bg.style() != Qt::NoBrush);
-  if (bg.style() == Qt::SolidPattern) {
-    ui->bg_options_box->setCurrentIndex(0);
-  }
-  if (bg.gradient() != nullptr) {
-    ui->bg_options_box->setCurrentIndex(1);
-  }
-  if (bg.style() == Qt::TexturePattern) {
-    ui->bg_options_box->setCurrentIndex(2);
-  }
-  ui->bg_per_element_cb->setChecked(acfg.getBackgroundPerCharacter());
+  ui->background_group->setChecked(acfg.getBackgroundType() != tx::None);
+  if (acfg.getBackgroundType() != tx::None)
+    setIndexByValue(ui->bg_options_box, QVariant::fromValue(acfg.getBackgroundType()));
+  ui->bg_per_element_cb->setChecked(acfg.getBackgroundCustomization() == LinesRenderer::PerChar);
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
 
-  SectionGeneric& gcfg = app->config().window(idx).generic();
-  ui->anchor_left->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorLeft);
-  ui->anchor_center->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorCenter);
-  ui->anchor_right->setChecked(gcfg.getAnchorPoint() == ClockWindow::AnchorRight);
+  ui->anchor_left->setChecked(app->window(idx)->anchorPoint() == ClockWindow::AnchorLeft);
+  ui->anchor_center->setChecked(app->window(idx)->anchorPoint() == ClockWindow::AnchorCenter);
+  ui->anchor_right->setChecked(app->window(idx)->anchorPoint() == ClockWindow::AnchorRight);
 
-  ui->hs_edit->setValue(acfg.getSpacingH());
-  ui->vs_edit->setValue(acfg.getSpacingV());
+  ui->hs_edit->setValue(acfg.getCharSpacing());
+  ui->vs_edit->setValue(acfg.getLineSpacing());
 }
 
-void SettingsDialog::initMiscTab(int idx)
+void SettingsDialog::initMiscTab(size_t idx)
 {
-  SectionAppearance& acfg = app->config().window(idx).appearance();
+  InstanceConfig& acfg = *app->config()->instance(idx);
 
   const auto& cm = acfg.getCharMargins();
   ui->m_char_l->setValue(cm.left());
@@ -999,7 +893,7 @@ void SettingsDialog::initMiscTab(int idx)
   connect(ui->m_char_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
   connect(ui->m_char_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onCharMarginsChanged);
 
-  const auto& tm = acfg.getTextMargins();
+  const auto& tm = acfg.getWidgetMargins();
   ui->m_text_l->setValue(tm.left());
   ui->m_text_t->setValue(tm.top());
   ui->m_text_r->setValue(tm.right());
@@ -1010,8 +904,8 @@ void SettingsDialog::initMiscTab(int idx)
   connect(ui->m_text_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
   connect(ui->m_text_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
 
-  ui->ignore_ax->setChecked(acfg.getIgnoreAX());
-  ui->ignore_ay->setChecked(acfg.getIgnoreAY());
+  ui->true_per_char->setChecked(acfg.getTruePerCharRendering());
+  ui->respect_line_spacing->setChecked(acfg.getRespectLineSpacing());
 
   ui->layout_spacing_edit->setValue(acfg.getLayoutSpacing());
 }
@@ -1020,28 +914,31 @@ void SettingsDialog::initPluginsTab()
 {
   ui->plugins_list->clear();
 
-  const auto plugins_ids = app->pluginManager().availablePlugins();
-
-  QVector<PluginInfo> plugins_meta(plugins_ids.size());
-  std::transform(plugins_ids.begin(), plugins_ids.end(), plugins_meta.begin(),
-                 [this](auto& id) { return app->pluginManager().pluginInfo(id); });
-
-
-  auto by_title = [](const PluginInfo& a, const PluginInfo& b)
+  auto plugins = app->getPluginManager()->plugins();
+  auto by_name = [](const PluginHandle& a, const PluginHandle& b)
   {
-    return QString::localeAwareCompare(a.title, b.title) < 0;
+    return QString::localeAwareCompare(a.name(), b.name()) < 0;
   };
-  std::sort(plugins_meta.begin(), plugins_meta.end(), by_title);
+  std::sort(plugins.begin(), plugins.end(), by_name);
 
-  for (const auto& plugin : std::as_const(plugins_meta)) {
-    QListWidgetItem* item = new QListWidgetItem();
-    PluginListItemWidget* widget = new PluginListItemWidget(ui->plugins_list);
-    widget->SetInfo(plugin);
+  for (const PluginHandle& p : std::as_const(plugins)) {
+    auto widget = new PluginListItemWidget;
+    widget->SetDisplayName(p.name());
+    widget->SetVersion(p.metadata().value("version", "0.0.0").toString());
+    widget->SetConfigurable(p.isConfigurable());
+    widget->SetChecked(p.isActive());
+
+    connect(widget, &PluginListItemWidget::StateChanged,
+            this, [this, p](bool checked) { onPluginStateChanged(p, checked); });
+    connect(widget, &PluginListItemWidget::ConfigureRequested,
+            [this, ph = p]() mutable { ph.configure(this, _curr_idx); });
+    connect(widget, &PluginListItemWidget::InfoDialogRequested,
+            this, [this, p]() { showPluginInfoDialog(p); });
+
+    auto item = new QListWidgetItem;
     item->setSizeHint(widget->sizeHint());
     ui->plugins_list->addItem(item);
     ui->plugins_list->setItemWidget(item, widget);
-    connect(widget, &PluginListItemWidget::StateChanged, this, &SettingsDialog::onPluginStateChanged);
-    connect(widget, &PluginListItemWidget::ConfigureRequested, &app->pluginManager(), &PluginManager::configurePlugin);
   }
 }
 
@@ -1052,6 +949,27 @@ void SettingsDialog::initControlsState()
   initAppearanceTab(_curr_idx);
   initMiscTab(_curr_idx);
   initPluginsTab();
+}
+
+void SettingsDialog::onPluginStateChanged(PluginHandle ph, bool enabled)
+{
+  ph.setActive(enabled);
+
+  auto current_plugins = app->config()->global()->getPlugins();
+  if (enabled)
+    current_plugins.push_back(ph.id());
+  else
+    current_plugins.removeOne(ph.id());
+
+  app->config()->global()->setPlugins(current_plugins);
+}
+
+void SettingsDialog::showPluginInfoDialog(const PluginHandle& ph)
+{
+  auto dlg = new PluginInfoDialog(ph, this);
+  dlg->setAttribute(Qt::WA_DeleteOnClose, true);
+  dlg->setWindowModality(Qt::WindowModal);
+  dlg->show();
 }
 
 void SettingsDialog::fillLanguagesList()
@@ -1095,9 +1013,9 @@ void SettingsDialog::fillSkinsList()
   auto locale_cmp = [](QStringView lhs, QStringView rhs) { return QString::localeAwareCompare(lhs, rhs) < 0; };
   std::multimap<QString, QString, decltype(locale_cmp)> sorted_skins(locale_cmp);
 
-  const auto avail_skins = app->skinManager().availableSkins();
+  const auto avail_skins = app->getSkinManager()->infoList();
   for (const auto& s : avail_skins)
-    sorted_skins.insert({app->skinManager().metadata(s)["name"], s});
+    sorted_skins.insert({s.metadata["name"], s.id});
 
   for (const auto& [t, s] : std::as_const(sorted_skins))
     ui->skin_cbox->addItem(t, s);
@@ -1106,110 +1024,14 @@ void SettingsDialog::fillSkinsList()
   user_fnt.setItalic(true);
   for (int i = 0; i < ui->skin_cbox->count(); i++) {
     auto s = ui->skin_cbox->itemData(i).toString();
-    if (app->skinManager().isUserSkin(s))
+    if (app->getSkinManager()->info(s).user_provided)
       ui->skin_cbox->setItemData(i, user_fnt, Qt::FontRole);
   }
 }
 
-void SettingsDialog::applySkin(std::shared_ptr<Skin> skin)
+void SettingsDialog::fillTextureTypes(QComboBox* box)
 {
-  applyClockOption(&GraphicsDateTimeWidget::setSkin, skin);
-  applyClockOption(&GraphicsDateTimeWidget::setUseAlternateSeparator, skin->hasAlternateSeparator());
-  applyClockOption(&GraphicsDateTimeWidget::setUseCustomSeparators, skin->supportsCustomSeparator() && ui->use_custom_seps->isChecked());
-
-  ui->use_custom_seps->setEnabled(skin->supportsCustomSeparator());
-  ui->custom_seps_edit->setEnabled(skin->supportsCustomSeparator());
-  ui->custom_seps_help_btn->setEnabled(skin->supportsCustomSeparator());
-}
-
-void SettingsDialog::applyTimeZoneSettings()
-{
-  if (app->config().window(_curr_idx).generic().getShowLocalTime())
-    app->window(_curr_idx)->clock()->setTimeZone(QDateTime::currentDateTime().timeZone());
-  else
-    app->window(_curr_idx)->clock()->setTimeZone(app->config().window(_curr_idx).generic().getTimeZone());
-}
-
-void SettingsDialog::applyColorization()
-{
-  auto create_effect = [this]() {
-    SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
-    auto effect = new QGraphicsColorizeEffect;
-    effect->setColor(acfg.getColorizationColor());
-    effect->setStrength(acfg.getColorizationStrength());
-    return effect;
-  };
-
-  if (app->config().global().getAppearancePerInstance()) {
-    app->window(_curr_idx)->setGraphicsEffect(create_effect());
-  } else {
-    for (const auto& wnd : app->windows())
-      wnd->setGraphicsEffect(create_effect());
-  }
-}
-
-void SettingsDialog::updateColorization()
-{
-  SectionAppearance& acfg = app->config().window(_curr_idx).appearance();
-
-  if (app->config().global().getAppearancePerInstance()) {
-    auto effect = qobject_cast<QGraphicsColorizeEffect*>(app->window(_curr_idx)->graphicsEffect());
-    if (!effect) return;
-    effect->setColor(acfg.getColorizationColor());
-    effect->setStrength(acfg.getColorizationStrength());
-  } else {
-    for (const auto& wnd : app->windows()) {
-      auto effect = qobject_cast<QGraphicsColorizeEffect*>(wnd->graphicsEffect());
-      if (!effect) continue;
-      effect->setColor(acfg.getColorizationColor());
-      effect->setStrength(acfg.getColorizationStrength());
-    }
-  }
-}
-
-template<typename Method, typename... Args>
-void SettingsDialog::applyWindowOption(Method method, Args&&... args)
-{
-  if (app->config().global().getAppearancePerInstance()) {
-    auto wnd = app->window(_curr_idx);
-    (*wnd.*method)(std::forward<Args>(args)...);
-  } else {
-    for (const auto& wnd : app->windows())
-      (*wnd.*method)(std::forward<Args>(args)...);
-  }
-}
-
-template<typename Method, typename... Args>
-void SettingsDialog::applyClockOption(Method method, Args&&... args)
-{
-  if (app->config().global().getAppearancePerInstance()) {
-    auto wnd = app->window(_curr_idx);
-    (*wnd->clock().*method)(std::forward<Args>(args)...);
-  } else {
-    for (const auto& wnd : app->windows())
-      (*wnd->clock().*method)(std::forward<Args>(args)...);
-  }
-}
-
-template<typename Method, typename... Args>
-void SettingsDialog::notifyOptionChanged(Method method, Args&&... args)
-{
-  if (app->config().global().getAppearancePerInstance()) {
-    auto t = app->settingsTransmitter(_curr_idx);
-    (*t.*method)(std::forward<Args>(args)...);
-  } else {
-    for (const auto& t : app->settingsTransmitters())
-      (*t.*method)(std::forward<Args>(args)...);
-  }
-}
-
-void SettingsDialog::reloadSettings(std::function<void()> act)
-{
-  const auto prev_plugins = app->config().global().getPlugins();
-  for (const auto& p : prev_plugins) app->pluginManager().unloadPlugin(p);
-  act();
-  app->configureWindows();
-  const auto curr_plugins = app->config().global().getPlugins();
-  for (const auto& p : curr_plugins) app->pluginManager().loadPlugin(p);
-  app->retranslateUI();
+  box->addItem(tr("solid color"), QVariant::fromValue(tx::Color));
+  box->addItem(tr("gradient"), QVariant::fromValue(tx::Gradient));
+  box->addItem(tr("pattern"), QVariant::fromValue(tx::Pattern));
 }

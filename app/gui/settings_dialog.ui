@@ -673,23 +673,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QComboBox" name="tx_options_box">
-            <item>
-             <property name="text">
-              <string>solid color</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>gradient</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>pattern</string>
-             </property>
-            </item>
-           </widget>
+           <widget class="QComboBox" name="tx_options_box"/>
           </item>
           <item row="2" column="0" colspan="2">
            <widget class="QCheckBox" name="tx_per_element_cb">
@@ -849,23 +833,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
-           <widget class="QComboBox" name="bg_options_box">
-            <item>
-             <property name="text">
-              <string>solid color</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>gradient</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>pattern</string>
-             </property>
-            </item>
-           </widget>
+           <widget class="QComboBox" name="bg_options_box"/>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QCheckBox" name="bg_option">
@@ -1148,16 +1116,16 @@
         </widget>
        </item>
        <item row="2" column="0" colspan="5">
-        <widget class="QCheckBox" name="ignore_ax">
+        <widget class="QCheckBox" name="true_per_char">
          <property name="text">
-          <string>ignore horizontal spacing defined by characters</string>
+          <string>character by character rendering</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0" colspan="5">
-        <widget class="QCheckBox" name="ignore_ay">
+        <widget class="QCheckBox" name="respect_line_spacing">
          <property name="text">
-          <string>ignore vertical spacing defined by characters</string>
+          <string>respect line spacing defined by skin/font</string>
          </property>
         </widget>
        </item>

@@ -6,32 +6,19 @@
 
 #pragma once
 
-#include "skin/skin.hpp"
+#include "renderer/image_skin.hpp"
 
-// TODO: convert it to "pure factory"
-class LegacySkin : public Skin {
+#include <QtCore/QHash>
+
+class LegacySkin : public ImageSkin
+{
 public:
-  bool hasAlternateSeparator() const override
+  bool hasAlternateSeparator() const /* override */
   {
-    return _glyphs.contains(' ');
+    return glyph(' ') != nullptr;
   }
 
-  bool supportsCustomSeparator() const override { return false; }
-
-protected:
-  std::shared_ptr<Glyph> create(char32_t c) const override
-  {
-    return _glyphs.value(c, nullptr);
-  }
-
-public:
-  void addGlyph(char32_t c, std::shared_ptr<Glyph> g)
-  {
-    _glyphs[c] = std::move(g);
-  }
-
-private:
-  QHash<char32_t, std::shared_ptr<Glyph>> _glyphs;
+  bool supportsCustomSeparator() const /* override */ { return false; }
 };
 
 

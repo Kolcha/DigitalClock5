@@ -5,24 +5,31 @@
 project(SkinEngine VERSION 2.0.3 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
-    skin/container.cpp
-    skin/container.hpp
-    skin/datetime_formatter.cpp
-    skin/datetime_formatter.hpp
-    skin/font_skin.cpp
-    skin/font_skin.hpp
-    skin/glyph.cpp
-    skin/glyph.hpp
-    skin/graphics.cpp
-    skin/graphics.hpp
-    skin/graphics_widgets.cpp
-    skin/graphics_widgets.hpp
-    skin/image_glyph.cpp
-    skin/image_glyph.hpp
-    skin/observable.hpp
-    skin/skin.cpp
-    skin/skin.hpp
+    renderer/font_skin.cpp
+    renderer/font_skin.hpp
+    renderer/image_skin.cpp
+    renderer/image_skin.hpp
+    renderer/item.cpp
+    renderer/item.hpp
+    renderer/layout.cpp
+    renderer/layout.hpp
+    renderer/painter_guard.hpp
+    renderer/renderable.cpp
+    renderer/renderable.hpp
+    renderer/renderer.cpp
+    renderer/renderer.hpp
+    renderer/skin.cpp
+    renderer/skin.hpp
+    renderer/skin_base.cpp
+    renderer/skin_base.hpp
+    renderer/texture.cpp
+    renderer/texture.hpp
+    layout_config_parser.cpp
+    layout_config_parser.hpp
+    scale_factor.hpp
     skin_engine_global.hpp
+    skinned_widget.cpp
+    skinned_widget.hpp
 )
 
 add_win_rc_file(${PROJECT_NAME} skin_engine.rc)

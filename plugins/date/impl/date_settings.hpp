@@ -6,21 +6,41 @@
 
 #pragma once
 
-#include "config/settings_storage.hpp"
-#include "config/custom_converters.hpp"
+#include "plugin/text/plugin_config.hpp"
 
-#include "date_plugin_impl.hpp"
+#include <QLocale>
 
-namespace plugin_impl {
+namespace plugin::date {
 
-class DatePluginSettings : public SettingsStorageClient {
+class DatePluginInstanceConfig : public text::PluginInstanceConfig
+{
+  Q_OBJECT
+
 public:
-  explicit DatePluginSettings(ISettingsStorage& st)
-      : SettingsStorageClient("Date", st) {}
+  using PluginInstanceConfig::PluginInstanceConfig;
 
-  CONFIG_OPTION_Q(DatePluginImpl::FormatType, FormatType, DatePluginImpl::System)
-  CONFIG_OPTION_Q(QLocale::FormatType, FormatSys, QLocale::LongFormat)
-  CONFIG_OPTION_Q(QString, FormatStr, QLocale().dateFormat())
+  enum FormatType {System, Custom};
+  Q_ENUM(FormatType);
+
+  CONFIG_OPTION(FormatType, "format_type", FormatType, System)
+  CONFIG_OPTION(FormatSys, "format_sys", QLocale::FormatType, QLocale::LongFormat)
+  CONFIG_OPTION(FormatStr, "format_str", QString, QLocale().dateFormat())
 };
 
-} // namespace plugin_impl
+
+class DatePluginConfig : public text::PluginConfig
+{
+  Q_OBJECT
+
+public:
+  using PluginConfig::PluginConfig;
+
+protected:
+  std::unique_ptr<text::PluginInstanceConfig>
+  createInstanceImpl(std::unique_ptr<SettingsStorage> st) const override
+  {
+    return std::make_unique<DatePluginInstanceConfig>(std::move(st));
+  }
+};
+
+} // namespace plugin::date

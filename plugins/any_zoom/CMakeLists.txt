@@ -5,11 +5,9 @@
 project(any_zoom VERSION 3.0.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME AnyZoomPluginFactory
-    gui/settings_widget.cpp
-    gui/settings_widget.hpp
-    gui/settings_widget.ui
-    impl/any_zoom_plugin_impl.cpp
-    impl/any_zoom_plugin_impl.hpp
+    gui/zoom_dialog.cpp
+    gui/zoom_dialog.hpp
+    gui/zoom_dialog.ui
     impl/any_zoom_settings.hpp
     any_zoom_plugin.cpp
     any_zoom_plugin.hpp

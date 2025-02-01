@@ -8,8 +8,9 @@
 
 #include <QWidget>
 
-#include "impl/stopwatch_plugin_impl.hpp"
 #include "impl/stopwatch_settings.hpp"
+
+namespace timetracker {
 
 namespace Ui {
 class TimerSettingsWidget;
@@ -20,15 +21,20 @@ class TimerSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                               StopwatchPluginImpl* impl, QWidget* parent = nullptr);
+  explicit TimerSettingsWidget(QWidget* parent = nullptr);
   ~TimerSettingsWidget();
+
+  void initControls(StopwatchInstanceConfig* icfg);
+
+signals:
+  void optionChanged(Options opt, const QVariant& val);
 
 private slots:
   void on_hide_if_inactive_clicked(bool checked);
 
 private:
   Ui::TimerSettingsWidget* ui;
-  plugin_impl::StopwatchPluginSettings cfg;
-  StopwatchPluginImpl* impl;
+  StopwatchInstanceConfig* cfg;
 };
+
+} // namespace timetracker

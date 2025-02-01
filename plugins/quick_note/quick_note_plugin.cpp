@@ -10,12 +10,12 @@
 #include <QLabel>
 #include <QMouseEvent>
 
-class DoubleClickWidget : public GraphicsTextWidget
+class DoubleClickWidget : public SkinnedTextWidget
 {
   Q_OBJECT
 
 public:
-  explicit DoubleClickWidget(QWidget* parent = nullptr);
+  using SkinnedTextWidget::SkinnedTextWidget;
 
 signals:
   void doubleClicked();
@@ -25,47 +25,33 @@ protected:
 };
 
 
-DoubleClickWidget::DoubleClickWidget(QWidget* parent)
-    : GraphicsTextWidget(parent)
-{
-}
-
 void DoubleClickWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
   if (event->button() == Qt::LeftButton) {
     emit doubleClicked();
   }
-  GraphicsTextWidget::mouseDoubleClickEvent(event);
+  SkinnedTextWidget::mouseDoubleClickEvent(event);
 }
 
 
-void QuickNotePlugin::initState(StateClient* st)
+QuickNotePlugin::QuickNotePlugin(const PluginInstanceConfig& cfg, std::unique_ptr<SettingsStorage> st)
+  : TextPluginInstanceBase(cfg)
+  , _st(std::move(st))
 {
-  _state = st;
-  _last_text = st->value("last_text", tr("double click me!")).toString();
 }
 
-QList<QWidget*> QuickNotePlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
+void QuickNotePlugin::startup()
 {
-  Q_UNUSED(s);
-  Q_UNUSED(t);
-  auto l = new QLabel(tr("Nothing is here!\nDouble click the widget to change the text."));
-  l->setAlignment(Qt::AlignCenter);
-  return {l};
+  const StateStorage st(*_st);
+  _last_text = st.value("last_text", tr("double click me!")).toString();
+  TextPluginInstanceBase::startup();
 }
 
-std::shared_ptr<GraphicsWidgetBase> QuickNotePlugin::createWidget()
+SkinnedTextWidget* QuickNotePlugin::createWidget(QWidget* parent) const
 {
-  auto w = std::make_shared<DoubleClickWidget>();
-  w->setText(_last_text);
-  connect(w.get(), &DoubleClickWidget::doubleClicked, this, &QuickNotePlugin::onWidgetClicked);
-  _widget = std::move(w);
-  return _widget;
-}
-
-void QuickNotePlugin::destroyWidget()
-{
-  _widget.reset();
+  auto w = new DoubleClickWidget(parent);
+  connect(w, &DoubleClickWidget::doubleClicked, this, &QuickNotePlugin::onWidgetClicked);
+  return w;
 }
 
 void QuickNotePlugin::onWidgetClicked()
@@ -76,20 +62,24 @@ void QuickNotePlugin::onWidgetClicked()
                                    QLineEdit::Normal, _last_text, &ok);
   if (ok && !str.isEmpty()) {
     _last_text = str;
-    _state->setValue("last_text", str);
-    _widget->setText(std::move(str));
+    StateStorage st(*_st);
+    st.setValue("last_text", str);
+    repaintWidget();
   }
 }
 
 
-std::unique_ptr<ClockPluginBase> QuickNotePluginFactory::create() const
-{
-  return std::make_unique<QuickNotePlugin>();
-}
-
 QString QuickNotePluginFactory::description() const
 {
   return tr("Allows to display any short message under the clock.");
+}
+
+QVector<QWidget*> QuickNotePluginFactory::configPagesBeforeCommonPages()
+{
+  auto l = new QLabel(tr("Nothing is here!\nDouble click the widget to change the text."));
+  l->setAlignment(Qt::AlignCenter);
+  l->setWindowTitle(tr("Note"));
+  return {l};
 }
 
 #include "quick_note_plugin.moc"

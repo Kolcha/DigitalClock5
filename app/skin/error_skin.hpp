@@ -1,19 +1,17 @@
-/*
- * SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
+// SPDX-FileCopyrightText: 2025 Nick Korotysh <nick.korotysh@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
 
-#include "skin/skin.hpp"
+#include "renderer/skin_base.hpp"
 
-class ErrorSkin : public Skin
+class ErrorSkin : public SkinBase
 {
 public:
-  bool hasAlternateSeparator() const override { return true; }
-  bool supportsCustomSeparator() const override { return false; }
+  std::unique_ptr<Renderable> draw(const QString& str) const override;
 
-protected:
-  std::shared_ptr<Glyph> create(char32_t c) const override;
+  bool supports(char32_t ch) const noexcept override { return true; }
+
+  Metrics metrics() const override;
 };

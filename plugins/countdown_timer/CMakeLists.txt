@@ -13,8 +13,6 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME CountdownTimerPluginFactory
     gui/timer_settings_widget.ui
     impl/countdown_timer.cpp
     impl/countdown_timer.hpp
-    impl/countdown_timer_plugin_impl.cpp
-    impl/countdown_timer_plugin_impl.hpp
     impl/countdown_timer_settings.cpp
     impl/countdown_timer_settings.hpp
     impl/utilities.cpp

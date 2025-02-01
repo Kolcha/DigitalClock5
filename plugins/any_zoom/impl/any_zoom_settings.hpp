@@ -6,17 +6,17 @@
 
 #pragma once
 
-#include "config/settings_storage.hpp"
+#include "common/config_base.hpp"
 
-namespace plugin_impl {
+namespace any_zoom {
 
-class AnyZoomPluginSettings : public SettingsStorageClient {
+class AnyZoomPluginInstanceConfig : public ConfigBase
+{
 public:
-  explicit AnyZoomPluginSettings(ISettingsStorage& st)
-      : SettingsStorageClient("AnyZoom", st) {}
+  using ConfigBase::ConfigBase;
 
-  CONFIG_OPTION_Q(int, ZoomX, 125)
-  CONFIG_OPTION_Q(int, ZoomY, 125)
+  CONFIG_OPTION(ZoomX, "zoom_x", int, 125)
+  CONFIG_OPTION(ZoomY, "zoom_y", int, 125)
 };
 
-} // namespace plugin_impl
+} // namespace any_zoom

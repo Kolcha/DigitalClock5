@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtCompilerDetection>
 
 #if defined(PLUGIN_CORE_LIBRARY)
 #define PLUGIN_CORE_EXPORT Q_DECL_EXPORT

@@ -6,42 +6,48 @@
 
 #pragma once
 
-#include "widget_plugin_base.hpp"
+#include "plugin/text/skinned_text_plugin_base.hpp"
 
-class QuickNotePlugin : public WidgetPluginBase
+using namespace plugin::text;
+
+class QuickNotePlugin : public TextPluginInstanceBase
 {
   Q_OBJECT
 
 public:
-  void initState(StateClient* st) override;
+  QuickNotePlugin(const PluginInstanceConfig& cfg, std::unique_ptr<SettingsStorage> st);
+
+  void startup() override;
 
 protected:
-  QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) override;
+  QString text() const override { return _last_text; }
 
-  std::shared_ptr<GraphicsWidgetBase> createWidget() override;
-  void destroyWidget() override;
+  SkinnedTextWidget* createWidget(QWidget* parent) const override;
 
 private slots:
   void onWidgetClicked();
 
 private:
   QString _last_text;
-  StateClient* _state = nullptr;
-  std::shared_ptr<GraphicsTextWidget> _widget;
+  std::unique_ptr<SettingsStorage> _st;
 };
 
 
-class QuickNotePluginFactory : public ClockPluginFactory
+class QuickNotePluginFactory : public TextPluginBase
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "quick_note.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "quick_note.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
-
-  QString title() const override { return tr("Quick note"); }
+  QString name() const override { return tr("Quick note"); }
   QString description() const override;
 
-  bool perClockInstance() const noexcept override { return true; }
+protected:
+  Instance createInstance(size_t idx) const override
+  {
+    return std::make_unique<QuickNotePlugin>(*instanceConfig(idx), instanceState(idx));
+  }
+
+  QVector<QWidget*> configPagesBeforeCommonPages() override;
 };

@@ -7,16 +7,13 @@
 #include "timer_settings_widget.hpp"
 #include "ui_timer_settings_widget.h"
 
-TimerSettingsWidget::TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                                         StopwatchPluginImpl* impl, QWidget* parent)
+namespace timetracker {
+
+TimerSettingsWidget::TimerSettingsWidget(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::TimerSettingsWidget)
-    , cfg(s)
-    , impl(impl)
 {
   ui->setupUi(this);
-
-  ui->hide_if_inactive->setChecked(cfg.getHideInactive());
 }
 
 TimerSettingsWidget::~TimerSettingsWidget()
@@ -24,9 +21,20 @@ TimerSettingsWidget::~TimerSettingsWidget()
   delete ui;
 }
 
+void TimerSettingsWidget::initControls(StopwatchInstanceConfig* icfg)
+{
+  Q_ASSERT(icfg);
+  cfg = icfg;
+
+  QSignalBlocker _(this);
+
+  ui->hide_if_inactive->setChecked(cfg->getHideInactive());
+}
+
 void TimerSettingsWidget::on_hide_if_inactive_clicked(bool checked)
 {
-  cfg.setHideInactive(checked);
-  impl->hide_inactive = checked;
-  impl->applySettings();
+  cfg->setHideInactive(checked);
+  emit optionChanged(HideInactive, checked);
 }
+
+} // namespace timetracker

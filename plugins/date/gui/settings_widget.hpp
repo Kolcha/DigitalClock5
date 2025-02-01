@@ -8,8 +8,9 @@
 
 #include <QWidget>
 
-#include "impl/date_plugin_impl.hpp"
 #include "impl/date_settings.hpp"
+
+namespace plugin::date {
 
 namespace Ui {
 class SettingsWidget;
@@ -20,9 +21,13 @@ class SettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  SettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                 DatePluginImpl* impl, QWidget* parent = nullptr);
+  SettingsWidget(QWidget* parent = nullptr);
   ~SettingsWidget();
+
+  void initControls(DatePluginInstanceConfig* icfg);
+
+signals:
+  void dateFormatChanged();
 
 private slots:
   void on_sys_format_rbtn_clicked();
@@ -34,6 +39,7 @@ private slots:
 
 private:
   Ui::SettingsWidget* ui;
-  plugin_impl::DatePluginSettings cfg;
-  DatePluginImpl* impl;
+  DatePluginInstanceConfig* cfg = nullptr;
 };
+
+} // namespace plugin::date

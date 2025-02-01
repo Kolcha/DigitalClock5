@@ -6,40 +6,47 @@
 
 #pragma once
 
-#include "clock_plugin.hpp"
+#include "plugin/clock_plugin.hpp"
 
-class RandomPositionPlugin : public ClockPluginBase, public WindowAccessExtension
+#include <QPoint>
+
+class RandomPositionPlugin : public ClockPluginInstance, public WidgetAccess
 {
   Q_OBJECT
 
 public:
-  void initWindow(QWidget* wnd) override;
+  void init(QWidget* wnd) override;
 
 public slots:
-  void init() override;
+  void startup() override;
   void shutdown() override;
 
-  void tick() override;
+  void update(const QDateTime& dt) override;
 
 private:
-  bool _is_active = false;
   QWidget* _wnd = nullptr;
   QPoint _last_pos;
   int _interval_counter = 60;
 };
 
 
-class RandomPositionPluginFactory : public ClockPluginFactory
+class RandomPositionPluginFactory : public ClockPlugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "random_position.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "random_position.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
+  void init(Context&& ctx) override {}
 
-  QString title() const override { return tr("Random position"); }
+  QString name() const override { return tr("Random position"); }
   QString description() const override;
 
-  bool perClockInstance() const override { return true; }
+  ClockPluginInstance* instance(size_t idx) override;
+
+public slots:
+  void configure(QWidget* parent, size_t idx) override {}
+
+private:
+  std::map<size_t, std::unique_ptr<RandomPositionPlugin>> _insts;
 };

@@ -8,8 +8,9 @@
 
 #include <QWidget>
 
-#include "impl/stopwatch_plugin_impl.hpp"
 #include "impl/stopwatch_settings.hpp"
+
+namespace timetracker {
 
 namespace Ui {
 class HotkeysSettingsWidget;
@@ -20,9 +21,13 @@ class HotkeysSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit HotkeysSettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                                 StopwatchPluginImpl* impl, QWidget* parent = nullptr);
+  explicit HotkeysSettingsWidget(QWidget* parent = nullptr);
   ~HotkeysSettingsWidget();
+
+  void initControls(StopwatchInstanceConfig* icfg);
+
+signals:
+  void optionChanged(Options opt, const QVariant& val);
 
 private slots:
   void on_pause_seq_edit_editingFinished();
@@ -30,6 +35,7 @@ private slots:
 
 private:
   Ui::HotkeysSettingsWidget* ui;
-  plugin_impl::StopwatchPluginSettings cfg;
-  StopwatchPluginImpl* impl;
+  StopwatchInstanceConfig* cfg = nullptr;
 };
+
+} // namespace timetracker

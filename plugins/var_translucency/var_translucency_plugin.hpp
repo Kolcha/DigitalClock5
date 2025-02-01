@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include "clock_plugin.hpp"
+#include "plugin/clock_plugin.hpp"
 
 class OpacityChanger;
 
-class VarTranslucencyPlugin : public ClockPluginBase, public WindowAccessExtension
+class VarTranslucencyPlugin : public ClockPluginInstance, public WidgetAccess
 {
   Q_OBJECT
 
@@ -18,13 +18,13 @@ public:
   VarTranslucencyPlugin();
   ~VarTranslucencyPlugin();
 
-  void initWindow(QWidget* wnd) override;
+  void init(QWidget* wnd) override;
 
 public slots:
-  void init() override;
+  void startup() override;
   void shutdown() override;
 
-  void tick() override;
+  void update(const QDateTime& dt) override;
 
 private:
   QWidget* _wnd = nullptr;
@@ -34,17 +34,23 @@ private:
 };
 
 
-class VarTranslucencyPluginFactory : public ClockPluginFactory
+class VarTranslucencyPluginFactory : public ClockPlugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "var_translucency.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "var_translucency.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
+  void init(Context&& ctx) override {}
 
-  QString title() const override { return tr("Variable translucency"); }
+  QString name() const override { return tr("Variable translucency"); }
   QString description() const override;
 
-  bool perClockInstance() const override { return true; }
+  ClockPluginInstance* instance(size_t idx) override;
+
+public slots:
+  void configure(QWidget* parent, size_t idx) override {}
+
+private:
+  std::map<size_t, std::unique_ptr<VarTranslucencyPlugin>> _insts;
 };

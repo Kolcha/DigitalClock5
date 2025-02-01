@@ -8,21 +8,20 @@
 
 #include <QDialog>
 
-#include "core/plugin_info.hpp"
-
 namespace Ui {
 class PluginInfoDialog;
 }
+
+class PluginHandle;
 
 class PluginInfoDialog : public QDialog
 {
   Q_OBJECT
 
 public:
-  explicit PluginInfoDialog(QWidget* parent = nullptr);
+  explicit PluginInfoDialog(const PluginHandle& ph,
+                            QWidget* parent = nullptr);
   ~PluginInfoDialog();
-
-  void SetInfo(const PluginInfo& info);
 
 private:
   Ui::PluginInfoDialog* ui;

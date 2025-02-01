@@ -5,25 +5,26 @@
 project(PluginCore VERSION 2.1.3 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
+    plugin/text/impl/appearance_settings_widget.cpp
+    plugin/text/impl/appearance_settings_widget.hpp
+    plugin/text/impl/appearance_settings_widget.ui
+    plugin/text/impl/geometry_settings_widget.cpp
+    plugin/text/impl/geometry_settings_widget.hpp
+    plugin/text/impl/geometry_settings_widget.ui
+    plugin/text/impl/settings_dialog.cpp
+    plugin/text/impl/settings_dialog.hpp
+    plugin/text/impl/settings_dialog.ui
+    plugin/text/impl/shared_option_router.cpp
+    plugin/text/impl/shared_option_router.hpp
+    plugin/text/plugin_config.cpp
+    plugin/text/plugin_config.hpp
+    plugin/text/skinned_text_plugin_base.cpp
+    plugin/text/skinned_text_plugin_base.hpp
+    plugin/clock_plugin.cpp
+    plugin/clock_plugin.hpp
+    plugin/plugin_settings.cpp
+    plugin/plugin_settings.hpp
     plugin_core_global.hpp
-    clock_plugin.hpp
-    clock_plugin.cpp
-    settings_bridge.cpp
-    settings_bridge.hpp
-    shared_config_keys.hpp
-    widget_plugin_base.cpp
-    widget_plugin_base.hpp
-    plugin_config.cpp
-    plugin_config.hpp
-    impl/plugin_section_appearance.hpp
-    impl/appearance_settings_widget.cpp
-    impl/appearance_settings_widget.hpp
-    impl/appearance_settings_widget.ui
-    impl/geometry_settings_widget.cpp
-    impl/geometry_settings_widget.hpp
-    impl/geometry_settings_widget.ui
-    impl/widget_plugin_base_impl.cpp
-    impl/widget_plugin_base_impl.hpp
 )
 
 add_win_rc_file(${PROJECT_NAME} plugin_core.rc)

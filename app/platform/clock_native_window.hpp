@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <QtGlobal>
+#include <QtCore/QtSystemDetection>
 
 #if defined(Q_OS_WINDOWS)
 #define HAVE_NATIVE_WIN_IMPL
@@ -20,5 +20,11 @@
 
 #if !defined(HAVE_NATIVE_WIN_IMPL)
 #include "gui/clock_window.hpp"
-using ClockNativeWindow = ClockWindow;
+struct ClockWindow::PlatformData {};
+
+void ClockWindow::platformOneTimeFlags() {}
+void ClockWindow::platformTick() {}
+
+void ClockWindow::platformStayOnTop(bool enabled) { Q_UNUSED(enabled); }
+void ClockWindow::platformFullScreenDetect(bool enabled) { Q_UNUSED(enabled); }
 #endif

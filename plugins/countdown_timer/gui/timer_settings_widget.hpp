@@ -8,8 +8,9 @@
 
 #include <QWidget>
 
-#include "impl/countdown_timer_plugin_impl.hpp"
 #include "impl/countdown_timer_settings.hpp"
+
+namespace countdown_timer {
 
 namespace Ui {
 class TimerSettingsWidget;
@@ -20,9 +21,13 @@ class TimerSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit TimerSettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                               CountdownTimerPluginImpl* impl, QWidget* parent = nullptr);
+  explicit TimerSettingsWidget(QWidget* parent = nullptr);
   ~TimerSettingsWidget();
+
+  void initControls(CountdownTimerInstanceConfig* icfg);
+
+signals:
+  void optionChanged(Options opt, const QVariant& val);
 
 private slots:
   void on_target_time_rbtn_clicked();
@@ -50,6 +55,7 @@ private slots:
 
 private:
   Ui::TimerSettingsWidget* ui;
-  plugin_impl::CountdownTimerPluginSettings cfg;
-  CountdownTimerPluginImpl* impl;
+  CountdownTimerInstanceConfig* cfg;
 };
+
+} // namespace countdown_timer

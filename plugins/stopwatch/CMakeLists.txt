@@ -11,8 +11,7 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME StopwatchPluginFactory
     gui/timer_settings_widget.cpp
     gui/timer_settings_widget.hpp
     gui/timer_settings_widget.ui
-    impl/stopwatch_plugin_impl.cpp
-    impl/stopwatch_plugin_impl.hpp
+    impl/stopwatch_settings.cpp
     impl/stopwatch_settings.hpp
     impl/timetracker.cpp
     impl/timetracker.hpp

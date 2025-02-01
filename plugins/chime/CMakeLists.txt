@@ -7,14 +7,12 @@ project(chime VERSION 2.0.1 LANGUAGES CXX)
 set(CMAKE_AUTORCC ON)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME ChimePluginFactory
-    gui/settings_widget.cpp
-    gui/settings_widget.hpp
-    gui/settings_widget.ui
+    gui/settings_dialog.cpp
+    gui/settings_dialog.hpp
+    gui/settings_dialog.ui
     gui/sound_dialog.cpp
     gui/sound_dialog.hpp
     gui/sound_dialog.ui
-    impl/chime_plugin_impl.cpp
-    impl/chime_plugin_impl.hpp
     impl/chime_settings.hpp
     chime.qrc
     chime_plugin.cpp

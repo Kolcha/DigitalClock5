@@ -6,59 +6,92 @@
 
 #include "date_plugin.hpp"
 
+#include "common/datetime_formatter.hpp"
+
 #include "gui/settings_widget.hpp"
-#include "impl/date_plugin_impl.hpp"
 
-DatePlugin::DatePlugin()
-    : _impl(std::make_unique<DatePluginImpl>())
+namespace {
+
+class DateStringBuilder : public DateTimeStringBuilder
+{
+public:
+  explicit DateStringBuilder(QString& str) noexcept
+    : _str(str)
+  {}
+
+  void addCharacter(char32_t ch) { _str += QString::fromUcs4(&ch, 1); }
+  void addSeparator(char32_t ch) { addCharacter(ch); }
+
+private:
+  QString& _str;
+};
+
+} // namespace
+
+DatePlugin::DatePlugin(const DatePluginInstanceConfig* cfg)
+  : TextPluginInstanceBase(*cfg)
+  , _cfg(cfg)
 {
 }
 
-DatePlugin::~DatePlugin() = default;
-
-void DatePlugin::initSettings(PluginSettingsStorage& st)
+void DatePlugin::startup()
 {
-  _impl->initSettings(st);
-  _impl->updateWidget();
-  WidgetPluginBase::initSettings(st);
+  _last_date = QDateTime::currentDateTime();
+  updateDateFmt();
+  updateDateStr();
+  TextPluginInstanceBase::startup();
 }
 
-void DatePlugin::onTimeChanged(const QDateTime& dt)
+void DatePlugin::update(const QDateTime& dt)
 {
-  _impl->last_dt = dt;
-  if (!_impl->widget)
-    return;
-  if (_impl->widget->currentTimeZone() != dt.timeZone())
-    _impl->widget->setTimeZone(dt.timeZone());
-  _impl->widget->setDateTime(dt);
+  if (dt.date() != _last_date.date()) {
+    _last_date = dt;
+    updateDateStr();
+  }
+  TextPluginInstanceBase::update(dt);
 }
 
-QList<QWidget*> DatePlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
+void DatePlugin::onDateFormatChanged()
 {
-  return { new SettingsWidget(s, t, _impl.get()) };
+  updateDateFmt();
+  updateDateStr();
+  repaintWidget();
 }
 
-std::shared_ptr<GraphicsWidgetBase> DatePlugin::createWidget()
+void DatePlugin::updateDateFmt()
 {
-  _impl->widget = std::make_shared<GraphicsDateTimeWidget>();
-  _impl->widget->setTimeZone(_impl->last_dt.timeZone());
-  _impl->widget->setDateTime(_impl->last_dt);
-  _impl->updateWidget();
-  return _impl->widget;
+  _date_fmt = _cfg->getFormatStr();
+  if (_cfg->getFormatType() == DatePluginInstanceConfig::System) {
+    auto fmt_type = QLocale::LongFormat;
+    if (_cfg->getFormatSys() != fmt_type)
+      fmt_type = QLocale::ShortFormat;
+    _date_fmt = QLocale().dateFormat(fmt_type);
+  }
 }
 
-void DatePlugin::destroyWidget()
+void DatePlugin::updateDateStr()
 {
-  _impl->widget.reset();
+  _date_str.clear();
+  DateStringBuilder builder(_date_str);
+  FormatDateTime(_last_date, _date_fmt, builder);
 }
 
-
-std::unique_ptr<ClockPluginBase> DatePluginFactory::create() const
-{
-  return std::make_unique<DatePlugin>();
-}
 
 QString DatePluginFactory::description() const
 {
   return tr("Allows to display current date under the clock.");
+}
+
+QVector<QWidget*> DatePluginFactory::configPagesBeforeCommonPages()
+{
+  using plugin::date::SettingsWidget;
+  auto page = new SettingsWidget();
+  connect(this, &DatePluginFactory::instanceSwitched, page, [this, page](size_t idx) {
+    page->initControls(qobject_cast<DatePluginInstanceConfig*>(instanceConfig(idx)));
+    if (!hasInstances()) return;
+    disconnect(page, &SettingsWidget::dateFormatChanged, nullptr, nullptr);
+    auto inst = qobject_cast<DatePlugin*>(instance(idx));
+    connect(page, &SettingsWidget::dateFormatChanged, inst, &DatePlugin::onDateFormatChanged);
+  });
+  return { page };
 }

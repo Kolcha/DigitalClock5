@@ -6,46 +6,58 @@
 
 #pragma once
 
-#include "clock_plugin.hpp"
+#include "plugin/clock_plugin.hpp"
 
-class ChimePluginImpl;
+#include "impl/chime_settings.hpp"
+
+using chime::ChimePluginConfig;
 class QMediaPlayer;
 
-class ChimePlugin : public ClockPluginBase, public ConfigurablePlugin
+class ChimePlugin : public ClockPluginInstance
 {
   Q_OBJECT
 
 public:
-  ChimePlugin();
+  ChimePlugin(const ChimePluginConfig& cfg);
   ~ChimePlugin();
 
-  void initSettings(PluginSettingsStorage& st) override;
-
-  QWidget* configure(PluginSettingsStorage& s, StateClient& t) override;
-
 public slots:
-  void init() override;
+  void startup() override;
   void shutdown() override;
 
-  void tick() override;
+  void update(const QDateTime& dt) override;
 
 private:
-  std::unique_ptr<ChimePluginImpl> _impl;
+  bool isQuietTime(const QTime& t) const;
+
+private:
   std::unique_ptr<QMediaPlayer> _player;
+  const ChimePluginConfig& _cfg;
+
+  bool _playback_allowed = false;
 };
 
 
-class ChimePluginFactory : public ClockPluginFactory
+class ChimePluginFactory : public ClockPlugin
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "chime.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "chime.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
+  void init(Context&& ctx) override;
 
-  QString title() const override { return tr("Chime"); }
+  QString name() const override { return tr("Chime"); }
   QString description() const override;
 
-  bool perClockInstance() const noexcept override { return false; }
+  ClockPluginInstance* instance(size_t idx) override;
+
+public slots:
+  void configure(QWidget* parent, size_t idx) override;
+
+private:
+  size_t _first_idx = 0;
+  std::unique_ptr<ChimePluginConfig> _cfg;
+  std::unique_ptr<SettingsStorage> _state;
+  std::unique_ptr<ChimePlugin> _inst;
 };

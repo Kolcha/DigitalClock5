@@ -13,6 +13,15 @@
 
 #include "fullscreen_detect.hpp"
 
+namespace {
+
+// postpone applying window flags for a few ticks
+// it is known that even isVisible() returns true,
+// manipulations on winId() may have no effect...
+static constexpr const int max_ticks = 2;
+
+} // namespace
+
 namespace dc = digital_clock;
 
 // should be called once if stay on top is disabled
@@ -38,21 +47,11 @@ static void SetSurviveWinDHackEnabled(WId winId, bool en)
     SetWindowLongPtr((HWND)winId, GWLP_HWNDPARENT, (LONG_PTR)0);
 }
 
-
-ClockNativeWindow::ClockNativeWindow(QWidget* parent)
-    : ClockWindow(parent)
+void ClockWindow::platformOneTimeFlags()
 {
 }
 
-void ClockNativeWindow::setStayOnTop(bool en)
-{
-  ClockWindow::setStayOnTop(en);
-
-  SetSurviveWinDHackEnabled(winId(), !en);
-  runStayOnTopHacks();
-}
-
-void ClockNativeWindow::runStayOnTopHacks()
+void ClockWindow::platformTick()
 {
   // calling winId() for invisible window causes move event from (0,0) to (289,160)
   // during startup (doesn't matter what saved coordinates were, each time the same),
@@ -62,31 +61,56 @@ void ClockNativeWindow::runStayOnTopHacks()
 
   // unfortunately, fullscreen invisible (transparent) windows may exist... we should ignore them
   // remember all fullscreen windows on app startup or window's screen change and ignore them later
-  if (_last_screen != screen()) {
-    _last_screen = screen();
-    _fullscreen_ignore_list = dc::GetFullscreenWindowsOnSameMonitor(winId());
+  if (_data->last_screen != screen()) {
+    _data->last_screen = screen();
+    _data->fullscreen_ignore_list = dc::GetFullscreenWindowsOnSameMonitor(winId());
   }
 
-  if (!_should_stay_on_top) return;
-
-  if (_detect_fullscreen && dc::IsFullscreenWndOnSameMonitor(winId(), _fullscreen_ignore_list)) {
-    // don't stay above fullscreen windows
-    if ((GetWindowLongPtr((HWND)winId(), GWL_EXSTYLE) & WS_EX_TOPMOST) != 0) {
-      SetWindowPos((HWND)winId(), HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
+  if (_data->should_stay_on_top) {
+    // disable hack required to survive Win+D
+    if (GetWindowLongPtr((HWND)winId(), GWLP_HWNDPARENT) != 0) {
+      SetSurviveWinDHackEnabled(winId(), false);
+    }
+    if (_data->detect_fullscreen && dc::IsFullscreenWndOnSameMonitor(winId(), _data->fullscreen_ignore_list)) {
+      // don't stay above fullscreen windows
+      if (windowFlags() & Qt::WindowStaysOnTopHint) {
+        wrap_set_window_flag(this, Qt::WindowStaysOnTopHint, false);
+        lower();
+      }
+    } else {
+      // always on top problem workaround
+      // sometimes Qt somehow loses Qt::WindowStaysOnTopHint window flag, so set it again
+      if (!(windowFlags() & Qt::WindowStaysOnTopHint)) {
+        wrap_set_window_flag(this, Qt::WindowStaysOnTopHint, true);
+      }
+      // sometimes even window have Qt::WindowStaysOnTopHint window flag, it doesn't have WS_EX_TOPMOST flag,
+      // so set it manually using WinAPI...
+      if (!(GetWindowLongPtr((HWND)winId(), GWL_EXSTYLE) & WS_EX_TOPMOST)) {
+        SetWindowPos((HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
+      }
+      // https://forum.qt.io/topic/28739/flags-windows-7-window-always-on-top-including-the-win7-taskbar-custom-error/4
+      if (!isActiveWindow()) raise();
     }
   } else {
-    // always on top problem workaround
-    // sometimes Qt somehow loses Qt::WindowStaysOnTopHint window flag, so set it again
-    if (!(windowFlags() & Qt::WindowStaysOnTopHint)) {
-      setStayOnTop(true);
+    // ensure that window doesn't have WS_EX_TOPMOST flag
+    if (GetWindowLongPtr((HWND)winId(), GWL_EXSTYLE) & WS_EX_TOPMOST) {
+      SetWindowPos((HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
     }
-    // sometimes even window have Qt::WindowStaysOnTopHint window flag, it doesn't have WS_EX_TOPMOST flag,
-    // so set it manually using WinAPI...
-    if ((GetWindowLongPtr((HWND)winId(), GWL_EXSTYLE) & WS_EX_TOPMOST) == 0) {
-      SetWindowPos((HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
+    if (_data->should_apply_win_d_hack && _data->ticks_count++ >= max_ticks) {
+      _data->should_apply_win_d_hack = false;
+      _data->ticks_count = 0;
+      SetSurviveWinDHackEnabled(winId(), true);
     }
-    // keep above the taskbar workaround
-    // https://forum.qt.io/topic/28739/flags-windows-7-window-always-on-top-including-the-win7-taskbar-custom-error/4
-    if (!isActiveWindow()) raise();
   }
+}
+
+void ClockWindow::platformStayOnTop(bool enabled)
+{
+  _data->should_stay_on_top = enabled;
+  _data->should_apply_win_d_hack = !enabled;
+}
+
+void ClockWindow::platformFullScreenDetect(bool enabled)
+{
+  _data->detect_fullscreen = enabled;
 }

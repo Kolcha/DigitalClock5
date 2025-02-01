@@ -15,8 +15,9 @@
 
 #include "gui/hotkeys_settings_widget.hpp"
 #include "gui/timer_settings_widget.hpp"
+#include "impl/utilities.hpp"
 
-class CountdownTimerWidget : public GraphicsTextWidget
+class CountdownTimerWidget : public SkinnedTextWidget
 {
   Q_OBJECT
 
@@ -34,7 +35,7 @@ protected:
 
 
 CountdownTimerWidget::CountdownTimerWidget(QWidget* parent)
-    : GraphicsTextWidget(parent)
+    : SkinnedTextWidget(parent)
 {
 }
 
@@ -43,7 +44,7 @@ void CountdownTimerWidget::mouseReleaseEvent(QMouseEvent* event)
   if (event->button() == Qt::LeftButton) {
     emit clicked();
   }
-  GraphicsTextWidget::mouseReleaseEvent(event);
+  SkinnedTextWidget::mouseReleaseEvent(event);
 }
 
 void CountdownTimerWidget::mouseDoubleClickEvent(QMouseEvent* event)
@@ -51,144 +52,240 @@ void CountdownTimerWidget::mouseDoubleClickEvent(QMouseEvent* event)
   if (event->button() == Qt::LeftButton) {
     emit doubleClicked();
   }
-  GraphicsTextWidget::mouseDoubleClickEvent(event);
+  SkinnedTextWidget::mouseDoubleClickEvent(event);
 }
 
 
-CountdownTimerPlugin::CountdownTimerPlugin()
-    : _impl(std::make_unique<CountdownTimerPluginImpl>())
+CountdownTimerPlugin::CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg)
+    : TextPluginInstanceBase(*cfg)
+    , _cfg(cfg)
 {
 }
 
 CountdownTimerPlugin::~CountdownTimerPlugin() = default;
 
-void CountdownTimerPlugin::initSettings(PluginSettingsStorage& st)
-{
-  _impl->initSettings(st);
-  _impl->updateWidgetText();
-  WidgetPluginBase::initSettings(st);
-}
-
-void CountdownTimerPlugin::accepted()
-{
-  if (_impl->timer)
-    _impl->initTimer();
-  WidgetPluginBase::accepted();
-}
-
-void CountdownTimerPlugin::rejected()
-{
-  WidgetPluginBase::rejected();
-}
-
-void CountdownTimerPlugin::init()
+void CountdownTimerPlugin::startup()
 {
   using countdown_timer::CountdownTimer;
-  _impl->timer = std::make_unique<CountdownTimer>();
+  _timer = std::make_unique<CountdownTimer>();
 
-  connect(_impl->timer.get(), &CountdownTimer::timeLeftChanged, this, &CountdownTimerPlugin::onUpdate);
-  connect(_impl->timer.get(), &CountdownTimer::timeout, this, &CountdownTimerPlugin::onTimeout);
+  connect(_timer.get(), &CountdownTimer::timeLeftChanged, this, &CountdownTimerPlugin::updateWidgetText);
+  connect(_timer.get(), &CountdownTimer::timeout, this, &CountdownTimerPlugin::onTimeout);
 
   _player = std::make_unique<QMediaPlayer>();
 
-  connect(_impl->pause_hotkey.get(), &QHotkey::activated, this, &CountdownTimerPlugin::onWidgetClicked);
-  connect(_impl->restart_hotkey.get(), &QHotkey::activated, this, &CountdownTimerPlugin::onWidgetDblclicked);
+  initTimer();
+  updateWidgetText();
 
-  WidgetPluginBase::init();
+  TextPluginInstanceBase::startup();
 
-  _impl->applySettings();
-  _impl->initTimer();
+  // options may depend on widget
+  namespace cd = countdown_timer;
+  applyTimerOption(cd::HideInactive, _cfg->getHideInactive());
+
+  applyTimerOption(cd::PauseHotkey, _cfg->getPauseHotkey());
+  applyTimerOption(cd::RestartHotkey, _cfg->getRestartHotkey());
 }
 
 void CountdownTimerPlugin::shutdown()
 {
-  if (_impl->timer->isActive())
-    _impl->timer->stop();
+  if (_timer->isActive())
+    _timer->stop();
+
+  _timer.reset();
+  _player.reset();
   // shortcuts must be destroyed explicitly...
   // if not, it causes the crash for some reason
-  _impl->pause_hotkey.reset();
-  _impl->restart_hotkey.reset();
+  _pause_hotkey.reset();
+  _restart_hotkey.reset();
 
-  WidgetPluginBase::shutdown();
+  TextPluginInstanceBase::shutdown();
 }
 
-QList<QWidget*> CountdownTimerPlugin::customConfigure(PluginSettingsStorage& s, StateClient& t)
+void CountdownTimerPlugin::applyTimerOption(countdown_timer::Options opt, const QVariant& val)
 {
-  auto timer_tab = new TimerSettingsWidget(s, t, _impl.get());
-  auto hotkeys_tab = new HotkeysSettingsWidget(s, t, _impl.get());
-  return {timer_tab, hotkeys_tab};
+  auto init_hotkey = [](auto key_seq, auto receiver, auto method) {
+    std::unique_ptr<QHotkey> hotkey;
+    if (!key_seq.isEmpty()) {
+      hotkey = std::make_unique<QHotkey>(QKeySequence(key_seq), true);
+      QObject::connect(hotkey.get(), &QHotkey::activated, receiver, method);
+    }
+    return hotkey;
+  };
+
+  namespace cd = countdown_timer;
+  switch (opt) {
+    case cd::IntervalHours:
+    case cd::IntervalMinutes:
+    case cd::IntervalSeconds:
+
+    case cd::UseTargetDateTime:
+    case cd::TargetDateTime:
+      _timer->stop();
+      initTimer();
+      break;
+
+    case cd::ChimeOnTimeout:
+    case cd::ChimeSoundFile:
+      // implicitly handled
+      break;
+
+    case cd::ShowMessage:
+    case cd::MessageText:
+      // implicitly handled
+      break;
+
+    case cd::HideDaysThreshold:
+    case cd::AlsoHideHours:
+      updateWidgetText();
+      repaintWidget();
+      break;
+
+    case cd::RestartOnDblClick:
+    case cd::RestartOnTimeout:
+      // implicitly handled
+      break;
+
+    case cd::HideInactive:
+      using countdown_timer::CountdownTimer;
+      if (val.toBool()) {
+        connect(_timer.get(), &CountdownTimer::activityChanged, widget(), &QWidget::setVisible);
+        widget()->setVisible(_timer->isActive());
+      } else {
+        disconnect(_timer.get(), &CountdownTimer::activityChanged, widget(), &QWidget::setVisible);
+        widget()->setVisible(true);
+      }
+      break;
+
+    case cd::ReverseCounting:
+      updateWidgetText();
+      repaintWidget();
+      break;
+
+    case cd::PauseHotkey:
+      _pause_hotkey = init_hotkey(val.toString(), this, &CountdownTimerPlugin::pauseTimer);
+      break;
+    case cd::RestartHotkey:
+      _restart_hotkey = init_hotkey(val.toString(), this, &CountdownTimerPlugin::restartTimer);
+      break;
+  }
 }
 
-std::shared_ptr<GraphicsWidgetBase> CountdownTimerPlugin::createWidget()
+SkinnedTextWidget* CountdownTimerPlugin::createWidget(QWidget* parent) const
 {
-  auto w = std::make_shared<CountdownTimerWidget>();
-
-  connect(w.get(), &CountdownTimerWidget::clicked, this, &CountdownTimerPlugin::onWidgetClicked);
-  connect(w.get(), &CountdownTimerWidget::doubleClicked, this, &CountdownTimerPlugin::onWidgetDblclicked);
-
-  _impl->widget = std::move(w);
-  _impl->updateWidgetText();
-  return _impl->widget;
-}
-
-void CountdownTimerPlugin::destroyWidget()
-{
-  _impl->widget.reset();
+  auto w = new CountdownTimerWidget(parent);
+  connect(w, &CountdownTimerWidget::clicked, this, &CountdownTimerPlugin::onWidgetClicked);
+  connect(w, &CountdownTimerWidget::doubleClicked, this, &CountdownTimerPlugin::onWidgetDblclicked);
+  return w;
 }
 
 void CountdownTimerPlugin::onWidgetClicked()
 {
-  if (_impl->timer->isActive()) {
-    _impl->timer->stop();
-  } else {
-    _impl->timer->start();
-  }
+  pauseTimer();
 }
 
 void CountdownTimerPlugin::onWidgetDblclicked()
 {
-  if (_impl->restart_on_dbl_click) {
-    _impl->timer->stop();
-    _impl->initTimer();
-    _impl->timer->start();
+  if (_cfg->getRestartOnDblClick())
+    restartTimer();
+}
+
+void CountdownTimerPlugin::initTimer()
+{
+  if (_cfg->getUseTargetDateTime()) {
+    QDateTime now = QDateTime::currentDateTime();   // TODO: depend on time zone
+    now = now.addMSecs(-now.time().msec());
+    QDateTime target = _cfg->getTargetDateTime();
+    if (target < now) {
+      target = countdown_timer::default_target_date();
+      // settings_->SetOption(OPT_TARGET_DATETIME, target);   // ?
+    }
+    if (target > now) {
+      _timer->setInterval(now.secsTo(target));
+      _timer->start();
+    }
+  } else {
+    qint64 timeout = _cfg->getIntervalSeconds();
+    timeout += 60LL * _cfg->getIntervalMinutes();
+    timeout += 3600LL * _cfg->getIntervalHours();
+    _timer->setInterval(timeout);
   }
 }
 
-void CountdownTimerPlugin::onUpdate()
+void CountdownTimerPlugin::updateWidgetText()
 {
-  _impl->updateWidgetText();
+  qint64 counter = _cfg->getReverseCounting() ? _timer->interval() - _timer->timeLeft() : _timer->timeLeft();
+  _last_text = countdown_timer::format_time(counter, _cfg->getHideDaysThreshold(), _cfg->getAlsoHideHours());
 }
 
 void CountdownTimerPlugin::onTimeout()
 {
-  if (_impl->chime_on_timeout) {
-    _player->setSource(QUrl::fromLocalFile(_impl->chime_sound));
+  if (_cfg->getChimeOnTimeout()) {
+    _player->setSource(QUrl::fromLocalFile(_cfg->getChimeSoundFile()));
     _player->play();
   }
 
-  if (_impl->show_message) {
+  if (_cfg->getShowMessage()) {
     QMessageBox mb(QMessageBox::Warning,
                    tr("Countdown timer"),
-                   _impl->message_text);
+                   _cfg->getMessageText());
     mb.addButton(QMessageBox::Ok)->setFocusPolicy(Qt::ClickFocus);
     mb.exec();
   }
 
-  if (_impl->restart_on_timeout) {
-    _impl->initTimer();
-    _impl->timer->start();
+  if (_cfg->getRestartOnTimeout()) {
+    initTimer();
+    _timer->start();
   }
 }
 
-
-std::unique_ptr<ClockPluginBase> CountdownTimerPluginFactory::create() const
+void CountdownTimerPlugin::pauseTimer()
 {
-  return std::make_unique<CountdownTimerPlugin>();
+  if (_timer->isActive())
+    _timer->stop();
+  else
+    _timer->start();
 }
+
+void CountdownTimerPlugin::restartTimer()
+{
+  _timer->stop();
+  initTimer();
+  _timer->start();
+}
+
 
 QString CountdownTimerPluginFactory::description() const
 {
   return tr("Just a countdown timer.");
+}
+
+QVector<QWidget*> CountdownTimerPluginFactory::configPagesBeforeCommonPages()
+{
+  using countdown_timer::TimerSettingsWidget;
+  auto page = new TimerSettingsWidget();
+  connect(this, &CountdownTimerPluginFactory::instanceSwitched, page, [this, page](size_t idx) {
+    page->initControls(qobject_cast<CountdownTimerInstanceConfig*>(instanceConfig(idx)));
+    if (!hasInstances()) return;
+    disconnect(page, &TimerSettingsWidget::optionChanged, nullptr, nullptr);
+    auto inst = qobject_cast<CountdownTimerPlugin*>(instance(idx));
+    connect(page, &TimerSettingsWidget::optionChanged, inst, &CountdownTimerPlugin::applyTimerOption);
+  });
+  return { page };
+}
+
+QVector<QWidget*> CountdownTimerPluginFactory::configPagesAfterCommonPages()
+{
+  using countdown_timer::HotkeysSettingsWidget;
+  auto page = new HotkeysSettingsWidget();
+  connect(this, &CountdownTimerPluginFactory::instanceSwitched, page, [this, page](size_t idx) {
+    page->initControls(qobject_cast<CountdownTimerInstanceConfig*>(instanceConfig(idx)));
+    if (!hasInstances()) return;
+    disconnect(page, &HotkeysSettingsWidget::optionChanged, nullptr, nullptr);
+    auto inst = qobject_cast<CountdownTimerPlugin*>(instance(idx));
+    connect(page, &HotkeysSettingsWidget::optionChanged, inst, &CountdownTimerPlugin::applyTimerOption);
+  });
+  return { page };
 }
 
 #include "countdown_timer_plugin.moc"

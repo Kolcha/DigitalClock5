@@ -8,15 +8,12 @@
 
 #include "gui/clock_window.hpp"
 
-class ClockNativeWindow : public ClockWindow
-{
-  Q_OBJECT
+struct ClockWindow::PlatformData {
+  QScreen* last_screen = nullptr;
+  QSet<QString> fullscreen_ignore_list;
+  bool should_stay_on_top = false;
+  bool detect_fullscreen = true;
 
-public:
-  explicit ClockNativeWindow(QWidget* parent = nullptr);
-
-public slots:
-  void setStayOnTop(bool en) override;
-
-  void runStayOnTopHacks();
+  bool should_apply_win_d_hack = false;
+  int ticks_count = 0;
 };

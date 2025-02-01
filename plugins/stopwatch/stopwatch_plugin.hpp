@@ -6,51 +6,82 @@
 
 #pragma once
 
-#include "widget_plugin_base.hpp"
+#include "plugin/text/skinned_text_plugin_base.hpp"
 
-#include "impl/stopwatch_plugin_impl.hpp"
+#include <QHotkey>
 
-class StopwatchPlugin : public WidgetPluginBase
+#include "impl/stopwatch_settings.hpp"
+#include "impl/timetracker.hpp"
+
+using timetracker::StopwatchInstanceConfig;
+
+class StopwatchPlugin : public plugin::text::TextPluginInstanceBase
 {
   Q_OBJECT
 
 public:
-  StopwatchPlugin();
+  StopwatchPlugin(const StopwatchInstanceConfig* cfg, size_t idx);
   ~StopwatchPlugin();
 
-  void initSettings(PluginSettingsStorage& st) override;
-
 public slots:
-  void init() override;
+  void startup() override;
   void shutdown() override;
 
-  void tick() override;
+  void update(const QDateTime& dt) override;
+
+  void applyTimerOption(timetracker::Options opt, const QVariant& val);
 
 protected:
-  QList<QWidget*> customConfigure(PluginSettingsStorage& s, StateClient& t) override;
+  QString text() const override { return _last_text; }
 
-  std::shared_ptr<GraphicsWidgetBase> createWidget() override;
-  void destroyWidget() override;
+  SkinnedTextWidget* createWidget(QWidget* parent) const override;
 
 private slots:
   void onWidgetClicked();
 
 private:
-  std::unique_ptr<StopwatchPluginImpl> _impl;
+  void updateWidgetText();
+
+private:
+  std::unique_ptr<timetracker::Timetracker> _tracker;
+
+  const StopwatchInstanceConfig* _cfg;
+  QString _last_text;
+
+  std::unique_ptr<QHotkey> _pause_hotkey;
+  std::unique_ptr<QHotkey> _restart_hotkey;
+
+  // TRICK! dynamic properties names
+  char _last_elapsed_prop[40];
+  char _last_active_prop[40];
 };
 
 
-class StopwatchPluginFactory : public ClockPluginFactory
+class StopwatchPluginFactory : public plugin::text::TextPluginBase
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "stopwatch.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "stopwatch.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
-  std::unique_ptr<ClockPluginBase> create() const override;
-
-  QString title() const override { return tr("Stopwatch"); }
+  QString name() const override { return tr("Stopwatch"); }
   QString description() const override;
 
-  bool perClockInstance() const noexcept override { return true; }
+protected:
+  Instance createInstance(size_t idx) const override
+  {
+    auto cfg = qobject_cast<StopwatchInstanceConfig*>(instanceConfig(idx));
+    Q_ASSERT(cfg);
+    return std::make_unique<StopwatchPlugin>(cfg, idx);
+  }
+
+  std::unique_ptr<plugin::text::PluginConfig> createConfig(
+      std::unique_ptr<PluginSettingsBackend> b) const override
+  {
+    using timetracker::StopwatchPluginConfig;
+    return std::make_unique<StopwatchPluginConfig>(std::move(b));
+  }
+
+  QVector<QWidget*> configPagesBeforeCommonPages() override;
+  QVector<QWidget*> configPagesAfterCommonPages() override;
 };

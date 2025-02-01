@@ -6,46 +6,39 @@
 
 #pragma once
 
-#include "clock_plugin.hpp"
+#include "plugin/text/skinned_text_plugin_base.hpp"
 
-class SamplePlugin : public SettingsPlugin, public ConfigurablePlugin
+using namespace plugin::text;
+
+class SamplePlugin : public TextPluginInstanceBase
 {
   Q_OBJECT
 
 public:
-  SamplePlugin();
+  SamplePlugin(const PluginInstanceConfig& cfg);
   ~SamplePlugin();
 
-  void initSharedSettings(const SharedSettings& s) override;
-
-  void initSettings(PluginSettingsStorage& st) override;
-
-  QWidget* configure(PluginSettingsStorage& s, StateClient& t) override;
-
-public slots:
-  void init() override;
-  void shutdown() override;
-
-  void tick() override;
-
-  void onOptionChanged(cs::SharedConfigKeys opt, const QVariant& val) override;
+protected:
+  QString text() const override { return "Hello from plugin!"; }
 };
 
 
-class SamplePluginFactory : public ClockPluginFactory
+class SamplePluginFactory : public TextPluginBase
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID ClockPluginFactory_iid FILE "sample.json")
-  Q_INTERFACES(ClockPluginFactory)
+  Q_PLUGIN_METADATA(IID ClockPlugin_IId FILE "sample.json")
+  Q_INTERFACES(ClockPlugin)
 
 public:
   SamplePluginFactory();
   ~SamplePluginFactory();
 
-  std::unique_ptr<ClockPluginBase> create() const override;
-
-  QString title() const override { return tr("Sample Plugin"); }
+  QString name() const override { return tr("Sample Plugin"); }
   QString description() const override;
 
-  bool perClockInstance() const override { return false; }
+protected:
+  Instance createInstance(size_t idx) const override
+  {
+    return std::make_unique<SamplePlugin>(*instanceConfig(idx));
+  }
 };

@@ -37,13 +37,13 @@ private:
 VarTranslucencyPlugin::VarTranslucencyPlugin() = default;
 VarTranslucencyPlugin::~VarTranslucencyPlugin() = default;
 
-void VarTranslucencyPlugin::initWindow(QWidget* wnd)
+void VarTranslucencyPlugin::init(QWidget* wnd)
 {
   _wnd = wnd->window();
   _last_opacity = _wnd->windowOpacity();
 }
 
-void VarTranslucencyPlugin::init()
+void VarTranslucencyPlugin::startup()
 {
   _changer = std::make_unique<OpacityChanger>();
   _changer->setOpacity(_last_opacity);
@@ -55,7 +55,7 @@ void VarTranslucencyPlugin::shutdown()
   _wnd->setWindowOpacity(_last_opacity);
 }
 
-void VarTranslucencyPlugin::tick()
+void VarTranslucencyPlugin::update(const QDateTime& dt)
 {
   if (!_changer || !_wnd)
     return;
@@ -66,12 +66,15 @@ void VarTranslucencyPlugin::tick()
 }
 
 
-std::unique_ptr<ClockPluginBase> VarTranslucencyPluginFactory::create() const
-{
-  return std::make_unique<VarTranslucencyPlugin>();
-}
-
 QString VarTranslucencyPluginFactory::description() const
 {
-  return tr("Changes clock opacity level during time.");
+  return tr("Changes clock opacity level with time.");
+}
+
+ClockPluginInstance* VarTranslucencyPluginFactory::instance(size_t idx)
+{
+  auto& inst = _insts[idx];
+  if (!inst)
+    inst = std::make_unique<VarTranslucencyPlugin>();
+  return inst.get();
 }

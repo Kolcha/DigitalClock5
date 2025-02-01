@@ -8,25 +8,36 @@
 
 #include <QDialog>
 
-#include "skin/skin.hpp"
+#include "common/instance_options.hpp"
+#include "config/global_options.hpp"
 
-class Application;
+class ClockApplication;
+class QComboBox;
 
 namespace Ui {
 class SettingsDialog;
 }
+
+class PluginHandle;
 
 class SettingsDialog : public QDialog
 {
   Q_OBJECT
 
 public:
-  explicit SettingsDialog(Application* app, int idx, QWidget* parent = nullptr);
+  explicit SettingsDialog(ClockApplication* app, size_t idx, QWidget* parent = nullptr);
   ~SettingsDialog();
 
 public slots:
   void accept() override;
   void reject() override;
+
+signals:
+  void globalOptionChanged(opt::GlobalOptions opt, const QVariant& val);
+  void instanceOptionChanged(size_t i, opt::InstanceOptions opt, const QVariant& val);
+
+protected:
+  bool event(QEvent* e) override;
 
 private slots:
   void on_import_btn_clicked();
@@ -127,43 +138,31 @@ private slots:
   // misc
   void onCharMarginsChanged();
   void onTextMarginsChanged();
-  void on_ignore_ax_clicked(bool checked);
-  void on_ignore_ay_clicked(bool checked);
+  void on_true_per_char_clicked(bool checked);
+  void on_respect_line_spacing_clicked(bool checked);
   void on_layout_spacing_edit_valueChanged(int arg1);
-
-  // plugins
-  void onPluginStateChanged(const QString& id, bool enabled);
 
 private:
   void initAppGlobalTab();
-  void initGeneralTab(int idx);
-  void initAppearanceTab(int idx);
-  void initMiscTab(int idx);
+  void initGeneralTab(size_t idx);
+  void initAppearanceTab(size_t idx);
+  void initMiscTab(size_t idx);
   void initPluginsTab();
 
   void initControlsState();
+
+  void onPluginStateChanged(PluginHandle ph, bool enabled);
+  void showPluginInfoDialog(const PluginHandle& ph);
 
   void fillLanguagesList();
   void fillUpdatePeriodsList();
   void fillTimeZonesList();
   void fillSkinsList();
-
-  void applySkin(std::shared_ptr<Skin> skin);
-  void applyTimeZoneSettings();
-  void applyColorization();
-  void updateColorization();
-  template<typename Method, typename... Args>
-  void applyWindowOption(Method method, Args&&... args);
-  template<typename Method, typename... Args>
-  void applyClockOption(Method method, Args&&... args);
-
-  template<typename Method, typename... Args>
-  void notifyOptionChanged(Method method, Args&&... args);
-
-  void reloadSettings(std::function<void()> act);
+  void fillTextureTypes(QComboBox* box);
 
 private:
   Ui::SettingsDialog* ui;
-  Application* app;
-  int _curr_idx;
+  ClockApplication* app;
+  size_t _curr_idx;
+  bool _settings_imported = false;
 };

@@ -6,11 +6,13 @@
 
 #pragma once
 
-#include "config/settings_storage.hpp"
-#include "config/custom_converters.hpp"
+#include <QObject>
 
 #include <QTime>
 #include <QUrl>
+
+#include "common/config_base.hpp"
+#include "common/variant_converters.hpp"
 
 namespace chime {
 
@@ -23,65 +25,30 @@ enum Repeat {
 
 Q_ENUM_NS(Repeat)
 
+class ChimePluginConfig : public QObject, public ConfigBase
+{
+  Q_OBJECT
+
+public:
+  using ConfigBase::ConfigBase;
+
+  CONFIG_OPTION(EveryHourEnabled, "every_hour/enabled", bool, true)
+  CONFIG_OPTION(EveryHourSignal, "every_hour/signal", QUrl, QUrl("qrc:/chime/hour_signal.wav"))
+  CONFIG_OPTION(EveryHourVolume, "every_hour/volume", int, 90)
+  CONFIG_OPTION(EveryHourRepeat, "every_hour/repeat", Repeat, Repeat::Once)
+
+  CONFIG_OPTION(QuarterHourEnabled, "quarter_hour/enabled", bool, false)
+  CONFIG_OPTION(QuarterHourSignal, "quarter_hour/signal", QUrl, QUrl("qrc:/chime/quarter_signal.wav"))
+  CONFIG_OPTION(QuarterHourVolume, "quarter_hour/volume", int, 90)
+  CONFIG_OPTION(QuarterHourRepeat, "quarter_hour/repeat", Repeat, Repeat::Once)
+
+  CONFIG_OPTION(QuietHoursEnabled, "quiet_hours/enabled", bool, false)
+  CONFIG_OPTION(QuietHoursStartTime, "quiet_hours/start_time", QTime, QTime(23, 1))
+  CONFIG_OPTION(QuietHoursEndTime, "quiet_hours/end_time", QTime, QTime(6, 59))
+
+public slots:
+  void commit() { storage()->commit(); }
+  void discard() { storage()->discard(); }
+};
+
 } // namespace chime
-
-namespace plugin_impl {
-
-class EveryHourSignalSection : public SettingsStorageClient {
-public:
-  explicit EveryHourSignalSection(ISettingsStorage& st)
-      : SettingsStorageClient("EveryHour", st) {}
-
-  CONFIG_OPTION_Q(bool, Enabled, true);
-  CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/hour_signal.wav"))
-  CONFIG_OPTION_Q(int, Volume, 90)
-  CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
-};
-
-
-class QuarterHourSignalSection : public SettingsStorageClient {
-public:
-  explicit QuarterHourSignalSection(ISettingsStorage& st)
-      : SettingsStorageClient("QuarterHour", st) {}
-
-  CONFIG_OPTION_Q(bool, Enabled, false);
-  CONFIG_OPTION_Q(QUrl, Signal, QUrl("qrc:/chime/quarter_signal.wav"))
-  CONFIG_OPTION_Q(int, Volume, 90)
-  CONFIG_OPTION_Q(chime::Repeat, Repeat, chime::Once)
-};
-
-
-class QuietHoursSection : public SettingsStorageClient {
-public:
-  explicit QuietHoursSection(ISettingsStorage& st)
-      : SettingsStorageClient("QuietHours", st) {}
-
-  CONFIG_OPTION_Q(bool, Enabled, false)
-  CONFIG_OPTION_Q(QTime, StartTime, QTime(23, 1))
-  CONFIG_OPTION_Q(QTime, EndTime, QTime(6, 59))
-};
-
-
-class ChimePluginSettings {
-public:
-  explicit ChimePluginSettings(ISettingsStorage& c)
-      : _eh(c)
-      , _qh(c)
-      , _qhrs(c)
-  {}
-
-  auto& hour() { return _eh; }
-  auto& hour() const { return _eh; }
-  auto& quarter() { return _qh; }
-  auto& quarter() const { return _qh; }
-
-  auto& quietTime() { return _qhrs; }
-  auto& quietTime() const { return _qhrs; }
-
-private:
-  EveryHourSignalSection _eh;
-  QuarterHourSignalSection _qh;
-  QuietHoursSection _qhrs;
-};
-
-} // namespace plugin_impl

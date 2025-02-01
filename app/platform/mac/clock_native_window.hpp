@@ -8,16 +8,12 @@
 
 #include "gui/clock_window.hpp"
 
-class ClockNativeWindow : public ClockWindow
-{
-  Q_OBJECT
+struct ClockWindow::PlatformData {
+  bool should_stay_on_top = false;
+  bool detect_fullscreen = true;
 
-public:
-  explicit ClockNativeWindow(QWidget* parent = nullptr);
-
-public slots:
-  void setStayOnTop(bool en) override;
-
-  void setHiddenInMissionControl(bool en);
-  void setVisibleOnAllDesktops(bool en);
+  bool should_apply_on_top_fullscreen = false;
+  bool should_apply_on_all_desktops = false;
+  bool should_apply_hidden_in_mc = false;
+  int ticks_count = 0;
 };

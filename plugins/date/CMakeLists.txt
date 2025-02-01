@@ -8,8 +8,6 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME DatePluginFactory
     gui/settings_widget.hpp
     gui/settings_widget.cpp
     gui/settings_widget.ui
-    impl/date_plugin_impl.cpp
-    impl/date_plugin_impl.hpp
     impl/date_settings.hpp
     date_plugin.cpp
     date_plugin.hpp

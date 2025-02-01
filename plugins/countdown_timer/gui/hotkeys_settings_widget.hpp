@@ -8,8 +8,9 @@
 
 #include <QWidget>
 
-#include "impl/countdown_timer_plugin_impl.hpp"
 #include "impl/countdown_timer_settings.hpp"
+
+namespace countdown_timer {
 
 namespace Ui {
 class HotkeysSettingsWidget;
@@ -20,9 +21,13 @@ class HotkeysSettingsWidget : public QWidget
   Q_OBJECT
 
 public:
-  explicit HotkeysSettingsWidget(PluginSettingsStorage& s, StateClient& t,
-                                 CountdownTimerPluginImpl* impl, QWidget* parent = nullptr);
+  explicit HotkeysSettingsWidget(QWidget* parent = nullptr);
   ~HotkeysSettingsWidget();
+
+  void initControls(CountdownTimerInstanceConfig* icfg);
+
+signals:
+  void optionChanged(Options opt, const QVariant& val);
 
 private slots:
   void on_pause_seq_edit_editingFinished();
@@ -30,6 +35,7 @@ private slots:
 
 private:
   Ui::HotkeysSettingsWidget* ui;
-  plugin_impl::CountdownTimerPluginSettings cfg;
-  CountdownTimerPluginImpl* impl;
+  CountdownTimerInstanceConfig* cfg = nullptr;
 };
+
+} // namespace countdown_timer

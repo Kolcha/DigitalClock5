@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtCompilerDetection>
 
 #if defined(CLOCK_COMMON_LIBRARY)
 #define CLOCK_COMMON_EXPORT Q_DECL_EXPORT

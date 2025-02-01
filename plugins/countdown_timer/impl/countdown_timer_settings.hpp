@@ -6,43 +6,106 @@
 
 #pragma once
 
-#include "config/settings_storage.hpp"
+#include "plugin/text/plugin_config.hpp"
 
 #include <QDateTime>
 
-namespace plugin_impl {
+namespace countdown_timer {
+
+Q_NAMESPACE
+
+enum Options {
+  IntervalHours,
+  IntervalMinutes,
+  IntervalSeconds,
+
+  UseTargetDateTime,
+  TargetDateTime,
+
+  ChimeOnTimeout,
+  ChimeSoundFile,
+
+  ShowMessage,
+  MessageText,
+
+  HideDaysThreshold,
+  AlsoHideHours,
+
+  RestartOnDblClick,
+  RestartOnTimeout,
+
+  HideInactive,
+
+  ReverseCounting,
+
+  PauseHotkey,
+  RestartHotkey,
+};
+
+Q_ENUM_NS(Options)
 
 QDateTime default_target_date();
 
-class CountdownTimerPluginSettings : public SettingsStorageClient {
+#define PLUGIN_CONFIG_OPTION(type, name)                                                        \
+  void set##name(const type& v) { ConfigBase::setValue(key(name), v); }                         \
+  type get##name() const { return ConfigBase::value(key(name), def_value(name).value<type>()); }
+
+class CountdownTimerInstanceConfig : public plugin::text::PluginInstanceConfig
+{
+  Q_OBJECT
+
 public:
-  explicit CountdownTimerPluginSettings(ISettingsStorage& st)
-      : SettingsStorageClient("CountdownTimer", st) {}
+  using PluginInstanceConfig::PluginInstanceConfig;
 
-  CONFIG_OPTION_Q(int, IntervalHours, 0)
-  CONFIG_OPTION_Q(int, IntervalMinutes, 0)
-  CONFIG_OPTION_Q(int, IntervalSeconds, 0)
+  bool getUseClockSkinDefault() const noexcept override { return true; }
 
-  CONFIG_OPTION_Q(bool, UseTargetDateTime, true)
-  CONFIG_OPTION_Q(QDateTime, TargetDateTime, default_target_date())
+  PLUGIN_CONFIG_OPTION(int, IntervalHours)
+  PLUGIN_CONFIG_OPTION(int, IntervalMinutes)
+  PLUGIN_CONFIG_OPTION(int, IntervalSeconds)
 
-  CONFIG_OPTION_Q(bool, ChimeOnTimeout, false)
-  CONFIG_OPTION_Q(QString, ChimeSoundFile, QString())
+  PLUGIN_CONFIG_OPTION(bool, UseTargetDateTime)
+  PLUGIN_CONFIG_OPTION(QDateTime, TargetDateTime)
 
-  CONFIG_OPTION_Q(bool, ShowMessage, false)
-  CONFIG_OPTION_Q(QString, MessageText, QString())
+  PLUGIN_CONFIG_OPTION(bool, ChimeOnTimeout)
+  PLUGIN_CONFIG_OPTION(QString, ChimeSoundFile)
 
-  CONFIG_OPTION_Q(int, HideDaysThreshold, 0)
-  CONFIG_OPTION_Q(bool, AlsoHideHours, false)
+  PLUGIN_CONFIG_OPTION(bool, ShowMessage)
+  PLUGIN_CONFIG_OPTION(QString, MessageText)
 
-  CONFIG_OPTION_Q(bool, RestartOnDblClick, false)
-  CONFIG_OPTION_Q(bool, RestartOnTimeout, false)
+  PLUGIN_CONFIG_OPTION(int, HideDaysThreshold)
+  PLUGIN_CONFIG_OPTION(bool, AlsoHideHours)
 
-  CONFIG_OPTION_Q(QString, PauseHotkey, QString())
-  CONFIG_OPTION_Q(QString, RestartHotkey, QString())
+  PLUGIN_CONFIG_OPTION(bool, RestartOnDblClick)
+  PLUGIN_CONFIG_OPTION(bool, RestartOnTimeout)
 
-  CONFIG_OPTION_Q(bool, HideInactive, false)
-  CONFIG_OPTION_Q(bool, ReverseCounting, false)
+  PLUGIN_CONFIG_OPTION(bool, HideInactive)
+
+  PLUGIN_CONFIG_OPTION(bool, ReverseCounting)
+
+  PLUGIN_CONFIG_OPTION(QString, PauseHotkey)
+  PLUGIN_CONFIG_OPTION(QString, RestartHotkey)
+
+private:
+  static QString key(Options o);
+  static QVariant def_value(Options o);
 };
 
-} // namespace plugin_impl
+#undef PLUGIN_CONFIG_OPTION
+
+
+class CountdownTimerPluginConfig : public plugin::text::PluginConfig
+{
+  Q_OBJECT
+
+public:
+  using PluginConfig::PluginConfig;
+
+protected:
+  std::unique_ptr<plugin::text::PluginInstanceConfig>
+  createInstanceImpl(std::unique_ptr<SettingsStorage> st) const override
+  {
+    return std::make_unique<CountdownTimerInstanceConfig>(std::move(st));
+  }
+};
+
+} // namespace countdown_timer

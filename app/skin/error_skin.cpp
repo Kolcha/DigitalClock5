@@ -1,61 +1,74 @@
-/*
- * SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
+// SPDX-FileCopyrightText: 2025 Nick Korotysh <nick.korotysh@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "error_skin.hpp"
 
-#include <QFontDatabase>
-#include <QPainter>
+#include <QtGui/QFontDatabase>
+#include <QtGui/QFontMetrics>
+#include <QtGui/QPainter>
 
 namespace {
 
-class ErrorGlyph : public Skin::Glyph
+constexpr const int base_w = 40;
+constexpr const int base_h = 80;
+
+class ErrorRenderable : public Renderable
 {
 public:
-  explicit ErrorGlyph(bool vis) noexcept
-      : _r(0, 0, 240, 100)
-      , _vis(vis)
+  explicit ErrorRenderable(int n) noexcept
+    : _r(0, -base_h, n * base_w, base_h)
   {}
 
-  QRectF rect() const override { return _r; }
-  QPointF advance() const override { return {_r.width(), -_r.height()}; }
+  QRectF geometry() const noexcept override { return _r; }
 
   void draw(QPainter* p) const override;
 
 private:
   QRectF _r;
-  bool _vis = true;
 };
 
-void ErrorGlyph::draw(QPainter* p) const
+void ErrorRenderable::draw(QPainter* p) const
 {
-  p->save();
-  p->drawRoundedRect(_r.marginsRemoved({5, 5, 5, 5}), 8, 8);
+  auto pen = p->pen();
+  pen.setWidth(2);
+  pen.setCapStyle(Qt::RoundCap);
+  pen.setJoinStyle(Qt::RoundJoin);
+  p->setPen(pen);
+
+  auto r = _r.adjusted(2, 2, -2, -2);
+  p->drawRect(r);
+
   auto fnt = QFontDatabase::systemFont(QFontDatabase::FixedFont);
-  p->setPen(QColor(0x8C, 0x8A, 0xFF));
-  fnt.setPointSize(14);
+  fnt.setPointSize(12);
   p->setFont(fnt);
-  p->drawText(_r.adjusted(0, 10, 0, -(_r.height() - 10 - 20)), "Digital Clock 5", {Qt::AlignCenter});
-  if (_vis) {
-    fnt.setPointSize(36);
-    p->setPen(QColor(0xF0, 0x40, 0x58));
-    p->setFont(fnt);
-    p->drawText(_r, "ERROR", {Qt::AlignCenter});
+
+  QString txt = "Error";
+  QFontMetricsF fm(fnt);
+  if (r.width() > 1.2*fm.boundingRect(txt).width()) {
+    p->drawText(r, txt, {Qt::AlignCenter});
+  } else {
+    p->drawLine(r.topLeft(), r.bottomRight());
+    p->drawLine(r.bottomLeft(), r.topRight());
   }
-  fnt.setPointSize(14);
-  p->setFont(fnt);
-  p->drawText(_r.adjusted(0, _r.height() - 10 - 20, 0, -10), "Skin Not Loaded", {Qt::AlignCenter});
-  p->restore();
 }
 
 } // namespace
 
-std::shared_ptr<Skin::Glyph> ErrorSkin::create(char32_t c) const
+std::unique_ptr<Renderable> ErrorSkin::draw(const QString& str) const
 {
-  if (c == ':' || c == ' ') {
-    return std::make_shared<ErrorGlyph>(c == ':');
-  }
-  return nullptr;
+  auto er = std::make_unique<ErrorRenderable>(str.toUcs4().size());
+  auto sr = std::make_unique<SkinRenderable>(std::move(er));
+  sr->setTexture(texture(), textureRules());
+  sr->setBackground(background(), backgroundRules());
+  return sr;
+}
+
+Skin::Metrics ErrorSkin::metrics() const
+{
+  return {
+    .ascent = base_h,
+    .descent = 0,
+    .line_spacing = base_h,
+  };
 }

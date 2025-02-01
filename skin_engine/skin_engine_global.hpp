@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtCompilerDetection>
 
 #if defined(SKIN_ENGINE_LIBRARY)
 #define SKIN_ENGINE_EXPORT Q_DECL_EXPORT

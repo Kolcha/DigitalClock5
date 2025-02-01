@@ -9,27 +9,25 @@
 #include <QScreen>
 #include <QWidget>
 
-void RandomPositionPlugin::initWindow(QWidget* wnd)
+void RandomPositionPlugin::init(QWidget* wnd)
 {
   _wnd = wnd->window();
   _last_pos = _wnd->pos();
 }
 
-void RandomPositionPlugin::init()
+void RandomPositionPlugin::startup()
 {
   std::srand(std::time(0));
-  _is_active = true;
 }
 
 void RandomPositionPlugin::shutdown()
 {
-  _is_active = false;
   _wnd->move(_last_pos);
 }
 
-void RandomPositionPlugin::tick()
+void RandomPositionPlugin::update(const QDateTime& dt)
 {
-  if (!_is_active || !_wnd || _interval_counter-- > 0)
+  if (!_wnd || _interval_counter-- > 0)
     return;
 
   _interval_counter = std::rand() % 600 + 60;
@@ -43,12 +41,15 @@ void RandomPositionPlugin::tick()
 }
 
 
-std::unique_ptr<ClockPluginBase> RandomPositionPluginFactory::create() const
-{
-  return std::make_unique<RandomPositionPlugin>();
-}
-
 QString RandomPositionPluginFactory::description() const
 {
-  return tr("Randomly changes clock position during time.");
+  return tr("Randomly changes clock position with time.");
+}
+
+ClockPluginInstance* RandomPositionPluginFactory::instance(size_t idx)
+{
+  auto& inst = _insts[idx];
+  if (!inst)
+    inst = std::make_unique<RandomPositionPlugin>();
+  return inst.get();
 }

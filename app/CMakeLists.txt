@@ -5,60 +5,64 @@
 project(${CLOCK_PROJECT_NAME} VERSION ${CLOCK_VERSION} LANGUAGES CXX)
 
 qt_add_executable(${PROJECT_NAME}
-    main.cpp
-    config/config_sections.hpp
-    config/config_sections.cpp
-    config/app_config.hpp
     config/app_config.cpp
+    config/app_config.hpp
+    config/app_state.cpp
+    config/app_state.hpp
     config/dc4_to_dc5.cpp
     config/dc4_to_dc5.hpp
+    config/dc5_legacy.cpp
+    config/dc5_legacy.hpp
+    config/global_options.hpp
     config/serialization.cpp
     config/serialization.hpp
-    gui/clock_window.hpp
-    gui/clock_window.cpp
-    core/application.hpp
-    core/application.cpp
-    core/skin_manager.hpp
-    core/skin_manager.cpp
-    gui/clock_icon_engine.hpp
-    gui/clock_icon_engine.cpp
-    gui/clock_tray_icon.hpp
-    gui/clock_tray_icon.cpp
-    core/update_checker.hpp
-    core/update_checker.cpp
-    core/build_date.hpp
+    config/settings_backend_impl.cpp
+    config/settings_backend_impl.hpp
     core/build_date.cpp
-    gui/logo_label.hpp
-    gui/logo_label.cpp
-    gui/about_dialog.ui
-    gui/about_dialog.hpp
-    gui/about_dialog.cpp
+    core/build_date.hpp
+    core/clock_application.cpp
+    core/clock_application.hpp
+    core/clock_application_settings.cpp
     core/dialog_manager.hpp
-    gui/settings_dialog.hpp
-    gui/settings_dialog.cpp
-    gui/settings_dialog.ui
-    skin/legacy_skin.hpp
-    skin/legacy_skin.cpp
-    core/plugin_manager.hpp
-    core/plugin_manager.cpp
-    gui/plugin_list_item_widget.cpp
-    gui/plugin_list_item_widget.hpp
-    gui/plugin_list_item_widget.ui
+    core/plugin_manager_impl.cpp
+    core/plugin_manager_impl.hpp
+    core/skin_manager_impl.cpp
+    core/skin_manager_impl.hpp
+    core/translation.cpp
+    core/translation.hpp
+    core/tray_icon_manager_impl.cpp
+    core/tray_icon_manager_impl.hpp
+    core/update_checker.cpp
+    core/update_checker.hpp
+    gui/about_dialog.cpp
+    gui/about_dialog.hpp
+    gui/about_dialog.ui
+    gui/clock_icon_engine.cpp
+    gui/clock_icon_engine.hpp
+    gui/clock_tray_icon.cpp
+    gui/clock_tray_icon.hpp
+    gui/clock_widget.cpp
+    gui/clock_widget.hpp
+    gui/clock_window.cpp
+    gui/clock_window.hpp
+    gui/logo_label.cpp
+    gui/logo_label.hpp
     gui/plugin_info_dialog.cpp
     gui/plugin_info_dialog.hpp
     gui/plugin_info_dialog.ui
-    core/plugin_info.hpp
-    core/settings_change_listener.cpp
-    core/settings_change_listener.hpp
-    gui/plugin_settings_dialog.hpp
-    gui/plugin_settings_dialog.cpp
-    gui/plugin_settings_dialog.ui
-    core/translation.cpp
-    core/translation.hpp
-    gui/overlay_widget.cpp
-    gui/overlay_widget.hpp
+    gui/plugin_list_item_widget.cpp
+    gui/plugin_list_item_widget.hpp
+    gui/plugin_list_item_widget.ui
+    gui/settings_dialog.cpp
+    gui/settings_dialog.hpp
+    gui/settings_dialog.ui
     skin/error_skin.cpp
     skin/error_skin.hpp
+    skin/legacy_skin.cpp
+    skin/legacy_skin.hpp
+    skin/time_renderer.cpp
+    skin/time_renderer.hpp
+    main.cpp
 )
 
 set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")

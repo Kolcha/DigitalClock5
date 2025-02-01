@@ -7,13 +7,13 @@
 #include "clock_tray_icon.hpp"
 
 #include <QLocale>
-#include <QTimer>
 
 #include "clock_icon_engine.hpp"
 
-inline bool compareTime(const QTime& t1, const QTime& t2) noexcept
+inline bool minuteChanged(const QTime& t1, const QTime& t2) noexcept
 {
-  return t1.hour() == t2.hour() && t1.minute() == t2.minute();
+  // hour should also be checked to handle time zone change
+  return t1.minute() != t2.minute() || t1.hour() != t2.hour();
 }
 
 ClockTrayIcon::ClockTrayIcon(QObject* parent)
@@ -26,9 +26,9 @@ ClockTrayIcon::ClockTrayIcon(QObject* parent)
           this, &ClockTrayIcon::onSystemThemeChanged);
 #endif
   updateIcon();
-  auto timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this, &ClockTrayIcon::updateIcon);
-  timer->start(1000);
+
+  connect(&m_timer, &QTimer::timeout, this, &ClockTrayIcon::updateIcon);
+  resumeUpdating();
 }
 
 ClockTrayIcon::~ClockTrayIcon()
@@ -39,11 +39,21 @@ ClockTrayIcon::~ClockTrayIcon()
 #endif
 }
 
+void ClockTrayIcon::stopUpdating()
+{
+  m_timer.stop();
+}
+
+void ClockTrayIcon::resumeUpdating()
+{
+  m_timer.start(1000);
+}
+
 void ClockTrayIcon::updateIcon()
 {
   auto now = QTime::currentTime();
 
-  if (compareTime(now, m_last_update))
+  if (!minuteChanged(now, m_last_update))
     return;
 
   repaintIcon();

@@ -1,20 +1,25 @@
-/*
- * SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
- *
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
+// SPDX-FileCopyrightText: 2025 Nick Korotysh <nick.korotysh@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "clock_window.hpp"
 
 #include <QApplication>
 
+#include <QGraphicsColorizeEffect>
+#include <QGridLayout>
 #include <QMenu>
 #include <QScreen>
+
+#include <QPainter>
 
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 
-namespace {
+#include "common/settings.hpp"
+#include "platform/clock_native_window.hpp"
+
+#include "clock_widget.hpp"
 
 // this wrapper function allows to change window flag on runtime as it should be
 // after setWindowFlag() call widget becomes hidden, and must be shown explicitly
@@ -29,31 +34,30 @@ void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set)
   if (aw) aw->activateWindow();
 }
 
+namespace {
+
+static constexpr const char* const ORIGIN_POS_KEY = "origin_pos";
+static constexpr const char* const ANCHOR_POINT_KEY = "anchor_point";
+static constexpr const char* const VISIBILITY_KEY = "visible";
+
 } // namespace
 
 ClockWindow::ClockWindow(QWidget* parent)
-    : QWidget(parent)
+  : QWidget(parent)
+  , _clock(new ClockWidget(this))
+  , _ctx_menu(new QMenu(this))
+  , _data(std::make_unique<PlatformData>())
 {
-  setAttribute(Qt::WA_NativeWindow);
-  setAttribute(Qt::WA_DontCreateNativeAncestors);
+  setWindowFlags(Qt::FramelessWindowHint);
+#ifdef Q_OS_MACOS
+  setWindowFlag(Qt::NoDropShadowWindowHint);
+#endif
+#ifdef Q_OS_WINDOWS
+  setWindowFlag(Qt::Tool);
+#endif
+  setAttribute(Qt::WA_TranslucentBackground);
+  platformOneTimeFlags();
 
-  _layout = new QGridLayout(this);
-  _layout->setSizeConstraint(QLayout::SetFixedSize);
-  _layout->setContentsMargins(0, 0, 0, 0);
-  _layout->setSpacing(0);
-
-  _clock = new GraphicsDateTimeWidget(this);
-  _layout->addWidget(_clock);
-
-  setLayout(_layout);
-
-  // not in layout! resized manually
-  _overlay = new OverlayWidget(this);
-  _overlay->move({0, 0});
-  _overlay->resize(sizeHint());
-
-  using namespace Qt::Literals::StringLiterals;
-  _ctx_menu = new QMenu(this);
   _ctx_menu->addAction(QIcon(":/icons/configure.svg"), tr("Settings"),
                        this, &ClockWindow::settingsDialogRequested);
   addPositionMenu();
@@ -63,27 +67,33 @@ ClockWindow::ClockWindow(QWidget* parent)
   _ctx_menu->addSeparator();
   _ctx_menu->addAction(QIcon(":/icons/application-exit.svg"), tr("Quit"),
                        this, &ClockWindow::appExitRequested);
+
+  auto l = new QGridLayout(this);
+  l->addWidget(_clock);
+
+  l->setSizeConstraint(QLayout::SetFixedSize);
 }
 
-void ClockWindow::addPluginWidget(GraphicsWidgetBase* w, int row, int column,
-                                  int row_span, int column_span)
+ClockWindow::~ClockWindow() = default;
+
+void ClockWindow::saveState(StateStorage& st) const
 {
-  w->setScaling(_sx, _sy);
-  _layout->addWidget(w, row, column, row_span, column_span);
+  st.setValue(ORIGIN_POS_KEY, _last_origin);
+  st.setValue(ANCHOR_POINT_KEY, _anchor_point);
+  st.setValue(VISIBILITY_KEY, isVisible());
 }
 
-void ClockWindow::saveState(State& s) const
+void ClockWindow::loadState(const StateStorage& st)
 {
-  s.setValue("origin", _last_origin);
-  s.setValue("anchor", (int)_anchor_point);
+  _last_origin = st.value(ORIGIN_POS_KEY, _last_origin).toPoint();
+  _anchor_point = st.value(ANCHOR_POINT_KEY, _anchor_point).value<AnchorPoint>();
+  setVisible(st.value(VISIBILITY_KEY, true).toBool());
 }
 
-void ClockWindow::loadState(const State& s)
+void ClockWindow::setAnchorPoint(AnchorPoint ap)
 {
-  // TODO: maybe set default point based on graphics size
-  // as practice shown, it is better to avoid negative Y values :(
-  _last_origin = s.value("origin", _last_origin).toPoint();
-  _anchor_point = (AnchorPoint)s.value("anchor", (int)AnchorLeft).toInt();
+  _anchor_point = ap;
+  updateLastOrigin();
 }
 
 void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
@@ -91,75 +101,67 @@ void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
   auto tpos = pos();
 
   auto sg = screen()->availableGeometry();
+  auto wg = frameGeometry();
 
   if (a & Qt::AlignLeft)
     tpos.setX(sg.left());
   if (a & Qt::AlignHCenter)
-    tpos.setX(sg.center().x() - width()/2);
+    tpos.setX(sg.center().x() - wg.width()/2);
   if (a & Qt::AlignRight)
-    tpos.setX(sg.right() - width());
+    tpos.setX(sg.right() - wg.width());
 
   if (a & Qt::AlignTop)
     tpos.setY(sg.top());
   if (a & Qt::AlignVCenter)
-    tpos.setY(sg.center().y() - height()/2);
+    tpos.setY(sg.center().y() - wg.height()/2);
   if (a & Qt::AlignBottom)
-    tpos.setY(sg.bottom() - height());
+    tpos.setY(sg.bottom() - wg.height());
 
   move(tpos);
   updateLastOrigin();
 }
 
-void ClockWindow::setAnchorPoint(AnchorPoint ap)
+void ClockWindow::setStayOnTop(bool enabled)
 {
-  _anchor_point = ap;
-  emit saveStateRequested();
+  wrap_set_window_flag(this, Qt::WindowStaysOnTopHint, enabled);
+  platformStayOnTop(enabled);
 }
 
-void ClockWindow::setOriginPoint(QPoint origin)
+void ClockWindow::setFullscreenDetectEnabled(bool enabled)
 {
-  _last_origin = std::move(origin);
+  platformFullScreenDetect(enabled);
 }
 
-void ClockWindow::setSnapToEdge(bool enable, int threshold)
+void ClockWindow::setTransparentForMouse(bool enabled)
 {
-  _snap_to_edge = enable;
+  wrap_set_window_flag(this, Qt::WindowTransparentForInput, enabled);
+}
+
+void ClockWindow::setSnapToEdgeEnabled(bool enabled)
+{
+  _snap_to_edge = enabled;
+}
+
+void ClockWindow::setSnapThreshold(int threshold)
+{
   _snap_threshold = threshold;
 }
 
-void ClockWindow::setKeepVisible(bool en)
+void ClockWindow::setPreventOutOfScreenEnabled(bool enabled)
 {
-  _keep_visible = en;
-  updateWindowPos();
+  _keep_visible = enabled;
+  preventOutOfScreenPos();
 }
 
-void ClockWindow::setScaling(qreal sx, qreal sy)
+void ClockWindow::setTransparentOnHoverEnabled(bool enabled)
 {
-  _sx = sx;
-  _sy = sy;
-  const auto& widgets = children();
-  for (auto o : widgets)
-    if (auto w = qobject_cast<GraphicsWidgetBase*>(o))
-      w->setScaling(_sx, _sy);
-  updateGeometry();
-  update();
+  _transparent_on_hover = enabled;
 }
 
-void ClockWindow::setFrameVisible(bool vis)
+void ClockWindow::setOpacityOnHover(qreal opacity)
 {
-  _overlay->setFrameVisible(vis);
+  _opacity_on_hover = opacity;
 }
-
-void ClockWindow::setTransparentOnHover(bool en)
-{
-  _transparent_on_hover = en;
-}
-
-void ClockWindow::setOpacityOnHover(qreal o)
-{
-  _opacity_on_hover = o;
-}
-
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
 void ClockWindow::handleMouseMove(const QPoint& global_pos)
 {
@@ -188,16 +190,45 @@ void ClockWindow::handleMouseMove(const QPoint& global_pos)
   setProperty("dc_mouse_entered", entered);
 }
 #endif
-
-void ClockWindow::setStayOnTop(bool en)
+void ClockWindow::setFrameVisible(bool vis)
 {
-  _should_stay_on_top = en;
-  wrap_set_window_flag(this, Qt::WindowStaysOnTopHint, en);
+  _frame_visible = vis;
+  if (_frame_visible)
+    setContentsMargins(contentsMargins() + QMargins(2, 2, 2, 2));
+  else
+    setContentsMargins(contentsMargins() - QMargins(2, 2, 2, 2));
+  update();
 }
 
-void ClockWindow::setTransparentForInput(bool en)
+void ClockWindow::setColorizationEnabled(bool enabled)
 {
-  wrap_set_window_flag(this, Qt::WindowTransparentForInput, en);
+  if (enabled) {
+    auto e = new QGraphicsColorizeEffect;
+    e->setColor(_colorization_color);
+    e->setStrength(_colorization_strength);
+    setGraphicsEffect(e);
+  } else {
+    setGraphicsEffect(nullptr);
+  }
+}
+
+void ClockWindow::setColorizationColor(const QColor& color)
+{
+  if (auto e = qobject_cast<QGraphicsColorizeEffect*>(graphicsEffect()))
+    e->setColor(color);
+  _colorization_color = color;
+}
+
+void ClockWindow::setColorizationStrength(qreal s)
+{
+  if (auto e = qobject_cast<QGraphicsColorizeEffect*>(graphicsEffect()))
+    e->setStrength(s);
+  _colorization_strength = s;
+}
+
+void ClockWindow::tick()
+{
+  platformTick();
 }
 
 void ClockWindow::contextMenuEvent(QContextMenuEvent* event)
@@ -249,73 +280,30 @@ void ClockWindow::moveEvent(QMoveEvent* event)
 {
   QWidget::moveEvent(event);
   if (!isVisible()) return;
-  if (_keep_visible) updateWindowPos();
+  if (!_is_dragging) preventOutOfScreenPos();
 }
 
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
-  _overlay->resize(event->size());
-  _overlay->raise();  // to make sure that it is always on top
 
   // do not apply anhoring logic during dragging
   if (_is_dragging) return;
 
   // state restore must happen before the first resize event!
   // previous origin and correct anchor point must be known here
-  auto curr_origin = _clock->mapToGlobal(_clock->origin());
-
-  switch (_anchor_point) {
-    case AnchorLeft:
-      move(pos() + _last_origin - curr_origin);
-      break;
-    case AnchorCenter:
-      move(pos() + _last_origin - (curr_origin + QPoint(_clock->advance().x(), 0)/2));
-      break;
-    case AnchorRight:
-      move(pos() + _last_origin - (curr_origin + QPoint(_clock->advance().x(), 0)));
-      break;
-  }
+  auto curr_origin = anchoredOrigin();
+  move(pos() + _last_origin - curr_origin);
 }
 
-void ClockWindow::updateLastOrigin()
+void ClockWindow::paintEvent(QPaintEvent* event)
 {
-  auto curr_origin = _clock->mapToGlobal(_clock->origin());
+  QWidget::paintEvent(event);
 
-  switch (_anchor_point) {
-    case AnchorLeft:
-      _last_origin = curr_origin;
-      break;
-    case AnchorCenter:
-      _last_origin = curr_origin + QPoint(_clock->advance().x(), 0)/2;
-      break;
-    case AnchorRight:
-      _last_origin = curr_origin + QPoint(_clock->advance().x(), 0);
-      break;
-  }
-
-  emit saveStateRequested();
-}
-
-void ClockWindow::updateWindowPos()
-{
-  auto tpos = pos();
-
-  auto sg = screen()->geometry();
-
-  if (tpos.x() < sg.left())
-    tpos.setX(sg.left());
-  if (tpos.x() + width() > sg.right())
-    tpos.setX(sg.right() - width());
-
-  if (tpos.y() < sg.top())
-    tpos.setY(sg.top());
-  if (tpos.y() + height() > sg.bottom())
-    tpos.setY(sg.bottom() - height());
-
-  if (tpos != pos()) {
-    move(tpos);
-    updateLastOrigin();
+  if (_frame_visible) {
+    QPainter p(this);
+    p.setPen(QPen(Qt::red, 2, Qt::DotLine, Qt::SquareCap, Qt::MiterJoin));
+    p.drawRect(rect().adjusted(1, 1, -1, -1));
   }
 }
 
@@ -334,4 +322,56 @@ void ClockWindow::addPositionMenu()
   b_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignLeft); });
   b_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignHCenter); });
   b_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignRight); });
+}
+
+QPoint ClockWindow::anchoredOrigin() const
+{
+  auto curr_origin = _clock->mapToGlobal(_clock->origin());
+  auto wnd_rect = frameGeometry();
+
+  switch (_anchor_point) {
+    case AnchorLeft:
+      curr_origin.setX(wnd_rect.x());
+      break;
+    case AnchorCenter:
+      curr_origin.setX(wnd_rect.center().x());
+      break;
+    case AnchorRight:
+      curr_origin.setX(wnd_rect.x() + wnd_rect.width());
+      break;
+  }
+
+  return curr_origin;
+}
+
+void ClockWindow::updateLastOrigin()
+{
+  _last_origin = anchoredOrigin();
+  emit saveStateRequested();
+}
+
+void ClockWindow::preventOutOfScreenPos()
+{
+  if (!_keep_visible)
+    return;
+
+  auto tpos = pos();
+
+  auto sg = screen()->geometry();
+  auto wg = frameGeometry();
+
+  if (tpos.x() < sg.left())
+    tpos.setX(sg.left());
+  if (tpos.x() + wg.width() > sg.right())
+    tpos.setX(sg.right() - wg.width());
+
+  if (tpos.y() < sg.top())
+    tpos.setY(sg.top());
+  if (tpos.y() + wg.height() > sg.bottom())
+    tpos.setY(sg.bottom() - wg.height());
+
+  if (tpos != pos()) {
+    move(tpos);
+    updateLastOrigin();
+  }
 }

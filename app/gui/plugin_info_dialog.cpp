@@ -9,6 +9,8 @@
 
 #include <QFileInfo>
 
+#include "core/plugin_manager_impl.hpp"
+
 namespace {
 
 QDateTime lastModified(const QString& filename)
@@ -16,16 +18,16 @@ QDateTime lastModified(const QString& filename)
   return QFileInfo(filename).lastModified();
 }
 
-QString copyrightString(const PluginInfo& info)
+QString copyrightString(const PluginHandle& ph)
 {
-  const auto& md = info.metadata;
+  const auto& md = ph.metadata();
 
   if (auto iter = md.find("copyright"); iter != md.end())
     return iter.value().toString();
 
   if (auto iter = md.find("author"); iter != md.end())
     return QString("(c) %1 %2")
-        .arg(lastModified(info.path).date().year())
+        .arg(lastModified(ph.fileName()).date().year())
         .arg(iter.value().toString());
 
   return {};
@@ -33,7 +35,7 @@ QString copyrightString(const PluginInfo& info)
 
 } // namespace
 
-PluginInfoDialog::PluginInfoDialog(QWidget* parent)
+PluginInfoDialog::PluginInfoDialog(const PluginHandle& ph, QWidget* parent)
     : QDialog(parent)
     , ui(new Ui::PluginInfoDialog)
 {
@@ -49,20 +51,17 @@ PluginInfoDialog::PluginInfoDialog(QWidget* parent)
   fnt.setPointSizeF(fnt.pointSizeF() * 5/6);
   ui->description_value->setFont(fnt);
   ui->copyright_label->setFont(fnt);
+
+  ui->icon_label->setPixmap(ph.icon().pixmap(96));
+  ui->name_value->setText(ph.name());
+  ui->version_value->setText(
+      tr("version: %1")
+          .arg(ph.metadata().value("version", tr("unknown")).toString()));
+  ui->description_value->setText(ph.description());
+  ui->copyright_label->setText(copyrightString(ph));
 }
 
 PluginInfoDialog::~PluginInfoDialog()
 {
   delete ui;
-}
-
-void PluginInfoDialog::SetInfo(const PluginInfo& info)
-{
-  ui->icon_label->setPixmap(info.icon);
-  ui->name_value->setText(info.title);
-  ui->version_value->setText(
-      tr("version: %1")
-          .arg(info.metadata.value("version", tr("unknown")).toString()));
-  ui->description_value->setText(info.description);
-  ui->copyright_label->setText(copyrightString(info));
 }

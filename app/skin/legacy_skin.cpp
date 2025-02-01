@@ -6,10 +6,8 @@
 
 #include "legacy_skin.hpp"
 
-#include <QDir>
-#include <QSettings>
-
-#include "skin/image_glyph.hpp"
+#include <QtCore/QDir>
+#include <QtCore/QSettings>
 
 namespace {
 
@@ -19,7 +17,7 @@ constexpr const auto optional_keys = {"s2", "am", "pm"};
 constexpr const auto skin_cfg_file = "skin.ini";
 constexpr const auto geometry_file = "geometry.ini";
 
-std::shared_ptr<ImageGlyphBase> probeImage(const QString& filename)
+std::shared_ptr<GlyphBase> probeImage(const QString& filename)
 {
   // trust file extension, but still verify "reader's" state
   auto ext = QFileInfo(filename).suffix().toLower();
@@ -33,7 +31,7 @@ std::shared_ptr<ImageGlyphBase> probeImage(const QString& filename)
   return nullptr;
 }
 
-using SkinGlyphs = QHash<QLatin1StringView, std::shared_ptr<ImageGlyphBase>>;
+using SkinGlyphs = QHash<QLatin1StringView, std::shared_ptr<GlyphBase>>;
 
 void loadSkinFiles(const LegacySkinLoader::FilesMap& files, SkinGlyphs& glyphs)
 {
@@ -152,7 +150,7 @@ GlyphGeometryRaw parseGlyphGeometry(const QSettings& s)
   return gargs;
 }
 
-void updateGlyphGeometry(ImageGlyphBase& glyph, const GlyphGeometryRaw& gargs)
+void updateGlyphGeometry(GlyphBase& glyph, const GlyphGeometryRaw& gargs)
 {
   const auto& r = glyph.rect();
   qreal x = gargs.x.value_or(r.x());
@@ -238,7 +236,7 @@ std::unique_ptr<Skin> LegacySkinLoader::skin() const
 
   auto add_glyph = [&](char c, QLatin1StringView key) {
     if (auto g = glyphs.value(key, nullptr))
-      skin->addGlyph(c, g);
+      skin->insertGlyph(c, std::move(g));
   };
 
   for (char c = '0'; c <= '9'; c++) {
