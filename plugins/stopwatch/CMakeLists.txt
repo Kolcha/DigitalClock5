@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(stopwatch VERSION 2.0.2 LANGUAGES CXX)
+project(stopwatch VERSION 2.1.0 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME StopwatchPluginFactory
     gui/hotkeys_settings_widget.cpp
