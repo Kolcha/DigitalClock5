@@ -224,6 +224,96 @@ SPDX-License-Identifier: MIT
       <Component Id="cmpF8C2296477B0E309DB7856ABC78E19D7" Directory="dir987EDE4C0530FAAEDD442657B23EA6EB" Guid="{DCC8E54A-D3DF-4707-A257-0F753677E939}">
         <File Id="filBD50125FE8E2D7BF6E0FA5C19A26304D" KeyPath="yes" Source="$(var.MySource)\skins\electronic-italic\skin.ini" />
       </Component>
+      <Component Id="cmpD8C3A74CD8630B51236EB25B894EA31C" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{B6367F35-4B27-4ADC-83B6-F3FD4D6CA125}">
+        <File Id="fil11AB8E1BA0FE51D90AF7EC9AE9F30616" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\0.svg" />
+      </Component>
+      <Component Id="cmp2B1FEFA21070148EC5D4404F32AABFD0" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{3FF76613-E780-4FDE-B8E0-2CAF451D7CA6}">
+        <File Id="fil752DB0E8204727D4F7289B314F03B325" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\1.svg" />
+      </Component>
+      <Component Id="cmp920384A7B9C714BF3A1C8235C1616370" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{7E79B7E3-2C10-4E03-B498-473F5BDA12DD}">
+        <File Id="fil4CB4D248064F33C471543123D14A2D72" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\2.svg" />
+      </Component>
+      <Component Id="cmp1F8036BA115BD2F21B889CB4A95E6E82" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{8FC33981-24F7-4430-8860-5A2C56D9021F}">
+        <File Id="fil26D5AB8410FCDDF030887547852ABA1B" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\3.svg" />
+      </Component>
+      <Component Id="cmp320511354E341E97CDBEA024B0F75FE3" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{FC8B6C1A-C885-4F51-A359-2159B3E0E56C}">
+        <File Id="fil7FC4C85C129CE26FDDAFC9930EA1263A" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\4.svg" />
+      </Component>
+      <Component Id="cmp0DB1B48C00976F38D08656394A2F7F52" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{BBAEFE41-6C06-44E2-B6F9-1238DFEF934F}">
+        <File Id="fil1F6C92E8B703C778B6302C4DD532281A" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\5.svg" />
+      </Component>
+      <Component Id="cmp2A713BA8DF455A4594FF8FDE0CAB12BF" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{BDA59C45-6BC5-4F3E-92D7-306AADA3AD3F}">
+        <File Id="fil8EFACD84AB0E2F26566767CD4A50552C" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\6.svg" />
+      </Component>
+      <Component Id="cmp2934E1C1126107216554AFFD22FBBA2E" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{15D057DF-5470-4D42-A335-95CEF8CD30AB}">
+        <File Id="filCB03B3E6B89E53210CA83AB77114A151" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\7.svg" />
+      </Component>
+      <Component Id="cmp68BCCD1A504D9AEE587ADD41CDF5A8E7" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{8CE233ED-27A9-45B7-AC99-07D6FDCB7834}">
+        <File Id="filE7F1EB3787E942C7A39162F004E0E243" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\8.svg" />
+      </Component>
+      <Component Id="cmp9C279EBBAE1D172A72E0B2551B7C8511" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{DB6C7666-EB7B-4E09-9689-1ECF74308188}">
+        <File Id="fil96854FAF21EF2916B408105BFDEED219" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\9.svg" />
+      </Component>
+      <Component Id="cmpE5AAB78C4BA58B1B71CA30367304DDAD" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{D02AE626-6D53-4E93-818F-ABD9C3D1F7DD}">
+        <File Id="fil98C218AF6914A4AF6D6D8FC51DD8C9AB" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\am.svg" />
+      </Component>
+      <Component Id="cmp9E843AA4CB752F80F254DA99A9CBA84B" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{0BFD2475-2237-4C09-B461-480CD8E1646E}">
+        <File Id="fil338A953BE0B15BD598EE13603D74565B" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\pm.svg" />
+      </Component>
+      <Component Id="cmpB26BDD10534A1EB5866801A199ECE958" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{F6FBA0AC-184E-4214-94C1-4A5576DAB773}">
+        <File Id="filED34ED34CA571B5428CD2A3A5481925B" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\s1.svg" />
+      </Component>
+      <Component Id="cmp4FF444790F8DABF1B50AF4C33DF2FF1F" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{278D6A23-2297-4807-B654-1DF05FF12E0A}">
+        <File Id="fil4E79EE1DECF2CAC3733E2C6C9A0745E3" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\s2.svg" />
+      </Component>
+      <Component Id="cmpF25B8E21BFE8FB498BF71BD73C0B5A68" Directory="dir007BEA0232F037B427BC1FAED9E0C44E" Guid="{97BC3D96-7B62-422D-BB0D-D48AEA34460F}">
+        <File Id="filC7EA3562FC9887FC58032E705939585A" KeyPath="yes" Source="$(var.MySource)\skins\electronic_dc4\skin.ini" />
+      </Component>
+      <Component Id="cmp3A61E4F0A54F72652DE44C1CB7319A70" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{5B109372-4387-4D25-8309-327EBA6376CC}">
+        <File Id="filE277842494A438532D5F2089DB07AEE5" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\0.svg" />
+      </Component>
+      <Component Id="cmpF32D45AF3283F6459EE8058C8F8680B1" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{9E80ADCB-D5F8-4B60-AA80-6F588C6F1C43}">
+        <File Id="filBCC64CFB853B241EF8104A695FAAC940" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\1.svg" />
+      </Component>
+      <Component Id="cmpC1D2DCB3B7F0C5EACDE66B2BDD0FD130" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{34C1D47A-4F4B-43F2-94B7-05B5ECFCAE5B}">
+        <File Id="fil9087410E5EA201580BCD6F00FA13666F" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\2.svg" />
+      </Component>
+      <Component Id="cmpA0983BE964C41E02A0E2E04EB2C712CA" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{96217E0C-18D5-4365-B9FE-F38773C0C867}">
+        <File Id="fil801B4AB59F8FAEFCEE401C917188735C" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\3.svg" />
+      </Component>
+      <Component Id="cmp7565A2584251365F4CA276111D065665" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{4BC4EE53-539B-4F7F-AF06-B829F53BA469}">
+        <File Id="filAF044EF9E6A43D635081C1BBE741882F" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\4.svg" />
+      </Component>
+      <Component Id="cmp3F21AB2CE84ABB06B28E933551BD104B" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{62C63A32-56A4-490C-9743-03F1FDD2392E}">
+        <File Id="fil4EED02FD14B590AD1418C279A6FA1DF4" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\5.svg" />
+      </Component>
+      <Component Id="cmp6B0C49CADBC0D7F13A3DA5936FD1AFB3" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{2F93952D-38AD-4996-8E12-6963CA623999}">
+        <File Id="filBB562EA6D35CE0B8552669A9C2597C49" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\6.svg" />
+      </Component>
+      <Component Id="cmp57B7BB8CED09AC8F4EB2ABDC1A9B3F35" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{F470A23B-2353-431A-B989-5A046ACBD4A9}">
+        <File Id="fil3F790D02E1A4584A4632E0E1AA6CC7F5" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\7.svg" />
+      </Component>
+      <Component Id="cmp54E66221B2E09C6587FD2C71C4B28504" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{148BE87D-A7F7-4C14-8E61-3317445D02EC}">
+        <File Id="fil6A928CC3CD7DDDEAD86E3EA114012B5A" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\8.svg" />
+      </Component>
+      <Component Id="cmpD55D7FDD81830474EE68C284A0905CC8" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{8EC8A782-5A20-4666-A0D1-54189C5B390A}">
+        <File Id="filF28BF62A6049C773B6F7C626311FDBB5" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\9.svg" />
+      </Component>
+      <Component Id="cmpD0E99591D2504E46945E0D3FCEAB383D" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{1D2A670C-BAB0-49A7-8B45-DC2DE06AF06E}">
+        <File Id="fil1B1E7989FCA391CE99A05BABCE77CE73" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\am.svg" />
+      </Component>
+      <Component Id="cmp6489C9C1FAC2D05DA2B909A73F59A5A4" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{78DB6066-DB63-4507-ADF7-E0B4B2927BE7}">
+        <File Id="fil670DE7E5E5D48EC85B46AF4CC853C34A" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\pm.svg" />
+      </Component>
+      <Component Id="cmpB82BCF378598F83B1095D254AB03CF49" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{2D0D2F7A-6892-49E7-85B5-4AE48FBABD48}">
+        <File Id="fil02D4B1E69A6C04D26B11051C0083757C" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\s1.svg" />
+      </Component>
+      <Component Id="cmp67A314B3332B374217040D6A30D374A9" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{68CDFF9A-3611-48E7-A138-86B7408DA4BF}">
+        <File Id="fil612B39B7E81BA3F941057826C78F4FB0" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\s2.svg" />
+      </Component>
+      <Component Id="cmpF56BA9824B73736590BBFF00DE6B0A67" Directory="dir44318F35D591123CC7352B6AFB51F5AF" Guid="{876EF9A8-E367-4E72-95D7-75A0CC1AB35E}">
+        <File Id="fil4C025B80F8C1B756CB1E83B50CB5CA68" KeyPath="yes" Source="$(var.MySource)\skins\electronic_empty_dc4\skin.ini" />
+      </Component>
       <Component Id="cmpF53E30332394194EDB46BE82C399A464" Directory="dirE26BF0C6980A4A150948453724BC24E7" Guid="{D0AFFCC7-2F66-46D1-8F3E-38C8AF423D1B}">
         <File Id="fil26B9303F5150036B9020E06F045F1D25" KeyPath="yes" Source="$(var.MySource)\skins\flipclock-hd\0.png" />
       </Component>
@@ -699,6 +789,11 @@ SPDX-License-Identifier: MIT
   </Fragment>
   <Fragment>
     <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
+      <Directory Id="dir007BEA0232F037B427BC1FAED9E0C44E" Name="electronic_dc4" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
       <Directory Id="dir178E1D0395442E7BD664F8AA7C9E80C3" Name="steel" />
     </DirectoryRef>
   </Fragment>
@@ -710,6 +805,11 @@ SPDX-License-Identifier: MIT
   <Fragment>
     <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
       <Directory Id="dir420529AF9C725D79E4031B194BA27ACB" Name="christmas_tree_r" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
+      <Directory Id="dir44318F35D591123CC7352B6AFB51F5AF" Name="electronic_empty_dc4" />
     </DirectoryRef>
   </Fragment>
   <Fragment>
