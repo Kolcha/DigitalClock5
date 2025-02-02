@@ -20,4 +20,20 @@ qt_add_resources(${PROJECT_NAME} "skins"
         electronic/d.svg
         electronic/e.svg
         electronic/skin.ini
+
+        electronic-empty/0.svg
+        electronic-empty/1.svg
+        electronic-empty/2.svg
+        electronic-empty/3.svg
+        electronic-empty/4.svg
+        electronic-empty/5.svg
+        electronic-empty/6.svg
+        electronic-empty/7.svg
+        electronic-empty/8.svg
+        electronic-empty/9.svg
+        electronic-empty/a.svg
+        electronic-empty/p.svg
+        electronic-empty/d.svg
+        electronic-empty/e.svg
+        electronic-empty/skin.ini
 )

@@ -1,0 +1,6 @@
+<svg width="24" height="108" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(6,6)">
+  <circle id="dp" fill="none" stroke="#2f2f2f" stroke-width="1.5" stroke-opacity="0.1" cx="5.8203" cy="34.781" r="5.8203"/>
+  <use href="#dp" transform="translate(0 26.411)"/>
+  </g>
+</svg>
