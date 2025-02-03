@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 # rewritten the original one, mostly to drop the very annoying
-# warning about too old required CMake vaersion and CPack stuff
+# warning about too old required CMake version and CPack stuff
 
 cmake_minimum_required(VERSION 3.16)
 
