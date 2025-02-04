@@ -76,17 +76,17 @@
         <translation>текстура</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="394"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="408"/>
         <source>solid color</source>
         <translation>сплошной цвет</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="395"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="409"/>
         <source>gradient</source>
         <translation>градиент</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="396"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="410"/>
         <source>pattern</source>
         <translation>паттерн</translation>
     </message>
@@ -117,51 +117,51 @@
         <translation>пользовательский</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="382"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="396"/>
         <source>left</source>
         <comment>alignment</comment>
         <translation>по левому</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="383"/>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="387"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="397"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="401"/>
         <source>center</source>
         <comment>alignment</comment>
         <translation>по центру</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="384"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="398"/>
         <source>right</source>
         <comment>alignment</comment>
         <translation>по правому</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="386"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="400"/>
         <source>top</source>
         <comment>alignment</comment>
         <translation>по верхнему</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="388"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="402"/>
         <source>bottom</source>
         <comment>alignment</comment>
         <translation>по нижнему</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="199"/>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="301"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="202"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="311"/>
         <source>follow system theme</source>
         <translation>следовать системной теме</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="213"/>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="315"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="216"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="325"/>
         <source>stretch instead of tile</source>
         <translation>растянуть вместо замостить</translation>
     </message>
     <message>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="258"/>
-        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="360"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="264"/>
+        <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="373"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Картинки (*.png *.bmp *.jpg)</translation>
     </message>

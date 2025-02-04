@@ -120,12 +120,12 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation>показывать сообщение по истечении времени</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="136"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="137"/>
         <source>Open File</source>
         <translation>Выбор файла</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="138"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="139"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation>Звуки (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
     </message>
