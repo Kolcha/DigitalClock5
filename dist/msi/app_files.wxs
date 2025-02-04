@@ -80,6 +80,9 @@ initial file was generated with the next command:
       <Component Id="cmpDD1F507A49329DF5C1809F83192E389B" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{80983F94-77F2-467A-B063-91280C9E5DB1}">
         <File Id="fil049E952A3524BADC7316C6017CBE7584" KeyPath="yes" Source="$(var.MySource)\plugins\stopwatch.dll" />
       </Component>
+      <Component Id="cmp69918D711C20C91BEB9AC8F20D35C3DA" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{49DA2060-8332-495E-AE95-EAB7A9E841E4}">
+        <File Id="fil32B5AA27EE6EFCA997EE6E2416978CA8" KeyPath="yes" Source="$(var.MySource)\plugins\time_zone.dll" />
+      </Component>
       <Component Id="cmp3A5FB4F133FB057DEDF3A5DCD7C48CD4" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{F0B8AA0A-7C87-462F-829B-B2519A5FEDA4}">
         <File Id="fil05D4DA97CDEF45B64CB3569E03D36D3D" KeyPath="yes" Source="$(var.MySource)\plugins\var_translucency.dll" />
       </Component>
