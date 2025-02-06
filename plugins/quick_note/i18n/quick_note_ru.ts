@@ -9,12 +9,6 @@
         <translation>двойной щелчок здесь!</translation>
     </message>
     <message>
-        <source>Nothing is here!
-Double click the widget to change the text.</source>
-        <translation type="vanished">Здесь ничего нет!
-Сделайте двойной щелчок по виджету чтобы изменить текст.</translation>
-    </message>
-    <message>
         <location filename="../quick_note_plugin.cpp" line="60"/>
         <source>Quick note</source>
         <translation>Быстрая заметка</translation>

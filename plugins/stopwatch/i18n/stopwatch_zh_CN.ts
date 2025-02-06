@@ -47,11 +47,4 @@ Double click to reset/restart.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>timetracker::timetracker::TimerSettingsWidget</name>
-    <message>
-        <source>Timer</source>
-        <translation type="obsolete">计时器</translation>
-    </message>
-</context>
 </TS>

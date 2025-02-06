@@ -15,17 +15,6 @@
     </message>
 </context>
 <context>
-    <name>any_zoom::AnyZoom</name>
-    <message>
-        <source>Any zoom</source>
-        <translation type="vanished">Любое увеличение</translation>
-    </message>
-    <message>
-        <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
-        <translation type="vanished">Позволяет устанавливать любое значение увеличения, даже разные значения по осям X и Y.</translation>
-    </message>
-</context>
-<context>
     <name>any_zoom::ZoomDialog</name>
     <message>
         <location filename="../gui/zoom_dialog.ui" line="14"/>

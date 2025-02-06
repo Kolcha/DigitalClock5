@@ -66,55 +66,6 @@ Click here to download.</source>
     </message>
 </context>
 <context>
-    <name>Application</name>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Configurações</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">Sobre</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Sair</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Posição</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="vanished">Topo</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="vanished">Esquerda</translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="vanished">Meio</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="vanished">Direita</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="vanished">Fundo</translation>
-    </message>
-    <message>
-        <source>%1 Update</source>
-        <translation type="vanished">%1 Atualização</translation>
-    </message>
-    <message>
-        <source>Update available: %1 (%2).
-Click this message to download.</source>
-        <translation type="vanished">Atualização disponível: %1 (%2).
-Clique nesta mensagem para descarregar.</translation>
-    </message>
-</context>
-<context>
     <name>ClockApplication</name>
     <message>
         <location filename="../core/clock_application.cpp" line="263"/>

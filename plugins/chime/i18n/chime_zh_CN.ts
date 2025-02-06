@@ -15,21 +15,6 @@
     </message>
 </context>
 <context>
-    <name>chime::ChimePlugin</name>
-    <message>
-        <source>Chime</source>
-        <translation type="vanished">报时</translation>
-    </message>
-    <message>
-        <source>Chimes with selected period.This plugin replaces all chiming plugins:
-&quot;Every hour signal&quot;, &quot;Quarter of an hour signal&quot;, &quot;Tower clock hour signal&quot;.
-Sounds from these plugins are included as default sounds.</source>
-        <translation type="vanished">在设定的时段进行报时。此插件替换了其他原有的报时插件，包括：
-&quot;Every hour signal&quot;, &quot;Quarter of an hour signal&quot;, &quot;Tower clock hour signal&quot;。
-这些插件的铃声作为默认铃声包含在本插件中。</translation>
-    </message>
-</context>
-<context>
     <name>chime::SettingsDialog</name>
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>

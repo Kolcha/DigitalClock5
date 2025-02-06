@@ -15,17 +15,6 @@
     </message>
 </context>
 <context>
-    <name>any_zoom::AnyZoom</name>
-    <message>
-        <source>Any zoom</source>
-        <translation type="vanished">Qualquer aumento</translation>
-    </message>
-    <message>
-        <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
-        <translation type="vanished">Permite definir um aumento qualquer do relógio, até mesmo valores diferentes para o eixo do X e do Y.</translation>
-    </message>
-</context>
-<context>
     <name>any_zoom::ZoomDialog</name>
     <message>
         <location filename="../gui/zoom_dialog.ui" line="14"/>

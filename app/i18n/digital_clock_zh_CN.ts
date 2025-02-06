@@ -66,55 +66,6 @@ Click here to download.</source>
     </message>
 </context>
 <context>
-    <name>Application</name>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">设置</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">关于</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">退出</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">位置</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="vanished">顶部</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="vanished">左</translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="vanished">中</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="vanished">右</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="vanished">底部</translation>
-    </message>
-    <message>
-        <source>%1 Update</source>
-        <translation type="vanished">%1 更新</translation>
-    </message>
-    <message>
-        <source>Update available: %1 (%2).
-Click this message to download.</source>
-        <translation type="vanished">有可用更新: %1 (%2)
-点击此消息下载。</translation>
-    </message>
-</context>
-<context>
     <name>ClockApplication</name>
     <message>
         <location filename="../core/clock_application.cpp" line="263"/>

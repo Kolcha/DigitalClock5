@@ -67,55 +67,6 @@ Click here to download.</source>
     </message>
 </context>
 <context>
-    <name>Application</name>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Настройки</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">О программе</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Выход</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Расположение</translation>
-    </message>
-    <message>
-        <source>Top</source>
-        <translation type="vanished">Верх</translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="vanished">Лево</translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="vanished">Центр</translation>
-    </message>
-    <message>
-        <source>Right</source>
-        <translation type="vanished">Право</translation>
-    </message>
-    <message>
-        <source>Bottom</source>
-        <translation type="vanished">Низ</translation>
-    </message>
-    <message>
-        <source>%1 Update</source>
-        <translation type="vanished">Обновление %1</translation>
-    </message>
-    <message>
-        <source>Update available: %1 (%2).
-Click this message to download.</source>
-        <translation type="vanished">Доступно обновление: %1 (%2).
-Щелкните здесь чтобы начать загрузку.</translation>
-    </message>
-</context>
-<context>
     <name>ClockApplication</name>
     <message>
         <location filename="../core/clock_application.cpp" line="263"/>
@@ -253,13 +204,6 @@ Click this message to download.</source>
         <location filename="../gui/settings/plugin_info_dialog.cpp" line="57"/>
         <source>unknown</source>
         <translation>неизвестно</translation>
-    </message>
-</context>
-<context>
-    <name>PluginSettingsDialog</name>
-    <message>
-        <source>Instance %1</source>
-        <translation type="vanished">Экземпляр: %1</translation>
     </message>
 </context>
 <context>
@@ -590,14 +534,6 @@ Click this message to download.</source>
         <location filename="../gui/settings/settings_dialog.ui" line="1128"/>
         <source>respect line spacing defined by skin/font</source>
         <translation>соблюдать межстрочный интервал указанный в шрифте/стиле</translation>
-    </message>
-    <message>
-        <source>ignore horizontal spacing defined by characters</source>
-        <translation type="vanished">игнорировать горизонтальные расстояния указанные в свойствах символов</translation>
-    </message>
-    <message>
-        <source>ignore vertical spacing defined by characters</source>
-        <translation type="vanished">игнорировать вертикальные расстояния указанные в свойствах символов</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1137"/>

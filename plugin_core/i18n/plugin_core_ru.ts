@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru" sourcelanguage="en_US">
 <context>
-    <name>WidgetPluginBase</name>
-    <message>
-        <source>Plugin</source>
-        <translation type="vanished">Плагин</translation>
-    </message>
-</context>
-<context>
     <name>plugin::text::impl::AppearanceSettingsWidget</name>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="20"/>
@@ -216,14 +209,6 @@
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="181"/>
         <source>respect line spacing defined by skin/font</source>
         <translation>соблюдать межстрочный интервал указанный в шрифте/стиле</translation>
-    </message>
-    <message>
-        <source>ignore horizontal spacing defined by characters</source>
-        <translation type="vanished">игнорировать горизонтальные расстояния указанные в свойствах символов</translation>
-    </message>
-    <message>
-        <source>ignore vertical spacing defined by characters</source>
-        <translation type="vanished">игнорировать вертикальные расстояния указанные в свойствах символов</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="190"/>

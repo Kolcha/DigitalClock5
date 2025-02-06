@@ -129,31 +129,4 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>countdown_timer::countdown_timer::TimerSettingsWidget</name>
-    <message>
-        <source>Timer</source>
-        <translation type="obsolete">Contador</translation>
-    </message>
-    <message>
-        <source>target time</source>
-        <translation type="obsolete">tempo alvo</translation>
-    </message>
-    <message>
-        <source>interval</source>
-        <translation type="obsolete">intervalo</translation>
-    </message>
-    <message>
-        <source>hours</source>
-        <translation type="obsolete">horas</translation>
-    </message>
-    <message>
-        <source>minutes</source>
-        <translation type="obsolete">minutos</translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="obsolete">segundos</translation>
-    </message>
-</context>
 </TS>

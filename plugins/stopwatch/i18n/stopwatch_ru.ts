@@ -49,30 +49,4 @@ Double click to reset/restart.</source>
         <translation>скрывать неактивный таймер</translation>
     </message>
 </context>
-<context>
-    <name>timetracker::timetracker::HotkeysSettingsWidget</name>
-    <message>
-        <source>Hotkeys</source>
-        <translation type="obsolete">Горячие клавиши</translation>
-    </message>
-    <message>
-        <source>pause timer</source>
-        <translation type="obsolete">приостановить таймер</translation>
-    </message>
-    <message>
-        <source>restart timer</source>
-        <translation type="obsolete">перезапустить таймер</translation>
-    </message>
-</context>
-<context>
-    <name>timetracker::timetracker::TimerSettingsWidget</name>
-    <message>
-        <source>Timer</source>
-        <translation type="obsolete">Таймер</translation>
-    </message>
-    <message>
-        <source>hide timer when it is not active</source>
-        <translation type="obsolete">скрывать неактивный таймер</translation>
-    </message>
-</context>
 </TS>

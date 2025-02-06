@@ -15,21 +15,6 @@
     </message>
 </context>
 <context>
-    <name>chime::ChimePlugin</name>
-    <message>
-        <source>Chime</source>
-        <translation type="vanished">Звуковой сигнал</translation>
-    </message>
-    <message>
-        <source>Chimes with selected period.This plugin replaces all chiming plugins:
-&quot;Every hour signal&quot;, &quot;Quarter of an hour signal&quot;, &quot;Tower clock hour signal&quot;.
-Sounds from these plugins are included as default sounds.</source>
-        <translation type="vanished">Издает звуковой сигнал через определенный период. Данный плагин заменяет все плагины издающие звуки:
-&quot;Сигнал каждый час&quot;, &quot;Сигнал каждые 15 минут&quot;, &quot;Бой башенных часов&quot;.
-Звуки из этих плагинов включены как стандартные.</translation>
-    </message>
-</context>
-<context>
     <name>chime::SettingsDialog</name>
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>

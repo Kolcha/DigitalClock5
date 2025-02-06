@@ -15,17 +15,6 @@
     </message>
 </context>
 <context>
-    <name>any_zoom::AnyZoom</name>
-    <message>
-        <source>Any zoom</source>
-        <translation type="vanished">任意缩放</translation>
-    </message>
-    <message>
-        <source>Allows to set any clock zoom, even different values for X and Y axis.</source>
-        <translation type="vanished">任意缩放时钟尺寸，可设置不同的横纵缩放比例</translation>
-    </message>
-</context>
-<context>
     <name>any_zoom::ZoomDialog</name>
     <message>
         <location filename="../gui/zoom_dialog.ui" line="14"/>

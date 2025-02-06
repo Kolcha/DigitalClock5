@@ -15,21 +15,6 @@
     </message>
 </context>
 <context>
-    <name>chime::ChimePlugin</name>
-    <message>
-        <source>Chime</source>
-        <translation type="vanished">Tocar o Sino</translation>
-    </message>
-    <message>
-        <source>Chimes with selected period.This plugin replaces all chiming plugins:
-&quot;Every hour signal&quot;, &quot;Quarter of an hour signal&quot;, &quot;Tower clock hour signal&quot;.
-Sounds from these plugins are included as default sounds.</source>
-        <translation type="vanished">Toca o sino num período selecionado. Este módulo substitui todos os módulos de sons:
-&quot;Sinal a todas as horas&quot;, &quot;Sinal aos quartos de hora&quot;, &quot;Sinal de torre de relógio&quot;.
-Os sons destes módulos estão incluídos como sons padrão</translation>
-    </message>
-</context>
-<context>
     <name>chime::SettingsDialog</name>
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>
