@@ -56,7 +56,11 @@ protected:
   // default implementation creates SkinnedTextWidget
   // base implementation takes ownership of the created widget
   virtual SkinnedTextWidget* createWidget(QWidget* parent) const;
+  // point when custom config value should be reloaded
+  // called during reloadConfig()
+  virtual void pluginReloadConfig() = 0;
 
+  // enforce widget repainting, uses text() to get new text
   void repaintWidget();
 
   bool eventFilter(QObject* obj, QEvent* e) override;

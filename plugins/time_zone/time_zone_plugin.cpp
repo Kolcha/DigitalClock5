@@ -112,8 +112,6 @@ TimeZonePlugin::TimeZonePlugin(const TimeZonePluginInstanceConfig* cfg)
 void TimeZonePlugin::startup()
 {
   _last_date = QDateTime::currentDateTime();
-  updateTimeZoneFmt();
-  updateTimeZoneStr();
   TextPluginInstanceBase::startup();
 }
 
@@ -131,6 +129,12 @@ void TimeZonePlugin::onTimeZoneFormatChanged()
   updateTimeZoneFmt();
   updateTimeZoneStr();
   repaintWidget();
+}
+
+void TimeZonePlugin::pluginReloadConfig()
+{
+  updateTimeZoneFmt();
+  updateTimeZoneStr();
 }
 
 void TimeZonePlugin::updateTimeZoneFmt()

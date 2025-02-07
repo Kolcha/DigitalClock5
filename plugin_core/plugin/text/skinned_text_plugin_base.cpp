@@ -48,8 +48,6 @@ void TextPluginInstanceBase::startup()
   _widget = createWidget(_clock_wnd);
   _widget->installEventFilter(this);
 
-  _widget_text = text();
-
   reloadConfig();
 }
 
@@ -115,6 +113,8 @@ void TextPluginInstanceBase::applyPluginOption(wpo::InstanceOptions opt, const Q
         applySharedOption(opt::Scaling, _opt_router.value<int>(opt::Scaling));
       break;
     case wpo::PercentOfClockSize: {
+      Q_ASSERT(!_widget_text.isEmpty());
+      Q_ASSERT(!_widget->sizeHint().isEmpty());
       qreal k = val.toInt() / 100.;
       QSize avail_size = availSize();
       switch (_cfg.getWidgetPosition()) {
@@ -282,9 +282,14 @@ void TextPluginInstanceBase::applySharedOption(opt::InstanceOptions opt, const Q
 
 void TextPluginInstanceBase::reloadConfig()
 {
+  if (!_widget) return;
+  pluginReloadConfig();
+  // text may change because of settings change
+  _widget_text = text();
   loadSkinSettings();
   loadAppearanceSettings();
   // widget must be fully configured at this point
+  Q_ASSERT(!_widget_text.isEmpty());
   loadPluginSettings();
 }
 

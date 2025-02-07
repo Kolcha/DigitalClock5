@@ -74,17 +74,7 @@ void CountdownTimerPlugin::startup()
 
   _player = std::make_unique<QMediaPlayer>();
 
-  initTimer();
-  updateWidgetText();
-
   TextPluginInstanceBase::startup();
-
-  // options may depend on widget
-  namespace cd = countdown_timer;
-  applyTimerOption(cd::HideInactive, _cfg->getHideInactive());
-
-  applyTimerOption(cd::PauseHotkey, _cfg->getPauseHotkey());
-  applyTimerOption(cd::RestartHotkey, _cfg->getRestartHotkey());
 }
 
 void CountdownTimerPlugin::shutdown()
@@ -177,6 +167,19 @@ SkinnedTextWidget* CountdownTimerPlugin::createWidget(QWidget* parent) const
   connect(w, &CountdownTimerWidget::clicked, this, &CountdownTimerPlugin::onWidgetClicked);
   connect(w, &CountdownTimerWidget::doubleClicked, this, &CountdownTimerPlugin::onWidgetDblclicked);
   return w;
+}
+
+void CountdownTimerPlugin::pluginReloadConfig()
+{
+  initTimer();
+  updateWidgetText();
+
+  // options may depend on widget
+  namespace cd = countdown_timer;
+  applyTimerOption(cd::HideInactive, _cfg->getHideInactive());
+
+  applyTimerOption(cd::PauseHotkey, _cfg->getPauseHotkey());
+  applyTimerOption(cd::RestartHotkey, _cfg->getRestartHotkey());
 }
 
 void CountdownTimerPlugin::onWidgetClicked()

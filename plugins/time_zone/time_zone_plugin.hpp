@@ -30,6 +30,8 @@ public slots:
 protected:
   QString text() const override { return _tz_str; }
 
+  virtual void pluginReloadConfig() override;
+
 private:
   void updateTimeZoneFmt();
   void updateTimeZoneStr();

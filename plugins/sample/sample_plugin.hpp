@@ -20,6 +20,7 @@ public:
 
 protected:
   QString text() const override { return "Hello from plugin!"; }
+  void pluginReloadConfig() override { /* does nothing */ }
 };
 
 

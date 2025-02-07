@@ -87,13 +87,6 @@ void StopwatchPlugin::startup()
   updateWidgetText();
 
   TextPluginInstanceBase::startup();
-
-  // options may depend on widget
-  namespace cd = timetracker;
-  applyTimerOption(cd::HideInactive, _cfg->getHideInactive());
-
-  applyTimerOption(cd::PauseHotkey, _cfg->getPauseHotkey());
-  applyTimerOption(cd::RestartHotkey, _cfg->getRestartHotkey());
 }
 
 void StopwatchPlugin::shutdown()
@@ -159,6 +152,16 @@ SkinnedTextWidget* StopwatchPlugin::createWidget(QWidget* parent) const
   connect(w, &StopwatchWidget::clicked, this, &StopwatchPlugin::onWidgetClicked);
   connect(w, &StopwatchWidget::doubleClicked, _tracker.get(), &Timetracker::reset);
   return w;
+}
+
+void StopwatchPlugin::pluginReloadConfig()
+{
+  // options may depend on widget
+  namespace cd = timetracker;
+  applyTimerOption(cd::HideInactive, _cfg->getHideInactive());
+
+  applyTimerOption(cd::PauseHotkey, _cfg->getPauseHotkey());
+  applyTimerOption(cd::RestartHotkey, _cfg->getRestartHotkey());
 }
 
 void StopwatchPlugin::onWidgetClicked()

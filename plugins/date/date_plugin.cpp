@@ -37,8 +37,6 @@ DatePlugin::DatePlugin(const DatePluginInstanceConfig* cfg)
 void DatePlugin::startup()
 {
   _last_date = QDateTime::currentDateTime();
-  updateDateFmt();
-  updateDateStr();
   TextPluginInstanceBase::startup();
 }
 
@@ -56,6 +54,12 @@ void DatePlugin::onDateFormatChanged()
   updateDateFmt();
   updateDateStr();
   repaintWidget();
+}
+
+void DatePlugin::pluginReloadConfig()
+{
+  updateDateFmt();
+  updateDateStr();
 }
 
 void DatePlugin::updateDateFmt()

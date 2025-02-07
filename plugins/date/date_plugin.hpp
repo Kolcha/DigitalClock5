@@ -30,6 +30,8 @@ public slots:
 protected:
   QString text() const override { return _date_str; }
 
+  void pluginReloadConfig() override;
+
 private:
   void updateDateFmt();
   void updateDateStr();

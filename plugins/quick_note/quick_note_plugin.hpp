@@ -24,6 +24,8 @@ protected:
 
   SkinnedTextWidget* createWidget(QWidget* parent) const override;
 
+  void pluginReloadConfig() override {}
+
 private slots:
   void onWidgetClicked();
 
