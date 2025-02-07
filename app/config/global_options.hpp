@@ -30,6 +30,8 @@ enum GlobalOptions {
   SnapThreshold,
   PreventOutOfScreen,
 
+  ChangeCursorOnHover,
+
   TransparentOnHover,
   OpacityOnHover,
 

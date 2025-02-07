@@ -53,6 +53,7 @@ private slots:
   void on_enable_stay_on_top_clicked(bool checked);
   void on_fullscreen_detect_clicked(bool checked);
   void on_enable_transp_for_input_clicked(bool checked);
+  void on_should_change_cursor_clicked(bool checked);
 
   void on_snap_to_edges_clicked(bool checked);
   void on_snap_threshold_valueChanged(int arg1);

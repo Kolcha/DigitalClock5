@@ -153,6 +153,12 @@ void ClockWindow::setPreventOutOfScreenEnabled(bool enabled)
   preventOutOfScreenPos();
 }
 
+void ClockWindow::setChangeCursorOnHoverEnabled(bool enabled)
+{
+  _change_cursor_on_hover = enabled;
+  setCursor(enabled ? Qt::OpenHandCursor : Qt::ArrowCursor);
+}
+
 void ClockWindow::setTransparentOnHoverEnabled(bool enabled)
 {
   _transparent_on_hover = enabled;
@@ -242,6 +248,7 @@ void ClockWindow::mousePressEvent(QMouseEvent* event)
   if (event->button() == Qt::LeftButton) {
     _drag_pos = event->globalPosition().toPoint() - frameGeometry().topLeft();
     _is_dragging = true;
+    if (_change_cursor_on_hover) setCursor(Qt::ClosedHandCursor);
     event->accept();
   }
 }
@@ -272,6 +279,7 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
   if (event->button() == Qt::LeftButton) {
     updateLastOrigin();
     _is_dragging = false;
+    if (_change_cursor_on_hover) setCursor(Qt::OpenHandCursor);
     event->accept();
   }
 }

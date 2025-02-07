@@ -43,6 +43,8 @@ public:
   GLOBAL_OPTION(int, SnapThreshold)
   GLOBAL_OPTION(bool, PreventOutOfScreen)
 
+  GLOBAL_OPTION(bool, ChangeCursorOnHover)
+
   GLOBAL_OPTION(bool, TransparentOnHover)
   GLOBAL_OPTION(int, OpacityOnHover)
 

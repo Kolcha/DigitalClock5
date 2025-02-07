@@ -58,6 +58,8 @@ QString GlobalConfig::key(opt::GlobalOptions o)
     case opt::SnapThreshold:            return "behavior/snap_threshold";
     case opt::PreventOutOfScreen:       return "behavior/prevent_out_of_screen";
 
+    case opt::ChangeCursorOnHover:      return "behavior/change_cursor_on_hover";
+
     case opt::TransparentOnHover:       return "behavior/transparent_on_hover";
     case opt::OpacityOnHover:           return "behavior/opacity_on_hover";
 
@@ -89,6 +91,8 @@ QVariant GlobalConfig::def_value(opt::GlobalOptions o)
     case opt::SnapToEdge:               return true;
     case opt::SnapThreshold:            return 15;
     case opt::PreventOutOfScreen:       return true;
+
+    case opt::ChangeCursorOnHover:      return true;
 
     case opt::TransparentOnHover:       return false;
     case opt::OpacityOnHover:           return 15;

@@ -51,6 +51,8 @@ void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVari
     case opt::SnapThreshold:
     case opt::PreventOutOfScreen:
 
+    case opt::ChangeCursorOnHover:
+
     case opt::TransparentOnHover:
     case opt::OpacityOnHover:
       for (const auto& [i, w] : _windows) applyWindowOption(i, opt, val);
@@ -301,6 +303,10 @@ void ClockApplication::applyWindowOption(size_t idx, opt::GlobalOptions opt, con
       break;
     case opt::PreventOutOfScreen:
       wnd->setPreventOutOfScreenEnabled(val.toBool());
+      break;
+
+    case opt::ChangeCursorOnHover:
+      wnd->setChangeCursorOnHoverEnabled(val.toBool());
       break;
 
     case opt::TransparentOnHover:

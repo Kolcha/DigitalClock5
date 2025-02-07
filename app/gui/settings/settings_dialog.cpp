@@ -201,6 +201,12 @@ void SettingsDialog::on_enable_transp_for_input_clicked(bool checked)
   emit globalOptionChanged(opt::TransparentForMouse, checked);
 }
 
+void SettingsDialog::on_should_change_cursor_clicked(bool checked)
+{
+  app->config()->global()->setChangeCursorOnHover(checked);
+  emit globalOptionChanged(opt::ChangeCursorOnHover, checked);
+}
+
 void SettingsDialog::on_snap_to_edges_clicked(bool checked)
 {
   app->config()->global()->setSnapToEdge(checked);
@@ -775,6 +781,7 @@ void SettingsDialog::initAppGlobalTab()
   ui->fullscreen_detect->setVisible(false); // not implemented
 #endif
   ui->enable_transp_for_input->setChecked(gs.getTransparentForMouse());
+  ui->should_change_cursor->setChecked(gs.getChangeCursorOnHover());
 
   ui->snap_to_edges->setChecked(gs.getSnapToEdge());
   ui->snap_threshold->setValue(gs.getSnapThreshold());

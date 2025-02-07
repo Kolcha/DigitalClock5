@@ -98,13 +98,6 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QCheckBox" name="enable_transp_for_input">
-         <property name="text">
-          <string>transparent for mouse events</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0" colspan="2">
         <widget class="QCheckBox" name="enable_autostart">
          <property name="text">
@@ -218,6 +211,20 @@
           </spacer>
          </item>
         </layout>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QCheckBox" name="enable_transp_for_input">
+         <property name="text">
+          <string>transparent for mouse events</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="should_change_cursor">
+         <property name="text">
+          <string>change cursor on mouse hover</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

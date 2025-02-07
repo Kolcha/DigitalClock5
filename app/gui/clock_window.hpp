@@ -42,6 +42,8 @@ public slots:
   void setSnapThreshold(int threshold);
   void setPreventOutOfScreenEnabled(bool enabled);
 
+  void setChangeCursorOnHoverEnabled(bool enabled);
+
   void setTransparentOnHoverEnabled(bool enabled);
   void setOpacityOnHover(qreal opacity);
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
@@ -112,6 +114,8 @@ private:
   int _snap_threshold = 15;
 
   bool _keep_visible = true;
+
+  bool _change_cursor_on_hover = false;
 
   bool _transparent_on_hover = false;
   qreal _opacity_on_hover = 0.15;
