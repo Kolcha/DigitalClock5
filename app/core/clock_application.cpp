@@ -438,27 +438,36 @@ size_t ClockApplication::findWindow(ClockWindow* wnd) const
 void ClockApplication::addPositionMenu()
 {
   auto pos_menu = _tray_menu->addMenu(tr("Position"));
-  auto t_menu = pos_menu->addMenu(tr("Top"));
+  auto t_menu = pos_menu->addMenu(QIcon(":/icons/align/top.svg"), tr("Top"));
   // *INDENT-OFF*
-  t_menu->addAction(tr("Left"),   this, &ClockApplication::moveWindowToPredefinedPos)
+  t_menu->addAction(QIcon(":/icons/align/top-left.svg"), tr("Left"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignLeft));
-  t_menu->addAction(tr("Middle"), this, &ClockApplication::moveWindowToPredefinedPos)
+  t_menu->addAction(QIcon(":/icons/align/top.svg"), tr("Middle"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignHCenter));
-  t_menu->addAction(tr("Right"),  this, &ClockApplication::moveWindowToPredefinedPos)
+  t_menu->addAction(QIcon(":/icons/align/top-right.svg"), tr("Right"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignTop | Qt::AlignRight));
-  auto m_menu = pos_menu->addMenu(tr("Middle"));
-  m_menu->addAction(tr("Left"),   this, &ClockApplication::moveWindowToPredefinedPos)
+  auto m_menu = pos_menu->addMenu(QIcon(":/icons/align/v-center.svg"), tr("Middle"));
+  m_menu->addAction(QIcon(":/icons/align/left.svg"), tr("Left"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignLeft));
-  m_menu->addAction(tr("Middle"), this, &ClockApplication::moveWindowToPredefinedPos)
+  m_menu->addAction(QIcon(":/icons/align/h-center.svg"), tr("Middle"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignHCenter));
-  m_menu->addAction(tr("Right"),  this, &ClockApplication::moveWindowToPredefinedPos)
+  m_menu->addAction(QIcon(":/icons/align/right.svg"), tr("Right"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignVCenter | Qt::AlignRight));
-  auto b_menu = pos_menu->addMenu(tr("Bottom"));
-  b_menu->addAction(tr("Left"),   this, &ClockApplication::moveWindowToPredefinedPos)
+  auto b_menu = pos_menu->addMenu(QIcon(":/icons/align/bottom.svg"), tr("Bottom"));
+  b_menu->addAction(QIcon(":/icons/align/bottom-left.svg"), tr("Left"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignLeft));
-  b_menu->addAction(tr("Middle"), this, &ClockApplication::moveWindowToPredefinedPos)
+  b_menu->addAction(QIcon(":/icons/align/bottom.svg"), tr("Middle"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignHCenter));
-  b_menu->addAction(tr("Right"),  this, &ClockApplication::moveWindowToPredefinedPos)
+  b_menu->addAction(QIcon(":/icons/align/bottom-right.svg"), tr("Right"),
+                    this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignRight));
   // *INDENT-ON*
 }

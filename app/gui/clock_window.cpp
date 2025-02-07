@@ -309,19 +309,30 @@ void ClockWindow::paintEvent(QPaintEvent* event)
 
 void ClockWindow::addPositionMenu()
 {
+  // *INDENT-OFF*
   auto pos_menu = _ctx_menu->addMenu(tr("Position"));
-  auto t_menu = pos_menu->addMenu(tr("Top"));
-  t_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignLeft); });
-  t_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignHCenter); });
-  t_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignRight); });
-  auto m_menu = pos_menu->addMenu(tr("Middle"));
-  m_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignLeft); });
-  m_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignHCenter); });
-  m_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignRight); });
-  auto b_menu = pos_menu->addMenu(tr("Bottom"));
-  b_menu->addAction(tr("Left"),   this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignLeft); });
-  b_menu->addAction(tr("Middle"), this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignHCenter); });
-  b_menu->addAction(tr("Right"),  this, [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignRight); });
+  auto t_menu = pos_menu->addMenu(QIcon(":/icons/align/top.svg"), tr("Top"));
+  t_menu->addAction(QIcon(":/icons/align/top-left.svg"), tr("Left"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignLeft); });
+  t_menu->addAction(QIcon(":/icons/align/top.svg"), tr("Middle"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignHCenter); });
+  t_menu->addAction(QIcon(":/icons/align/top-right.svg"), tr("Right"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignTop | Qt::AlignRight); });
+  auto m_menu = pos_menu->addMenu(QIcon(":/icons/align/v-center.svg"), tr("Middle"));
+  m_menu->addAction(QIcon(":/icons/align/left.svg"), tr("Left"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignLeft); });
+  m_menu->addAction(QIcon(":/icons/align/h-center.svg"), tr("Middle"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignHCenter); });
+  m_menu->addAction(QIcon(":/icons/align/right.svg"), tr("Right"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignVCenter | Qt::AlignRight); });
+  auto b_menu = pos_menu->addMenu(QIcon(":/icons/align/bottom.svg"), tr("Bottom"));
+  b_menu->addAction(QIcon(":/icons/align/bottom-left.svg"), tr("Left"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignLeft); });
+  b_menu->addAction(QIcon(":/icons/align/bottom.svg"), tr("Middle"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignHCenter); });
+  b_menu->addAction(QIcon(":/icons/align/bottom-right.svg"), tr("Right"), this,
+                    [this]() { moveToPredefinedPos(Qt::AlignBottom | Qt::AlignRight); });
+  // *INDENT-ON*
 }
 
 QPoint ClockWindow::anchoredOrigin() const
