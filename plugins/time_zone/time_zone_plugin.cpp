@@ -75,7 +75,7 @@ QString FormatTimeZone(const QDateTime& dt, const QString& sfmt)
         res.append(QString::fromLatin1(tz.id()));
         break;
       case 'C':
-        res.append(QString::fromLatin1(tz.id().mid(tz.id().indexOf('/') + 1)));
+        res.append(QString::fromLatin1(tz.id().mid(tz.id().lastIndexOf('/') + 1)));
         break;
       case 'c':
         res.append(tz.comment());
