@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 add_subdirectory(GradientDialog)
-add_subdirectory(paletteicon)
 add_subdirectory(QHotkey)
 
 # on Linux -fPIC became required for this static library for some reason...

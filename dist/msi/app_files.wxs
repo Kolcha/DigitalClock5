@@ -89,9 +89,6 @@ initial file was generated with the next command:
       <Component Id="cmp6429D28736F78294E789F1285CDBA0C5" Directory="dir38849F6D66CAD1C9D4D23BF20EB0981D" Guid="{6167DA39-3BFA-4F21-A783-D155C356E320}">
         <File Id="fil7AEA337D7CE4012DC6754A25FCEC4511" KeyPath="yes" Source="$(var.MySource)\plugins\generic\qtuiotouchplugin.dll" />
       </Component>
-      <Component Id="cmp698C06FA13803FBEF53A4F76718FD5DA" Directory="dir2C41C47317919F7F40F42C2D5CABDBDE" Guid="{DBF1E50C-0BEF-46D3-B0F4-BAA7BE3ECA5E}">
-        <File Id="filDAE56F1EDD72339316724F169D2857CA" KeyPath="yes" Source="$(var.MySource)\plugins\iconengines\paletteicon.dll" />
-      </Component>
       <Component Id="cmp8868342A11EC1A5F0F368534A0870AAB" Directory="dir2C41C47317919F7F40F42C2D5CABDBDE" Guid="{8C0C42ED-978D-4BBA-83BA-AEF58FBF1A29}">
         <File Id="filACA0F8188FFBA3FCA53DDF584A3C92BA" KeyPath="yes" Source="$(var.MySource)\plugins\iconengines\qsvgicon.dll" />
       </Component>
