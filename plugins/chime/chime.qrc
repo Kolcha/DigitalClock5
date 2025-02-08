@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/chime">
         <file alias="quarter_signal.wav">res/83272__robinhood76__01355-triangle-2-bell-door.wav</file>
-        <file alias="icon.svg.p">res/1401047747_Streamline-48.svg</file>
-        <file alias="play.svg.p">res/1473644868_icon-play.svg</file>
-        <file alias="stop.svg.p">res/1473644880_icon-stop.svg</file>
+        <file alias="icon.svg">res/8726242_music_music.svg</file>
+        <file alias="play.svg">res/1473644868_icon-play.svg</file>
+        <file alias="stop.svg">res/1473644880_icon-stop.svg</file>
         <file alias="hour_signal.wav">res/hour_signal.wav</file>
         <file alias="big_ben_strikes_1.mp3">res/bigbenstrikes1.mp3</file>
         <file alias="quarter_hour_chime_beg.mp3">res/quarterhourchimebeg.mp3</file>

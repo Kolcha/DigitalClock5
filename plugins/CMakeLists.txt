@@ -20,6 +20,17 @@ function(set_clock_plugin_common_properties target)
     target_add_translations(${target} ${target})
 endfunction()
 
+function(add_plugin_icon target icon_file)
+    set(icon_ext "")
+    get_filename_component(icon_ext ${icon_file} LAST_EXT)
+    set_source_files_properties(${icon_file} PROPERTIES QT_RESOURCE_ALIAS "icon${icon_ext}")
+
+    qt_add_resources(${target} "plugin_icon"
+        PREFIX "/${target}"
+        FILES ${icon_file}
+    )
+endfunction()
+
 add_subdirectory(any_zoom)
 add_subdirectory(date)
 add_subdirectory(quick_note)

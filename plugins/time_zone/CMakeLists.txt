@@ -13,6 +13,7 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME TimeZonePluginFactory
     time_zone_plugin.hpp
 )
 
+add_plugin_icon(${PROJECT_NAME} 172473_internet_globe_global_internet_globe_global.svg)
 add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
 
 set_clock_plugin_common_properties(${PROJECT_NAME})

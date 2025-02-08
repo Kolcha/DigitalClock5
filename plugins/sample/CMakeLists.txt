@@ -9,11 +9,7 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME SamplePluginFactory
     sample_plugin.hpp
 )
 
-qt_add_resources(${PROJECT_NAME} "resources"
-    PREFIX "/icons"
-    FILES ${PROJECT_NAME}.svg
-)
-
+add_plugin_icon(${PROJECT_NAME} 8726206_plug_plug.svg)
 add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
 
 set_clock_plugin_common_properties(${PROJECT_NAME})

@@ -21,6 +21,7 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME CountdownTimerPluginFactory
     countdown_timer_plugin.hpp
 )
 
+add_plugin_icon(${PROJECT_NAME} if_timer_172599.svg)
 add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
 
 set_clock_plugin_common_properties(${PROJECT_NAME})

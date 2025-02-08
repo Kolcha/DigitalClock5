@@ -109,7 +109,7 @@
        <widget class="QToolButton" name="preview_btn">
         <property name="icon">
          <iconset resource="../chime.qrc">
-          <normaloff>:/chime/play.svg.p</normaloff>:/chime/play.svg.p</iconset>
+          <normaloff>:/chime/play.svg</normaloff>:/chime/play.svg</iconset>
         </property>
        </widget>
       </item>

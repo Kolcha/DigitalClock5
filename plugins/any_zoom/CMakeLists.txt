@@ -13,6 +13,7 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME AnyZoomPluginFactory
     any_zoom_plugin.hpp
 )
 
+add_plugin_icon(${PROJECT_NAME} 8726214_search_search.svg)
 add_win_rc_file(${PROJECT_NAME} ${PROJECT_NAME}.rc)
 
 set_clock_plugin_common_properties(${PROJECT_NAME})
