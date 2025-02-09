@@ -11,15 +11,15 @@
 #include <QMenu>
 #include <QScreen>
 
-#include <QPainter>
-
 #include <QContextMenuEvent>
 #include <QMouseEvent>
+#include <QResizeEvent>
 
 #include "config/settings.hpp"
 #include "platform/clock_native_window.hpp"
 
 #include "clock_widget.hpp"
+#include "overlay_widget.hpp"
 
 // this wrapper function allows to change window flag on runtime as it should be
 // after setWindowFlag() call widget becomes hidden, and must be shown explicitly
@@ -195,12 +195,17 @@ void ClockWindow::handleMouseMove(const QPoint& global_pos)
 #endif
 void ClockWindow::setFrameVisible(bool vis)
 {
-  _frame_visible = vis;
-  if (_frame_visible)
-    setContentsMargins(contentsMargins() + QMargins(2, 2, 2, 2));
-  else
-    setContentsMargins(contentsMargins() - QMargins(2, 2, 2, 2));
-  update();
+  if (vis) {
+    _overlay = new OverlayWidget(this);
+    _overlay->resize(size());
+    _overlay->enableFrame();
+    _overlay->show();
+  } else {
+    _overlay->disableFrame();
+    _overlay->hide();
+    _overlay->deleteLater();
+    _overlay = nullptr;
+  }
 }
 
 void ClockWindow::setColorizationEnabled(bool enabled)
@@ -284,6 +289,7 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
+  if (_overlay) _overlay->resize(event->size());
 
   // do not apply anhoring logic during dragging
   if (_is_dragging) return;
@@ -293,17 +299,6 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
   auto curr_origin = anchoredOrigin();
   move(pos() + _last_origin - curr_origin);
   preventOutOfScreenPos();
-}
-
-void ClockWindow::paintEvent(QPaintEvent* event)
-{
-  QWidget::paintEvent(event);
-
-  if (_frame_visible) {
-    QPainter p(this);
-    p.setPen(QPen(Qt::red, 2, Qt::DotLine, Qt::SquareCap, Qt::MiterJoin));
-    p.drawRect(rect().adjusted(1, 1, -1, -1));
-  }
 }
 
 void ClockWindow::addPositionMenu()

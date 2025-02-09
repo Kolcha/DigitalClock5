@@ -56,6 +56,8 @@ qt_add_executable(${PROJECT_NAME}
     gui/clock_widget.hpp
     gui/clock_window.cpp
     gui/clock_window.hpp
+    gui/overlay_widget.cpp
+    gui/overlay_widget.hpp
     skin/error_skin.cpp
     skin/error_skin.hpp
     skin/legacy_skin.cpp

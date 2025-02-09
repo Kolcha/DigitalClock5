@@ -7,6 +7,7 @@
 #include <QWidget>
 
 class ClockWidget;
+class OverlayWidget;
 class StateStorage;
 
 void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set);
@@ -81,8 +82,6 @@ protected:
 
   void resizeEvent(QResizeEvent* event) override;
 
-  void paintEvent(QPaintEvent* event) override;
-
   void platformOneTimeFlags();
   void platformTick();
 
@@ -100,11 +99,10 @@ private:
 private:
   ClockWidget* _clock;
   QMenu* _ctx_menu;
+  OverlayWidget* _overlay = nullptr;
 
   AnchorPoint _anchor_point = AnchorLeft;
   QPoint _last_origin = {80, 120};
-
-  bool _frame_visible = false;
 
   bool _is_dragging = false;
   QPoint _drag_pos;
