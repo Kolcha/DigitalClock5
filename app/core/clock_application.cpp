@@ -135,6 +135,7 @@ void ClockApplication::reconfigureWindow(size_t i)
 
   auto wnd = window(i);
   wnd->loadState(StateStorage(*_state->instance(i)));
+  wnd->show();
 
   // due to applyInstanceOption() implementation quirks, not all options are tracked
   // hence some necessary ones must be provided to the plugin system explicitly

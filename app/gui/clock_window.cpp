@@ -38,7 +38,6 @@ namespace {
 
 static constexpr const char* const ORIGIN_POS_KEY = "origin_pos";
 static constexpr const char* const ANCHOR_POINT_KEY = "anchor_point";
-static constexpr const char* const VISIBILITY_KEY = "visible";
 
 } // namespace
 
@@ -80,14 +79,12 @@ void ClockWindow::saveState(StateStorage& st) const
 {
   st.setValue(ORIGIN_POS_KEY, _last_origin);
   st.setValue(ANCHOR_POINT_KEY, _anchor_point);
-  st.setValue(VISIBILITY_KEY, isVisible());
 }
 
 void ClockWindow::loadState(const StateStorage& st)
 {
   _last_origin = st.value(ORIGIN_POS_KEY, _last_origin).toPoint();
   _anchor_point = st.value(ANCHOR_POINT_KEY, _anchor_point).value<AnchorPoint>();
-  setVisible(st.value(VISIBILITY_KEY, true).toBool());
 }
 
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
@@ -284,13 +281,6 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
   }
 }
 
-void ClockWindow::moveEvent(QMoveEvent* event)
-{
-  QWidget::moveEvent(event);
-  if (!isVisible()) return;
-  if (!_is_dragging) preventOutOfScreenPos();
-}
-
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
@@ -302,6 +292,7 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
   // previous origin and correct anchor point must be known here
   auto curr_origin = anchoredOrigin();
   move(pos() + _last_origin - curr_origin);
+  preventOutOfScreenPos();
 }
 
 void ClockWindow::paintEvent(QPaintEvent* event)
@@ -345,7 +336,7 @@ void ClockWindow::addPositionMenu()
 
 QPoint ClockWindow::anchoredOrigin() const
 {
-  auto curr_origin = _clock->mapToGlobal(_clock->origin());
+  auto curr_origin = pos() + _clock->mapTo(this, _clock->origin());
   auto wnd_rect = frameGeometry();
 
   switch (_anchor_point) {
