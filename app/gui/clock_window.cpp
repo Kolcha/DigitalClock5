@@ -266,10 +266,10 @@ void ClockWindow::mouseMoveEvent(QMouseEvent* event)
         target_pos.setX(screen.left());
       if (qAbs(target_pos.y() - screen.top()) <= _snap_threshold)
         target_pos.setY(screen.top());
-      if (qAbs(screen.right() - (target_pos.x() + widget.width())) <= _snap_threshold)
-        target_pos.setX(screen.right() - widget.width());
-      if (qAbs(screen.bottom() - (target_pos.y() + widget.height())) <= _snap_threshold)
-        target_pos.setY(screen.bottom() - widget.height());
+      if (qAbs((screen.x() + screen.width()) - (target_pos.x() + widget.width())) <= _snap_threshold)
+        target_pos.setX(screen.x() + screen.width() - widget.width());
+      if (qAbs((screen.y() + screen.height()) - (target_pos.y() + widget.height())) <= _snap_threshold)
+        target_pos.setY(screen.y() + screen.height() - widget.height());
     }
     move(target_pos);
     event->accept();
