@@ -38,7 +38,7 @@ void SkinRenderable::draw(QPainter* p) const
   const auto br = t.mapRect(geometry());
 
   const auto pxm_size = br.size() * p->device()->devicePixelRatio();
-  QPixmap pxm(pxm_size.toSize());
+  QPixmap pxm(qCeil(pxm_size.width()), qCeil(pxm_size.height()));
   pxm.setDevicePixelRatio(p->device()->devicePixelRatio());
   pxm.fill(Qt::transparent);
 
