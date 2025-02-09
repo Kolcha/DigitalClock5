@@ -4,9 +4,19 @@
 
 #include "skin_base.hpp"
 
+#include <QtCore/QtMath>
 #include <QtWidgets/qdrawutil.h>
 
 #include "painter_guard.hpp"
+
+static QRect fit_rect(const QRectF& rf)
+{
+  auto t = qFloor(rf.top());
+  auto l = qFloor(rf.left());
+  auto b = qCeil(rf.bottom());
+  auto r = qCeil(rf.right());
+  return QRect(QPoint(l, t), QPoint(r, b));
+}
 
 void SkinBase::setTexture(const QPixmap& b, const QTileRules& t)
 {
@@ -52,14 +62,14 @@ void SkinRenderable::draw(QPainter* p) const
 
     if (!_texture.isNull()) {
       pp.setCompositionMode(QPainter::CompositionMode_SourceIn);
-      qDrawBorderPixmap(&pp, geometry().toRect(), QMargins(),
+      qDrawBorderPixmap(&pp, fit_rect(geometry()), QMargins(),
                         _texture, _texture.rect(), QMargins(),
                         _tx_rules);
     }
 
     if (!_background.isNull()) {
       pp.setCompositionMode(QPainter::CompositionMode_DestinationOver);
-      qDrawBorderPixmap(&pp, geometry().toRect(), QMargins(),
+      qDrawBorderPixmap(&pp, fit_rect(geometry()), QMargins(),
                         _background, _background.rect(), QMargins(),
                         _bg_rules);
     }
