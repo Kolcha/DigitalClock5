@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(date VERSION 2.1.0 LANGUAGES CXX)
+project(date VERSION 2.1.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME DatePluginFactory
     gui/settings_widget.hpp

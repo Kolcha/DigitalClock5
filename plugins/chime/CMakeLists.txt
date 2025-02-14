@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(chime VERSION 2.1.0 LANGUAGES CXX)
+project(chime VERSION 2.1.1 LANGUAGES CXX)
 
 set(CMAKE_AUTORCC ON)
 
