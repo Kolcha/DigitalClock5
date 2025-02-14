@@ -1271,7 +1271,7 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>494</x>
+     <x>488</x>
      <y>351</y>
     </hint>
     <hint type="destinationlabel">
@@ -1287,7 +1287,7 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>494</x>
+     <x>488</x>
      <y>351</y>
     </hint>
     <hint type="destinationlabel">
@@ -1323,7 +1323,7 @@
      <y>200</y>
     </hint>
     <hint type="destinationlabel">
-     <x>494</x>
+     <x>476</x>
      <y>200</y>
     </hint>
    </hints>
@@ -1339,7 +1339,7 @@
      <y>174</y>
     </hint>
     <hint type="destinationlabel">
-     <x>494</x>
+     <x>476</x>
      <y>174</y>
     </hint>
    </hints>
@@ -1371,7 +1371,7 @@
      <y>227</y>
     </hint>
     <hint type="destinationlabel">
-     <x>494</x>
+     <x>476</x>
      <y>227</y>
     </hint>
    </hints>
@@ -1789,6 +1789,22 @@
     <hint type="destinationlabel">
      <x>197</x>
      <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enable_transp_for_input</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>should_change_cursor</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>235</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>108</y>
     </hint>
    </hints>
   </connection>
