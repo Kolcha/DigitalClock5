@@ -4,7 +4,7 @@
 <context>
     <name>StopwatchPluginFactory</name>
     <message>
-        <location filename="../stopwatch_plugin.cpp" line="186"/>
+        <location filename="../stopwatch_plugin.cpp" line="189"/>
         <source>Very simple stopwatch.
 Single click to start/pause.
 Double click to reset/restart.</source>
@@ -13,7 +13,7 @@ Double click to reset/restart.</source>
 Двойной клик для сброса/перезапуска.</translation>
     </message>
     <message>
-        <location filename="../stopwatch_plugin.hpp" line="67"/>
+        <location filename="../stopwatch_plugin.hpp" line="69"/>
         <source>Stopwatch</source>
         <translation>Секундомер</translation>
     </message>

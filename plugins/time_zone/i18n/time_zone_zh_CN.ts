@@ -4,12 +4,12 @@
 <context>
     <name>TimeZonePluginFactory</name>
     <message>
-        <location filename="../time_zone_plugin.cpp" line="149"/>
+        <location filename="../time_zone_plugin.cpp" line="153"/>
         <source>Displays current time zone under the clock.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../time_zone_plugin.hpp" line="52"/>
+        <location filename="../time_zone_plugin.hpp" line="54"/>
         <source>Time Zone</source>
         <translation type="unfinished"></translation>
     </message>

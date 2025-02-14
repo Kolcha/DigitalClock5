@@ -38,7 +38,7 @@ Double click the widget to change the text.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.hpp" line="43"/>
+        <location filename="../quick_note_plugin.hpp" line="45"/>
         <source>Quick note</source>
         <translation>便捷笔记</translation>
     </message>

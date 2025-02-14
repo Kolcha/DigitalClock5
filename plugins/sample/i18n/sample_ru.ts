@@ -9,7 +9,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sample_plugin.hpp" line="36"/>
+        <location filename="../sample_plugin.hpp" line="37"/>
         <source>Sample Plugin</source>
         <translation type="unfinished"></translation>
     </message>
