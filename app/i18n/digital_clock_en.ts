@@ -343,12 +343,12 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="165"/>
-        <source>always keep clock visible on screen, prevent out of screen postion</source>
+        <source>always keep clock visible on screen, prevent out of screen position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="168"/>
-        <source>prevent out of screen postion</source>
+        <source>prevent out of screen position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

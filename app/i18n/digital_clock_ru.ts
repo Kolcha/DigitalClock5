@@ -345,12 +345,12 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="165"/>
-        <source>always keep clock visible on screen, prevent out of screen postion</source>
+        <source>always keep clock visible on screen, prevent out of screen position</source>
         <translation>всегда держать часы видимыми на экране, избегать положения вне экрана</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="168"/>
-        <source>prevent out of screen postion</source>
+        <source>prevent out of screen position</source>
         <translation>избегать положения вне экрана</translation>
     </message>
     <message>

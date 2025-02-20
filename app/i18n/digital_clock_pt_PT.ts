@@ -289,12 +289,12 @@ Clique nesta mensagem para descarregar.</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="165"/>
-        <source>always keep clock visible on screen, prevent out of screen postion</source>
+        <source>always keep clock visible on screen, prevent out of screen position</source>
         <translation>manter o relógio sempre visível no ecrã, previne que saia da área do ecrã</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="168"/>
-        <source>prevent out of screen postion</source>
+        <source>prevent out of screen position</source>
         <translation>previne que saia da área do ecrã</translation>
     </message>
     <message>

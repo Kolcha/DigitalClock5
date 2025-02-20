@@ -45,7 +45,7 @@ class PLUGIN_CORE_EXPORT SettingsPluginInstance : public ClockPluginInstance
 public:
   using ClockPluginInstance::ClockPluginInstance;
 
-  // initializes plugin with current instace settings
+  // initializes plugin with current instance settings
   virtual void init(const InstanceOptionsHash& settings) = 0;
 
 public slots:
@@ -175,7 +175,7 @@ public slots:
   // virtual void shutdown() = 0;
 
   // open plugin's configuration dialog, optionally for the specific instance
-  // it's up to the plugin implementation how to handle idx paramenter
+  // it's up to the plugin implementation how to handle idx parameter
   // it is guaranteed that 'parent' parameter is never NULL
   // and 'idx' is set to the current "active" instance
   // idx should not be interpreted, just used as opaque identifier

@@ -344,12 +344,12 @@ Click this message to download.</source>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="165"/>
-        <source>always keep clock visible on screen, prevent out of screen postion</source>
+        <source>always keep clock visible on screen, prevent out of screen position</source>
         <translation>保持时钟在屏幕中可见，防止时钟出现在屏幕内容以外的位置</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="168"/>
-        <source>prevent out of screen postion</source>
+        <source>prevent out of screen position</source>
         <translation>防止时钟出现在屏幕内容以外的位置</translation>
     </message>
     <message>

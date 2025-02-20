@@ -162,10 +162,10 @@
        <item row="3" column="2">
         <widget class="QCheckBox" name="keep_always_visible">
          <property name="toolTip">
-          <string>always keep clock visible on screen, prevent out of screen postion</string>
+          <string>always keep clock visible on screen, prevent out of screen position</string>
          </property>
          <property name="text">
-          <string>prevent out of screen postion</string>
+          <string>prevent out of screen position</string>
          </property>
         </widget>
        </item>
