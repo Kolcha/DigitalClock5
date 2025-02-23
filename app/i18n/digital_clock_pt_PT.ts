@@ -135,54 +135,54 @@ Clique nesta mensagem para descarregar.</translation>
 <context>
     <name>ClockWindow</name>
     <message>
-        <location filename="../gui/clock_window.cpp" line="60"/>
+        <location filename="../gui/clock_window.cpp" line="130"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="64"/>
+        <location filename="../gui/clock_window.cpp" line="134"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="67"/>
+        <location filename="../gui/clock_window.cpp" line="137"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="307"/>
+        <location filename="../gui/clock_window.cpp" line="377"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="308"/>
+        <location filename="../gui/clock_window.cpp" line="378"/>
         <source>Top</source>
         <translation>Topo</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="309"/>
-        <location filename="../gui/clock_window.cpp" line="316"/>
-        <location filename="../gui/clock_window.cpp" line="323"/>
+        <location filename="../gui/clock_window.cpp" line="379"/>
+        <location filename="../gui/clock_window.cpp" line="386"/>
+        <location filename="../gui/clock_window.cpp" line="393"/>
         <source>Left</source>
         <translation>Esquerda</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="311"/>
-        <location filename="../gui/clock_window.cpp" line="315"/>
-        <location filename="../gui/clock_window.cpp" line="318"/>
-        <location filename="../gui/clock_window.cpp" line="325"/>
+        <location filename="../gui/clock_window.cpp" line="381"/>
+        <location filename="../gui/clock_window.cpp" line="385"/>
+        <location filename="../gui/clock_window.cpp" line="388"/>
+        <location filename="../gui/clock_window.cpp" line="395"/>
         <source>Middle</source>
         <translation>Meio</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="313"/>
-        <location filename="../gui/clock_window.cpp" line="320"/>
-        <location filename="../gui/clock_window.cpp" line="327"/>
+        <location filename="../gui/clock_window.cpp" line="383"/>
+        <location filename="../gui/clock_window.cpp" line="390"/>
+        <location filename="../gui/clock_window.cpp" line="397"/>
         <source>Right</source>
         <translation>Direita</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="322"/>
+        <location filename="../gui/clock_window.cpp" line="392"/>
         <source>Bottom</source>
         <translation>Fundo</translation>
     </message>
