@@ -36,6 +36,66 @@ void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set)
 
 namespace {
 
+QScreen* find_max_intersected_screen(QWidget* w)
+{
+  QScreen* screen = nullptr;
+
+  const auto r = w->frameGeometry();
+  const auto screens = QGuiApplication::screens();
+
+  int max_intersected = 0;
+  for (const auto s : screens) {
+    auto ir = r.intersected(s->availableGeometry());
+    if (ir.isEmpty()) continue; // no intersection
+
+    auto sq = ir.width() * ir.height();
+
+    if (sq > max_intersected) {
+      max_intersected = sq;
+      screen = s;
+    }
+  }
+
+  return screen;
+}
+
+inline qreal distance(const QPointF& p1, const QPointF& p2)
+{
+  return QLineF(p1, p2).length();
+}
+
+inline qreal distance(const QRectF& r1, const QRectF& r2)
+{
+  return distance(r1.topLeft(), r2.topLeft());
+}
+
+QScreen* find_nearest_screen(QWidget* w)
+{
+  QScreen* screen = QGuiApplication::primaryScreen();
+
+  const auto r = w->frameGeometry();
+  const auto screens = QGuiApplication::screens();
+
+  qreal min_distance = distance(r, screen->availableGeometry());
+  for (const auto s : screens) {
+    auto curr_dist = distance(r, s->availableGeometry());
+    if (curr_dist < min_distance) {
+      min_distance = curr_dist;
+      screen = s;
+    }
+  }
+
+  return screen;
+}
+
+QScreen* find_screen(QWidget* w)
+{
+  auto screen = find_max_intersected_screen(w);
+  if (!screen) screen = find_nearest_screen(w);
+  Q_ASSERT(screen);
+  return screen;
+}
+
 static constexpr const char* const ORIGIN_POS_KEY = "origin_pos";
 static constexpr const char* const ANCHOR_POINT_KEY = "anchor_point";
 
@@ -362,7 +422,7 @@ void ClockWindow::preventOutOfScreenPos()
 
   auto tpos = pos();
 
-  auto sg = screen()->geometry();
+  auto sg = find_screen(this)->geometry();
   auto wg = frameGeometry();
 
   if (tpos.x() < sg.left())
