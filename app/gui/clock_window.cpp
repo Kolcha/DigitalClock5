@@ -45,7 +45,7 @@ QScreen* find_max_intersected_screen(QWidget* w)
 
   int max_intersected = 0;
   for (const auto s : screens) {
-    auto ir = r.intersected(s->availableGeometry());
+    auto ir = r.intersected(s->geometry());
     if (ir.isEmpty()) continue; // no intersection
 
     auto sq = ir.width() * ir.height();
@@ -76,9 +76,9 @@ QScreen* find_nearest_screen(QWidget* w)
   const auto r = w->frameGeometry();
   const auto screens = QGuiApplication::screens();
 
-  qreal min_distance = distance(r, screen->availableGeometry());
+  qreal min_distance = distance(r, screen->geometry());
   for (const auto s : screens) {
-    auto curr_dist = distance(r, s->availableGeometry());
+    auto curr_dist = distance(r, s->geometry());
     if (curr_dist < min_distance) {
       min_distance = curr_dist;
       screen = s;
