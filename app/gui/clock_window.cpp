@@ -96,6 +96,16 @@ QScreen* find_screen(QWidget* w)
   return screen;
 }
 
+// returns full screen geometry or available geometry depending on widget
+QRect smart_screen_geometry(const QScreen* screen, const QWidget* widget)
+{
+  auto ag = screen->availableGeometry();
+  if (ag.contains(widget->frameGeometry()))
+    return ag;
+
+  return screen->geometry();
+}
+
 static constexpr const char* const ORIGIN_POS_KEY = "origin_pos";
 static constexpr const char* const ANCHOR_POINT_KEY = "anchor_point";
 
@@ -320,7 +330,7 @@ void ClockWindow::mouseMoveEvent(QMouseEvent* event)
   if (event->buttons() & Qt::LeftButton) {
     QPoint target_pos = event->globalPosition().toPoint() - _drag_pos;
     if (_snap_to_edge) {
-      QRect screen = window()->screen()->availableGeometry();
+      QRect screen = smart_screen_geometry(window()->screen(), this);
       QRect widget = frameGeometry();
       if (qAbs(target_pos.x() - screen.left()) <= _snap_threshold)
         target_pos.setX(screen.left());
