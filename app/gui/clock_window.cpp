@@ -165,14 +165,14 @@ void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
   if (a & Qt::AlignHCenter)
     tpos.setX(sg.center().x() - wg.width()/2);
   if (a & Qt::AlignRight)
-    tpos.setX(sg.right() - wg.width());
+    tpos.setX(sg.x() + sg.width() - wg.width());
 
   if (a & Qt::AlignTop)
     tpos.setY(sg.top());
   if (a & Qt::AlignVCenter)
     tpos.setY(sg.center().y() - wg.height()/2);
   if (a & Qt::AlignBottom)
-    tpos.setY(sg.bottom() - wg.height());
+    tpos.setY(sg.y() + sg.height() - wg.height());
 
   move(tpos);
   updateLastOrigin();
@@ -427,13 +427,13 @@ void ClockWindow::preventOutOfScreenPos()
 
   if (tpos.x() < sg.left())
     tpos.setX(sg.left());
-  if (tpos.x() + wg.width() > sg.right())
-    tpos.setX(sg.right() - wg.width());
+  if (tpos.x() + wg.width() > sg.x() + sg.width())
+    tpos.setX(sg.x() + sg.width() - wg.width());
 
   if (tpos.y() < sg.top())
     tpos.setY(sg.top());
-  if (tpos.y() + wg.height() > sg.bottom())
-    tpos.setY(sg.bottom() - wg.height());
+  if (tpos.y() + wg.height() > sg.y() + sg.height())
+    tpos.setY(sg.y() + sg.height() - wg.height());
 
   if (tpos != pos()) {
     move(tpos);
