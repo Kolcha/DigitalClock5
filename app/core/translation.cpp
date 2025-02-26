@@ -27,6 +27,9 @@ std::unique_ptr<QTranslator> findTranslation(QStringView module)
 
 std::unique_ptr<QTranslator> loadTranslation(QStringView module, QStringView locale)
 {
+  if (locale.startsWith(QLatin1String("en")))         // "English" is built-in
+    return nullptr;                                   // use built-in
+
   auto translator = std::make_unique<QTranslator>();
   if (translator->load(QString(":/i18n/i18n/%1_%2").arg(module, locale)))
     return translator;

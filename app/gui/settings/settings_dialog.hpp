@@ -155,6 +155,7 @@ private:
   void onPluginStateChanged(PluginHandle ph, bool enabled);
   void showPluginInfoDialog(const PluginHandle& ph);
 
+  void fillWindowsList();
   void fillLanguagesList();
   void fillUpdatePeriodsList();
   void fillTimeZonesList();

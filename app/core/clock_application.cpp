@@ -312,6 +312,7 @@ void ClockApplication::loadTranslation()
     }
 
     _active_lang = app_translator->language();
+    _active_lang.replace('-', '_');
     _translators.push_back(std::move(app_translator));
   }
 
