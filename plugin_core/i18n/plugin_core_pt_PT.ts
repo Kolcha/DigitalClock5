@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_PT" sourcelanguage="en_US">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>plugin::text::impl::AppearanceSettingsWidget</name>
     <message>
@@ -31,22 +31,22 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="70"/>
         <source>layout configuration string:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">layout configuration string:</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="99"/>
         <source>resize policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">resize policy</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="105"/>
         <source>autoscale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">autoscale</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="112"/>
         <source>fixed size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fixed size</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="125"/>
@@ -76,12 +76,12 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="409"/>
         <source>gradient</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gradient</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="410"/>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pattern</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="190"/>
@@ -102,7 +102,7 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="249"/>
         <source>follow clock</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">follow clock</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="256"/>
@@ -144,13 +144,13 @@
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="202"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="311"/>
         <source>follow system theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">follow system theme</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="216"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="325"/>
         <source>stretch instead of tile</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">stretch instead of tile</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="264"/>
@@ -164,12 +164,12 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="14"/>
         <source>Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geometry</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="20"/>
         <source>extra space around characters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">extra space around characters</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="27"/>
@@ -198,32 +198,32 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="91"/>
         <source>extra space around widget</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">extra space around widget</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="174"/>
         <source>character by character rendering</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">character by character rendering</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="181"/>
         <source>respect line spacing defined by skin/font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">respect line spacing defined by skin/font</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="190"/>
         <source>spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">spacing:</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="197"/>
         <source>horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">horizontal</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="217"/>
         <source>vertical</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">vertical</translation>
     </message>
 </context>
 <context>
@@ -231,7 +231,7 @@
     <message>
         <location filename="../plugin/text/impl/settings_dialog.cpp" line="66"/>
         <source>instance %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instance %1</translation>
     </message>
 </context>
 </TS>

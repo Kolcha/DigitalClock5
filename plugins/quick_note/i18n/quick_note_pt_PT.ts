@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_PT" sourcelanguage="en_US">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>QuickNotePlugin</name>
     <message>
         <location filename="../quick_note_plugin.cpp" line="46"/>
         <source>double click me!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">double click me!</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.cpp" line="60"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../quick_note_plugin.cpp" line="61"/>
         <source>Enter the desired note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enter the desired note</translation>
     </message>
 </context>
 <context>
@@ -30,7 +30,8 @@
         <location filename="../quick_note_plugin.cpp" line="79"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nothing is here!
+Double click the widget to change the text.</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.cpp" line="81"/>

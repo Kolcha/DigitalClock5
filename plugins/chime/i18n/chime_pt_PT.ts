@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_PT" sourcelanguage="en_US">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>ChimePluginFactory</name>
     <message>
@@ -88,7 +88,7 @@
     <message>
         <location filename="../gui/sound_dialog.ui" line="85"/>
         <source>Volume</source>
-        <translation>Volume</translation>
+        <translation type="unfinished">Volume</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="24"/>

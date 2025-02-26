@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN" sourcelanguage="en_US">
+<TS version="2.1" language="zh-CN" sourcelanguage="en">
 <context>
     <name>plugin::text::impl::AppearanceSettingsWidget</name>
     <message>
@@ -31,27 +31,27 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="70"/>
         <source>layout configuration string:</source>
-        <translation type="unfinished"></translation>
+        <translation>布局配置字符串：</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="99"/>
         <source>resize policy</source>
-        <translation type="unfinished"></translation>
+        <translation>调整大小策略</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="105"/>
         <source>autoscale</source>
-        <translation type="unfinished"></translation>
+        <translation>自动缩放</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="112"/>
         <source>fixed size</source>
-        <translation type="unfinished"></translation>
+        <translation>固定大小</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="125"/>
         <source>Skin</source>
-        <translation type="unfinished"></translation>
+        <translation>皮肤</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="131"/>
@@ -66,33 +66,33 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="171"/>
         <source>texture</source>
-        <translation type="unfinished"></translation>
+        <translation>纹理</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="408"/>
         <source>solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>纯色</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="409"/>
         <source>gradient</source>
-        <translation type="unfinished"></translation>
+        <translation>渐变</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="410"/>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>图案</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="190"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="233"/>
         <source>apply per element</source>
-        <translation type="unfinished"></translation>
+        <translation>应用到每个元素</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="207"/>
         <source>background</source>
-        <translation type="unfinished"></translation>
+        <translation>背景</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="243"/>
@@ -102,7 +102,7 @@
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="249"/>
         <source>follow clock</source>
-        <translation type="unfinished"></translation>
+        <translation>跟随时钟</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.ui" line="256"/>
@@ -144,19 +144,19 @@
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="202"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="311"/>
         <source>follow system theme</source>
-        <translation type="unfinished"></translation>
+        <translation>跟随系统主题</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="216"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="325"/>
         <source>stretch instead of tile</source>
-        <translation type="unfinished"></translation>
+        <translation>拉伸而非平铺</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="264"/>
         <location filename="../plugin/text/impl/appearance_settings_widget.cpp" line="373"/>
         <source>Images (*.png *.bmp *.jpg)</source>
-        <translation type="unfinished"></translation>
+        <translation>图片文件(*.png *.bmp *.jpg)</translation>
     </message>
 </context>
 <context>
@@ -164,12 +164,12 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="14"/>
         <source>Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geometry</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="20"/>
         <source>extra space around characters</source>
-        <translation type="unfinished"></translation>
+        <translation>字符周围的额外空间</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="27"/>
@@ -198,32 +198,32 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="91"/>
         <source>extra space around widget</source>
-        <translation type="unfinished"></translation>
+        <translation>小部件周围的额外空间</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="174"/>
         <source>character by character rendering</source>
-        <translation type="unfinished"></translation>
+        <translation>逐个字符渲染</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="181"/>
         <source>respect line spacing defined by skin/font</source>
-        <translation type="unfinished"></translation>
+        <translation>尊重皮肤/字体定义的行距</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="190"/>
         <source>spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>间距:</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="197"/>
         <source>horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">horizontal</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="217"/>
         <source>vertical</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">vertical</translation>
     </message>
 </context>
 <context>
@@ -231,7 +231,7 @@
     <message>
         <location filename="../plugin/text/impl/settings_dialog.cpp" line="66"/>
         <source>instance %1</source>
-        <translation type="unfinished"></translation>
+        <translation>实例 %1</translation>
     </message>
 </context>
 </TS>

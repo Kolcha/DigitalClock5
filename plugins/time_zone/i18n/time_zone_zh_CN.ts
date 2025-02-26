@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN" sourcelanguage="en_US">
+<TS version="2.1" language="zh-CN" sourcelanguage="en">
 <context>
     <name>TimeZonePluginFactory</name>
     <message>
         <location filename="../time_zone_plugin.cpp" line="153"/>
         <source>Displays current time zone under the clock.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Displays current time zone under the clock.</translation>
     </message>
     <message>
         <location filename="../time_zone_plugin.hpp" line="54"/>
         <source>Time Zone</source>
-        <translation type="unfinished"></translation>
+        <translation>时区</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="14"/>
         <source>Time Zone</source>
-        <translation type="unfinished"></translation>
+        <translation>时区</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="20"/>
         <source>Time Zone Format</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Time Zone Format</translation>
     </message>
 </context>
 </TS>

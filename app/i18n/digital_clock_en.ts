@@ -79,54 +79,54 @@ Click this message to download.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="328"/>
+        <location filename="../core/clock_application.cpp" line="329"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="335"/>
+        <location filename="../core/clock_application.cpp" line="336"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="339"/>
+        <location filename="../core/clock_application.cpp" line="340"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="443"/>
+        <location filename="../core/clock_application.cpp" line="444"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="444"/>
+        <location filename="../core/clock_application.cpp" line="445"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="446"/>
-        <location filename="../core/clock_application.cpp" line="456"/>
-        <location filename="../core/clock_application.cpp" line="466"/>
+        <location filename="../core/clock_application.cpp" line="447"/>
+        <location filename="../core/clock_application.cpp" line="457"/>
+        <location filename="../core/clock_application.cpp" line="467"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="449"/>
-        <location filename="../core/clock_application.cpp" line="455"/>
-        <location filename="../core/clock_application.cpp" line="459"/>
-        <location filename="../core/clock_application.cpp" line="469"/>
+        <location filename="../core/clock_application.cpp" line="450"/>
+        <location filename="../core/clock_application.cpp" line="456"/>
+        <location filename="../core/clock_application.cpp" line="460"/>
+        <location filename="../core/clock_application.cpp" line="470"/>
         <source>Middle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="452"/>
-        <location filename="../core/clock_application.cpp" line="462"/>
-        <location filename="../core/clock_application.cpp" line="472"/>
+        <location filename="../core/clock_application.cpp" line="453"/>
+        <location filename="../core/clock_application.cpp" line="463"/>
+        <location filename="../core/clock_application.cpp" line="473"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="465"/>
+        <location filename="../core/clock_application.cpp" line="466"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>

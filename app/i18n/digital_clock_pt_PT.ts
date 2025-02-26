@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_PT" sourcelanguage="en_US">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -11,7 +11,7 @@
     <message>
         <location filename="../gui/about/about_dialog.ui" line="66"/>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation type="unfinished">Info</translation>
     </message>
     <message>
         <location filename="../gui/about/about_dialog.ui" line="145"/>
@@ -62,7 +62,8 @@
         <location filename="../gui/about/about_dialog.cpp" line="105"/>
         <source>New version available.
 Click here to download.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">New version available.
+Click here to download.</translation>
     </message>
 </context>
 <context>
@@ -80,54 +81,54 @@ Click this message to download.</source>
 Clique nesta mensagem para descarregar.</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="328"/>
+        <location filename="../core/clock_application.cpp" line="329"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="335"/>
+        <location filename="../core/clock_application.cpp" line="336"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="339"/>
+        <location filename="../core/clock_application.cpp" line="340"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="443"/>
+        <location filename="../core/clock_application.cpp" line="444"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="444"/>
+        <location filename="../core/clock_application.cpp" line="445"/>
         <source>Top</source>
         <translation>Topo</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="446"/>
-        <location filename="../core/clock_application.cpp" line="456"/>
-        <location filename="../core/clock_application.cpp" line="466"/>
+        <location filename="../core/clock_application.cpp" line="447"/>
+        <location filename="../core/clock_application.cpp" line="457"/>
+        <location filename="../core/clock_application.cpp" line="467"/>
         <source>Left</source>
         <translation>Esquerda</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="449"/>
-        <location filename="../core/clock_application.cpp" line="455"/>
-        <location filename="../core/clock_application.cpp" line="459"/>
-        <location filename="../core/clock_application.cpp" line="469"/>
+        <location filename="../core/clock_application.cpp" line="450"/>
+        <location filename="../core/clock_application.cpp" line="456"/>
+        <location filename="../core/clock_application.cpp" line="460"/>
+        <location filename="../core/clock_application.cpp" line="470"/>
         <source>Middle</source>
         <translation>Meio</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="452"/>
-        <location filename="../core/clock_application.cpp" line="462"/>
-        <location filename="../core/clock_application.cpp" line="472"/>
+        <location filename="../core/clock_application.cpp" line="453"/>
+        <location filename="../core/clock_application.cpp" line="463"/>
+        <location filename="../core/clock_application.cpp" line="473"/>
         <source>Right</source>
         <translation>Direita</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="465"/>
+        <location filename="../core/clock_application.cpp" line="466"/>
         <source>Bottom</source>
         <translation>Fundo</translation>
     </message>
@@ -215,7 +216,17 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="24"/>
         <source>App Global</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">App Global</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="104"/>
+        <source>start on system startup</source>
+        <translation>Iniciar no arranque do sistema</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="151"/>
+        <source>stay on top of other windows</source>
+        <translation>manter por cima de tudo</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="218"/>
@@ -225,22 +236,22 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="40"/>
         <source>become almost transparent on mouse hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">become almost transparent on mouse hover</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="33"/>
         <source>hide completely</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hide completely</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="134"/>
         <source>enable multiple clocks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">enable multiple clocks</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="70"/>
         <source>same appearance</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">same appearance</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="111"/>
@@ -255,17 +266,12 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="158"/>
         <source>enable debug options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">enable debug options</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="144"/>
         <source>Most of options listed here require app restart to take effect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="151"/>
-        <source>stay on top of other windows</source>
-        <translation>manter por cima de tudo</translation>
+        <translation type="unfinished">Most of options listed here require app restart to take effect.</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="124"/>
@@ -278,14 +284,64 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>mostrar relógio no modo ecrã total</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="104"/>
-        <source>start on system startup</source>
-        <translation>Iniciar no arranque do sistema</translation>
+        <location filename="../gui/settings/settings_dialog.ui" line="233"/>
+        <source>Format</source>
+        <translation>Formato</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="273"/>
+        <source>custom format</source>
+        <translation>personalizado</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="423"/>
+        <source>Apply</source>
+        <translation>Aplicar</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="413"/>
+        <source>layout config string (useful only for multiline formats)</source>
+        <translation type="unfinished">layout config string (useful only for multiline formats)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="352"/>
+        <source>custom separators (will be used instead of &apos;:&apos;)</source>
+        <translation type="unfinished">custom separators (will be used instead of &apos;:&apos;)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="247"/>
+        <source>replacement characters for &apos;:&apos; in format</source>
+        <translation type="unfinished">replacement characters for &apos;:&apos; in format</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="371"/>
+        <source>make seconds smaller,</source>
+        <translation type="unfinished">make seconds smaller,</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="394"/>
+        <source>of clock&apos;s height</source>
+        <translation type="unfinished">of clock&apos;s height</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="459"/>
+        <source>12h</source>
+        <translation type="unfinished">12h</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="486"/>
+        <source>24h</source>
+        <translation type="unfinished">24h</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="469"/>
+        <source>leading zero</source>
+        <translation type="unfinished">leading zero</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="89"/>
         <source>help to translate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">help to translate</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="165"/>
@@ -305,47 +361,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="225"/>
         <source>change cursor on mouse hover</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="233"/>
-        <source>Format</source>
-        <translation>Formato</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="247"/>
-        <source>replacement characters for &apos;:&apos; in format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="273"/>
-        <source>custom format</source>
-        <translation>personalizado</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="352"/>
-        <source>custom separators (will be used instead of &apos;:&apos;)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="371"/>
-        <source>make seconds smaller,</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="394"/>
-        <source>of clock&apos;s height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="413"/>
-        <source>layout config string (useful only for multiline formats)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="423"/>
-        <source>Apply</source>
-        <translation>Aplicar</translation>
+        <translation type="unfinished">change cursor on mouse hover</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="432"/>
@@ -353,44 +369,29 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>mostrar tempo noutro fuso horário</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="459"/>
-        <source>12h</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="469"/>
-        <source>leading zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gui/settings/settings_dialog.ui" line="476"/>
         <source>show seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="486"/>
-        <source>24h</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">show seconds</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="512"/>
         <source>show AM/PM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">show AM/PM</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="522"/>
         <source>add space before AM/PM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">add space before AM/PM</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="529"/>
         <source>uppercase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">uppercase</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="539"/>
         <source>lowercase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lowercase</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="590"/>
@@ -418,16 +419,6 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>textura</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1128"/>
-        <source>character by character rendering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1135"/>
-        <source>respect line spacing defined by skin/font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
         <source>solid color</source>
         <translation>cor sólida</translation>
@@ -435,12 +426,12 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
         <source>gradient</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">gradient</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pattern</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="688"/>
@@ -466,7 +457,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="794"/>
         <source>colorization color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">colorization color</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="836"/>
@@ -500,17 +491,17 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="905"/>
         <source>spacing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">spacing</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="911"/>
         <source>H:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">H:</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="931"/>
         <source>V:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">V:</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="955"/>
@@ -520,7 +511,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="961"/>
         <source>extra space around characters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">extra space around characters</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="984"/>
@@ -537,12 +528,22 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1045"/>
         <source>extra space around widget</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">extra space around widget</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1128"/>
+        <source>character by character rendering</source>
+        <translation type="unfinished">character by character rendering</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1135"/>
+        <source>respect line spacing defined by skin/font</source>
+        <translation type="unfinished">respect line spacing defined by skin/font</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1144"/>
         <source>layout spacing (space between widgets)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">layout spacing (space between widgets)</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1196"/>
@@ -562,7 +563,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="69"/>
         <source>window %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">window %1</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="122"/>
@@ -588,13 +589,13 @@ Clique nesta mensagem para descarregar.</translation>
         <location filename="../gui/settings/settings_dialog.cpp" line="513"/>
         <location filename="../gui/settings/settings_dialog.cpp" line="624"/>
         <source>follow system theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">follow system theme</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="527"/>
         <location filename="../gui/settings/settings_dialog.cpp" line="638"/>
         <source>stretch instead of tile</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">stretch instead of tile</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="576"/>
@@ -605,7 +606,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="996"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Automatic</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1007"/>
@@ -630,7 +631,7 @@ Clique nesta mensagem para descarregar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1011"/>
         <source>1 month</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1 month</translation>
     </message>
 </context>
 </TS>
