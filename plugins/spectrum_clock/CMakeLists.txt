@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(spectrum_clock VERSION 3.1.0 LANGUAGES CXX)
+project(spectrum_clock VERSION 3.1.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME SpectrumClockPluginFactory
     spectrum_clock_plugin.cpp

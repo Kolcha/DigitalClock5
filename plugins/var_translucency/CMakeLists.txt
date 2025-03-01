@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(var_translucency VERSION 3.1.0 LANGUAGES CXX)
+project(var_translucency VERSION 3.1.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME VarTranslucencyPluginFactory
     var_translucency_plugin.cpp

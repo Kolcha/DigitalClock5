@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(time_zone VERSION 1.0.1 LANGUAGES CXX)
+project(time_zone VERSION 1.0.2 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME TimeZonePluginFactory
     gui/settings_widget.hpp
