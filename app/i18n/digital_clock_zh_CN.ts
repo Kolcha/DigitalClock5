@@ -276,7 +276,7 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="124"/>
         <source>show clock in fullscreen mode (may not work for some apps)</source>
-        <translation>以全屏模式显示时钟 (对某些程序可能不生效)</translation>
+        <translation>以全屏模式显示时钟（对某些程序可能不生效）</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="127"/>
@@ -419,17 +419,17 @@ Click this message to download.</source>
         <translation>纹理</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1067"/>
         <source>solid color</source>
         <translation>使用颜色填充</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1068"/>
         <source>gradient</source>
         <translation>渐变</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1069"/>
         <source>pattern</source>
         <translation>图案</translation>
     </message>
@@ -561,75 +561,75 @@ Click this message to download.</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="69"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1000"/>
         <source>window %1</source>
         <translation>窗口 %1</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="122"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="123"/>
         <source>Import settings from ...</source>
         <translation>导入设置文件...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="124"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="125"/>
         <source>Digital Clock Settings (*.dc5 *.dcs)</source>
         <translation>Digital Clock设置文件(*.dc5 *.dcs)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="148"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="149"/>
         <source>Export settings to ...</source>
         <translation>将设置导出到...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="150"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="151"/>
         <source>Digital Clock 5 Settings (*.dc5)</source>
         <translation>Digital Clock 5设置文件(*.dc5)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="513"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="624"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="514"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="625"/>
         <source>follow system theme</source>
         <translation>跟随系统主题</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="527"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="638"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="528"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="639"/>
         <source>stretch instead of tile</source>
         <translation>拉伸而非平铺</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="576"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="687"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="577"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="688"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>图片文件(*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="996"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1008"/>
         <source>Automatic</source>
         <translation>自动</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1007"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1020"/>
         <source>1 day</source>
         <translation>1天</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1008"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1021"/>
         <source>3 days</source>
         <translation>3天</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1009"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1022"/>
         <source>1 week</source>
         <translation>1周</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1010"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1023"/>
         <source>2 weeks</source>
         <translation>2周</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1011"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1024"/>
         <source>1 month</source>
         <translation>1 个月</translation>
     </message>

@@ -417,17 +417,17 @@ Click this message to download.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1067"/>
         <source>solid color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1068"/>
         <source>gradient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1069"/>
         <source>pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,75 +559,75 @@ Click this message to download.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="69"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1000"/>
         <source>window %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="122"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="123"/>
         <source>Import settings from ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="124"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="125"/>
         <source>Digital Clock Settings (*.dc5 *.dcs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="148"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="149"/>
         <source>Export settings to ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="150"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="151"/>
         <source>Digital Clock 5 Settings (*.dc5)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="513"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="624"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="514"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="625"/>
         <source>follow system theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="527"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="638"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="528"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="639"/>
         <source>stretch instead of tile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="576"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="687"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="577"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="688"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="996"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1008"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1007"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1020"/>
         <source>1 day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1008"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1021"/>
         <source>3 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1009"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1022"/>
         <source>1 week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1010"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1023"/>
         <source>2 weeks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1011"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1024"/>
         <source>1 month</source>
         <translation type="unfinished"></translation>
     </message>
