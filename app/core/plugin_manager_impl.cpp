@@ -54,7 +54,7 @@ public:
   {
     _loader.load();
     _metadata = _loader.metaData().value("MetaData").toObject().toVariantHash();
-    _tr = loadTranslation(id(), app->activeLang());
+    setTranslator(loadTranslation(id(), app->activeLang()));
   }
 
   virtual ~PluginHandleImpl()

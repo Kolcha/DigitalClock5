@@ -36,9 +36,6 @@ signals:
   void globalOptionChanged(opt::GlobalOptions opt, const QVariant& val);
   void instanceOptionChanged(size_t i, opt::InstanceOptions opt, const QVariant& val);
 
-protected:
-  bool event(QEvent* e) override;
-
 private slots:
   void on_import_btn_clicked();
   void on_export_btn_clicked();
@@ -155,7 +152,7 @@ private:
   void onPluginStateChanged(PluginHandle ph, bool enabled);
   void showPluginInfoDialog(const PluginHandle& ph);
 
-  void fillWindowsList();
+  void initWindowsList();
   void fillLanguagesList();
   void fillUpdatePeriodsList();
   void fillTimeZonesList();

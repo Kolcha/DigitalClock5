@@ -63,7 +63,7 @@ SettingsDialog::SettingsDialog(ClockApplication* app, size_t idx, QWidget* paren
 
   app->window(_curr_idx)->enableFrame();
 
-  fillWindowsList();
+  initWindowsList();
 
   fillLanguagesList();
   fillUpdatePeriodsList();
@@ -100,21 +100,6 @@ void SettingsDialog::reject()
   if (_settings_imported)
     app->settings()->discardAll();
   QDialog::reject();
-}
-
-bool SettingsDialog::event(QEvent* e)
-{
-  if (e->type() == QEvent::LanguageChange) {
-    QSignalBlocker _(this);
-    ui->retranslateUi(this);
-    fillWindowsList();
-    fillUpdatePeriodsList();
-    fillTextureTypes(ui->tx_options_box);
-    fillTextureTypes(ui->bg_options_box);
-    initAppearanceTab(_curr_idx);
-    initPluginsTab();
-  }
-  return QDialog::event(e);
 }
 
 void SettingsDialog::on_import_btn_clicked()
@@ -991,10 +976,9 @@ void SettingsDialog::showPluginInfoDialog(const PluginHandle& ph)
   dlg->show();
 }
 
-void SettingsDialog::fillWindowsList()
+void SettingsDialog::initWindowsList()
 {
   QSignalBlocker _(ui->windows_box);
-  ui->windows_box->clear();
   const auto act_insts = app->config()->global()->getActiveInstancesList();
   for (auto i : act_insts)
     ui->windows_box->addItem(tr("window %1").arg(i+1));
@@ -1016,7 +1000,6 @@ void SettingsDialog::fillLanguagesList()
 void SettingsDialog::fillUpdatePeriodsList()
 {
   QSignalBlocker _(ui->update_period_edit);
-  ui->update_period_edit->clear();
   ui->update_period_edit->addItem(tr("1 day"), 1);
   ui->update_period_edit->addItem(tr("3 days"), 3);
   ui->update_period_edit->addItem(tr("1 week"), 7);
@@ -1063,7 +1046,6 @@ void SettingsDialog::fillSkinsList()
 void SettingsDialog::fillTextureTypes(QComboBox* box)
 {
   QSignalBlocker _(box);
-  box->clear();
   box->addItem(tr("solid color"), QVariant::fromValue(tx::Color));
   box->addItem(tr("gradient"), QVariant::fromValue(tx::Gradient));
   box->addItem(tr("pattern"), QVariant::fromValue(tx::Pattern));
