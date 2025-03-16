@@ -41,7 +41,11 @@ MouseTrackerPrivate::MouseTrackerPrivate(QObject* parent)
   : QObject(parent)
 {
   g_pdata = this;
+  // do not enable mouse hook on debug builds,
+  // this makes mouse unusable under debugger
+#ifndef _DEBUG
   hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
+#endif
 }
 
 MouseTrackerPrivate::~MouseTrackerPrivate()
