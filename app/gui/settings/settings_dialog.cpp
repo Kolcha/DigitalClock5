@@ -67,6 +67,8 @@ SettingsDialog::SettingsDialog(ClockApplication* app, size_t idx, QWidget* paren
 
   fillLanguagesList();
   fillUpdatePeriodsList();
+  fillTrayIconActions(ui->tray_icon_s_action_box);
+  fillTrayIconActions(ui->tray_icon_d_action_box);
   fillTimeZonesList();
   fillSkinsList();
 
@@ -252,6 +254,34 @@ void SettingsDialog::on_hide_on_mouse_hover_clicked(bool checked)
   emit globalOptionChanged(opt::OpacityOnHover, opacity);
 }
 
+void SettingsDialog::on_tray_icon_s_action_enabled_clicked(bool checked)
+{
+  auto act = checked ? ui->tray_icon_s_action_box->currentData().value<opt::TrayIconAction>() : opt::NoAction;
+  app->config()->global()->setTrayIconSingleClickAction(act);
+  emit globalOptionChanged(opt::TrayIconSingleClickAction, QVariant::fromValue(act));
+}
+
+void SettingsDialog::on_tray_icon_s_action_box_activated(int index)
+{
+  auto act = ui->tray_icon_s_action_box->currentData().value<opt::TrayIconAction>();
+  app->config()->global()->setTrayIconSingleClickAction(act);
+  emit globalOptionChanged(opt::TrayIconSingleClickAction, QVariant::fromValue(act));
+}
+
+void SettingsDialog::on_tray_icon_d_action_enabled_clicked(bool checked)
+{
+  auto act = checked ? ui->tray_icon_d_action_box->currentData().value<opt::TrayIconAction>() : opt::NoAction;
+  app->config()->global()->setTrayIconDoubleClickAction(act);
+  emit globalOptionChanged(opt::TrayIconDoubleClickAction, QVariant::fromValue(act));
+}
+
+void SettingsDialog::on_tray_icon_d_action_box_activated(int index)
+{
+  auto act = ui->tray_icon_d_action_box->currentData().value<opt::TrayIconAction>();
+  app->config()->global()->setTrayIconDoubleClickAction(act);
+  emit globalOptionChanged(opt::TrayIconDoubleClickAction, QVariant::fromValue(act));
+}
+
 void SettingsDialog::on_enable_autoupdate_clicked(bool checked)
 {
   app->config()->global()->setCheckForUpdates(checked);
@@ -269,12 +299,6 @@ void SettingsDialog::on_check_for_beta_clicked(bool checked)
 {
   app->config()->global()->setCheckForBetaVersion(checked);
   emit globalOptionChanged(opt::CheckForBetaVersion, checked);
-}
-
-void SettingsDialog::on_enable_debug_options_clicked(bool checked)
-{
-  Q_UNUSED(checked);
-  // no debug options implemented
 }
 
 void SettingsDialog::on_smaller_seconds_clicked(bool checked)
@@ -786,7 +810,21 @@ void SettingsDialog::initAppGlobalTab()
 
   setIndexByValue(ui->update_period_edit, gs.getUpdatePeriodDays());
 
-  ui->enable_debug_options->setVisible(false);  // no debug options for now
+#if defined(Q_OS_WINDOWS)
+  auto tray_icon_s_action = gs.getTrayIconSingleClickAction();
+  auto tray_icon_d_action = gs.getTrayIconDoubleClickAction();
+  ui->tray_icon_s_action_enabled->setChecked(tray_icon_s_action != opt::NoAction);
+  ui->tray_icon_d_action_enabled->setChecked(tray_icon_d_action != opt::NoAction);
+  if (tray_icon_s_action == opt::NoAction) tray_icon_s_action = opt::ShowHideClock;
+  if (tray_icon_d_action == opt::NoAction) tray_icon_d_action = opt::OpenSettings;
+  setIndexByValue(ui->tray_icon_s_action_box, QVariant::fromValue(tray_icon_s_action));
+  setIndexByValue(ui->tray_icon_d_action_box, QVariant::fromValue(tray_icon_d_action));
+#else
+  ui->tray_icon_s_action_enabled->setVisible(false);
+  ui->tray_icon_s_action_box->setVisible(false);
+  ui->tray_icon_d_action_enabled->setVisible(false);
+  ui->tray_icon_d_action_box->setVisible(false);
+#endif
 }
 
 void SettingsDialog::initGeneralTab(size_t idx)
@@ -1005,6 +1043,14 @@ void SettingsDialog::fillUpdatePeriodsList()
   ui->update_period_edit->addItem(tr("1 week"), 7);
   ui->update_period_edit->addItem(tr("2 weeks"), 14);
   ui->update_period_edit->addItem(tr("1 month"), 30);
+}
+
+void SettingsDialog::fillTrayIconActions(QComboBox* box)
+{
+  QSignalBlocker _(box);
+  box->addItem(tr("open settings"), QVariant::fromValue(opt::OpenSettings));
+  box->addItem(tr("show/hide clock"), QVariant::fromValue(opt::ShowHideClock));
+  box->addItem(tr("toggle \"stay on top\""), QVariant::fromValue(opt::ToggleStayOnTop));
 }
 
 void SettingsDialog::fillTimeZonesList()

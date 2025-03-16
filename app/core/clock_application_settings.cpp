@@ -58,6 +58,11 @@ void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVari
       for (const auto& [i, w] : _windows) applyWindowOption(i, opt, val);
       break;
 
+    case opt::TrayIconSingleClickAction:
+    case opt::TrayIconDoubleClickAction:
+      // does nothing, value is used directly from config
+      break;
+
     case opt::CheckForUpdates:
       if (val.toBool())
         initUpdater();

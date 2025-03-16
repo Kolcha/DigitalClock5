@@ -221,6 +221,7 @@ void ClockApplication::saveWindowState()
 
 void ClockApplication::showSettingsDialog()
 {
+  std::ranges::for_each(_windows, [](const auto& p) { auto& [_, w] = p; if (!w->isVisible()) w->show(); });
   auto wnd = qobject_cast<ClockWindow*>(sender());
   size_t idx = wnd ? findWindow(wnd) : _windows.begin()->first;
   _windows[idx]->activateWindow();
@@ -269,6 +270,20 @@ void ClockApplication::handleNewVersion(const QVersionNumber& v, const QDate& d,
         QSystemTrayIcon::Information, -1);
   // *INDENT-ON*
   connect(_tray_icon.get(), &QSystemTrayIcon::messageClicked, [=] () { QDesktopServices::openUrl(l); });
+}
+
+void ClockApplication::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+  switch (reason) {
+    case QSystemTrayIcon::DoubleClick:
+      applyTrayIconDoubleClickAction();
+      break;
+    case QSystemTrayIcon::Trigger:
+      applyTrayIconSingleClickAction();
+      break;
+    default:
+      break;
+  }
 }
 
 void ClockApplication::initConfig()
@@ -321,6 +336,9 @@ void ClockApplication::loadTranslation()
 
 void ClockApplication::initTray()
 {
+#ifdef Q_OS_WINDOWS
+  connect(_tray_icon.get(), &QSystemTrayIcon::activated, this, &ClockApplication::onTrayIconActivated);
+#endif
   _tray_icon->show();
 
   _tray_menu = std::make_unique<QMenu>();
@@ -474,4 +492,32 @@ void ClockApplication::addPositionMenu()
                     this, &ClockApplication::moveWindowToPredefinedPos)
       ->setData(QVariant::fromValue(Qt::AlignBottom | Qt::AlignRight));
   // *INDENT-ON*
+}
+
+void ClockApplication::applyTrayIconAction(opt::TrayIconAction act)
+{
+  switch (act) {
+    case opt::NoAction:
+      break;
+    case opt::OpenSettings:
+      showSettingsDialog();
+      break;
+    case opt::ShowHideClock:
+      std::ranges::for_each(_windows, [](const auto& p) { auto& [_, w] = p; w->setVisible(!w->isVisible()); });
+      break;
+    case opt::ToggleStayOnTop:
+      _cfg->global()->setStayOnTop(!_cfg->global()->getStayOnTop());
+      onGlobalOptionChanged(opt::StayOnTop, _cfg->global()->getStayOnTop());
+      break;
+  }
+}
+
+void ClockApplication::applyTrayIconSingleClickAction()
+{
+  applyTrayIconAction(_cfg->global()->getTrayIconSingleClickAction());
+}
+
+void ClockApplication::applyTrayIconDoubleClickAction()
+{
+  applyTrayIconAction(_cfg->global()->getTrayIconDoubleClickAction());
 }

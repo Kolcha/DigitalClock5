@@ -63,6 +63,9 @@ QString GlobalConfig::key(opt::GlobalOptions o)
     case opt::TransparentOnHover:       return "behavior/transparent_on_hover";
     case opt::OpacityOnHover:           return "behavior/opacity_on_hover";
 
+    case opt::TrayIconSingleClickAction:  return "behavior/tray_icon_single_click_action";
+    case opt::TrayIconDoubleClickAction:  return "behavior/tray_icon_double_click_action";
+
     case opt::CheckForUpdates:          return "updater/check_for_updates";
     case opt::CheckForBetaVersion:      return "updater/check_for_beta";
     case opt::UpdatePeriodDays:         return "updater/update_period_days";
@@ -96,6 +99,9 @@ QVariant GlobalConfig::def_value(opt::GlobalOptions o)
 
     case opt::TransparentOnHover:       return false;
     case opt::OpacityOnHover:           return 15;
+
+    case opt::TrayIconSingleClickAction:  return QVariant::fromValue(opt::NoAction);
+    case opt::TrayIconDoubleClickAction:  return QVariant::fromValue(opt::OpenSettings);
 
     case opt::CheckForUpdates:          return true;
     case opt::CheckForBetaVersion:      return true;

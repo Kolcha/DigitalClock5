@@ -23,152 +23,7 @@
       <attribute name="title">
        <string>App Global</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,1">
-       <item row="4" column="2">
-        <widget class="QCheckBox" name="hide_on_mouse_hover">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>hide completely</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="2">
-        <widget class="QCheckBox" name="transparent_on_hover">
-         <property name="text">
-          <string>become almost transparent on mouse hover</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QSpinBox" name="wnd_count_edit">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>8</number>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="5" column="2">
-        <widget class="QCheckBox" name="use_same_appearance">
-         <property name="text">
-          <string>same appearance</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QComboBox" name="update_period_edit"/>
-       </item>
-       <item row="6" column="2">
-        <widget class="QCheckBox" name="check_for_beta">
-         <property name="text">
-          <string>include beta</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <layout class="QHBoxLayout" name="lang_layout" stretch="0,1">
-         <item>
-          <widget class="QToolButton" name="lang_tr_btn">
-           <property name="toolTip">
-            <string>help to translate</string>
-           </property>
-           <property name="autoRaise">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="lang_list"/>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="enable_autostart">
-         <property name="text">
-          <string>start on system startup</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QCheckBox" name="enable_autoupdate">
-         <property name="text">
-          <string>check for updates every</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QCheckBox" name="fullscreen_detect">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>show clock in fullscreen mode (may not work for some apps)</string>
-         </property>
-         <property name="text">
-          <string>show in fullscreen mode</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QCheckBox" name="enable_multiwindow">
-         <property name="text">
-          <string>enable multiple clocks</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0" colspan="3">
-        <widget class="QLabel" name="warning_label">
-         <property name="text">
-          <string>Most of options listed here require app restart to take effect.</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QCheckBox" name="enable_stay_on_top">
-         <property name="text">
-          <string>stay on top of other windows</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0" colspan="3">
-        <widget class="QCheckBox" name="enable_debug_options">
-         <property name="text">
-          <string>enable debug options</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QCheckBox" name="keep_always_visible">
-         <property name="toolTip">
-          <string>always keep clock visible on screen, prevent out of screen position</string>
-         </property>
-         <property name="text">
-          <string>prevent out of screen position</string>
-         </property>
-        </widget>
-       </item>
+      <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0">
        <item row="3" column="0" colspan="2">
         <layout class="QHBoxLayout" name="snap_to_edges_layout">
          <item>
@@ -212,6 +67,46 @@
          </item>
         </layout>
        </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QCheckBox" name="transparent_on_hover">
+         <property name="text">
+          <string>become almost transparent on mouse hover</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="enable_autoupdate">
+         <property name="text">
+          <string>check for updates every</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="update_period_edit"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="fullscreen_detect">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>show clock in fullscreen mode (may not work for some apps)</string>
+         </property>
+         <property name="text">
+          <string>show in fullscreen mode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QCheckBox" name="use_same_appearance">
+         <property name="text">
+          <string>same appearance</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="0" colspan="2">
         <widget class="QCheckBox" name="enable_transp_for_input">
          <property name="text">
@@ -219,10 +114,129 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="enable_autostart">
+         <property name="text">
+          <string>start on system startup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <layout class="QHBoxLayout" name="lang_layout" stretch="0,1">
+         <item>
+          <widget class="QToolButton" name="lang_tr_btn">
+           <property name="toolTip">
+            <string>help to translate</string>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="lang_list"/>
+         </item>
+        </layout>
+       </item>
        <item row="2" column="2">
         <widget class="QCheckBox" name="should_change_cursor">
          <property name="text">
           <string>change cursor on mouse hover</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="enable_multiwindow">
+         <property name="text">
+          <string>enable multiple clocks</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QCheckBox" name="check_for_beta">
+         <property name="text">
+          <string>include beta</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="hide_on_mouse_hover">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>hide completely</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="enable_stay_on_top">
+         <property name="text">
+          <string>stay on top of other windows</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSpinBox" name="wnd_count_edit">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QCheckBox" name="keep_always_visible">
+         <property name="toolTip">
+          <string>always keep clock visible on screen, prevent out of screen position</string>
+         </property>
+         <property name="text">
+          <string>prevent out of screen position</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <widget class="QCheckBox" name="tray_icon_s_action_enabled">
+         <property name="text">
+          <string>tray icon single click action</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QComboBox" name="tray_icon_s_action_box">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="2">
+        <widget class="QCheckBox" name="tray_icon_d_action_enabled">
+         <property name="text">
+          <string>tray icon double click action</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QComboBox" name="tray_icon_d_action_box">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1805,6 +1819,38 @@
     <hint type="destinationlabel">
      <x>321</x>
      <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tray_icon_s_action_enabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tray_icon_s_action_box</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tray_icon_d_action_enabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tray_icon_d_action_box</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>308</x>
+     <y>271</y>
     </hint>
    </hints>
   </connection>

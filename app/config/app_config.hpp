@@ -48,6 +48,9 @@ public:
   GLOBAL_OPTION(bool, TransparentOnHover)
   GLOBAL_OPTION(int, OpacityOnHover)
 
+  GLOBAL_OPTION(opt::TrayIconAction, TrayIconSingleClickAction)
+  GLOBAL_OPTION(opt::TrayIconAction, TrayIconDoubleClickAction)
+
   GLOBAL_OPTION(bool, CheckForUpdates)
   GLOBAL_OPTION(bool, CheckForBetaVersion)
   GLOBAL_OPTION(int, UpdatePeriodDays)

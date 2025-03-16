@@ -63,11 +63,15 @@ private slots:
   void on_transparent_on_hover_clicked(bool checked);
   void on_hide_on_mouse_hover_clicked(bool checked);
 
+  void on_tray_icon_s_action_enabled_clicked(bool checked);
+  void on_tray_icon_s_action_box_activated(int index);
+
+  void on_tray_icon_d_action_enabled_clicked(bool checked);
+  void on_tray_icon_d_action_box_activated(int index);
+
   void on_enable_autoupdate_clicked(bool checked);
   void on_update_period_edit_activated(int index);
   void on_check_for_beta_clicked(bool checked);
-
-  void on_enable_debug_options_clicked(bool checked);
 
   // format
   void on_smaller_seconds_clicked(bool checked);
@@ -155,6 +159,7 @@ private:
   void initWindowsList();
   void fillLanguagesList();
   void fillUpdatePeriodsList();
+  void fillTrayIconActions(QComboBox* box);
   void fillTimeZonesList();
   void fillSkinsList();
   void fillTextureTypes(QComboBox* box);

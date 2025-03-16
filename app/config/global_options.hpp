@@ -11,6 +11,15 @@ inline namespace app {
 
 Q_NAMESPACE
 
+enum TrayIconAction {
+  NoAction,
+  OpenSettings,
+  ShowHideClock,
+  ToggleStayOnTop,
+};
+
+Q_ENUM_NS(TrayIconAction)
+
 enum GlobalOptions {
   // general
   Locale,
@@ -34,6 +43,9 @@ enum GlobalOptions {
 
   TransparentOnHover,
   OpacityOnHover,
+
+  TrayIconSingleClickAction,
+  TrayIconDoubleClickAction,
 
   // updater
   CheckForUpdates,

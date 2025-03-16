@@ -7,6 +7,7 @@
 #include <QtCore/QObject>
 
 #include <QtCore/QVersionNumber>
+#include <QtWidgets/QSystemTrayIcon>
 
 #include <map>
 #include <memory>
@@ -71,6 +72,8 @@ private slots:
   void maybeCheckForUpdate();
   void handleNewVersion(const QVersionNumber& v, const QDate& d, const QUrl& l);
 
+  void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+
   void onGlobalOptionChanged(opt::GlobalOptions opt, const QVariant& val);
   void onInstanceOptionChanged(size_t i, opt::InstanceOptions opt, const QVariant& val);
 
@@ -93,6 +96,10 @@ private:
 
   void applyInstanceOption(size_t idx, opt::InstanceOptions opt, const QVariant& val);
   void applyWindowOption(size_t idx, opt::GlobalOptions opt, const QVariant& val);
+
+  void applyTrayIconAction(opt::TrayIconAction act);
+  void applyTrayIconSingleClickAction();
+  void applyTrayIconDoubleClickAction();
 
 private:
   std::unique_ptr<ClockTrayIcon> _tray_icon;
