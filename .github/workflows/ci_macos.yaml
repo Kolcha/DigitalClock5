@@ -53,8 +53,20 @@ jobs:
           rm DigitalClock5.app/Contents/Frameworks/libsw*
           macdeployqt DigitalClock5.app -no-plugins -codesign=-
           popd
+          mkdir dmg_src
+          mv build/app/DigitalClock5.app dmg_src/
+          cp dist/dmg/install.txt dmg_src/
           mkdir upload
-          create-dmg --volname "Digital Clock 5" --window-size 400 300 --text-size 16 --icon-size 128 --icon "DigitalClock5.app" 30 110 --app-drop-link 200 110 --format UDBZ upload/digital_clock_5-macos.dmg build/app/DigitalClock5.app
+          create-dmg \
+            --volname "Digital Clock 5" \
+            --window-size 600 300 \
+            --text-size 16 \
+            --icon-size 128 \
+            --icon "DigitalClock5.app" 30 110 \
+            --app-drop-link 250 110 \
+            --icon "install.txt" 400 110 \
+            --format UDBZ upload/digital_clock_5-macos.dmg \
+            dmg_src
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

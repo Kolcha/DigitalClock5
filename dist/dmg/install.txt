@@ -1,0 +1,14 @@
+after moving "DigitalClock5.app" into "/Applications"
+run the following command in the Terminal:
+
+xattr -cr "/Applications/DigitalClock5.app/"
+
+
+Official Homepage:
+https://digitalclock4.sourceforge.io
+
+Github:
+https://github.com/Kolcha/DigitalClock5
+
+Bug Report:
+https://github.com/Kolcha/DigitalClock5/issues
