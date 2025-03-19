@@ -133,7 +133,7 @@ void AppearanceSettingsWidget::on_align_h_box_activated(int index)
 
 void AppearanceSettingsWidget::on_align_v_box_activated(int index)
 {
-  auto valign = ui->align_h_box->itemData(index).value<Qt::Alignment>();
+  auto valign = ui->align_v_box->itemData(index).value<Qt::Alignment>();
   cfg->setWidgetAlignment((cfg->getWidgetAlignment() & Qt::AlignHorizontal_Mask) | valign);
   emit pluginOptionChanged(wpo::WidgetAlignment, QVariant::fromValue(cfg->getWidgetAlignment()));
 }
