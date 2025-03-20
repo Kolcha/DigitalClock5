@@ -205,5 +205,5 @@ bool LinkLocalAddressesFilterModel::filterAcceptsRow(int source_row, const QMode
 {
   const auto* m = sourceModel();
   const auto sidx = m->index(source_row, 0, source_parent);
-  return !is_addr_item(sidx.internalId()) || !QHostAddress(m->data(sidx).toString()).isLinkLocal();
+  return m->rowCount(sidx) > 0 || !QHostAddress(m->data(sidx).toString()).isLinkLocal();
 }
