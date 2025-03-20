@@ -33,6 +33,7 @@ endfunction()
 
 add_subdirectory(any_zoom)
 add_subdirectory(date)
+add_subdirectory(ip_address)
 add_subdirectory(quick_note)
 add_subdirectory(random_position)
 add_subdirectory(sample)

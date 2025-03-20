@@ -68,6 +68,9 @@ initial file was generated with the next command:
       <Component Id="cmp591185D005BC8A86F42703372CEBCC40" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{AB6EFEB8-5069-4BBF-B52A-069587FEFFAB}">
         <File Id="filBD8F914FE753A4434FDEDFFDB5A79158" KeyPath="yes" Source="$(var.MySource)\plugins\date.dll" />
       </Component>
+      <Component Id="cmp2B77B8278BBFFC630F5BCC2F2614AD64" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{6DF5C069-FCEC-4DBD-9521-2F25CD2364D7}">
+        <File Id="filA9801231E3C530FD0555DBDC0BCCDE63" KeyPath="yes" Source="$(var.MySource)\plugins\ip_address.dll" />
+      </Component>
       <Component Id="cmp9D3C488A101B70CFEE382E10C3DA4D9D" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{9864FB1D-B61E-4534-B884-7D8B8AD74B67}">
         <File Id="filD3AB63896CD5BC5D2A1E264F82EDFB88" KeyPath="yes" Source="$(var.MySource)\plugins\quick_note.dll" />
       </Component>
