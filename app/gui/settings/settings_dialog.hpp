@@ -143,6 +143,7 @@ private slots:
   void on_true_per_char_clicked(bool checked);
   void on_respect_line_spacing_clicked(bool checked);
   void on_layout_spacing_edit_valueChanged(int arg1);
+  void on_hide_clock_widget_clicked(bool checked);
 
 private:
   void initAppGlobalTab();

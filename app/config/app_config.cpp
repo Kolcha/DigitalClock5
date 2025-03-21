@@ -193,6 +193,8 @@ QString InstanceConfig::key(opt::InstanceOptions o)
     case opt::FlashingSeparator:        return "clock/flashing_separator";
     case opt::UseCustomSeparators:      return "clock/use_custom_separators";
     case opt::CustomSeparators:         return "clock/custom_separators";
+
+    case opt::HideClockWidget:          return "misc/hide_clock_widget";
   }
   Q_ASSERT(false);
   return {};
@@ -254,6 +256,8 @@ QVariant InstanceConfig::def_value(opt::InstanceOptions o)
     case opt::FlashingSeparator:        return true;
     case opt::UseCustomSeparators:      return false;
     case opt::CustomSeparators:         return QString();
+
+    case opt::HideClockWidget:          return false;
   }
   Q_ASSERT(false);
   return {};

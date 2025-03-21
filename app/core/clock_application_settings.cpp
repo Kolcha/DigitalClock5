@@ -274,6 +274,10 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
     case opt::CustomSeparators:
       wnd->clock()->setCustomSeparators(val.toString());
       break;
+
+    case opt::HideClockWidget:
+      wnd->clock()->setHidden(val.toBool());
+      break;
   }
 
   _pm->onOptionChanged(idx, opt, val);

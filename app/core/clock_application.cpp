@@ -122,6 +122,8 @@ void ClockApplication::reconfigureWindow(size_t i)
   applyInstanceOption(i, opt::FlashingSeparator, inst_cfg->getFlashingSeparator());
   applyInstanceOption(i, opt::UseCustomSeparators, inst_cfg->getUseCustomSeparators());
 
+  applyInstanceOption(i, opt::HideClockWidget, inst_cfg->getHideClockWidget());
+
   applyWindowOption(i, opt::StayOnTop, glob_cfg->getStayOnTop());
   applyWindowOption(i, opt::FullscreenDetect, glob_cfg->getFullscreenDetect());
   applyWindowOption(i, opt::TransparentForMouse, glob_cfg->getTransparentForMouse());

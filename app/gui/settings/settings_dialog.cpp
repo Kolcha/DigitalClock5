@@ -775,6 +775,12 @@ void SettingsDialog::on_layout_spacing_edit_valueChanged(int arg1)
   emit instanceOptionChanged(_curr_idx, opt::LayoutSpacing, arg1);
 }
 
+void SettingsDialog::on_hide_clock_widget_clicked(bool checked)
+{
+  app->config()->instance(_curr_idx)->setHideClockWidget(checked);
+  emit instanceOptionChanged(_curr_idx, opt::HideClockWidget, checked);
+}
+
 void SettingsDialog::initAppGlobalTab()
 {
   ui->lang_tr_btn->setIcon(QIcon(":/icons/set-language.svg"));
@@ -953,6 +959,8 @@ void SettingsDialog::initMiscTab(size_t idx)
   ui->respect_line_spacing->setChecked(acfg.getRespectLineSpacing());
 
   ui->layout_spacing_edit->setValue(acfg.getLayoutSpacing());
+
+  ui->hide_clock_widget->setChecked(acfg.getHideClockWidget());
 }
 
 void SettingsDialog::initPluginsTab()

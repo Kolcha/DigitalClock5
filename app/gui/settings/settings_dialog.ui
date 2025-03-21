@@ -969,33 +969,10 @@
        <string>Misc</string>
       </attribute>
       <layout class="QGridLayout" name="misc_layout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="margins_char_lbl">
-         <property name="text">
-          <string>extra space around characters</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="m_char_l">
+       <item row="0" column="4">
+        <widget class="QDoubleSpinBox" name="m_char_b">
          <property name="toolTip">
-          <string>left</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="maximum">
-          <double>32.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.050000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QDoubleSpinBox" name="m_char_t">
-         <property name="toolTip">
-          <string>top</string>
+          <string>bottom</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -1024,61 +1001,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="4">
-        <widget class="QDoubleSpinBox" name="m_char_b">
-         <property name="toolTip">
-          <string>bottom</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="maximum">
-          <double>32.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.050000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <spacer name="horizontalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>66</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="margins_text_lbl">
-         <property name="text">
-          <string>extra space around widget</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="m_text_l">
-         <property name="toolTip">
-          <string>left</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <double>128.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.100000000000000</double>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="2">
         <widget class="QDoubleSpinBox" name="m_text_t">
          <property name="toolTip">
@@ -1098,22 +1020,26 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <widget class="QDoubleSpinBox" name="m_text_r">
+       <item row="0" column="0">
+        <widget class="QLabel" name="margins_char_lbl">
+         <property name="text">
+          <string>extra space around characters</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QDoubleSpinBox" name="m_char_t">
          <property name="toolTip">
-          <string>right</string>
+          <string>top</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
          <property name="maximum">
-          <double>128.000000000000000</double>
+          <double>32.000000000000000</double>
          </property>
          <property name="singleStep">
-          <double>0.100000000000000</double>
+          <double>0.050000000000000</double>
          </property>
         </widget>
        </item>
@@ -1136,6 +1062,13 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="0" colspan="5">
+        <widget class="QCheckBox" name="respect_line_spacing">
+         <property name="text">
+          <string>respect line spacing defined by skin/font</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="0" colspan="5">
         <widget class="QCheckBox" name="true_per_char">
          <property name="text">
@@ -1143,12 +1076,79 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="5">
-        <widget class="QCheckBox" name="respect_line_spacing">
-         <property name="text">
-          <string>respect line spacing defined by skin/font</string>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="m_text_l">
+         <property name="toolTip">
+          <string>left</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <double>128.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
          </property>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="margins_text_lbl">
+         <property name="text">
+          <string>extra space around widget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="m_char_l">
+         <property name="toolTip">
+          <string>left</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="maximum">
+          <double>32.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.050000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QDoubleSpinBox" name="m_text_r">
+         <property name="toolTip">
+          <string>right</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <double>128.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>124</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item row="4" column="0" colspan="5">
         <layout class="QHBoxLayout" name="layout_spacing_layout">
@@ -1190,18 +1190,25 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="1">
-        <spacer name="verticalSpacer_3">
+       <item row="0" column="5">
+        <spacer name="horizontalSpacer_7">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>124</height>
+           <width>66</width>
+           <height>20</height>
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="5" column="0" colspan="5">
+        <widget class="QCheckBox" name="hide_clock_widget">
+         <property name="text">
+          <string>hide clock widget, show only widgets added by plugins</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

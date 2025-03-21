@@ -150,6 +150,8 @@ public:
   INSTANCE_OPTION(bool, UseCustomSeparators)
   INSTANCE_OPTION(QString, CustomSeparators)
 
+  INSTANCE_OPTION(bool, HideClockWidget)
+
 public slots:
   void commit();
   void discard();

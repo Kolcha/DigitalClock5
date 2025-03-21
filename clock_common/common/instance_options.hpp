@@ -85,6 +85,9 @@ enum InstanceOptions {
   FlashingSeparator,
   UseCustomSeparators,
   CustomSeparators,
+
+  // misc options
+  HideClockWidget,
 };
 
 Q_ENUM_NS(InstanceOptions)
