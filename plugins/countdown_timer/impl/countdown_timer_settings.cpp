@@ -27,6 +27,7 @@ QString CountdownTimerInstanceConfig::key(Options o)
     case ShowMessage:           return "show_message";
     case MessageText:           return "message_text";
 
+    case ShowLeadingZero:       return "show_leading_zero";
     case HideDaysThreshold:     return "hide_days_threshold";
     case AlsoHideHours:         return "also_hide_hours";
 
@@ -60,6 +61,7 @@ QVariant CountdownTimerInstanceConfig::def_value(Options o)
     case ShowMessage:           return false;
     case MessageText:           return QString();
 
+    case ShowLeadingZero:       return false;
     case HideDaysThreshold:     return 0;
     case AlsoHideHours:         return false;
 

@@ -10,6 +10,12 @@
 
 namespace countdown_timer {
 
-QString format_time(qint64 time_left, int days_threshold = -1, bool hide_hours = false);
+struct fmt_options {
+  int days_threshold = -1;
+  bool hide_hours = false;
+  bool leading_zero = false;
+};
+
+QString format_time(qint64 time_left, const fmt_options& opt);
 
 } // namespace countdown_timer

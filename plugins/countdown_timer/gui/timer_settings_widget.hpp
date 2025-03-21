@@ -38,6 +38,7 @@ private slots:
   void on_m_edit_valueChanged(int arg1);
   void on_s_edit_valueChanged(int arg1);
 
+  void on_show_leading_zero_clicked(bool checked);
   void on_min_days_edit_valueChanged(int arg1);
   void on_also_hide_hours_clicked(bool checked);
 

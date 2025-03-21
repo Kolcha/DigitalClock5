@@ -6,14 +6,62 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>373</width>
-    <height>329</height>
+    <width>498</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Timer</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="6" column="0" colspan="2">
+    <widget class="QTextEdit" name="msg_text_edit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="reverse_counting">
+     <property name="text">
+      <string>reverse counting</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QCheckBox" name="hide_if_inactive">
+     <property name="text">
+      <string>hide timer when it is not active</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QCheckBox" name="show_msg">
+     <property name="text">
+      <string>show custom message on timeout</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="restart_on_timeout">
+     <property name="text">
+      <string>auto-restart countdown</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="restart_on_dblclik">
+     <property name="text">
+      <string>restart on double click</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="2">
     <widget class="QFrame" name="timeout_frame">
      <property name="frameShape">
@@ -74,6 +122,26 @@
    <item row="1" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QCheckBox" name="show_leading_zero">
+       <property name="text">
+        <string>leading zero</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QLabel" name="min_days_label">
        <property name="text">
         <string>minimum days count to show</string>
@@ -95,19 +163,6 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QCheckBox" name="also_hide_hours">
        <property name="enabled">
         <bool>false</bool>
@@ -118,34 +173,6 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="2" column="0">
-    <widget class="QCheckBox" name="restart_on_dblclik">
-     <property name="text">
-      <string>restart on double click</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QCheckBox" name="restart_on_timeout">
-     <property name="text">
-      <string>auto-restart countdown</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QCheckBox" name="hide_if_inactive">
-     <property name="text">
-      <string>hide timer when it is not active</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCheckBox" name="reverse_counting">
-     <property name="text">
-      <string>reverse counting</string>
-     </property>
-    </widget>
    </item>
    <item row="4" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -167,26 +194,6 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QCheckBox" name="show_msg">
-     <property name="text">
-      <string>show custom message on timeout</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0" colspan="2">
-    <widget class="QTextEdit" name="msg_text_edit">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>100</height>
-      </size>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

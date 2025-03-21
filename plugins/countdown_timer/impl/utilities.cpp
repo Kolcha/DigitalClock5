@@ -8,7 +8,17 @@
 
 namespace countdown_timer {
 
-QString format_time(qint64 time_left, int days_threshold, bool hide_hours)
+namespace {
+
+constexpr qint64 int_pow(qint64 v, int p) noexcept
+{
+  while (p-- > 0) v *= v;
+  return v;
+}
+
+} // namespace
+
+QString format_time(qint64 time_left, const fmt_options& opt)
 {
   qint64 h = time_left / 3600;
   qint64 m = (time_left - h * 3600) / 60;
@@ -16,19 +26,25 @@ QString format_time(qint64 time_left, int days_threshold, bool hide_hours)
 
   qint64 days_left = h / 24;
 
-  int fw = 2;             // field width
-  int b = 10;             // base
-  QLatin1Char ch('0');    // filler
+  constexpr int fw = 2;             // field width
+  constexpr int b = 10;             // base
+  constexpr QLatin1Char ch('0');    // filler
 
-  if (days_left < days_threshold || days_threshold == -1) {
-    if (hide_hours)
-      return QString("%1:%2").arg(m + h * 60).arg(s, fw, b, ch);
+  auto maybe_pad = [&](qint64 v) -> QString {
+    if (opt.leading_zero && v < int_pow(b, fw))
+      return QString("%1").arg(v, fw, b, ch);
+    return QString::number(v, b);
+  };
+
+  if (days_left < opt.days_threshold || opt.days_threshold == -1) {
+    if (opt.hide_hours)
+      return QString("%1:%2").arg(maybe_pad(m + h * 60)).arg(s, fw, b, ch);
     else
-      return QString("%1:%2:%3").arg(h).arg(m, fw, b, ch).arg(s, fw, b, ch);
+      return QString("%1:%2:%3").arg(maybe_pad(h)).arg(m, fw, b, ch).arg(s, fw, b, ch);
   }
 
   return QString("%1:%2:%3:%4")
-         .arg(days_left)
+         .arg(maybe_pad(days_left))
          .arg(h - days_left * 24, fw, b, ch)
          .arg(m, fw, b, ch)
          .arg(s, fw, b, ch);

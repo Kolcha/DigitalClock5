@@ -38,6 +38,7 @@ void TimerSettingsWidget::initControls(CountdownTimerInstanceConfig* icfg)
   ui->m_edit->setValue(cfg->getIntervalMinutes());
   ui->s_edit->setValue(cfg->getIntervalSeconds());
 
+  ui->show_leading_zero->setChecked(cfg->getShowLeadingZero());
   ui->min_days_edit->setValue(cfg->getHideDaysThreshold());
   ui->also_hide_hours->setChecked(cfg->getAlsoHideHours());
 
@@ -86,6 +87,12 @@ void TimerSettingsWidget::on_s_edit_valueChanged(int arg1)
 {
   cfg->setIntervalSeconds(arg1);
   emit optionChanged(IntervalSeconds, arg1);
+}
+
+void TimerSettingsWidget::on_show_leading_zero_clicked(bool checked)
+{
+  cfg->setShowLeadingZero(checked);
+  emit optionChanged(ShowLeadingZero, checked);
 }
 
 void TimerSettingsWidget::on_min_days_edit_valueChanged(int arg1)

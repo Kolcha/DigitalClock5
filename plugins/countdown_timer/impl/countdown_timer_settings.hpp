@@ -28,6 +28,7 @@ enum Options {
   ShowMessage,
   MessageText,
 
+  ShowLeadingZero,
   HideDaysThreshold,
   AlsoHideHours,
 
@@ -72,6 +73,7 @@ public:
   PLUGIN_CONFIG_OPTION(bool, ShowMessage)
   PLUGIN_CONFIG_OPTION(QString, MessageText)
 
+  PLUGIN_CONFIG_OPTION(bool, ShowLeadingZero)
   PLUGIN_CONFIG_OPTION(int, HideDaysThreshold)
   PLUGIN_CONFIG_OPTION(bool, AlsoHideHours)
 

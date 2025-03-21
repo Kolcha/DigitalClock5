@@ -125,6 +125,7 @@ void CountdownTimerPlugin::applyTimerOption(countdown_timer::Options opt, const 
       // implicitly handled
       break;
 
+    case cd::ShowLeadingZero:
     case cd::HideDaysThreshold:
     case cd::AlsoHideHours:
       updateWidgetText();
@@ -218,7 +219,12 @@ void CountdownTimerPlugin::initTimer()
 void CountdownTimerPlugin::updateWidgetText()
 {
   qint64 counter = _cfg->getReverseCounting() ? _timer->interval() - _timer->timeLeft() : _timer->timeLeft();
-  _last_text = countdown_timer::format_time(counter, _cfg->getHideDaysThreshold(), _cfg->getAlsoHideHours());
+  const countdown_timer::fmt_options options = {
+    .days_threshold = _cfg->getHideDaysThreshold(),
+    .hide_hours = _cfg->getAlsoHideHours(),
+    .leading_zero = _cfg->getShowLeadingZero(),
+  };
+  _last_text = countdown_timer::format_time(counter, options);
 }
 
 void CountdownTimerPlugin::onTimeout()
