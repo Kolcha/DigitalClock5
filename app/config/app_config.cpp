@@ -121,6 +121,7 @@ InstanceConfig::InstanceConfig(std::unique_ptr<SettingsStorage> st, AppConfig& c
 {
   _unique_opts.insert(opt::ShowLocalTime);
   _unique_opts.insert(opt::TimeZone);
+  _unique_opts.insert(opt::HideClockWidget);
 }
 
 void InstanceConfig::commit()
