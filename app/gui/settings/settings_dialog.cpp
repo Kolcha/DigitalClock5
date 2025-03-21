@@ -25,6 +25,7 @@
 #include "platform/autostart.h"
 #include "plugin_info_dialog.hpp"
 #include "plugin_list_item_widget.hpp"
+#include "scale_factor.hpp"
 
 namespace {
 
@@ -459,7 +460,8 @@ void SettingsDialog::on_is_separator_flashes_clicked(bool checked)
 void SettingsDialog::on_scaling_edit_valueChanged(int arg1)
 {
   app->config()->instance(_curr_idx)->setScaling(arg1);
-  emit instanceOptionChanged(_curr_idx, opt::Scaling, arg1);
+  const auto s = ScaleFactor(arg1 / 100.);
+  emit instanceOptionChanged(_curr_idx, opt::Scaling, QVariant::fromValue(s));
 }
 
 void SettingsDialog::on_opacity_edit_valueChanged(int arg1)

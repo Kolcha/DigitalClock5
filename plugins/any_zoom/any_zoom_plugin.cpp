@@ -16,7 +16,7 @@ AnyZoomPlugin::AnyZoomPlugin(const AnyZoomPluginInstanceConfig& cfg)
 
 void AnyZoomPlugin::init(const InstanceOptionsHash& settings)
 {
-  _clock_scaling = settings.value(opt::Scaling, _clock_scaling).toInt();
+  _clock_scaling = settings.value(opt::Scaling, QVariant::fromValue(_clock_scaling)).value<ScaleFactor>();
 }
 
 void AnyZoomPlugin::startup()
@@ -26,7 +26,7 @@ void AnyZoomPlugin::startup()
 
 void AnyZoomPlugin::shutdown()
 {
-  emit optionChanged(opt::Scaling, _clock_scaling);
+  emit optionChanged(opt::Scaling, QVariant::fromValue(_clock_scaling));
 }
 
 void AnyZoomPlugin::onOptionChanged(opt::InstanceOptions opt, const QVariant& val)

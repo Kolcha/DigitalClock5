@@ -26,6 +26,7 @@
 #include "gui/clock_window.hpp"
 #include "gui/settings/settings_dialog.hpp"
 #include "platform/mouse_tracker.hpp"
+#include "scale_factor.hpp"
 
 namespace {
 
@@ -87,7 +88,8 @@ void ClockApplication::reconfigureWindow(size_t i)
   Q_ASSERT(inst_cfg);
   Q_ASSERT(glob_cfg);
 
-  applyInstanceOption(i, opt::Scaling, inst_cfg->getScaling());
+  const auto s = ScaleFactor(inst_cfg->getScaling() / 100.);
+  applyInstanceOption(i, opt::Scaling, QVariant::fromValue(s));
   applyInstanceOption(i, opt::Opacity, inst_cfg->getOpacity());
   applyInstanceOption(i, opt::UseSkin, inst_cfg->getUseSkin());
 

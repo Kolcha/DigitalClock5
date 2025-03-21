@@ -37,7 +37,7 @@ public slots:
 
 private:
   const AnyZoomPluginInstanceConfig& _cfg;
-  int _clock_scaling = 100;
+  ScaleFactor _clock_scaling;
 };
 
 

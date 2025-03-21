@@ -112,15 +112,9 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
       wnd->clock()->setSkin(std::make_unique<FontSkin>(val.value<QFont>()));
       break;
 
-    case opt::Scaling: {
-      bool ok = false;
-      auto s = val.toInt(&ok) / 100.;
-      if (ok)
-        wnd->clock()->setScaling(s, s);
-      else
-        wnd->clock()->setScaling(val.value<ScaleFactor>());
+    case opt::Scaling:
+      wnd->clock()->setScaling(val.value<ScaleFactor>());
       break;
-    }
 
     case opt::Opacity:
       wnd->setWindowOpacity(val.toInt() / 100.);

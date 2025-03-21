@@ -110,7 +110,7 @@ void TextPluginInstanceBase::applyPluginOption(wpo::InstanceOptions opt, const Q
       if (val.toBool())
         applyPluginOption(wpo::PercentOfClockSize, _cfg.getPercentOfClockSize());
       else
-        applySharedOption(opt::Scaling, _opt_router.value<int>(opt::Scaling));
+        applySharedOption(opt::Scaling, QVariant::fromValue(_opt_router.value<ScaleFactor>(opt::Scaling)));
       break;
     case wpo::PercentOfClockSize: {
       Q_ASSERT(!_widget_text.isEmpty());
@@ -163,7 +163,7 @@ void TextPluginInstanceBase::applySharedOption(opt::InstanceOptions opt, const Q
 
     case opt::Scaling:
       if (!_cfg.getAutoscaleEnabled())
-        _widget->setScaling(val.toInt() / 100.);
+        _widget->setScaling(val.value<ScaleFactor>());
       break;
 
     case opt::TextureType:
