@@ -10,6 +10,8 @@ bool SharedOptionRouter::should_route(opt::InstanceOptions o) const
 {
   static const QSet<opt::InstanceOptions> always_route_opts = {
     opt::Scaling,
+    opt::ShowLocalTime,
+    opt::TimeZone,
   };
 
   static const QSet<opt::InstanceOptions> never_route_opts = {

@@ -62,6 +62,13 @@ CountdownTimerPlugin::CountdownTimerPlugin(const CountdownTimerInstanceConfig* c
 {
 }
 
+void CountdownTimerPlugin::init(const InstanceOptionsHash& settings)
+{
+  _local_time = settings[opt::ShowLocalTime].toBool();
+  _last_tz = settings[opt::TimeZone].value<QTimeZone>();
+  TextPluginInstanceBase::init(settings);
+}
+
 CountdownTimerPlugin::~CountdownTimerPlugin() = default;
 
 void CountdownTimerPlugin::startup()
@@ -90,6 +97,24 @@ void CountdownTimerPlugin::shutdown()
   _restart_hotkey.reset();
 
   TextPluginInstanceBase::shutdown();
+}
+
+void CountdownTimerPlugin::onOptionChanged(opt::InstanceOptions o, const QVariant& v)
+{
+  switch (o) {
+    case opt::ShowLocalTime:
+      _local_time = v.toBool();
+      restartTimer();
+      break;
+    case opt::TimeZone:
+      _last_tz = v.value<QTimeZone>();
+      restartTimer();
+      break;
+    default:
+      break;
+  }
+
+  TextPluginInstanceBase::onOptionChanged(o, v);
 }
 
 void CountdownTimerPlugin::applyTimerOption(countdown_timer::Options opt, const QVariant& val)
@@ -197,13 +222,14 @@ void CountdownTimerPlugin::onWidgetDblclicked()
 void CountdownTimerPlugin::initTimer()
 {
   if (_cfg->getUseTargetDateTime()) {
-    QDateTime now = QDateTime::currentDateTime();   // TODO: depend on time zone
+    QDateTime now = QDateTime::currentDateTime().toTimeZone(currentTimeZone());
     now = now.addMSecs(-now.time().msec());
     QDateTime target = _cfg->getTargetDateTime();
     if (target < now) {
       target = countdown_timer::default_target_date();
       // settings_->SetOption(OPT_TARGET_DATETIME, target);   // ?
     }
+    target.setTimeZone(currentTimeZone());
     if (target > now) {
       _timer->setInterval(now.secsTo(target));
       _timer->start();
@@ -261,6 +287,11 @@ void CountdownTimerPlugin::restartTimer()
   _timer->stop();
   initTimer();
   _timer->start();
+}
+
+QTimeZone CountdownTimerPlugin::currentTimeZone() const
+{
+  return _local_time ? QTimeZone::systemTimeZone() : _last_tz;
 }
 
 

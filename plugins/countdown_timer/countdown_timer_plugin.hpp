@@ -25,9 +25,13 @@ public:
   CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg);
   ~CountdownTimerPlugin();
 
+  void init(const InstanceOptionsHash& settings) override;
+
 public slots:
   void startup() override;
   void shutdown() override;
+
+  void onOptionChanged(opt::InstanceOptions o, const QVariant& v) override;
 
   void applyTimerOption(countdown_timer::Options opt, const QVariant& val);
 
@@ -51,11 +55,17 @@ private slots:
   void restartTimer();
 
 private:
+  QTimeZone currentTimeZone() const;
+
+private:
   std::unique_ptr<countdown_timer::CountdownTimer> _timer;
   std::unique_ptr<QMediaPlayer> _player;
 
   const CountdownTimerInstanceConfig* _cfg;
   QString _last_text;
+
+  bool _local_time = true;
+  QTimeZone _last_tz;
 
   std::unique_ptr<QHotkey> _pause_hotkey;
   std::unique_ptr<QHotkey> _restart_hotkey;
