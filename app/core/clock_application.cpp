@@ -236,6 +236,7 @@ void ClockApplication::showSettingsDialog()
   connect(dlg, &SettingsDialog::accepted, _cfg.get(), &AppConfig::commit);
   connect(dlg, &SettingsDialog::rejected, _cfg.get(), &AppConfig::discard);
   connect(dlg, &SettingsDialog::rejected, this, &ClockApplication::reloadConfig);
+  connect(dlg, &SettingsDialog::finished, this, [this]() { for (const auto& [_, w] : _windows) w->raise(); });
 }
 
 void ClockApplication::showAboutDialog()
