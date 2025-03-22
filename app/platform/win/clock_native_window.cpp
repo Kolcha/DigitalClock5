@@ -47,6 +47,13 @@ static void SetSurviveWinDHackEnabled(WId winId, bool en)
     SetWindowLongPtr((HWND)winId, GWLP_HWNDPARENT, (LONG_PTR)0);
 }
 
+static QPoint wndPosWinAPI(WId winId)
+{
+  RECT r;
+  GetWindowRect((HWND)winId, &r);
+  return {r.left, r.top};
+}
+
 void ClockWindow::platformOneTimeFlags()
 {
 }
@@ -101,6 +108,15 @@ void ClockWindow::platformTick()
       _data->ticks_count = 0;
       SetSurviveWinDHackEnabled(winId(), true);
     }
+  }
+
+  // there were reports that clock position is wrong on startup or after state restore
+  // there is no obvious explanation for this, the only thing is some Windows quirks...
+  // just detect possible "position mismatch" case and move the window explicitly
+  // https://github.com/Kolcha/DigitalClock5/discussions/32
+  auto curr_origin = anchoredOrigin();
+  if ((wndPosWinAPI(winId()) / devicePixelRatio() != pos() || curr_origin != _last_origin) && !_is_dragging) {
+    move(pos() + _last_origin - curr_origin);
   }
 }
 
