@@ -421,7 +421,9 @@ QPoint ClockWindow::anchoredOrigin() const
 
 void ClockWindow::updateLastOrigin()
 {
-  _last_origin = anchoredOrigin();
+  auto origin = anchoredOrigin();
+  if (_last_origin == origin) return;
+  _last_origin = origin;
   emit saveStateRequested();
 }
 
@@ -445,8 +447,6 @@ void ClockWindow::preventOutOfScreenPos()
   if (tpos.y() + wg.height() > sg.y() + sg.height())
     tpos.setY(sg.y() + sg.height() - wg.height());
 
-  if (tpos != pos()) {
+  if (tpos != pos())
     move(tpos);
-    updateLastOrigin();
-  }
 }
