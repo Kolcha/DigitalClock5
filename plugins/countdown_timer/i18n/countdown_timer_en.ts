@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="233"/>
+        <location filename="../countdown_timer_plugin.cpp" line="265"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12,12 +12,12 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="263"/>
+        <location filename="../countdown_timer_plugin.cpp" line="300"/>
         <source>Just a countdown timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="72"/>
+        <location filename="../countdown_timer_plugin.hpp" line="82"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,83 +48,88 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="29"/>
+        <location filename="../gui/timer_settings_widget.ui" line="77"/>
         <source>target time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="43"/>
+        <location filename="../gui/timer_settings_widget.ui" line="91"/>
         <source>interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="53"/>
+        <location filename="../gui/timer_settings_widget.ui" line="101"/>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="60"/>
+        <location filename="../gui/timer_settings_widget.ui" line="108"/>
         <source>minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="67"/>
+        <location filename="../gui/timer_settings_widget.ui" line="115"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="79"/>
+        <location filename="../gui/timer_settings_widget.ui" line="127"/>
+        <source>leading zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_settings_widget.ui" line="147"/>
         <source>minimum days count to show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="89"/>
+        <location filename="../gui/timer_settings_widget.ui" line="157"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="116"/>
+        <location filename="../gui/timer_settings_widget.ui" line="171"/>
         <source>also hide hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="125"/>
+        <location filename="../gui/timer_settings_widget.ui" line="61"/>
         <source>restart on double click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="132"/>
+        <location filename="../gui/timer_settings_widget.ui" line="54"/>
         <source>auto-restart countdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="139"/>
+        <location filename="../gui/timer_settings_widget.ui" line="40"/>
         <source>hide timer when it is not active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="146"/>
+        <location filename="../gui/timer_settings_widget.ui" line="33"/>
         <source>reverse counting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="155"/>
+        <location filename="../gui/timer_settings_widget.ui" line="182"/>
         <source>chime when countdown finishes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="174"/>
+        <location filename="../gui/timer_settings_widget.ui" line="47"/>
         <source>show custom message on timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="137"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="144"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="139"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="146"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation type="unfinished"></translation>
     </message>

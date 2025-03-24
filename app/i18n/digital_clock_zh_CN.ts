@@ -69,66 +69,66 @@ Click here to download.</source>
 <context>
     <name>ClockApplication</name>
     <message>
-        <location filename="../core/clock_application.cpp" line="266"/>
+        <location filename="../core/clock_application.cpp" line="272"/>
         <source>%1 Update</source>
         <translation>%1 更新</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="267"/>
+        <location filename="../core/clock_application.cpp" line="273"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>有可用更新: %1 (%2)
 点击此消息下载。</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="329"/>
+        <location filename="../core/clock_application.cpp" line="352"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="336"/>
+        <location filename="../core/clock_application.cpp" line="359"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="340"/>
+        <location filename="../core/clock_application.cpp" line="363"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="444"/>
+        <location filename="../core/clock_application.cpp" line="467"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="445"/>
+        <location filename="../core/clock_application.cpp" line="468"/>
         <source>Top</source>
         <translation>顶部</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="447"/>
-        <location filename="../core/clock_application.cpp" line="457"/>
-        <location filename="../core/clock_application.cpp" line="467"/>
+        <location filename="../core/clock_application.cpp" line="470"/>
+        <location filename="../core/clock_application.cpp" line="480"/>
+        <location filename="../core/clock_application.cpp" line="490"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="450"/>
-        <location filename="../core/clock_application.cpp" line="456"/>
-        <location filename="../core/clock_application.cpp" line="460"/>
-        <location filename="../core/clock_application.cpp" line="470"/>
+        <location filename="../core/clock_application.cpp" line="473"/>
+        <location filename="../core/clock_application.cpp" line="479"/>
+        <location filename="../core/clock_application.cpp" line="483"/>
+        <location filename="../core/clock_application.cpp" line="493"/>
         <source>Middle</source>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="453"/>
-        <location filename="../core/clock_application.cpp" line="463"/>
-        <location filename="../core/clock_application.cpp" line="473"/>
+        <location filename="../core/clock_application.cpp" line="476"/>
+        <location filename="../core/clock_application.cpp" line="486"/>
+        <location filename="../core/clock_application.cpp" line="496"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="466"/>
+        <location filename="../core/clock_application.cpp" line="489"/>
         <source>Bottom</source>
         <translation>底部</translation>
     </message>
@@ -219,419 +219,439 @@ Click this message to download.</source>
         <translation>应用全局</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="104"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="120"/>
         <source>start on system startup</source>
         <translation>开机自启</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="151"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="178"/>
         <source>stay on top of other windows</source>
         <translation>始终置顶</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="218"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="113"/>
         <source>transparent for mouse events</source>
         <translation>不响应鼠标操作</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="40"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="73"/>
         <source>become almost transparent on mouse hover</source>
         <translation>鼠标经过时透明化</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="33"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="171"/>
         <source>hide completely</source>
         <translation>完全隐藏</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="134"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="151"/>
         <source>enable multiple clocks</source>
         <translation>启用多时钟</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="70"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="106"/>
         <source>same appearance</source>
         <translation>相同外观</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="111"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="80"/>
         <source>check for updates every</source>
         <translation>每次检查更新间隔</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="80"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="161"/>
         <source>include beta</source>
         <translation>包括测试版</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="158"/>
-        <source>enable debug options</source>
-        <translation>启用调试选项</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="144"/>
-        <source>Most of options listed here require app restart to take effect.</source>
-        <translation>这里列出的大多数选项都需要重启应用才能生效。</translation>
-    </message>
-    <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="124"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="96"/>
         <source>show clock in fullscreen mode (may not work for some apps)</source>
         <translation>以全屏模式显示时钟（对某些程序可能不生效）</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="127"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="99"/>
         <source>show in fullscreen mode</source>
         <translation>以全屏模式显示时钟</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="233"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="247"/>
         <source>Format</source>
         <translation>时间格式</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="273"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="287"/>
         <source>custom format</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="423"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="437"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="413"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="427"/>
         <source>layout config string (useful only for multiline formats)</source>
         <translation>布局配置字符串（仅适用于多行格式）</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="352"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="366"/>
         <source>custom separators (will be used instead of &apos;:&apos;)</source>
         <translation>自定义分隔符（将代替 &apos;:&apos; 使用）</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="247"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="261"/>
         <source>replacement characters for &apos;:&apos; in format</source>
         <translation>格式中 &apos;:&apos; 的替换字符</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="371"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="385"/>
         <source>make seconds smaller,</source>
         <translation>使秒数更小，</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="394"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="408"/>
         <source>of clock&apos;s height</source>
         <translation>时钟的高度</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="459"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="473"/>
         <source>12h</source>
         <translation>12 小时制</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="486"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="500"/>
         <source>24h</source>
         <translation>24 小时制</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="469"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="483"/>
         <source>leading zero</source>
         <translation>前导零</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="89"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="129"/>
         <source>help to translate</source>
         <translation>帮助翻译</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="165"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="208"/>
         <source>always keep clock visible on screen, prevent out of screen position</source>
         <translation>保持时钟在屏幕中可见，防止时钟出现在屏幕内容以外的位置</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="168"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="211"/>
         <source>prevent out of screen position</source>
         <translation>防止时钟出现在屏幕内容以外的位置</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="177"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="32"/>
         <source>snap to edges, threshold</source>
         <translation>靠近边缘时自动吸附；阈值</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="225"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="144"/>
         <source>change cursor on mouse hover</source>
         <translation>更改鼠标悬停时的光标</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="432"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="218"/>
+        <source>tray icon single click action</source>
+        <translation type="unfinished">tray icon single click action</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="232"/>
+        <source>tray icon double click action</source>
+        <translation type="unfinished">tray icon double click action</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="446"/>
         <source>display time in another time zone</source>
         <translation>显示另一时区的时间</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="476"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="490"/>
         <source>show seconds</source>
         <translation>显示秒数</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="512"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="526"/>
         <source>show AM/PM</source>
         <translation>显示上午/下午</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="522"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="536"/>
         <source>add space before AM/PM</source>
         <translation>在上午/下午前添加空格</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="529"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="543"/>
         <source>uppercase</source>
         <translation>大写</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="539"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="553"/>
         <source>lowercase</source>
         <translation>小写</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="590"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="604"/>
         <source>Appearance</source>
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="599"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="613"/>
         <source>font</source>
         <translation>字体</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="632"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="646"/>
         <source>skin</source>
         <translation>皮肤</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="655"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="669"/>
         <source>flashing separator</source>
         <translation>分隔符闪烁</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="662"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="676"/>
         <source>texture</source>
         <translation>纹理</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1067"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1105"/>
         <source>solid color</source>
         <translation>使用颜色填充</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1068"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1106"/>
         <source>gradient</source>
         <translation>渐变</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1069"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1107"/>
         <source>pattern</source>
         <translation>图案</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="688"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="862"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="702"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="876"/>
         <source>apply per element</source>
         <translation>应用到每个元素</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="743"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="757"/>
         <source>opacity</source>
         <translation>不透明度</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="753"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="767"/>
         <source>scaling</source>
         <translation>缩放</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="785"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="799"/>
         <source>colorize</source>
         <translation>改变颜色</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="794"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="808"/>
         <source>colorization color</source>
         <translation>上色颜色</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="836"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="850"/>
         <source>background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="872"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="886"/>
         <source>alignment</source>
         <translation>对齐方式</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="878"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="968"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1052"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="892"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1082"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1108"/>
         <source>left</source>
         <translation>左对齐</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="888"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="902"/>
         <source>center</source>
         <translation>中心对齐</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="895"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1000"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1090"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="909"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="991"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1124"/>
         <source>right</source>
         <translation>右对齐</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="905"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="919"/>
         <source>spacing</source>
         <translation>间距</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="911"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="925"/>
         <source>H:</source>
         <translation type="unfinished">H:</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="931"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="945"/>
         <source>V:</source>
         <translation type="unfinished">V:</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="955"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="969"/>
         <source>Misc</source>
         <translation>杂项</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="961"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1026"/>
         <source>extra space around characters</source>
         <translation>字符周围的额外空间</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="984"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1071"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1007"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1033"/>
         <source>top</source>
         <translation>顶部</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1016"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1109"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="975"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1049"/>
         <source>bottom</source>
         <translation>底部</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1045"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1101"/>
         <source>extra space around widget</source>
         <translation>小部件周围的额外空间</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1128"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1075"/>
         <source>character by character rendering</source>
         <translation>逐个字符渲染</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1135"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1068"/>
         <source>respect line spacing defined by skin/font</source>
         <translation>尊重皮肤/字体定义的行距</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1144"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1158"/>
         <source>layout spacing (space between widgets)</source>
         <translation>布局间距（小部件之间的空间）</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1196"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1209"/>
+        <source>hide clock widget, show only widgets added by plugins</source>
+        <translation type="unfinished">hide clock widget, show only widgets added by plugins</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1217"/>
         <source>Plugins</source>
         <translation>插件</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1211"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1232"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1218"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1239"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1000"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1032"/>
         <source>window %1</source>
         <translation>窗口 %1</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="123"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="111"/>
         <source>Import settings from ...</source>
         <translation>导入设置文件...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="125"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="113"/>
         <source>Digital Clock Settings (*.dc5 *.dcs)</source>
         <translation>Digital Clock设置文件(*.dc5 *.dcs)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="149"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="137"/>
         <source>Export settings to ...</source>
         <translation>将设置导出到...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="151"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="139"/>
         <source>Digital Clock 5 Settings (*.dc5)</source>
         <translation>Digital Clock 5设置文件(*.dc5)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="514"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="625"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="525"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="636"/>
         <source>follow system theme</source>
         <translation>跟随系统主题</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="528"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="639"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="539"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="650"/>
         <source>stretch instead of tile</source>
         <translation>拉伸而非平铺</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="577"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="688"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="588"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="699"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>图片文件(*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1008"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1040"/>
         <source>Automatic</source>
         <translation>自动</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1020"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1051"/>
         <source>1 day</source>
         <translation>1天</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1021"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
         <source>3 days</source>
         <translation>3天</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1022"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
         <source>1 week</source>
         <translation>1周</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1023"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
         <source>2 weeks</source>
         <translation>2周</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1024"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1055"/>
         <source>1 month</source>
         <translation>1 个月</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1061"/>
+        <source>open settings</source>
+        <translation type="unfinished">open settings</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1062"/>
+        <source>show/hide clock</source>
+        <translation type="unfinished">show/hide clock</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1063"/>
+        <source>toggle &quot;stay on top&quot;</source>
+        <translation type="unfinished">toggle &quot;stay on top&quot;</translation>
     </message>
 </context>
 </TS>

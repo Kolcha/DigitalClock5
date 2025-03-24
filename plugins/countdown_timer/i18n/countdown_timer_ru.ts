@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="233"/>
+        <location filename="../countdown_timer_plugin.cpp" line="265"/>
         <source>Countdown timer</source>
         <translation>Таймер обратного отсчёта</translation>
     </message>
@@ -12,12 +12,12 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="263"/>
+        <location filename="../countdown_timer_plugin.cpp" line="300"/>
         <source>Just a countdown timer.</source>
         <translation>Простой таймер обратного отсчёта.</translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="72"/>
+        <location filename="../countdown_timer_plugin.hpp" line="82"/>
         <source>Countdown timer</source>
         <translation>Таймер обратного отсчёта</translation>
     </message>
@@ -48,84 +48,89 @@
         <translation>Таймер</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="29"/>
+        <location filename="../gui/timer_settings_widget.ui" line="77"/>
         <source>target time</source>
         <translation>конкретное время</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="43"/>
+        <location filename="../gui/timer_settings_widget.ui" line="91"/>
         <source>interval</source>
         <translation>интервал</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="53"/>
+        <location filename="../gui/timer_settings_widget.ui" line="101"/>
         <source>hours</source>
         <translation>часы</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="60"/>
+        <location filename="../gui/timer_settings_widget.ui" line="108"/>
         <source>minutes</source>
         <translation>минуты</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="67"/>
+        <location filename="../gui/timer_settings_widget.ui" line="115"/>
         <source>seconds</source>
         <translation>секунды</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="79"/>
+        <location filename="../gui/timer_settings_widget.ui" line="127"/>
+        <source>leading zero</source>
+        <translation>начальный ноль</translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_settings_widget.ui" line="147"/>
         <source>minimum days count to show</source>
         <translation>минимальное количество дней для отображения</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="89"/>
+        <location filename="../gui/timer_settings_widget.ui" line="157"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation>Если количество оставшихся дней меньше данного значения, дни не будут отображаться.
 Установите данное значение в -1 чтобы никогда не отображать дни, или в 0 чтобы отображать всегда.</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="116"/>
+        <location filename="../gui/timer_settings_widget.ui" line="171"/>
         <source>also hide hours</source>
         <translation>также скрывать часы</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="125"/>
+        <location filename="../gui/timer_settings_widget.ui" line="61"/>
         <source>restart on double click</source>
         <translation>перезапуск по двойному клику</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="132"/>
+        <location filename="../gui/timer_settings_widget.ui" line="54"/>
         <source>auto-restart countdown</source>
         <translation>перезапуск таймера</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="139"/>
+        <location filename="../gui/timer_settings_widget.ui" line="40"/>
         <source>hide timer when it is not active</source>
         <translation>скрывать неактивный таймер</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="146"/>
+        <location filename="../gui/timer_settings_widget.ui" line="33"/>
         <source>reverse counting</source>
         <translation>обратный счет</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="155"/>
+        <location filename="../gui/timer_settings_widget.ui" line="182"/>
         <source>chime when countdown finishes</source>
         <translation>сигнал по истечению таймера</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="174"/>
+        <location filename="../gui/timer_settings_widget.ui" line="47"/>
         <source>show custom message on timeout</source>
         <translation>показывать сообщение по истечении времени</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="137"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="144"/>
         <source>Open File</source>
         <translation>Выбор файла</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="139"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="146"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation>Звуки (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
     </message>

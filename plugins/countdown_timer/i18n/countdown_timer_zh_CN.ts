@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="233"/>
+        <location filename="../countdown_timer_plugin.cpp" line="265"/>
         <source>Countdown timer</source>
         <translation>倒计时</translation>
     </message>
@@ -12,12 +12,12 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="263"/>
+        <location filename="../countdown_timer_plugin.cpp" line="300"/>
         <source>Just a countdown timer.</source>
         <translation>倒计时功能。</translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="72"/>
+        <location filename="../countdown_timer_plugin.hpp" line="82"/>
         <source>Countdown timer</source>
         <translation>倒计时</translation>
     </message>
@@ -48,84 +48,89 @@
         <translation>计时器</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="29"/>
+        <location filename="../gui/timer_settings_widget.ui" line="77"/>
         <source>target time</source>
         <translation>目标时间</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="43"/>
+        <location filename="../gui/timer_settings_widget.ui" line="91"/>
         <source>interval</source>
         <translation>间隔</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="53"/>
+        <location filename="../gui/timer_settings_widget.ui" line="101"/>
         <source>hours</source>
         <translation>小时</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="60"/>
+        <location filename="../gui/timer_settings_widget.ui" line="108"/>
         <source>minutes</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="67"/>
+        <location filename="../gui/timer_settings_widget.ui" line="115"/>
         <source>seconds</source>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="79"/>
+        <location filename="../gui/timer_settings_widget.ui" line="127"/>
+        <source>leading zero</source>
+        <translation>前导零</translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_settings_widget.ui" line="147"/>
         <source>minimum days count to show</source>
         <translation>倒计时显示的最小天数</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="89"/>
+        <location filename="../gui/timer_settings_widget.ui" line="157"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation>如果剩余天数小于此值，将不会再显示。
 设定为-1将从不显示天数，设定为0则总是显示天数。</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="116"/>
+        <location filename="../gui/timer_settings_widget.ui" line="171"/>
         <source>also hide hours</source>
         <translation type="unfinished">also hide hours</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="125"/>
+        <location filename="../gui/timer_settings_widget.ui" line="61"/>
         <source>restart on double click</source>
         <translation type="unfinished">restart on double click</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="132"/>
+        <location filename="../gui/timer_settings_widget.ui" line="54"/>
         <source>auto-restart countdown</source>
         <translation type="unfinished">auto-restart countdown</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="139"/>
+        <location filename="../gui/timer_settings_widget.ui" line="40"/>
         <source>hide timer when it is not active</source>
         <translation>计时器不活动时隐藏</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="146"/>
+        <location filename="../gui/timer_settings_widget.ui" line="33"/>
         <source>reverse counting</source>
         <translation type="unfinished">reverse counting</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="155"/>
+        <location filename="../gui/timer_settings_widget.ui" line="182"/>
         <source>chime when countdown finishes</source>
         <translation type="unfinished">chime when countdown finishes</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="174"/>
+        <location filename="../gui/timer_settings_widget.ui" line="47"/>
         <source>show custom message on timeout</source>
         <translation>到达设定时间后显示自定义消息</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="137"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="144"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="139"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="146"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation>声音文件 (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
     </message>
