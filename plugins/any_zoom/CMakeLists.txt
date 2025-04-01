@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(any_zoom VERSION 3.1.2 LANGUAGES CXX)
+project(any_zoom VERSION 3.1.3 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME AnyZoomPluginFactory
     gui/zoom_dialog.cpp

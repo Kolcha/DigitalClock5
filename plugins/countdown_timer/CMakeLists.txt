@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(countdown_timer VERSION 2.1.2 LANGUAGES CXX)
+project(countdown_timer VERSION 2.2.0 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME CountdownTimerPluginFactory
     gui/hotkeys_settings_widget.cpp

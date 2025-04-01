@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(ClockCommon VERSION 2.1.0 LANGUAGES CXX)
+project(ClockCommon VERSION 2.1.1 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
     common/instance_options.hpp
