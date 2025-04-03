@@ -11,6 +11,7 @@
 
 #include <QPushButton>
 
+#include <QAudioOutput>
 #include <QMediaPlayer>
 
 #include "gui/hotkeys_settings_widget.hpp"
@@ -80,6 +81,8 @@ void CountdownTimerPlugin::startup()
   connect(_timer.get(), &CountdownTimer::timeout, this, &CountdownTimerPlugin::onTimeout);
 
   _player = std::make_unique<QMediaPlayer>();
+  auto ao = new QAudioOutput(_player.get());
+  _player->setAudioOutput(ao);
 
   TextPluginInstanceBase::startup();
 }
