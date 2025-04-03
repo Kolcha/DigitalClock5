@@ -71,7 +71,7 @@ void SoundDialog::setSound(const QUrl& last_sound)
 void SoundDialog::setVolume(const int last_volume)
 {
   ui->volume_slider->setValue(last_volume);
-  _player->audioOutput()->setVolume(last_volume);
+  _player->audioOutput()->setVolume(last_volume / 100.);
 }
 
 void SoundDialog::setLastFile(const QString& file)
