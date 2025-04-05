@@ -117,6 +117,7 @@ void ClockWindow::platformTick()
   auto curr_origin = anchoredOrigin();
   if ((wndPosWinAPI(winId()) / devicePixelRatio() != pos() || curr_origin != _last_origin) && !_is_dragging) {
     move(pos() + _last_origin - curr_origin);
+    preventOutOfScreenPos();
   }
 }
 
