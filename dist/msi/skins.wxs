@@ -14,6 +14,45 @@ SPDX-License-Identifier: MIT
   </Fragment>
   <Fragment>
     <ComponentGroup Id="Skins">
+      <Component Id="cmp8D75D6284836F5638399096862F54E10" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{64C95DD3-1A0B-4A58-8CD4-6EFE29FCBC52}">
+        <File Id="fil7717F457DAD8A5CCB58CE1E91208AC2E" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\0.svg" />
+      </Component>
+      <Component Id="cmp5BFEDDA6C43C9A5D3880ECDC78D8E8AE" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{0AC5A38A-02AB-4BDD-AEDD-8F9C079290DF}">
+        <File Id="fil227B21584CBF7DD540B2DF866FF3DA3C" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\1.svg" />
+      </Component>
+      <Component Id="cmp0422BC4DBD7E98D344791077677AFEE9" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{EB9D1F56-75B2-48DE-832E-574C78C18760}">
+        <File Id="fil9318E82B159AB893C51AC1305022ECB4" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\2.svg" />
+      </Component>
+      <Component Id="cmp6B08F0614A3D0EAF3500A9CAECEC39DA" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{8249FA25-F327-4E60-929B-A5F09B43E078}">
+        <File Id="filC015567E554A20693705187702A49C7E" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\3.svg" />
+      </Component>
+      <Component Id="cmp74A564E2D09BDF34FE5F9C07EB63B012" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{689F7321-6CAA-4952-9AD0-29C253F1B8A1}">
+        <File Id="filC08C0D75FB4CE44101EEC1B2F8D20206" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\4.svg" />
+      </Component>
+      <Component Id="cmpF5DAD4906A3CADDBF3432318C591A257" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{698D2C3D-21F1-4C36-AEA9-EAFCA972E8D5}">
+        <File Id="filCB00AC14A6E3DC2A3A15D4CBA1144812" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\5.svg" />
+      </Component>
+      <Component Id="cmp23CBA8E70E18623E266996DA2224BD9E" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{3A1D7E77-C7D6-438D-93C0-4DEF92141411}">
+        <File Id="filF744B4FB526B17B1A4631A3D60F3BDD5" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\6.svg" />
+      </Component>
+      <Component Id="cmp69E05DC86AC8D6FC4AE327DECC0C079C" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{A157F4A0-8D8C-49F7-B3A6-52ED5005B88F}">
+        <File Id="fil20F4253376F5F0AE0F4F91799679F15D" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\7.svg" />
+      </Component>
+      <Component Id="cmp1C7427FFBA093E550A5F191BE5ADB326" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{037AC3A4-B471-4F35-B370-D9189FD73DAC}">
+        <File Id="fil8B7BF0050A84EDECAA3C3B456CDA3F81" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\8.svg" />
+      </Component>
+      <Component Id="cmp880549C7FA8B6430FE1DC9DC7DF22EBE" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{78307A25-5290-4E75-9A90-5B4E139683D9}">
+        <File Id="fil20F632828CC8777EA40981745A202DAC" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\9.svg" />
+      </Component>
+      <Component Id="cmp726E78A1ABFB838A8BF19B0CC126CBDD" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{4E6B4E07-1C19-47C4-8940-8BFEDA453A2F}">
+        <File Id="fil5D3CE5570688C4FAA819268D8118AD5B" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\d.svg" />
+      </Component>
+      <Component Id="cmpBCD50A080DFE6FCFDBE84182846C3A9E" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{9659112B-E774-4C9A-92C6-9069A85C57FB}">
+        <File Id="fil2ED48820659D66A09CC656EAE7877621" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\geometry.ini" />
+      </Component>
+      <Component Id="cmp7554D5151A9BFA277E825F6616B92405" Directory="dirF31253C58B93733550E3B6B710CDBB2E" Guid="{DD9A8227-366D-44ED-A780-8E5E46F4ED3A}">
+        <File Id="filE60062A9846BD1E494506BCAEC9CD1C1" KeyPath="yes" Source="$(var.MySource)\skins\cartoon-characters\skin.ini" />
+      </Component>
       <Component Id="cmpF6E4C6E1C4F9456A1F3C02ED714E1594" Directory="dirBA29D2C5551C01906BE6F28E8CCCD087" Guid="{F35F1FC4-78CC-4B5A-8CC7-366347B43C76}">
         <File Id="fil509C24CA6CBF9CCD4EE7C840BEBC5721" KeyPath="yes" Source="$(var.MySource)\skins\christmas_tree_b\Creative-Christmas-Tree-am.webp" />
       </Component>
@@ -875,6 +914,11 @@ SPDX-License-Identifier: MIT
   <Fragment>
     <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
       <Directory Id="dirF032FAF005D55997D08758C5E0CC6378" Name="grass_numbers-hd" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirBEDDA44FCE701296C072FFD2941711EB">
+      <Directory Id="dirF31253C58B93733550E3B6B710CDBB2E" Name="cartoon-characters" />
     </DirectoryRef>
   </Fragment>
 </Wix>
