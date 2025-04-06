@@ -31,6 +31,8 @@ public slots:
   void startup() override;
   void shutdown() override;
 
+  void update(const QDateTime& dt) override;
+
   void onOptionChanged(opt::InstanceOptions o, const QVariant& v) override;
 
   void applyTimerOption(countdown_timer::Options opt, const QVariant& val);
@@ -66,6 +68,8 @@ private:
 
   bool _local_time = true;
   QTimeZone _last_tz;
+  // used to detect system tz change
+  QTimeZone _last_clock_tz;
 
   std::unique_ptr<QHotkey> _pause_hotkey;
   std::unique_ptr<QHotkey> _restart_hotkey;

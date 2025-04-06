@@ -84,6 +84,8 @@ void CountdownTimerPlugin::startup()
   auto ao = new QAudioOutput(_player.get());
   _player->setAudioOutput(ao);
 
+  _last_clock_tz = QTimeZone::systemTimeZone();
+
   TextPluginInstanceBase::startup();
 }
 
@@ -100,6 +102,17 @@ void CountdownTimerPlugin::shutdown()
   _restart_hotkey.reset();
 
   TextPluginInstanceBase::shutdown();
+}
+
+void CountdownTimerPlugin::update(const QDateTime& dt)
+{
+  if (_last_clock_tz != dt.timeZone()) {
+    _last_clock_tz = dt.timeZone();
+    // restart timer on system time zone change
+    if (_cfg->getUseTargetDateTime() && _local_time)
+      restartTimer();
+  }
+  TextPluginInstanceBase::update(dt);
 }
 
 void CountdownTimerPlugin::onOptionChanged(opt::InstanceOptions o, const QVariant& v)
