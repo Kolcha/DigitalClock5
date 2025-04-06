@@ -213,7 +213,8 @@ void CountdownTimerPlugin::pluginReloadConfig()
 
 void CountdownTimerPlugin::onWidgetClicked()
 {
-  pauseTimer();
+  if (!_cfg->getUseTargetDateTime())
+    pauseTimer();
 }
 
 void CountdownTimerPlugin::onWidgetDblclicked()
