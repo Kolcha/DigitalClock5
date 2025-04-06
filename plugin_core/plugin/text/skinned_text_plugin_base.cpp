@@ -355,6 +355,7 @@ QSize TextPluginInstanceBase::availSize() const
   auto l = qobject_cast<QGridLayout*>(_clock_wnd->layout());
   Q_ASSERT(l);
   auto sz = l->itemAtPosition(0, 0)->widget()->sizeHint();  // clock
+
   for (int i = 1; i < _col_span; i++)
     if (auto item = l->itemAtPosition(0, i))
       if (auto w = item->widget())
@@ -363,6 +364,16 @@ QSize TextPluginInstanceBase::availSize() const
     if (auto item = l->itemAtPosition(i, 0))
       if (auto w = item->widget())
         sz.rheight() += w->sizeHint().height();
+
+  for (int i = 1; i < _row; i++)
+    if (auto item = l->itemAtPosition(i, 0))
+      if (auto w = item->widget())
+        sz.rwidth() = std::max(w->sizeHint().width(), sz.width());
+  for (int i = 1; i < _col; i++)
+    if (auto item = l->itemAtPosition(0, i))
+      if (auto w = item->widget())
+        sz.rheight() = std::max(w->sizeHint().height(), sz.height());
+
   return sz;
 }
 
