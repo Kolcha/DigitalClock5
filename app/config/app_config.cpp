@@ -93,7 +93,7 @@ QVariant GlobalConfig::def_value(opt::GlobalOptions o)
 
     case opt::SnapToEdge:               return true;
     case opt::SnapThreshold:            return 15;
-    case opt::PreventOutOfScreen:       return true;
+    case opt::PreventOutOfScreen:       return false;
 
     case opt::ChangeCursorOnHover:      return true;
 
