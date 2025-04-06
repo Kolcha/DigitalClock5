@@ -39,6 +39,7 @@ private:
 private:
   const TimeZonePluginInstanceConfig* _cfg;
   QDateTime _last_date;
+  QTimeZone _last_tz;
   QString _tz_fmt;
   QString _tz_str;
 };

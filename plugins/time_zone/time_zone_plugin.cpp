@@ -117,8 +117,11 @@ void TimeZonePlugin::startup()
 
 void TimeZonePlugin::update(const QDateTime& dt)
 {
-  if (dt.timeZone() != _last_date.timeZone()) {
+  // QTimeZone must be copied explicitly, it seems it is implicitly shared
+  // when used in QDateTime, so it *changes* even in saved timepoints
+  if (dt.timeZone() != _last_tz) {
     _last_date = dt;
+    _last_tz = dt.timeZone();
     updateTimeZoneStr();
   }
   TextPluginInstanceBase::update(dt);
