@@ -359,7 +359,10 @@ void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
   QWidget::resizeEvent(event);
-  if (_overlay) _overlay->resize(event->size());
+  if (_overlay) {
+    _overlay->resize(event->size());
+    _overlay->raise();
+  }
 
   // do not apply anhoring logic during dragging
   if (_is_dragging) return;
