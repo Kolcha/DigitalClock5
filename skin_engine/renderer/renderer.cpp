@@ -267,6 +267,7 @@ void LinesRenderer::updateSkinSettings()
 
   _skin->setPerCharRendering(_true_per_char);
   _skin->setCharSpacing(_char_spacing);
+  _skin->setCharMargins(_char_margins);
 
   _skin_metrics = _skin->metrics();
 }
