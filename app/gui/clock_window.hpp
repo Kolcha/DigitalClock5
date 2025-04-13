@@ -92,6 +92,7 @@ private:
   void addPositionMenu();
 
   QPoint anchoredOrigin() const;
+  QPoint desiredPosition() const;
 
   void updateLastOrigin();
   void preventOutOfScreenPos();

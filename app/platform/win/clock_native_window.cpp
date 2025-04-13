@@ -114,10 +114,8 @@ void ClockWindow::platformTick()
   // there is no obvious explanation for this, the only thing is some Windows quirks...
   // just detect possible "position mismatch" case and move the window explicitly
   // https://github.com/Kolcha/DigitalClock5/discussions/32
-  auto curr_origin = anchoredOrigin();
-  if ((wndPosWinAPI(winId()) / devicePixelRatio() != pos() || curr_origin != _last_origin) && !_is_dragging) {
-    move(pos() + _last_origin - curr_origin);
-    preventOutOfScreenPos();
+  if (auto dpos = desiredPosition(); (wndPosWinAPI(winId()) / devicePixelRatio() != dpos) && !_is_dragging) {
+    move(dpos);
   }
 }
 

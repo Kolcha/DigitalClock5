@@ -36,7 +36,7 @@ void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set)
 
 namespace {
 
-QScreen* find_max_intersected_screen(QWidget* w)
+QScreen* find_max_intersected_screen(const QWidget* w)
 {
   QScreen* screen = nullptr;
 
@@ -69,7 +69,7 @@ inline qreal distance(const QRectF& r1, const QRectF& r2)
   return distance(r1.topLeft(), r2.topLeft());
 }
 
-QScreen* find_nearest_screen(QWidget* w)
+QScreen* find_nearest_screen(const QWidget* w)
 {
   QScreen* screen = QGuiApplication::primaryScreen();
 
@@ -88,7 +88,7 @@ QScreen* find_nearest_screen(QWidget* w)
   return screen;
 }
 
-QScreen* find_screen(QWidget* w)
+QScreen* find_screen(const QWidget* w)
 {
   auto screen = find_max_intersected_screen(w);
   if (!screen) screen = find_nearest_screen(w);
@@ -369,9 +369,7 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
 
   // state restore must happen before the first resize event!
   // previous origin and correct anchor point must be known here
-  auto curr_origin = anchoredOrigin();
-  move(pos() + _last_origin - curr_origin);
-  preventOutOfScreenPos();
+  move(desiredPosition());
 }
 
 void ClockWindow::addPositionMenu()
@@ -422,20 +420,13 @@ QPoint ClockWindow::anchoredOrigin() const
   return curr_origin;
 }
 
-void ClockWindow::updateLastOrigin()
+QPoint ClockWindow::desiredPosition() const
 {
-  auto origin = anchoredOrigin();
-  if (_last_origin == origin) return;
-  _last_origin = origin;
-  emit saveStateRequested();
-}
+  auto curr_origin = anchoredOrigin();
+  auto tpos = pos() + _last_origin - curr_origin;
 
-void ClockWindow::preventOutOfScreenPos()
-{
   if (!_keep_visible)
-    return;
-
-  auto tpos = pos();
+    return tpos;
 
   auto sg = find_screen(this)->geometry();
   auto wg = frameGeometry();
@@ -449,6 +440,24 @@ void ClockWindow::preventOutOfScreenPos()
     tpos.setY(sg.top());
   if (tpos.y() + wg.height() > sg.y() + sg.height())
     tpos.setY(sg.y() + sg.height() - wg.height());
+
+  return tpos;
+}
+
+void ClockWindow::updateLastOrigin()
+{
+  auto origin = anchoredOrigin();
+  if (_last_origin == origin) return;
+  _last_origin = origin;
+  emit saveStateRequested();
+}
+
+void ClockWindow::preventOutOfScreenPos()
+{
+  if (!_keep_visible)
+    return;
+
+  auto tpos = desiredPosition();
 
   if (tpos != pos())
     move(tpos);
