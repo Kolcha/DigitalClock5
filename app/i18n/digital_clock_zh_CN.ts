@@ -151,39 +151,39 @@ Click this message to download.</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="377"/>
+        <location filename="../gui/clock_window.cpp" line="378"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="378"/>
+        <location filename="../gui/clock_window.cpp" line="379"/>
         <source>Top</source>
         <translation>顶部</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="379"/>
-        <location filename="../gui/clock_window.cpp" line="386"/>
-        <location filename="../gui/clock_window.cpp" line="393"/>
+        <location filename="../gui/clock_window.cpp" line="380"/>
+        <location filename="../gui/clock_window.cpp" line="387"/>
+        <location filename="../gui/clock_window.cpp" line="394"/>
         <source>Left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="381"/>
-        <location filename="../gui/clock_window.cpp" line="385"/>
-        <location filename="../gui/clock_window.cpp" line="388"/>
-        <location filename="../gui/clock_window.cpp" line="395"/>
+        <location filename="../gui/clock_window.cpp" line="382"/>
+        <location filename="../gui/clock_window.cpp" line="386"/>
+        <location filename="../gui/clock_window.cpp" line="389"/>
+        <location filename="../gui/clock_window.cpp" line="396"/>
         <source>Middle</source>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="383"/>
-        <location filename="../gui/clock_window.cpp" line="390"/>
-        <location filename="../gui/clock_window.cpp" line="397"/>
+        <location filename="../gui/clock_window.cpp" line="384"/>
+        <location filename="../gui/clock_window.cpp" line="391"/>
+        <location filename="../gui/clock_window.cpp" line="398"/>
         <source>Right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="392"/>
+        <location filename="../gui/clock_window.cpp" line="393"/>
         <source>Bottom</source>
         <translation>底部</translation>
     </message>
