@@ -753,8 +753,8 @@ void SettingsDialog::onCharMarginsChanged()
 void SettingsDialog::onTextMarginsChanged()
 {
   QMarginsF m(ui->m_text_l->value(), ui->m_text_t->value(), ui->m_text_r->value(), ui->m_text_b->value());
-  app->config()->instance(_curr_idx)->setWidgetMargins(m.toMargins());
-  emit instanceOptionChanged(_curr_idx, opt::WidgetMargins, QVariant::fromValue(m.toMargins()));
+  app->config()->instance(_curr_idx)->setWidgetMargins(m);
+  emit instanceOptionChanged(_curr_idx, opt::WidgetMargins, QVariant::fromValue(m));
 }
 
 void SettingsDialog::on_true_per_char_clicked(bool checked)

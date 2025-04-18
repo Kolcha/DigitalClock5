@@ -237,7 +237,7 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
       wnd->clock()->setCharMargins(val.value<QMarginsF>());
       break;
     case opt::WidgetMargins:
-      wnd->clock()->setTextMargins(val.value<QMargins>());
+      wnd->clock()->setTextMargins(val.value<QMarginsF>());
       break;
     case opt::LayoutMargins:
       wnd->layout()->setContentsMargins(val.value<QMargins>());

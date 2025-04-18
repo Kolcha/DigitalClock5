@@ -266,7 +266,7 @@ void TextPluginInstanceBase::applySharedOption(opt::InstanceOptions opt, const Q
       _widget->setCharMargins(val.value<QMarginsF>());
       break;
     case opt::WidgetMargins:
-      _widget->setTextMargins(val.value<QMargins>());
+      _widget->setTextMargins(val.value<QMarginsF>());
       break;
 
     case opt::LayoutConfig:
@@ -345,7 +345,7 @@ void TextPluginInstanceBase::loadAppearanceSettings()
   applySharedOption(opt::RespectLineSpacing, _opt_router.value<bool>(opt::RespectLineSpacing));
 
   applySharedOption(opt::CharMargins, QVariant::fromValue(_opt_router.value<QMarginsF>(opt::CharMargins)));
-  applySharedOption(opt::WidgetMargins, QVariant::fromValue(_opt_router.value<QMargins>(opt::WidgetMargins)));
+  applySharedOption(opt::WidgetMargins, QVariant::fromValue(_opt_router.value<QMarginsF>(opt::WidgetMargins)));
 
   applySharedOption(opt::LayoutConfig, _opt_router.value<QString>(opt::LayoutConfig));
 }

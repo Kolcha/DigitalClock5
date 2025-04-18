@@ -134,7 +134,7 @@ public:
   INSTANCE_OPTION(bool, RespectLineSpacing)
 
   INSTANCE_OPTION(QMarginsF, CharMargins)
-  INSTANCE_OPTION(QMargins, WidgetMargins)
+  INSTANCE_OPTION(QMarginsF, WidgetMargins)
   INSTANCE_OPTION(QMargins, LayoutMargins)
 
   INSTANCE_OPTION(QString, TimeFormat)

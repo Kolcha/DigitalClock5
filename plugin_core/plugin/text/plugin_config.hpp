@@ -99,7 +99,7 @@ public:
   SHARED_CONFIG_OPTION(bool, RespectLineSpacing)
 
   SHARED_CONFIG_OPTION(QMarginsF, CharMargins)
-  SHARED_CONFIG_OPTION(QMargins, WidgetMargins)
+  SHARED_CONFIG_OPTION(QMarginsF, WidgetMargins)
 
   SHARED_CONFIG_OPTION(QString, LayoutConfig)
 

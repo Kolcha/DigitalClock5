@@ -67,7 +67,7 @@ void GeometrySettingsWidget::onCharMarginsChanged()
 void GeometrySettingsWidget::onTextMarginsChanged()
 {
   QMarginsF m(ui->m_text_l->value(), ui->m_text_t->value(), ui->m_text_r->value(), ui->m_text_b->value());
-  cfg->setWidgetMargins(m.toMargins());
+  cfg->setWidgetMargins(m);
   emit sharedOptionChanged(opt::WidgetMargins, QVariant::fromValue(m));
 }
 

@@ -114,7 +114,7 @@ QVariant PluginInstanceConfig::def_value(opt::InstanceOptions o)
     case opt::RespectLineSpacing:       return false;
 
     case opt::CharMargins:              return QVariant::fromValue(QMarginsF());
-    case opt::WidgetMargins:            return QVariant::fromValue(QMargins());
+    case opt::WidgetMargins:            return QVariant::fromValue(QMarginsF());
 
     case opt::LayoutConfig:             return QString();
 
