@@ -20,13 +20,6 @@
       <string>Time Zone Format</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QToolButton" name="str_format_help_btn">
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <widget class="QComboBox" name="str_format_edit">
         <property name="editable">
@@ -62,6 +55,13 @@
           <string notr="true">a</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QToolButton" name="str_format_help_btn">
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
