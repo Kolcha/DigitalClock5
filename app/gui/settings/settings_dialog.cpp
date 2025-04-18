@@ -909,17 +909,17 @@ void SettingsDialog::initAppearanceTab(size_t idx)
   ui->colorize_group->setChecked(acfg.getColorizationEnabled());
   ui->colorization_strength_edit->setValue(acfg.getColorizationStrength());
 
-  ui->texture_group->setChecked(acfg.getTextureType() != tx::None);
   if (acfg.getTextureType() != tx::None)
     setIndexByValue(ui->tx_options_box, QVariant::fromValue(acfg.getTextureType()));
   ui->tx_per_element_cb->setChecked(acfg.getTextureCustomization() == LinesRenderer::PerChar);
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
+  ui->texture_group->setChecked(acfg.getTextureType() != tx::None);
 
-  ui->background_group->setChecked(acfg.getBackgroundType() != tx::None);
   if (acfg.getBackgroundType() != tx::None)
     setIndexByValue(ui->bg_options_box, QVariant::fromValue(acfg.getBackgroundType()));
   ui->bg_per_element_cb->setChecked(acfg.getBackgroundCustomization() == LinesRenderer::PerChar);
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
+  ui->background_group->setChecked(acfg.getBackgroundType() != tx::None);
 
   ui->anchor_left->setChecked(app->window(idx)->anchorPoint() == ClockWindow::AnchorLeft);
   ui->anchor_center->setChecked(app->window(idx)->anchorPoint() == ClockWindow::AnchorCenter);

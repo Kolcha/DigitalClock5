@@ -67,17 +67,17 @@ void AppearanceSettingsWidget::initControls(PluginInstanceConfig* icfg)
   ui->font_rbtn->setChecked(!icfg->getUseClockSkin());
   ui->skin_rbtn->setChecked(icfg->getUseClockSkin());
 
-  ui->tx_group->setChecked(cfg->getTextureType() != tx::None);
   if (cfg->getTextureType() != tx::None)
     setIndexByValue(ui->tx_options_box, QVariant::fromValue(cfg->getTextureType()));
   ui->tx_per_char->setChecked(cfg->getTextureCustomization() == LinesRenderer::PerChar);
   on_tx_options_box_currentIndexChanged(ui->tx_options_box->currentIndex());
+  ui->tx_group->setChecked(cfg->getTextureType() != tx::None);
 
-  ui->bg_group->setChecked(cfg->getBackgroundType() != tx::None);
   if (cfg->getBackgroundType() != tx::None)
     setIndexByValue(ui->bg_options_box, QVariant::fromValue(cfg->getBackgroundType()));
   ui->bg_per_char->setChecked(cfg->getBackgroundCustomization() == LinesRenderer::PerChar);
   on_bg_options_box_currentIndexChanged(ui->bg_options_box->currentIndex());
+  ui->bg_group->setChecked(cfg->getBackgroundType() != tx::None);
 
   auto halign = cfg->getWidgetAlignment() & Qt::AlignHorizontal_Mask;
   setIndexByValue(ui->align_h_box, QVariant::fromValue(halign));
