@@ -36,27 +36,15 @@ void wrap_set_window_flag(QWidget* wnd, Qt::WindowType flag, bool set)
 
 namespace {
 
-QScreen* find_max_intersected_screen(const QWidget* w)
+QScreen* find_intersected_screen(const QPoint& p)
 {
-  QScreen* screen = nullptr;
-
-  const auto r = w->frameGeometry();
   const auto screens = QGuiApplication::screens();
 
-  int max_intersected = 0;
-  for (const auto s : screens) {
-    auto ir = r.intersected(s->geometry());
-    if (ir.isEmpty()) continue; // no intersection
+  for (const auto s : screens)
+    if (s->geometry().contains(p))
+      return s;
 
-    auto sq = ir.width() * ir.height();
-
-    if (sq > max_intersected) {
-      max_intersected = sq;
-      screen = s;
-    }
-  }
-
-  return screen;
+  return nullptr;
 }
 
 inline qreal distance(const QPointF& p1, const QPointF& p2)
@@ -64,21 +52,23 @@ inline qreal distance(const QPointF& p1, const QPointF& p2)
   return QLineF(p1, p2).length();
 }
 
-inline qreal distance(const QRectF& r1, const QRectF& r2)
+inline qreal rect_distance(const QPointF& p, const QRectF& r)
 {
-  return distance(r1.topLeft(), r2.topLeft());
+  return std::min({distance(p, r.topLeft()),
+                   distance(p, r.topRight()),
+                   distance(p, r.bottomRight()),
+                   distance(p, r.bottomLeft())});
 }
 
-QScreen* find_nearest_screen(const QWidget* w)
+QScreen* find_nearest_screen(const QPoint& p)
 {
   QScreen* screen = QGuiApplication::primaryScreen();
 
-  const auto r = w->frameGeometry();
   const auto screens = QGuiApplication::screens();
 
-  qreal min_distance = distance(r, screen->geometry());
+  qreal min_distance = rect_distance(p, screen->geometry());
   for (const auto s : screens) {
-    auto curr_dist = distance(r, s->geometry());
+    auto curr_dist = rect_distance(p, s->geometry());
     if (curr_dist < min_distance) {
       min_distance = curr_dist;
       screen = s;
@@ -88,10 +78,10 @@ QScreen* find_nearest_screen(const QWidget* w)
   return screen;
 }
 
-QScreen* find_screen(const QWidget* w)
+QScreen* find_screen(const QPoint& p)
 {
-  auto screen = find_max_intersected_screen(w);
-  if (!screen) screen = find_nearest_screen(w);
+  auto screen = find_intersected_screen(p);
+  if (!screen) screen = find_nearest_screen(p);
   Q_ASSERT(screen);
   return screen;
 }
@@ -428,7 +418,7 @@ QPoint ClockWindow::desiredPosition() const
   if (!_keep_visible)
     return tpos;
 
-  auto sg = find_screen(this)->geometry();
+  auto sg = find_screen(tpos)->geometry();
   auto wg = frameGeometry();
 
   if (tpos.x() < sg.left())
@@ -455,6 +445,16 @@ void ClockWindow::updateLastOrigin()
 void ClockWindow::preventOutOfScreenPos()
 {
   if (!_keep_visible)
+    return;
+
+  // do not apply position correction to invisible windows,
+  // this is the easy way to distinguish app startup
+  // (window is not visible initially and must be explicitly shown)
+  // as before the first resize event windows size is incorrect
+
+  // this allows to avoid "almost the same" initialization code
+  // and still doesn't have undesired side effects
+  if (!isVisible())
     return;
 
   auto tpos = desiredPosition();
