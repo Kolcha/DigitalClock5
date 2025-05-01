@@ -48,79 +48,79 @@
         <translation>计时器</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="77"/>
+        <location filename="../gui/timer_settings_widget.ui" line="29"/>
         <source>target time</source>
         <translation>目标时间</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="91"/>
+        <location filename="../gui/timer_settings_widget.ui" line="43"/>
         <source>interval</source>
         <translation>间隔</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="101"/>
+        <location filename="../gui/timer_settings_widget.ui" line="53"/>
         <source>hours</source>
         <translation>小时</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="108"/>
+        <location filename="../gui/timer_settings_widget.ui" line="60"/>
         <source>minutes</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="115"/>
+        <location filename="../gui/timer_settings_widget.ui" line="67"/>
         <source>seconds</source>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="127"/>
+        <location filename="../gui/timer_settings_widget.ui" line="79"/>
         <source>leading zero</source>
         <translation>前导零</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="147"/>
+        <location filename="../gui/timer_settings_widget.ui" line="99"/>
         <source>minimum days count to show</source>
         <translation>倒计时显示的最小天数</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="157"/>
+        <location filename="../gui/timer_settings_widget.ui" line="109"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation>如果剩余天数小于此值，将不会再显示。
 设定为-1将从不显示天数，设定为0则总是显示天数。</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="171"/>
+        <location filename="../gui/timer_settings_widget.ui" line="123"/>
         <source>also hide hours</source>
         <translation type="unfinished">also hide hours</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="61"/>
+        <location filename="../gui/timer_settings_widget.ui" line="132"/>
         <source>restart on double click</source>
         <translation type="unfinished">restart on double click</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="54"/>
+        <location filename="../gui/timer_settings_widget.ui" line="139"/>
         <source>auto-restart countdown</source>
         <translation type="unfinished">auto-restart countdown</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="40"/>
+        <location filename="../gui/timer_settings_widget.ui" line="146"/>
         <source>hide timer when it is not active</source>
         <translation>计时器不活动时隐藏</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="33"/>
+        <location filename="../gui/timer_settings_widget.ui" line="153"/>
         <source>reverse counting</source>
         <translation type="unfinished">reverse counting</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="182"/>
+        <location filename="../gui/timer_settings_widget.ui" line="162"/>
         <source>chime when countdown finishes</source>
         <translation type="unfinished">chime when countdown finishes</translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="47"/>
+        <location filename="../gui/timer_settings_widget.ui" line="181"/>
         <source>show custom message on timeout</source>
         <translation>到达设定时间后显示自定义消息</translation>
     </message>
