@@ -26,12 +26,6 @@ initial file was generated with the next command:
       <Component Id="cmp566DD6260BE95CEE68BB3308DFD5A9D6" Directory="INSTALLDIR" Guid="{AA045A2F-8677-4850-9AD3-AE78E73B2AEB}">
         <File Id="fil29FCAD405C267097227953CFDC17A1E6" KeyPath="yes" Source="$(var.MySource)\DigitalClock5.exe" />
       </Component>
-      <Component Id="cmp5DCB3F6470E98D4BA4660BF76CB455A7" Directory="INSTALLDIR" Guid="{6E89A832-9472-4D9B-AB26-9FF780092036}">
-        <File Id="fil20E457EE15FAE7FE8BB8D0E29DBDA5F6" KeyPath="yes" Source="$(var.MySource)\dxcompiler.dll" />
-      </Component>
-      <Component Id="cmp11FA807A01C898071C18762386D25273" Directory="INSTALLDIR" Guid="{D25E4165-9BCC-40FD-B1A2-2EC1D5A1567B}">
-        <File Id="fil5D21199A44C3BF77F4C61E751E70851B" KeyPath="yes" Source="$(var.MySource)\dxil.dll" />
-      </Component>
       <Component Id="cmpC2A5AFEE3B72FD79939EAD5B7ECC198E" Directory="INSTALLDIR" Guid="{3ACE4D94-23C2-4500-B41E-756F3FBBB6AD}">
         <File Id="filE76BABA83A6F179EFC9DA117EF49AD9A" KeyPath="yes" Source="$(var.MySource)\PluginCore.dll" />
       </Component>
@@ -88,9 +82,6 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp3A5FB4F133FB057DEDF3A5DCD7C48CD4" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{F0B8AA0A-7C87-462F-829B-B2519A5FEDA4}">
         <File Id="fil05D4DA97CDEF45B64CB3569E03D36D3D" KeyPath="yes" Source="$(var.MySource)\plugins\var_translucency.dll" />
-      </Component>
-      <Component Id="cmp6429D28736F78294E789F1285CDBA0C5" Directory="dir38849F6D66CAD1C9D4D23BF20EB0981D" Guid="{6167DA39-3BFA-4F21-A783-D155C356E320}">
-        <File Id="fil7AEA337D7CE4012DC6754A25FCEC4511" KeyPath="yes" Source="$(var.MySource)\plugins\generic\qtuiotouchplugin.dll" />
       </Component>
       <Component Id="cmp8868342A11EC1A5F0F368534A0870AAB" Directory="dir2C41C47317919F7F40F42C2D5CABDBDE" Guid="{8C0C42ED-978D-4BBA-83BA-AEF58FBF1A29}">
         <File Id="filACA0F8188FFBA3FCA53DDF584A3C92BA" KeyPath="yes" Source="$(var.MySource)\plugins\iconengines\qsvgicon.dll" />
@@ -240,11 +231,6 @@ initial file was generated with the next command:
   <Fragment>
     <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
       <Directory Id="dir2C41C47317919F7F40F42C2D5CABDBDE" Name="iconengines" />
-    </DirectoryRef>
-  </Fragment>
-  <Fragment>
-    <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
-      <Directory Id="dir38849F6D66CAD1C9D4D23BF20EB0981D" Name="generic" />
     </DirectoryRef>
   </Fragment>
   <Fragment>

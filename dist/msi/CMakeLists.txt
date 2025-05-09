@@ -47,7 +47,14 @@ function(target_win_deploy_qt _target _out_file)
     )
 
     add_custom_target(${_target}_deploy_qt
-        COMMAND windeployqt --libdir . --plugindir "plugins" --translationdir "translations" --no-compiler-runtime --no-system-d3d-compiler --no-opengl-sw --exclude-plugins ffmpegmediaplugin ${_out_file}
+        COMMAND windeployqt --libdir . --plugindir "plugins" --translationdir "translations"
+            --no-compiler-runtime
+            --no-system-d3d-compiler
+            --no-system-dxc-compiler
+            --no-opengl-sw
+            --skip-plugin-types generic
+            --exclude-plugins ffmpegmediaplugin
+            ${_out_file}
         WORKING_DIRECTORY ${MSI_SRC_DIR}
         DEPENDS ${MSI_SRC_DIR}/${_out_file}
         JOB_POOL single_job
