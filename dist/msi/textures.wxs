@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
 
 SPDX-License-Identifier: MIT
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <DirectoryRef Id="INSTALLDIR">
       <Directory Id="dir42D20BB187241158A58BD37B50859EB4" Name="textures" />

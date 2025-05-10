@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 SPDX-FileCopyrightText: 2024 Nick Korotysh <nick.korotysh@gmail.com>
 
 SPDX-License-Identifier: MIT
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <DirectoryRef Id="INSTALLDIR">
       <Directory Id="dirBEDDA44FCE701296C072FFD2941711EB" Name="skins" />

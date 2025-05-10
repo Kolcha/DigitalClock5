@@ -14,17 +14,14 @@ set(WIX_SRC_FILES
 
 set_property(GLOBAL PROPERTY JOB_POOLS single_job=1)
 
-set(WIX_CANDLE_FLAGS "-nologo -arch x64 -ext WixUtilExtension")
-string(APPEND WIX_CANDLE_FLAGS " -dAppVersion=${PROJECT_VERSION}")
-string(APPEND WIX_CANDLE_FLAGS " -dAppIcon=${CMAKE_SOURCE_DIR}/app/dist/digital_clock.ico")
-string(APPEND WIX_CANDLE_FLAGS " -dMySource=${MSI_SRC_DIR}")
-set(WIX_LIGHT_FLAGS "-nologo -ext WixUtilExtension -spdb -sw1076")
+set(WIX_BUILD_FLAGS "-arch x64 -ext WixToolset.Util.wixext")
+string(APPEND WIX_BUILD_FLAGS " -d AppVersion=${PROJECT_VERSION}")
+string(APPEND WIX_BUILD_FLAGS " -d AppIcon=${CMAKE_SOURCE_DIR}/app/dist/digital_clock.ico")
+string(APPEND WIX_BUILD_FLAGS " -d MySource=${MSI_SRC_DIR}")
 
-list(TRANSFORM WIX_SRC_FILES REPLACE "\.wxs$" "\.wixobj" OUTPUT_VARIABLE WIX_OBJ_FILES)
 list(TRANSFORM WIX_SRC_FILES PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
 
-separate_arguments(WIX_CANDLE_FLAGS)
-separate_arguments(WIX_LIGHT_FLAGS)
+separate_arguments(WIX_BUILD_FLAGS)
 
 add_custom_target(deploy_qt COMMENT "Deploying Qt")
 
@@ -64,17 +61,9 @@ function(target_win_deploy_qt _target _out_file)
 endfunction()
 
 add_custom_command(
-    OUTPUT ${WIX_OBJ_FILES}
-    COMMAND candle ${WIX_CANDLE_FLAGS} ${WIX_SRC_FILES}
-    DEPENDS ${WIX_SRC_FILES}
-    VERBATIM
-    COMMAND_EXPAND_LISTS
-)
-
-add_custom_command(
     OUTPUT ${MSI_FILE}
-    COMMAND light ${WIX_LIGHT_FLAGS} -o ${MSI_FILE} ${WIX_OBJ_FILES}
-    DEPENDS ${WIX_OBJ_FILES} deploy_qt
+    COMMAND wix build ${WIX_BUILD_FLAGS} ${WIX_SRC_FILES} -o ${MSI_FILE}
+    DEPENDS ${WIX_SRC_FILES} deploy_qt
     VERBATIM
     COMMAND_EXPAND_LISTS
 )

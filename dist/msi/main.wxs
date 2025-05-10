@@ -1,45 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 SPDX-FileCopyrightText: 2023-2024 Nick Korotysh <nick.korotysh@gmail.com>
 
 SPDX-License-Identifier: MIT
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Product Name="Digital Clock 5" Id="*" UpgradeCode="{C453C194-7F26-4272-8DB5-9CBE30F96655}"
-    Language="1033" Codepage="1252" Version="$(var.AppVersion)" Manufacturer="Nick Korotysh">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+  <Package Name="Digital Clock 5" UpgradeCode="{C453C194-7F26-4272-8DB5-9CBE30F96655}" Version="$(var.AppVersion)" Manufacturer="Nick Korotysh">
+    <SummaryInformation Keywords="Installer" Description="Digital Clock 5" Comments="Digital Clock $(var.AppVersion) $(sys.BUILDARCH) Installer" />
 
-    <Package Id="*" Keywords="Installer" Platform="x64" Description="Digital Clock 5"
-      Comments="Digital Clock $(var.AppVersion) x64 Installer" Manufacturer="Nick Korotysh"
-      InstallerVersion="500" InstallScope="perMachine" Compressed="yes" Languages="1033" SummaryCodepage="1252" />
+    <Property Id="ARPCONTACT" Value="mailto:nick.korotysh@gmail.com" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/Kolcha/DigitalClock5" />
+    <Property Id="ARPURLINFOABOUT" Value="https://digitalclock4.sourceforge.io" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://digitalclock4.sourceforge.io" />
 
-    <Property Id="ARPCONTACT">mailto:nick.korotysh@gmail.com</Property>
-    <Property Id="ARPHELPLINK">https://github.com/Kolcha/DigitalClock5</Property>
-    <Property Id="ARPURLINFOABOUT">https://digitalclock4.sourceforge.io</Property>
-    <Property Id="ARPURLUPDATEINFO">https://digitalclock4.sourceforge.io</Property>
+    <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
 
-    <Property Id="ARPPRODUCTICON">app_icon.ico</Property>
-
-    <Property Id="ARPNOMODIFY">1</Property>
+    <Property Id="ARPNOMODIFY" Value="1" />
 
     <Upgrade Id="{C453C194-7F26-4272-8DB5-9CBE30F96655}">
-      <UpgradeVersion
-        Minimum="5.0.0" Maximum="$(var.AppVersion)"
-        Property="PREVIOUSVERSIONSINSTALLED"
-        IncludeMinimum="yes" IncludeMaximum="yes" />
+      <UpgradeVersion Minimum="5.0.0" Maximum="$(var.AppVersion)" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="yes" />
     </Upgrade>
 
     <Media Id="1" Cabinet="_data1.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
     <Property Id="DiskPrompt" Value="Digital Clock 5 Installation [1]" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFiles64Folder" Name="PFiles">
-        <Directory Id="INSTALLDIR" Name="Digital Clock 5" />
-      </Directory>
-      <Directory Id="ProgramMenuFolder" />
-    </Directory>
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLDIR" Name="!(bind.Property.ProductName)" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder" />
 
     <ComponentGroup Id="Extras">
       <Component Id="RegistryEntries" Directory="INSTALLDIR" Guid="{315BB45E-A308-43FC-B923-286201C5C81D}">
@@ -67,8 +55,8 @@ SPDX-License-Identifier: MIT
     <util:CloseApplication Id="close_main_exe" Target="DigitalClock5.exe" EndSessionMessage="yes" RebootPrompt="no" />
 
     <InstallExecuteSequence>
-      <Custom Action="WixCloseApplications" Before="InstallValidate">PREVIOUSVERSIONSINSTALLED OR REINSTALL OR (REMOVE="ALL")</Custom>
+      <Custom Action="override Wix4CloseApplications_$(sys.BUILDARCHSHORT)" Before="InstallValidate" Condition="PREVIOUSVERSIONSINSTALLED OR REINSTALL OR (REMOVE=&quot;ALL&quot;)" />
       <RemoveExistingProducts After="InstallFinalize" />
     </InstallExecuteSequence>
-  </Product>
+  </Package>
 </Wix>

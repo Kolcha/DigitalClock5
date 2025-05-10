@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 SPDX-FileCopyrightText: 2023-2024 Nick Korotysh <nick.korotysh@gmail.com>
 
@@ -11,7 +9,7 @@ initial file was generated with the next command:
 
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <DirectoryRef Id="INSTALLDIR">
       <Directory Id="dir280A744A3793B4E73B0B13172DB8683E" Name="plugins" />

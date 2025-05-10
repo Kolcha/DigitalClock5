@@ -26,7 +26,8 @@ jobs:
 
       - name: Install build tools
         run: |
-          "C:\Program Files (x86)\WiX Toolset v3.14\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+          dotnet tool install --global wix
+          wix extension add --global WixToolset.Util.wixext
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
