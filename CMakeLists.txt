@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.21.1)
 
 project(DigitalClock5 VERSION 5.1.6 LANGUAGES CXX)
 
