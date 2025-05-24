@@ -4,12 +4,10 @@
     <use id="sv" href="#sh" transform="rotate(90 5.8201 5.8202)"/>
   </defs>
   <g transform="translate(6,6)">
-  <use id="a" href="#sh" fill-opacity="1.0"/>
-  <use id="b" href="#sv" fill-opacity="1.0" transform="translate(42.166)"/>
-  <use id="c" href="#sv" fill-opacity="0.1" transform="translate(42.166 42.166)"/>
-  <use id="d" href="#sh" fill-opacity="0.1" transform="translate(0 84.331)"/>
-  <use id="e" href="#sv" fill-opacity="1.0" transform="translate(0 42.166)"/>
-  <use id="f" href="#sv" fill-opacity="1.0"/>
-  <use id="g" href="#sh" fill-opacity="1.0" transform="translate(0 42.166)"/>
+  <use id="a" href="#sh"/>
+  <use id="b" href="#sv" transform="translate(42.166)"/>
+  <use id="e" href="#sv" transform="translate(0 42.166)"/>
+  <use id="f" href="#sv"/>
+  <use id="g" href="#sh" transform="translate(0 42.166)"/>
   </g>
 </svg>
