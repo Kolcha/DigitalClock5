@@ -13,6 +13,7 @@
 #include <QNetworkReply>
 
 #include "gui/settings_widget.hpp"
+#include "impl/ext_ip_detectors.hpp"
 
 IpAddressPlugin::IpAddressPlugin(const IpAddressPluginInstanceConfig* cfg)
   : TextPluginInstanceBase(*cfg)
@@ -84,19 +85,20 @@ void IpAddressPlugin::pluginReloadConfig()
 void IpAddressPlugin::requestExternalAddress(bool ipv6)
 {
   auto getting_external_ip = ipv6 ? &_getting_external_ip6 : &_getting_external_ip4;
-  auto ipify_api_url = ipv6 ? "https://api6.ipify.org" : "https://api.ipify.org/";
+  const auto& detector_service = plugin::ip::ext_ip_detector(_cfg->getExternalIPDetector());
+  const auto& service_url = ipv6 ? detector_service.ipv6 : detector_service.ipv4;
 
   const auto external_placeholder = tr("waiting for an external address...");
 
   *getting_external_ip = true;
   _last_ip_list.append(external_placeholder);
-  QNetworkReply* reply = _qnam->get(QNetworkRequest(QUrl(ipify_api_url)));
-  connect(reply, &QNetworkReply::finished, [=, this] () {
+  QNetworkReply* reply = _qnam->get(QNetworkRequest(QUrl(service_url)));
+  connect(reply, &QNetworkReply::finished, this, [=, this] () {
     *getting_external_ip = false;
     auto i = _last_ip_list.indexOf(external_placeholder);
     Q_ASSERT(i != -1);
     if (reply->error() == QNetworkReply::NoError)
-      _last_ip_list[i] = QString::fromLatin1(reply->readAll());
+      _last_ip_list[i] = QString::fromLatin1(reply->readAll()).trimmed();
     else
       _last_ip_list[i] = reply->errorString();
     reply->deleteLater();
@@ -120,6 +122,7 @@ QVector<QWidget*> IpAddressPluginFactory::configPagesBeforeCommonPages()
     disconnect(page, &SettingsWidget::addressesListChanged, nullptr, nullptr);
     auto inst = qobject_cast<IpAddressPlugin*>(instance(idx));
     connect(page, &SettingsWidget::addressesListChanged, inst, &IpAddressPlugin::UpdateIPsList);
+    connect(page, &SettingsWidget::extIPDetectorChanged, inst, &IpAddressPlugin::UpdateIPsList);
   });
   return { page };
 }

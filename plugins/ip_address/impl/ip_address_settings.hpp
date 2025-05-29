@@ -20,6 +20,7 @@ public:
   CONFIG_OPTION(ShowInternal, "show_internal_addresses", bool, false)
   CONFIG_OPTION(ShowExternalIPv4, "show_external_ipv4", bool, true)
   CONFIG_OPTION(ShowExternalIPv6, "show_external_ipv6", bool, false)
+  CONFIG_OPTION(ExternalIPDetector, "external_ip_detector", int, 0)
 
   NetworkInterfacesModel::SelectedIPs getInternalAddresses() const;
   void setInternalAddresses(const NetworkInterfacesModel::SelectedIPs& ips);

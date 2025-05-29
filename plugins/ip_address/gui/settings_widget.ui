@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>265</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,6 +68,33 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="ext_addr_detector_layout">
+     <item>
+      <widget class="QLabel" name="ext_addr_detect_lbl">
+       <property name="text">
+        <string>External address detection service</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="ext_addr_detect_cbox"/>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <resources/>
@@ -95,12 +122,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>142</x>
-     <y>239</y>
+     <x>151</x>
+     <y>229</y>
     </hint>
     <hint type="destinationlabel">
-     <x>181</x>
-     <y>239</y>
+     <x>230</x>
+     <y>229</y>
     </hint>
    </hints>
   </connection>
@@ -111,12 +138,44 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>66</x>
-     <y>245</y>
+     <x>75</x>
+     <y>229</y>
     </hint>
     <hint type="destinationlabel">
-     <x>242</x>
-     <y>248</y>
+     <x>282</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>show_external_addr_cbox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ext_addr_detect_lbl</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>56</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>show_external_addr_cbox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ext_addr_detect_cbox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>242</y>
     </hint>
    </hints>
   </connection>

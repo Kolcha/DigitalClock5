@@ -8,6 +8,8 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME IpAddressPluginFactory
     gui/settings_widget.cpp
     gui/settings_widget.hpp
     gui/settings_widget.ui
+    impl/ext_ip_detectors.cpp
+    impl/ext_ip_detectors.hpp
     impl/ip_address_settings.cpp
     impl/ip_address_settings.hpp
     impl/network_interfaces_model.cpp

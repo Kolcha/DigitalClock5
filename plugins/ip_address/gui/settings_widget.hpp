@@ -27,6 +27,7 @@ public:
 
 signals:
   void addressesListChanged();
+  void extIPDetectorChanged();
 
 private slots:
   void onInterfacesListChanged(const NetworkInterfacesModel::SelectedIPs& ips);
@@ -35,6 +36,8 @@ private slots:
   void on_show_external_addr_cbox_clicked(bool checked);
   void on_show_external_v4_cbox_clicked(bool checked);
   void on_show_external_v6_cbox_clicked(bool checked);
+
+  void on_ext_addr_detect_cbox_activated(int index);
 
 private:
   Ui::SettingsWidget* ui;

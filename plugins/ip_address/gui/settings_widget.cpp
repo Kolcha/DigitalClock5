@@ -5,6 +5,8 @@
 #include "settings_widget.hpp"
 #include "ui_settings_widget.h"
 
+#include "impl/ext_ip_detectors.hpp"
+
 namespace plugin::ip {
 
 SettingsWidget::SettingsWidget(QWidget* parent)
@@ -22,6 +24,9 @@ SettingsWidget::SettingsWidget(QWidget* parent)
 
   for (int r = 0; r < ui->interfaces_list->model()->rowCount(); r++)
     ui->interfaces_list->setExpanded(ui->interfaces_list->model()->index(r, 0), true);
+
+  for (int i = 0; i < detectors_count(); i++)
+    ui->ext_addr_detect_cbox->addItem(ext_ip_detector(i).name);
 
   connect(iface_model, &NetworkInterfacesModel::selectedIPsChanged, this, &SettingsWidget::onInterfacesListChanged);
 }
@@ -43,6 +48,7 @@ void SettingsWidget::initControls(IpAddressPluginInstanceConfig* icfg)
   ui->show_external_addr_cbox->setChecked(cfg->getShowExternalIPv4() || cfg->getShowExternalIPv6());
   ui->show_external_v4_cbox->setChecked(cfg->getShowExternalIPv4());
   ui->show_external_v6_cbox->setChecked(cfg->getShowExternalIPv6());
+  ui->ext_addr_detect_cbox->setCurrentIndex(std::clamp(cfg->getExternalIPDetector(), 0, detectors_count()));
 }
 
 void SettingsWidget::onInterfacesListChanged(const NetworkInterfacesModel::SelectedIPs& ips)
@@ -74,6 +80,12 @@ void SettingsWidget::on_show_external_v6_cbox_clicked(bool checked)
 {
   cfg->setShowExternalIPv6(checked);
   emit addressesListChanged();
+}
+
+void SettingsWidget::on_ext_addr_detect_cbox_activated(int index)
+{
+  cfg->setExternalIPDetector(index);
+  emit extIPDetectorChanged();
 }
 
 } // namespace plugin::ip
