@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(ip_address VERSION 2.0.0 LANGUAGES CXX)
+project(ip_address VERSION 2.0.1 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME IpAddressPluginFactory
     gui/settings_widget.cpp
