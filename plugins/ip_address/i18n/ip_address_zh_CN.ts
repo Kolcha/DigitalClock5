@@ -4,12 +4,12 @@
 <context>
     <name>IpAddressPlugin</name>
     <message>
-        <location filename="../ip_address_plugin.cpp" line="75"/>
+        <location filename="../ip_address_plugin.cpp" line="76"/>
         <source>&lt;no interfaces selected&gt;</source>
         <translation type="unfinished">&lt;no interfaces selected&gt;</translation>
     </message>
     <message>
-        <location filename="../ip_address_plugin.cpp" line="89"/>
+        <location filename="../ip_address_plugin.cpp" line="91"/>
         <source>waiting for an external address...</source>
         <translation type="unfinished">waiting for an external address...</translation>
     </message>
@@ -17,7 +17,7 @@
 <context>
     <name>IpAddressPluginFactory</name>
     <message>
-        <location filename="../ip_address_plugin.cpp" line="110"/>
+        <location filename="../ip_address_plugin.cpp" line="112"/>
         <source>Displays local IP address(es) under clock.</source>
         <translation>在时钟下显示本地IP地址。</translation>
     </message>
@@ -43,6 +43,11 @@
         <location filename="../gui/settings_widget.ui" line="37"/>
         <source>Display external address</source>
         <translation>显示外部地址</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_widget.ui" line="76"/>
+        <source>External address detection service</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
