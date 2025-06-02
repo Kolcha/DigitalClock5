@@ -37,7 +37,7 @@ void CountdownTimer::stop()
   emit activityChanged(is_active_);
 }
 
-void CountdownTimer::setInterval(int seconds)
+void CountdownTimer::setInterval(qint64 seconds)
 {
   setTimeLeft(seconds);
   interval_ = seconds;

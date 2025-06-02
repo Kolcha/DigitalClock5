@@ -28,7 +28,7 @@ static int map_tx_per_char(bool per_char)
   return per_char ? LinesRenderer::PerChar : LinesRenderer::AllText;
 }
 
-static bool match_window_key(QRegularExpression re, QStringView full_key, int& idx, const char* k)
+static bool match_window_key(const QRegularExpression& re, QStringView full_key, int& idx, const char* k)
 {
   auto match = re.matchView(full_key);
   if (!match.hasMatch())
@@ -40,13 +40,13 @@ static bool match_window_key(QRegularExpression re, QStringView full_key, int& i
 static bool is_window_option(QStringView full_key, int& idx, const char* k)
 {
   QRegularExpression re(R"(^Window(\d+)/(.*)$)");
-  return match_window_key(std::move(re), full_key, idx, k);
+  return match_window_key(re, full_key, idx, k);
 }
 
 static bool is_window_state(QStringView full_key, int& idx, const char* k)
 {
   QRegularExpression re(R"(^state/window/(\d+)/(.*)$)");
-  return match_window_key(std::move(re), full_key, idx, k);
+  return match_window_key(re, full_key, idx, k);
 }
 
 static QString instance_key(int idx, const char* key)

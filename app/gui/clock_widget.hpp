@@ -20,7 +20,7 @@ public:
 
   void setCustomSeparators(QString seps);
 
-  void setTokenTransform(QString token, QTransform tr);
+  void setTokenTransform(const QString& token, const QTransform& tr);
 
 public slots:
   void setDateTime(const QDateTime& dt);

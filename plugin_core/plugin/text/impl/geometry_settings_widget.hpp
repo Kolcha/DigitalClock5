@@ -42,7 +42,7 @@ private slots:
 
 private:
   Ui::GeometrySettingsWidget* ui;
-  PluginInstanceConfig* cfg;
+  PluginInstanceConfig* cfg = nullptr;
 };
 
 } // namespace plugin::text::impl

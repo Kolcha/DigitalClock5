@@ -29,9 +29,9 @@ public:
     _custom_seps = std::move(seps);
   }
 
-  void setTokenTransform(QString token, QTransform tr)
+  void setTokenTransform(const QString& token, const QTransform& tr)
   {
-    _token_transforms[std::move(token)] = std::move(tr);
+    _token_transforms[token] = tr;
   }
 
 protected:

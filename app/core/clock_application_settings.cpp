@@ -55,7 +55,7 @@ void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVari
 
     case opt::TransparentOnHover:
     case opt::OpacityOnHover:
-      for (const auto& [i, w] : _windows) applyWindowOption(i, opt, val);
+      for (const auto i : _windows | std::views::keys) applyWindowOption(i, opt, val);
       break;
 
     case opt::TrayIconSingleClickAction:
@@ -87,7 +87,7 @@ void ClockApplication::onInstanceOptionChanged(size_t i, opt::InstanceOptions op
 {
   qDebug() << "instance:" << opt << val;
   if (_cfg->global()->getOptionsSharing() && _cfg->instance(i)->isSharedOption(opt)) {
-    for (const auto& [w, _] : _windows)
+    for (const auto w : _windows | std::views::keys)
       applyInstanceOption(w, opt, val);
   } else {
     applyInstanceOption(i, opt, val);

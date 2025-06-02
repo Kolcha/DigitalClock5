@@ -30,8 +30,8 @@ public:
 class SKIN_ENGINE_EXPORT NoopRenderable : public Renderable
 {
 public:
-  explicit NoopRenderable(QRectF r) noexcept
-    : _r(std::move(r))
+  explicit NoopRenderable(const QRectF& r) noexcept
+    : _r(r)
   {}
 
   QRectF geometry() const noexcept override { return _r; }
@@ -48,7 +48,7 @@ public:
   using ContainerType = std::vector<std::unique_ptr<Renderable>>;
 
   CompositeRenderable() = default;
-  CompositeRenderable(ContainerType&& c);
+  explicit CompositeRenderable(ContainerType&& c);
 
   // MSVC tries to generate copy constructor if class exported
   // so, delete copy operations explicitly and default the move ones

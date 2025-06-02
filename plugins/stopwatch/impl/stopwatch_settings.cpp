@@ -14,8 +14,7 @@ QString StopwatchInstanceConfig::key(Options o)
     case PauseHotkey:           return "pause_hotkey";
     case RestartHotkey:         return "restart_hotkey";
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant StopwatchInstanceConfig::def_value(Options o)
@@ -26,8 +25,7 @@ QVariant StopwatchInstanceConfig::def_value(Options o)
     case PauseHotkey:           return QString();
     case RestartHotkey:         return QString();
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 } // namespace timetracker

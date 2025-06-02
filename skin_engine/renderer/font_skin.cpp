@@ -43,7 +43,7 @@ public:
 
   QRectF geometry() const noexcept override { return _r.marginsAdded(_m); }
 
-  void setMargins(QMarginsF m) noexcept { _m = std::move(m); }
+  void setMargins(const QMarginsF& m) noexcept { _m = m; }
 
 private:
   QRectF _r;

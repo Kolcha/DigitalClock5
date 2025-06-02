@@ -24,7 +24,7 @@ class PLUGIN_CORE_EXPORT TextPluginInstanceBase : public SettingsPluginInstance,
   Q_OBJECT
 
 public:
-  TextPluginInstanceBase(const PluginInstanceConfig& cfg);
+  explicit TextPluginInstanceBase(const PluginInstanceConfig& cfg);
 
   void init(const InstanceOptionsHash& settings) override;
   void init(QWidget* w) override;

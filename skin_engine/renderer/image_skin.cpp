@@ -8,8 +8,8 @@
 
 #include "item.hpp"
 
-GlyphBase::GlyphBase(QRectF r) noexcept
-  : _rect(std::move(r))
+GlyphBase::GlyphBase(const QRectF& r) noexcept
+  : _rect(r)
   , _adv(_rect.width(), -_rect.height())
 {}
 
@@ -128,12 +128,12 @@ private:
 
 void ImageSkin::insertGlyph(char32_t c, std::shared_ptr<Glyph> g)
 {
-  _glyps[c] = std::make_shared<CachedGlyph>(std::move(g));
+  _glyphs[c] = std::make_shared<CachedGlyph>(std::move(g));
 }
 
 std::shared_ptr<Glyph> ImageSkin::glyph(char32_t c) const noexcept
 {
-  return _glyps.value(c, nullptr);
+  return _glyphs.value(c, nullptr);
 }
 
 std::unique_ptr<Renderable> ImageSkin::draw(const QString& str) const
@@ -163,10 +163,10 @@ std::unique_ptr<Renderable> ImageSkin::draw(const QString& str) const
 
 Skin::Metrics ImageSkin::metrics() const
 {
-  Metrics m;
+  Metrics m{};
 
-  if (!_glyps.empty()) {
-    auto first_iter = _glyps.begin();
+  if (!_glyphs.empty()) {
+    auto first_iter = _glyphs.begin();
     const auto& first = first_iter.value();
 
     auto ymin = first->rect().top();
@@ -174,7 +174,7 @@ Skin::Metrics ImageSkin::metrics() const
 
     auto yadv = qAbs(first->advance().y());
 
-    for (auto iter = std::next(first_iter); iter != _glyps.end(); ++iter) {
+    for (auto iter = std::next(first_iter); iter != _glyphs.end(); ++iter) {
       const auto& glyph = iter.value();
       ymin = std::min(ymin, glyph->rect().top());
       ymax = std::max(ymax, glyph->rect().bottom());

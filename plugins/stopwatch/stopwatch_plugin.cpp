@@ -114,7 +114,7 @@ void StopwatchPlugin::update(const QDateTime& dt)
 
 void StopwatchPlugin::applyTimerOption(timetracker::Options opt, const QVariant& val)
 {
-  auto init_hotkey = [](auto key_seq, auto receiver, auto method) {
+  auto init_hotkey = [](const auto& key_seq, auto receiver, auto method) {
     std::unique_ptr<QHotkey> hotkey;
     if (!key_seq.isEmpty()) {
       hotkey = std::make_unique<QHotkey>(QKeySequence(key_seq), true);

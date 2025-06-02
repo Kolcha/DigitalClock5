@@ -8,7 +8,7 @@
 
 Item::Item(std::unique_ptr<Renderable> r, QPointF p) noexcept
   : _r(std::move(r))
-  , _pos(std::move(p))
+  , _pos(p)
 {}
 
 void Item::draw(QPainter* p) const

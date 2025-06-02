@@ -39,7 +39,7 @@ class ClockApplication : public QObject
 
 public:
   explicit ClockApplication(QObject* parent = nullptr);
-  ~ClockApplication();
+  ~ClockApplication() override;
 
   ClockWindow* window(size_t idx) const noexcept;
 

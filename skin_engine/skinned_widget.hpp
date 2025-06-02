@@ -37,8 +37,8 @@ public:
   // not recommended for arbitrary text
   void setTruePerCharRendering(bool en);
 
-  void setCharMargins(QMarginsF m);
-  void setTextMargins(QMarginsF m);
+  void setCharMargins(const QMarginsF& m);
+  void setTextMargins(const QMarginsF& m);
 
   void setSkin(std::shared_ptr<Skin> skin);
 

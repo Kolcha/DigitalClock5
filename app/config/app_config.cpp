@@ -30,7 +30,7 @@ QVector<size_t> GlobalConfig::getActiveInstancesList() const
   return l;
 }
 
-void GlobalConfig::setActiveInstancesList(QVector<size_t> l)
+void GlobalConfig::setActiveInstancesList(const QVector<size_t>& l)
 {
   quint8 act_insts = 0;
   for (size_t i = 0; i < l.size() && i < 8u*sizeof(act_insts); i++)
@@ -72,8 +72,7 @@ QString GlobalConfig::key(opt::GlobalOptions o)
 
     case opt::SkinBaseSize:             return "app_limits/skin_base_size";
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant GlobalConfig::def_value(opt::GlobalOptions o)
@@ -109,8 +108,7 @@ QVariant GlobalConfig::def_value(opt::GlobalOptions o)
 
     case opt::SkinBaseSize:             return 96;
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 
@@ -197,8 +195,7 @@ QString InstanceConfig::key(opt::InstanceOptions o)
 
     case opt::HideClockWidget:          return "misc/hide_clock_widget";
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant InstanceConfig::def_value(opt::InstanceOptions o)
@@ -308,14 +305,14 @@ void AppConfig::removeInstance(size_t i)
 void AppConfig::commit()
 {
   _global->commit();
-  for (auto& [_, instance] : _instances)
+  for (auto& instance : _instances | std::views::values)
     instance->commit();
 }
 
 void AppConfig::discard()
 {
   _global->discard();
-  for (auto& [_, instance] : _instances)
+  for (auto& instance : _instances | std::views::values)
     instance->discard();
 }
 

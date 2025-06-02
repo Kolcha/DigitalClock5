@@ -8,7 +8,7 @@ namespace countdown_timer {
 
 QDateTime default_target_date()
 {
-  return QDateTime(QDate(QDate::currentDate().year() + 1, 1, 1), QTime(0, 0, 0));
+  return {QDate(QDate::currentDate().year() + 1, 1, 1), QTime(0, 0, 0)};
 }
 
 QString CountdownTimerInstanceConfig::key(Options o)
@@ -41,8 +41,7 @@ QString CountdownTimerInstanceConfig::key(Options o)
     case PauseHotkey:           return "pause_hotkey";
     case RestartHotkey:         return "restart_hotkey";
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant CountdownTimerInstanceConfig::def_value(Options o)
@@ -75,8 +74,7 @@ QVariant CountdownTimerInstanceConfig::def_value(Options o)
     case PauseHotkey:           return QString();
     case RestartHotkey:         return QString();
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 } // namespace countdown_timer

@@ -62,7 +62,7 @@ void ClockTrayIcon::updateIcon()
   auto dstr = QLocale::system().toString(QDate::currentDate());
   setToolTip(QString("%1\n%2").arg(tstr, dstr));
 
-  m_last_update = std::move(now);
+  m_last_update = now;
 }
 #ifdef Q_OS_WINDOWS
 void ClockTrayIcon::onSystemThemeChanged(bool is_light)

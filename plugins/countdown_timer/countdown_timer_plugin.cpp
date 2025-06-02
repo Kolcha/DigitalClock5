@@ -135,7 +135,7 @@ void CountdownTimerPlugin::onOptionChanged(opt::InstanceOptions o, const QVarian
 
 void CountdownTimerPlugin::applyTimerOption(countdown_timer::Options opt, const QVariant& val)
 {
-  auto init_hotkey = [](auto key_seq, auto receiver, auto method) {
+  auto init_hotkey = [](const auto& key_seq, auto receiver, auto method) {
     std::unique_ptr<QHotkey> hotkey;
     if (!key_seq.isEmpty()) {
       hotkey = std::make_unique<QHotkey>(QKeySequence(key_seq), true);

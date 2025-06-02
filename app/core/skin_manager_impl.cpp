@@ -30,7 +30,7 @@ void SkinManagerImpl::Impl::reload()
   data_paths.append(QCoreApplication::applicationDirPath());
   data_paths.append(":/");  // always look in app built-in resources
 
-  std::reverse(data_paths.begin(), data_paths.end());
+  std::ranges::reverse(data_paths);
 
   for (const auto& p : std::as_const(data_paths)) {
     bool is_user = p == QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);

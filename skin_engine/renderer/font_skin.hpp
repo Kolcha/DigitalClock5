@@ -14,7 +14,7 @@ class SKIN_ENGINE_EXPORT FontSkin : public SkinBase
 {
 public:
   explicit FontSkin(const QFont& font) noexcept
-    : _font(std::move(font))
+    : _font(font)
   {}
 
   std::unique_ptr<Renderable> draw(const QString &str) const override;

@@ -28,10 +28,10 @@ public:
 
   const QTransform& transform() const noexcept { return _transform; }
 
-  inline void setPos(QPointF p) noexcept { _pos = std::move(p); }
-  inline void setMargins(QMarginsF m) noexcept { _margins = std::move(m); }
+  void setPos(const QPointF p) noexcept { _pos = p; }
+  void setMargins(const QMarginsF& m) noexcept { _margins = m; }
 
-  void setTransform(QTransform t) noexcept { _transform = std::move(t); }
+  void setTransform(const QTransform& t) noexcept { _transform = t; }
 
   void setVisible(bool visible) noexcept { _visible = visible; }
   inline void show() noexcept { setVisible(true); }

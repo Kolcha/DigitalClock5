@@ -354,7 +354,7 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
     _overlay->raise();
   }
 
-  // do not apply anhoring logic during dragging
+  // do not apply anchoring logic during dragging
   if (_is_dragging) return;
 
   // state restore must happen before the first resize event!

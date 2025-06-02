@@ -25,7 +25,7 @@ public:
   explicit GlobalConfig(std::unique_ptr<SettingsStorage> st, QObject* parent = nullptr);
 
   QVector<size_t> getActiveInstancesList() const;
-  void setActiveInstancesList(QVector<size_t> l);
+  void setActiveInstancesList(const QVector<size_t>& l);
 
   GLOBAL_OPTION(QString, Locale)
 

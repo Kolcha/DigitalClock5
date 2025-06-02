@@ -15,7 +15,7 @@ static QRect fit_rect(const QRectF& rf)
   auto l = qFloor(rf.left());
   auto b = qCeil(rf.bottom());
   auto r = qCeil(rf.right());
-  return QRect(QPoint(l, t), QPoint(r, b));
+  return {QPoint(l, t), QPoint(r, b)};
 }
 
 void SkinBase::setTexture(const QPixmap& b, const QTileRules& t)
@@ -83,11 +83,11 @@ void SkinRenderable::draw(QPainter* p) const
 void SkinRenderable::setTexture(QPixmap b, QTileRules t) noexcept
 {
   _texture = std::move(b);
-  _tx_rules = std::move(t);
+  _tx_rules = t;
 }
 
 void SkinRenderable::setBackground(QPixmap b, QTileRules t) noexcept
 {
   _background = std::move(b);
-  _bg_rules = std::move(t);
+  _bg_rules = t;
 }

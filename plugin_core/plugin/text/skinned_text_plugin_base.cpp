@@ -5,7 +5,6 @@
 #include "skinned_text_plugin_base.hpp"
 
 #include <QColor>
-#include <QDateTime>
 #include <QEvent>
 #include <QGridLayout>
 
@@ -424,12 +423,12 @@ void TextPluginBase::configure(QWidget* parent, size_t idx)
   connect(d, &SettingsDialog::instanceSwitched, this, &TextPluginBase::instanceSwitched);
 
   connect(d, &SettingsDialog::rejected, this, [this]() {
-    for (const auto& [_, i] : _insts)
+    for (const auto& i : _insts | std::views::values)
       i->reloadConfig();
   });
 
   connect(d, &SettingsDialog::finished, this, [this]() {
-    for (const auto& [_, i] : _insts)
+    for (const auto& i : _insts | std::views::values)
       if (auto w = i->widget())
         w->disableFrame();
   });

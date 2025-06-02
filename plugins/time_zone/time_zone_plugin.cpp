@@ -46,9 +46,7 @@ QString FormatTimeZone(const QDateTime& dt, const QString& sfmt)
   bool escaped = false;
   bool quoted = false;
 
-  for (qsizetype i = 0; i < fmt.size(); ++i) {
-    const auto& c = fmt[i];
-
+  for (const char32_t c : fmt) {
     if (escaped) {
       escaped = false;
       add_char(res, escape_char(c));

@@ -34,7 +34,7 @@ public slots:
   void start();
   void stop();
 
-  void setInterval(int seconds);
+  void setInterval(qint64 seconds);
 
 protected:
   void timerEvent(QTimerEvent* event) override;

@@ -17,7 +17,7 @@ void RandomPositionPlugin::init(QWidget* wnd)
 
 void RandomPositionPlugin::startup()
 {
-  std::srand(std::time(0));
+  std::srand(std::time(nullptr));
 }
 
 void RandomPositionPlugin::shutdown()

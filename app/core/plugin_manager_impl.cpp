@@ -73,7 +73,7 @@ public:
 
   inline bool isActive() const noexcept { return _active; }
 
-  bool isConfigrable() const
+  bool isConfigurable() const
   {
     return _metadata.value("configurable", false).toBool();
   }
@@ -253,7 +253,7 @@ bool PluginHandle::isActive() const
 
 bool PluginHandle::isConfigurable() const
 {
-  return _impl->isConfigrable();
+  return _impl->isConfigurable();
 }
 
 QString PluginHandle::id() const

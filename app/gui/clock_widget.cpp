@@ -27,9 +27,9 @@ void ClockWidget::setCustomSeparators(QString seps)
   doUpdateGeometry();
 }
 
-void ClockWidget::setTokenTransform(QString token, QTransform tr)
+void ClockWidget::setTokenTransform(const QString& token, const QTransform& tr)
 {
-  _rr->setTokenTransform(std::move(token), std::move(tr));
+  _rr->setTokenTransform(token, tr);
   doUpdateGeometry();
 }
 

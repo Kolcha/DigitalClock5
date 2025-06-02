@@ -56,7 +56,7 @@ private slots:
 
 private:
   Ui::TimerSettingsWidget* ui;
-  CountdownTimerInstanceConfig* cfg;
+  CountdownTimerInstanceConfig* cfg = nullptr;
 };
 
 } // namespace countdown_timer

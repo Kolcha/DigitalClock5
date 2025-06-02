@@ -90,7 +90,7 @@ void align_items(LayoutItemsContainer& items, const LinesRenderer::Options& opt,
         break;
     }
 
-    item.setPos(std::move(pos));
+    item.setPos(pos);
 
     const auto& g = item.geometry();
     item.setMargins({g.left() - min_x, 0, max_x - g.right(), 0});
@@ -115,7 +115,7 @@ void scale_items(LayoutItemsContainer& items, const LinesRenderer::Options& opt,
 
     const auto& g = item.geometry();
     pos.setX(pos.x() + min_x - g.left());
-    item.setPos(std::move(pos));
+    item.setPos(pos);
   }
 }
 
@@ -127,7 +127,7 @@ public:
 
   QRectF geometry() const override { return inner()->geometry().marginsAdded(_m); }
 
-  void setMargins(QMarginsF m) noexcept { _m = std::move(m); }
+  void setMargins(const QMarginsF& m) noexcept { _m = m; }
 
 private:
   QMarginsF _m;
@@ -143,8 +143,8 @@ std::unique_ptr<Renderable> LinesRenderer::draw(Lines&& lines, const Options& op
 
   LayoutItemsContainer items(lines.size());
   // *INDENT-OFF*
-  std::transform(lines.begin(), lines.end(), items.begin(),
-                 [](auto&& l) { return std::make_unique<Item>(std::move(l)); });
+  std::ranges::transform(lines, items.begin(),
+                         [](auto& l) { return std::make_unique<Item>(std::move(l)); });
   // *INDENT-ON*
 
   auto first_non_scalable = find_first_non_scalable_item(items.begin(), items.end(), opt);
@@ -183,14 +183,14 @@ void LinesRenderer::setBackgroundCustomization(CustomizationType c)
 void LinesRenderer::setTexture(QPixmap p, QTileRules t)
 {
   _texture = std::move(p);
-  _tx_rules = std::move(t);
+  _tx_rules = t;
   updateSkinTexture();
 }
 
 void LinesRenderer::setBackground(QPixmap p, QTileRules t)
 {
   _background = std::move(p);
-  _bg_rules = std::move(t);
+  _bg_rules = t;
   updateSkinBackground();
 }
 
@@ -208,16 +208,16 @@ void LinesRenderer::setTruePerCharRendering(bool en)
   _true_per_char = en;
 }
 
-void LinesRenderer::setCharMargins(QMarginsF m)
+void LinesRenderer::setCharMargins(const QMarginsF& m)
 {
   if (_skin)
     _skin->setCharMargins(m);
-  _char_margins = std::move(m);
+  _char_margins = m;
 }
 
-void LinesRenderer::setTextMargins(QMarginsF m)
+void LinesRenderer::setTextMargins(const QMarginsF& m)
 {
-  _text_margins = std::move(m);
+  _text_margins = m;
 }
 
 void LinesRenderer::setSkin(std::shared_ptr<Skin> skin)

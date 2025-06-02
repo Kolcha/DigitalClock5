@@ -157,7 +157,7 @@ protected:
   virtual std::unique_ptr<PluginInstanceConfig> createInstanceImpl(std::unique_ptr<SettingsStorage> st) const;
 
 private:
-  std::unique_ptr<PluginInstanceConfig> createInstance(size_t i);
+  std::unique_ptr<PluginInstanceConfig> createInstance(size_t i) const;
 
 private:
   std::unique_ptr<PluginSettingsBackend> _st;

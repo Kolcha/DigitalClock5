@@ -167,7 +167,7 @@ void ClockApplication::reloadConfig()
 
   updateInstances();                // add/remove windows
 
-  for (const auto& [i, w] : _windows) reconfigureWindow(i);
+  for (const auto i : _windows | std::views::keys) reconfigureWindow(i);
 
   onGlobalOptionChanged(opt::CheckForUpdates, _cfg->global()->getCheckForUpdates());
 
@@ -236,7 +236,7 @@ void ClockApplication::showSettingsDialog()
   connect(dlg, &SettingsDialog::accepted, _cfg.get(), &AppConfig::commit);
   connect(dlg, &SettingsDialog::rejected, _cfg.get(), &AppConfig::discard);
   connect(dlg, &SettingsDialog::rejected, this, &ClockApplication::reloadConfig);
-  connect(dlg, &SettingsDialog::finished, this, [this]() { for (const auto& [_, w] : _windows) w->raise(); });
+  connect(dlg, &SettingsDialog::finished, this, [this]() { for (const auto& w : _windows | std::views::values) w->raise(); });
 }
 
 void ClockApplication::showAboutDialog()
@@ -422,7 +422,7 @@ void ClockApplication::updateInstances()
   Q_ASSERT(!desired_insts.empty());
 
   QSet<size_t> existing_insts;
-  for (const auto& [i, _] : _windows)
+  for (const auto i : _windows | std::views::keys)
     existing_insts.insert(i);
 
   const auto to_remove = existing_insts - desired_insts;

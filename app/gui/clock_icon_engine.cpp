@@ -11,7 +11,7 @@
 
 ClockIconEngine::ClockIconEngine(QColor color)
   : QIconEngine()
-  , m_color(std::move(color))
+  , m_color(color)
 {
 }
 

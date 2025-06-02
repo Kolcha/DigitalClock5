@@ -54,8 +54,8 @@ private:
   std::unique_ptr<QHotkey> _restart_hotkey;
 
   // TRICK! dynamic properties names
-  char _last_elapsed_prop[40];
-  char _last_active_prop[40];
+  char _last_elapsed_prop[40] = {};
+  char _last_active_prop[40] = {};
 };
 
 

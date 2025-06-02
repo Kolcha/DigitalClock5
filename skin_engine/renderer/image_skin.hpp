@@ -30,11 +30,11 @@ public:
   QPointF advance() const noexcept override { return _adv; }
 
   // factory may override geometry
-  void setRect(QRectF r) noexcept { _rect = std::move(r); }
-  void setAdvance(QPointF a) noexcept { _adv = std::move(a); }
+  void setRect(const QRectF& r) noexcept { _rect = r; }
+  void setAdvance(const QPointF a) noexcept { _adv = a; }
 
 protected:
-  GlyphBase(QRectF r) noexcept;
+  explicit GlyphBase(const QRectF& r) noexcept;
 
 private:
   QRectF _rect;
@@ -51,7 +51,7 @@ public:
   // raster images don't look good on HighDPI screens
   // unless they have suitable device/pixel ratio
   // don't make any assumption on it,
-  // let the caller to specify it explicitly
+  // let the caller specify it explicitly
   // should be called before custom geometry definition
   void setDevicePixelRatio(qreal dpr);
 
@@ -83,7 +83,7 @@ public:
 
   std::unique_ptr<Renderable> draw(const QString &str) const override;
 
-  bool supports(char32_t ch) const override { return _glyps.contains(ch); }
+  bool supports(char32_t ch) const override { return _glyphs.contains(ch); }
 
   Metrics metrics() const override;
 
@@ -93,5 +93,5 @@ private:
   std::unique_ptr<Renderable> customize(std::unique_ptr<Renderable> r) const;
 
 private:
-  QHash<char32_t, std::shared_ptr<Glyph>> _glyps;
+  QHash<char32_t, std::shared_ptr<Glyph>> _glyphs;
 };

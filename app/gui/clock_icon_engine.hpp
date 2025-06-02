@@ -16,10 +16,9 @@ public:
   void paint(QPainter* painter, const QRect& rect, QIcon::Mode mode, QIcon::State state) override;
   QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) override;
 
-  QIconEngine* clone() const override;
+  [[nodiscard]] QIconEngine* clone() const override;
 
-  QList<QSize> availableSizes(QIcon::Mode mode = QIcon::Normal,
-                              QIcon::State state = QIcon::Off) override;
+  QList<QSize> availableSizes(QIcon::Mode mode, QIcon::State state) override;
 
 private:
   QColor m_color;

@@ -127,7 +127,7 @@ void FormatDateTime(const QDateTime& dt, const QString& sfmt,
       case 'A':
         repeat = qMin(repeat, 1);
         if (i + 1 < fmt.size() && (fmt[i+1] == 'p' || fmt[i+1] == 'P'))
-          repeat += 1;  // AP should be handled as 'A' (case insensitive)
+          repeat += 1;  // AP should be handled as 'A' (case-insensitive)
         [[fallthrough]];
       default: {
         const auto sfmt = QString::fromUcs4(&fmt[i], repeat);

@@ -23,7 +23,7 @@ template<>
 struct ConfigBase::fromVariant<QBrush> {
   QBrush operator ()(const QVariant& v)
   {
-    QBrush brush = qvariant_cast<QBrush>(v);
+    auto brush = qvariant_cast<QBrush>(v);
     if (brush.gradient()) {
       QGradient gradient = *brush.gradient();
       gradient.setCoordinateMode(QGradient::ObjectMode);

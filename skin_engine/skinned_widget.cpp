@@ -42,13 +42,13 @@ void SkinnedWidgetBase::setBackgroundCustomization(LinesRenderer::CustomizationT
 
 void SkinnedWidgetBase::setTexture(QPixmap p, QTileRules t)
 {
-  _rr.setTexture(std::move(p), std::move(t));
+  _rr.setTexture(std::move(p), t);
   doRepaint();
 }
 
 void SkinnedWidgetBase::setBackground(QPixmap p, QTileRules t)
 {
-  _rr.setBackground(std::move(p), std::move(t));
+  _rr.setBackground(std::move(p), t);
   doRepaint();
 }
 
@@ -76,15 +76,15 @@ void SkinnedWidgetBase::setTruePerCharRendering(bool en)
   doUpdateGeometry();
 }
 
-void SkinnedWidgetBase::setCharMargins(QMarginsF m)
+void SkinnedWidgetBase::setCharMargins(const QMarginsF& m)
 {
-  _rr.setCharMargins(std::move(m));
+  _rr.setCharMargins(m);
   doUpdateGeometry();
 }
 
-void SkinnedWidgetBase::setTextMargins(QMarginsF m)
+void SkinnedWidgetBase::setTextMargins(const QMarginsF& m)
 {
-  _rr.setTextMargins(std::move(m));
+  _rr.setTextMargins(m);
   doUpdateGeometry();
 }
 

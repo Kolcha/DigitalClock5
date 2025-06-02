@@ -34,7 +34,7 @@ private slots:
 
 private:
   Ui::TimerSettingsWidget* ui;
-  StopwatchInstanceConfig* cfg;
+  StopwatchInstanceConfig* cfg = nullptr;
 };
 
 } // namespace timetracker

@@ -4,8 +4,6 @@
 
 #include "ip_address_plugin.hpp"
 
-// #include <functional>
-
 #include <QTimer>
 #include <QNetworkInterface>
 #include <QNetworkAccessManager>

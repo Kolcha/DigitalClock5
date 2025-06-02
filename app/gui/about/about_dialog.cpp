@@ -7,7 +7,6 @@
 #include "about_dialog.hpp"
 #include "ui_about_dialog.h"
 
-#include <QDate>
 #include <QLocale>
 #include <QSysInfo>
 #include <QDesktopServices>

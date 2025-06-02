@@ -20,8 +20,7 @@ QString PluginInstanceConfig::key(wpo::InstanceOptions o)
     case wpo::FollowClockAppearance:    return "widget/follow_clock_appearance";
     case wpo::UseClockSkin:             return "widget/use_clock_skin";
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QString PluginInstanceConfig::key(opt::InstanceOptions o)
@@ -62,8 +61,7 @@ QString PluginInstanceConfig::key(opt::InstanceOptions o)
 
     default:                            break;  // just to make clang happy...
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant PluginInstanceConfig::def_value(wpo::InstanceOptions o)
@@ -78,8 +76,7 @@ QVariant PluginInstanceConfig::def_value(wpo::InstanceOptions o)
     case wpo::FollowClockAppearance:    return true;
     case wpo::UseClockSkin:             return false;
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 QVariant PluginInstanceConfig::def_value(opt::InstanceOptions o)
@@ -120,8 +117,7 @@ QVariant PluginInstanceConfig::def_value(opt::InstanceOptions o)
 
     default:                            break;  // just to make clang happy...
   }
-  Q_ASSERT(false);
-  return {};
+  Q_UNREACHABLE();
 }
 
 bool PluginInstanceConfig::isSkinOption(opt::InstanceOptions o)
@@ -150,13 +146,13 @@ PluginInstanceConfig* PluginConfig::instance(size_t i)
 
 void PluginConfig::commit()
 {
-  for (const auto& [_, i] : _instances)
+  for (const auto& i : _instances | std::views::values)
     i->commit();
 }
 
 void PluginConfig::discard()
 {
-  for (const auto& [_, i] : _instances)
+  for (const auto& i : _instances | std::views::values)
     i->discard();
 }
 
@@ -165,7 +161,7 @@ std::unique_ptr<PluginInstanceConfig> PluginConfig::createInstanceImpl(std::uniq
   return std::make_unique<PluginInstanceConfig>(std::move(st));
 }
 
-std::unique_ptr<PluginInstanceConfig> PluginConfig::createInstance(size_t i)
+std::unique_ptr<PluginInstanceConfig> PluginConfig::createInstance(size_t i) const
 {
   auto st = std::make_unique<PluginSettingsStorage>(std::ref(*_st));
   auto pst = std::make_unique<PrefixedSettingsStorage>(std::move(st), instance_prefix(i));

@@ -971,7 +971,7 @@ void SettingsDialog::initPluginsTab()
   auto by_name = [](const PluginHandle& a, const PluginHandle& b) {
     return QString::localeAwareCompare(a.name(), b.name()) < 0;
   };
-  std::sort(plugins.begin(), plugins.end(), by_name);
+  std::ranges::sort(plugins, by_name);
 
   for (const PluginHandle& p : std::as_const(plugins)) {
     auto widget = new PluginListItemWidget;
