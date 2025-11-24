@@ -49,17 +49,17 @@
         <translation>Информация на других сайтах</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="89"/>
+        <location filename="../gui/about/about_dialog.cpp" line="88"/>
         <source>version: %1</source>
         <translation>версия: %1</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="91"/>
+        <location filename="../gui/about/about_dialog.cpp" line="90"/>
         <source>build date: %1</source>
         <translation>дата сборки: %1</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="105"/>
+        <location filename="../gui/about/about_dialog.cpp" line="104"/>
         <source>New version available.
 Click here to download.</source>
         <translation>Доступна новая версия.

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en">
+<TS version="2.1" language="pt-BR" sourcelanguage="en">
 <context>
     <name>TimeZonePluginFactory</name>
     <message>
         <location filename="../time_zone_plugin.cpp" line="154"/>
         <source>Displays current time zone under the clock.</source>
-        <translation>Отображает текущий часовой пояс под часами.</translation>
+        <translation>Exibe o fuso horário atual sob o relógio.</translation>
     </message>
     <message>
         <location filename="../time_zone_plugin.hpp" line="55"/>
         <source>Time Zone</source>
-        <translation>Часовой пояс</translation>
+        <translation>Fuso Horário</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="14"/>
         <source>Time Zone</source>
-        <translation>Часовой пояс</translation>
+        <translation>Fuso Horário</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="20"/>
         <source>Time Zone Format</source>
-        <translation>Формат</translation>
+        <translation>Formato do Fuso Horário</translation>
     </message>
 </context>
 </TS>

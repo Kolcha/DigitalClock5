@@ -4,7 +4,7 @@
 <context>
     <name>TimeZonePluginFactory</name>
     <message>
-        <location filename="../time_zone_plugin.cpp" line="156"/>
+        <location filename="../time_zone_plugin.cpp" line="154"/>
         <source>Displays current time zone under the clock.</source>
         <translation type="unfinished">Displays current time zone under the clock.</translation>
     </message>

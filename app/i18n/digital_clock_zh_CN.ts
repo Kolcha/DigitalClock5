@@ -49,17 +49,17 @@
         <translation>更多信息</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="89"/>
+        <location filename="../gui/about/about_dialog.cpp" line="88"/>
         <source>version: %1</source>
         <translation>版本：%1</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="91"/>
+        <location filename="../gui/about/about_dialog.cpp" line="90"/>
         <source>build date: %1</source>
         <translation>创建日期：%1</translation>
     </message>
     <message>
-        <location filename="../gui/about/about_dialog.cpp" line="105"/>
+        <location filename="../gui/about/about_dialog.cpp" line="104"/>
         <source>New version available.
 Click here to download.</source>
         <translation>新版本已发布。
