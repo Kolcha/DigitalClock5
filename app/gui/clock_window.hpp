@@ -80,6 +80,7 @@ protected:
   void mouseMoveEvent(QMouseEvent* event) override;
   void mouseReleaseEvent(QMouseEvent* event) override;
 
+  void moveEvent(QMoveEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
 
   void platformOneTimeFlags();
@@ -94,7 +95,6 @@ private:
   QPoint anchoredOrigin() const;
   QPoint desiredPosition() const;
 
-  void updateLastOrigin();
   void preventOutOfScreenPos();
 
 private:

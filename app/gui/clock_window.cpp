@@ -150,7 +150,8 @@ void ClockWindow::loadState(const StateStorage& st)
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
 {
   _anchor_point = ap;
-  updateLastOrigin();
+  _last_origin = anchoredOrigin();
+  emit saveStateRequested();
 }
 
 void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
@@ -175,7 +176,7 @@ void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
     tpos.setY(sg.y() + sg.height() - wg.height());
 
   move(tpos);
-  updateLastOrigin();
+  emit saveStateRequested();
 }
 
 void ClockWindow::setStayOnTop(bool enabled)
@@ -339,11 +340,20 @@ void ClockWindow::mouseMoveEvent(QMouseEvent* event)
 void ClockWindow::mouseReleaseEvent(QMouseEvent* event)
 {
   if (event->button() == Qt::LeftButton) {
-    updateLastOrigin();
+    emit saveStateRequested();
     _is_dragging = false;
     if (_change_cursor_on_hover) setCursor(Qt::OpenHandCursor);
     event->accept();
   }
+}
+
+void ClockWindow::moveEvent(QMoveEvent* event)
+{
+  QWidget::moveEvent(event);
+
+  if (!isVisible()) return;
+
+  _last_origin = anchoredOrigin();
 }
 
 void ClockWindow::resizeEvent(QResizeEvent* event)
@@ -432,14 +442,6 @@ QPoint ClockWindow::desiredPosition() const
     tpos.setY(sg.y() + sg.height() - wg.height());
 
   return tpos;
-}
-
-void ClockWindow::updateLastOrigin()
-{
-  auto origin = anchoredOrigin();
-  if (_last_origin == origin) return;
-  _last_origin = origin;
-  emit saveStateRequested();
 }
 
 void ClockWindow::preventOutOfScreenPos()
