@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1">
+<context>
+    <name>TalkingClockPluginFactory</name>
+    <message>
+        <location filename="../talking_clock_plugin.cpp" line="91"/>
+        <source>Announces time with selected period.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../talking_clock_plugin.hpp" line="52"/>
+        <source>Talking clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>talking_clock::SettingsDialog</name>
     <message>
@@ -21,19 +34,6 @@
     <message>
         <location filename="../gui/settings_dialog.ui" line="50"/>
         <source>quarter hour</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>talking_clock::TalkingClockPlugin</name>
-    <message>
-        <location filename="../talking_clock_plugin.cpp" line="36"/>
-        <source>Talking clock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../talking_clock_plugin.cpp" line="37"/>
-        <source>Announces time with selected period.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -104,7 +104,7 @@ This is example text, you can edit it to play with settings. No any chnages to t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.cpp" line="34"/>
+        <location filename="../gui/voice_config_dialog.cpp" line="20"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>

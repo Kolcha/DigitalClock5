@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/talking_clock">
-        <file alias="icon.svg">res/1479091174_Message.svg</file>
-        <file alias="voice-config.svg">res/1483194805_message-load.svg</file>
+        <file alias="icon.svg">res/8725613_alt_message_comment.svg</file>
+        <file alias="voice-config.svg">res/8725647_comment_message.svg</file>
     </qresource>
 </RCC>
