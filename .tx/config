@@ -100,6 +100,15 @@ resource_name          = stopwatch
 replace_edited_strings = false
 keep_translations      = false
 
+[o:nick-korotysh:p:digital-clock-5:r:plugin-talking-clock]
+file_filter            = plugins/talking_clock/i18n/talking_clock_<lang>.ts
+source_file            = plugins/talking_clock/i18n/talking_clock_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = talking_clock
+replace_edited_strings = false
+keep_translations      = false
+
 [o:nick-korotysh:p:digital-clock-5:r:plugin-time-zone]
 file_filter            = plugins/time_zone/i18n/time_zone_<lang>.ts
 source_file            = plugins/time_zone/i18n/time_zone_en.ts
