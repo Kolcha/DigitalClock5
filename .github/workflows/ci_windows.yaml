@@ -32,7 +32,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.9.*"
+          version: "6.10.*"
           arch: 'win64_msvc2022_64'
           archives: qtbase qtsvg qttools qttranslations
           modules: qtimageformats qtmultimedia qtspeech

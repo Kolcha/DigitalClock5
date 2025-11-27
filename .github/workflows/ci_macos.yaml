@@ -30,7 +30,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.9.*"
+          version: "6.10.*"
           modules: qtimageformats qtmultimedia qtspeech
 
       - name: Build application
