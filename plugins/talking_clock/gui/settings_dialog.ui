@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>talking_clock::SettingsDialog</class>
+ <widget class="QDialog" name="talking_clock::SettingsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>316</width>
+    <height>100</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Talking Clock Settings</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="every_hour">
+     <property name="text">
+      <string>every hour</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="hour_format_edit"/>
+   </item>
+   <item row="0" column="2" rowspan="2">
+    <widget class="QToolButton" name="voice_config_btn">
+     <property name="toolTip">
+      <string>voice configuration</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../talking_clock.qrc">
+       <normaloff>:/talking_clock/voice-config.svg</normaloff>:/talking_clock/voice-config.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="quarter_hour">
+     <property name="text">
+      <string>quarter hour</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="quarter_format_edit"/>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../talking_clock.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>talking_clock::SettingsDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>talking_clock::SettingsDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -46,3 +46,7 @@ if (TARGET Qt6::Multimedia)
     add_subdirectory(chime)
     add_subdirectory(countdown_timer)
 endif()
+
+if (TARGET Qt6::TextToSpeech)
+    add_subdirectory(talking_clock)
+endif()

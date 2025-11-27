@@ -15,7 +15,7 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET 12.0)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network Svg
-             OPTIONAL_COMPONENTS Multimedia LinguistTools)
+             OPTIONAL_COMPONENTS Multimedia TextToSpeech LinguistTools)
 
 set(tr_langs
     en
