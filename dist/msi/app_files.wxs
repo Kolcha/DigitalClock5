@@ -24,6 +24,9 @@ initial file was generated with the next command:
       <Component Id="cmp566DD6260BE95CEE68BB3308DFD5A9D6" Directory="INSTALLDIR" Guid="{AA045A2F-8677-4850-9AD3-AE78E73B2AEB}">
         <File Id="fil29FCAD405C267097227953CFDC17A1E6" KeyPath="yes" Source="$(var.MySource)\DigitalClock5.exe" />
       </Component>
+      <Component Id="cmp6344298A1FF6A5E8D3A4D8987E8BC02C" Directory="INSTALLDIR" Guid="{1DDE1167-BDD5-452B-9074-ED8EB02A361C}">
+        <File Id="filF0A7195B3F47B27AEAA52B88D7C78FAE" KeyPath="yes" Source="$(var.MySource)\icuuc.dll" />
+      </Component>
       <Component Id="cmpC2A5AFEE3B72FD79939EAD5B7ECC198E" Directory="INSTALLDIR" Guid="{3ACE4D94-23C2-4500-B41E-756F3FBBB6AD}">
         <File Id="filE76BABA83A6F179EFC9DA117EF49AD9A" KeyPath="yes" Source="$(var.MySource)\PluginCore.dll" />
       </Component>
@@ -41,6 +44,9 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp79F79792D0F95EE22F04EE38B8BB42A3" Directory="INSTALLDIR" Guid="{7B262E0B-4A3D-42B5-A5CD-BA3778D59B14}">
         <File Id="fil46C833FC61C84E6118BBC920671477FB" KeyPath="yes" Source="$(var.MySource)\Qt6Svg.dll" />
+      </Component>
+      <Component Id="cmp2E02A6EC293919DC7273189A51018DB3" Directory="INSTALLDIR" Guid="{0A933721-412C-45EC-959A-DEFD82D85EBD}">
+        <File Id="filB53FBE4918D94D3009CD6FB77C2DEB3A" KeyPath="yes" Source="$(var.MySource)\Qt6TextToSpeech.dll" />
       </Component>
       <Component Id="cmp853E95689CE2A9A2EDF66929F17D3700" Directory="INSTALLDIR" Guid="{D79C2F4E-5F45-4EF0-A634-C2D42741E952}">
         <File Id="filACABBB549FF34273BE6E692113DA8225" KeyPath="yes" Source="$(var.MySource)\Qt6Widgets.dll" />
@@ -74,6 +80,9 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmpDD1F507A49329DF5C1809F83192E389B" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{80983F94-77F2-467A-B063-91280C9E5DB1}">
         <File Id="fil049E952A3524BADC7316C6017CBE7584" KeyPath="yes" Source="$(var.MySource)\plugins\stopwatch.dll" />
+      </Component>
+      <Component Id="cmp5A04225B91CDB86678926FEDACAEE49A" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{90512754-62FE-42D5-983F-669414ABC1D0}">
+        <File Id="filFCC353B1D5332A566BA5B6194B373E7A" KeyPath="yes" Source="$(var.MySource)\plugins\talking_clock.dll" />
       </Component>
       <Component Id="cmp69918D711C20C91BEB9AC8F20D35C3DA" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{49DA2060-8332-495E-AE95-EAB7A9E841E4}">
         <File Id="fil32B5AA27EE6EFCA997EE6E2416978CA8" KeyPath="yes" Source="$(var.MySource)\plugins\time_zone.dll" />
@@ -122,6 +131,12 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmp573F54D4B8F63DC33F06203764E28F11" Directory="dirDB2D03FD80E110C5D67A547A8D04CBD3" Guid="{BAE73D46-3E65-4F75-BD9F-1F9F9051B9AE}">
         <File Id="filA3AA6A3273F64F091AAC273083668730" KeyPath="yes" Source="$(var.MySource)\plugins\styles\qmodernwindowsstyle.dll" />
+      </Component>
+      <Component Id="cmp14EF22A303E6189FA057C5D2D9F6CA78" Directory="dirFD1BCE11301C261726ED73090AF7A818" Guid="{159085EA-B6CD-40B6-86F2-BC8D44FA7ECE}">
+        <File Id="fil63C3882A52CED0212AB97283131F3730" KeyPath="yes" Source="$(var.MySource)\plugins\texttospeech\qtexttospeech_sapi.dll" />
+      </Component>
+      <Component Id="cmp8050A17E0668026439E3133684BABDFD" Directory="dirFD1BCE11301C261726ED73090AF7A818" Guid="{8866F3C7-7E1D-4056-AC30-8A0954CE1ED7}">
+        <File Id="filEAC839D07352F5AB7D40CBBC9F8FEE44" KeyPath="yes" Source="$(var.MySource)\plugins\texttospeech\qtexttospeech_winrt.dll" />
       </Component>
       <Component Id="cmp80E75174A493DF4F7221EE7BB7D63064" Directory="dirF6F536CAC2A521B870028196D039D8E6" Guid="{746C2A9F-BD8C-442F-B211-137F02C27D45}">
         <File Id="filEFFDA27E448FAD84740AEA7FE5939725" KeyPath="yes" Source="$(var.MySource)\plugins\tls\qcertonlybackend.dll" />
@@ -186,6 +201,9 @@ initial file was generated with the next command:
       <Component Id="cmp23B3657EE14B0ED7D00B271AFF81187C" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{9369F837-670B-457F-B2B9-98EB413C120F}">
         <File Id="fil5A7EE1B788293556A515EAFFC95747DB" KeyPath="yes" Source="$(var.MySource)\translations\qt_ko.qm" />
       </Component>
+      <Component Id="cmp3EB855AC316D449852CF6ABF83EC0913" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{A0B03557-B518-4E4B-96BB-9029733F5227}">
+        <File Id="filC57C03F450BE5DC822C581E79088BD71" KeyPath="yes" Source="$(var.MySource)\translations\qt_lg.qm" />
+      </Component>
       <Component Id="cmp2D105F39980CF93A40405E25755346BB" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{47400A29-F8D8-49FD-9C91-D0CC24DD8D3D}">
         <File Id="fil17B2A1B774381BBA3BF85AF1FFB636AA" KeyPath="yes" Source="$(var.MySource)\translations\qt_lv.qm" />
       </Component>
@@ -206,6 +224,9 @@ initial file was generated with the next command:
       </Component>
       <Component Id="cmpF5EA7E37332E95C614BD2D7EAA933E5D" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{A3B79548-D942-4A2E-982D-18DB68E4586B}">
         <File Id="fil49E3CA421049811064612E40502A6147" KeyPath="yes" Source="$(var.MySource)\translations\qt_sk.qm" />
+      </Component>
+      <Component Id="cmp4150D0F420994A12B07C5DDA5C593E1C" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{912E898A-C0C6-47A2-B059-719F8E2C1FBB}">
+        <File Id="fil69DBFFFBC175AD85B15AEACAC8DF573C" KeyPath="yes" Source="$(var.MySource)\translations\qt_sv.qm" />
       </Component>
       <Component Id="cmpE9AED311F572819D49ABE9B80778636A" Directory="dirF1C5FA08924D46D2A43D5134DF70C0A8" Guid="{DBA926E0-886B-46BE-9EB6-5AD2A8A3C8BD}">
         <File Id="fil57E9679FBF2B9691E0A5D8EEECFE9144" KeyPath="yes" Source="$(var.MySource)\translations\qt_tr.qm" />
@@ -254,6 +275,11 @@ initial file was generated with the next command:
   <Fragment>
     <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
       <Directory Id="dirF6F536CAC2A521B870028196D039D8E6" Name="tls" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir280A744A3793B4E73B0B13172DB8683E">
+      <Directory Id="dirFD1BCE11301C261726ED73090AF7A818" Name="texttospeech" />
     </DirectoryRef>
   </Fragment>
 </Wix>
