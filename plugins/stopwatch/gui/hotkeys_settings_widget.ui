@@ -25,9 +25,6 @@
      <property name="text">
       <string>pause timer</string>
      </property>
-     <property name="buddy">
-      <cstring>pause_seq_edit</cstring>
-     </property>
     </widget>
    </item>
    <item row="0" column="1">
@@ -53,9 +50,6 @@
      </property>
      <property name="text">
       <string>restart timer</string>
-     </property>
-     <property name="buddy">
-      <cstring>restart_seq_edit</cstring>
      </property>
     </widget>
    </item>

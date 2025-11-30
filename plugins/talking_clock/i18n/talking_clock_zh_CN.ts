@@ -69,8 +69,8 @@ This is example text, you can edit it to play with settings. No any chnages to t
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="77"/>
-        <source>&amp;Language:</source>
-        <translation>&amp;语言：</translation>
+        <source>Language:</source>
+        <translation>语言：</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="103"/>

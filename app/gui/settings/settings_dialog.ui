@@ -446,9 +446,6 @@
            <property name="text">
             <string>layout config string (useful only for multiline formats)</string>
            </property>
-           <property name="buddy">
-            <cstring>layout_cfg_edit</cstring>
-           </property>
           </widget>
          </item>
          <item row="2" column="1">
@@ -527,9 +524,6 @@
             <widget class="QLabel" name="of_height_label">
              <property name="text">
               <string>of clock's height</string>
-             </property>
-             <property name="buddy">
-              <cstring>seconds_scale_factor_edit</cstring>
              </property>
             </widget>
            </item>
@@ -717,9 +711,6 @@
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
             </property>
-            <property name="buddy">
-             <cstring>scaling_edit</cstring>
-            </property>
            </widget>
           </item>
           <item row="0" column="1">
@@ -755,9 +746,6 @@
            <widget class="QLabel" name="opacity_label">
             <property name="text">
              <string>opacity</string>
-            </property>
-            <property name="buddy">
-             <cstring>opacity_slider</cstring>
             </property>
            </widget>
           </item>
@@ -924,9 +912,6 @@
             <property name="text">
              <string>H:</string>
             </property>
-            <property name="buddy">
-             <cstring>hs_edit</cstring>
-            </property>
            </widget>
           </item>
           <item>
@@ -943,9 +928,6 @@
            <widget class="QLabel" name="vs_label">
             <property name="text">
              <string>V:</string>
-            </property>
-            <property name="buddy">
-             <cstring>vs_edit</cstring>
             </property>
            </widget>
           </item>

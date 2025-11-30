@@ -74,13 +74,10 @@ This is example text, you can edit it to play with settings. No any chnages to t
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&amp;Language:</string>
+        <string>Language:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="buddy">
-        <cstring>language</cstring>
        </property>
       </widget>
      </item>

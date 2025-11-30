@@ -98,9 +98,6 @@
        <property name="text">
         <string>minimum days count to show</string>
        </property>
-       <property name="buddy">
-        <cstring>min_days_edit</cstring>
-       </property>
       </widget>
      </item>
      <item>
