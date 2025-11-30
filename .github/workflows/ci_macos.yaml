@@ -49,6 +49,7 @@ jobs:
           rm DigitalClock5.app/Contents/PlugIns/sample.dylib
           macdeployqt DigitalClock5.app
           rm DigitalClock5.app/Contents/PlugIns/multimedia/libffmpegmediaplugin.dylib
+          rm DigitalClock5.app/Contents/PlugIns/texttospeech/libqtexttospeech_mock.dylib
           rm DigitalClock5.app/Contents/Frameworks/libav*
           rm DigitalClock5.app/Contents/Frameworks/libsw*
           macdeployqt DigitalClock5.app -no-plugins -codesign=-

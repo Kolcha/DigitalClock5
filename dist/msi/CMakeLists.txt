@@ -50,7 +50,7 @@ function(target_win_deploy_qt _target _out_file)
             --no-system-dxc-compiler
             --no-opengl-sw
             --skip-plugin-types generic
-            --exclude-plugins ffmpegmediaplugin
+            --exclude-plugins ffmpegmediaplugin,qtexttospeech_mock
             ${_out_file}
         WORKING_DIRECTORY ${MSI_SRC_DIR}
         DEPENDS ${MSI_SRC_DIR}/${_out_file}
