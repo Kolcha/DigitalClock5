@@ -69,42 +69,42 @@ This is example text, you can edit it to play with settings. No any chnages to t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="103"/>
+        <location filename="../gui/voice_config_dialog.ui" line="100"/>
         <source>Voice name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="151"/>
+        <location filename="../gui/voice_config_dialog.ui" line="148"/>
         <source>Rate:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="167"/>
+        <location filename="../gui/voice_config_dialog.ui" line="164"/>
         <source>Volume:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="204"/>
+        <location filename="../gui/voice_config_dialog.ui" line="201"/>
         <source>Speak</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="214"/>
+        <location filename="../gui/voice_config_dialog.ui" line="211"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="224"/>
+        <location filename="../gui/voice_config_dialog.ui" line="221"/>
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.ui" line="231"/>
+        <location filename="../gui/voice_config_dialog.ui" line="228"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/voice_config_dialog.cpp" line="20"/>
+        <location filename="../gui/voice_config_dialog.cpp" line="21"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt-BR" sourcelanguage="en">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
         <location filename="../countdown_timer_plugin.cpp" line="282"/>
         <source>Countdown timer</source>
-        <translation>Cronômetro decrescente</translation>
+        <translation>Contador decrescente</translation>
     </message>
 </context>
 <context>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../countdown_timer_plugin.cpp" line="317"/>
         <source>Just a countdown timer.</source>
-        <translation>Só um cronômetro decrescente.</translation>
+        <translation>Apenas um contador decrescente.</translation>
     </message>
     <message>
         <location filename="../countdown_timer_plugin.hpp" line="86"/>
         <source>Countdown timer</source>
-        <translation>Cronômetro decrescente</translation>
+        <translation>Contador decrescente</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="14"/>
         <source>Hotkeys</source>
-        <translation>Atalhos</translation>
+        <translation type="unfinished">Hotkeys</translation>
     </message>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="26"/>
         <source>pause timer</source>
-        <translation>pausar o cronômetro</translation>
+        <translation type="unfinished">pause timer</translation>
     </message>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
-        <translation>reiniciar o cronômetro</translation>
+        <translation type="unfinished">restart timer</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="14"/>
         <source>Timer</source>
-        <translation>Cronômetro</translation>
+        <translation>Contador</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="29"/>
@@ -75,64 +75,64 @@
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="79"/>
         <source>leading zero</source>
-        <translation>zero à esquerda</translation>
+        <translation type="unfinished">leading zero</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="99"/>
         <source>minimum days count to show</source>
-        <translation>quantidade mínima de dias a exibir</translation>
+        <translation type="unfinished">minimum days count to show</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="106"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
-        <translation>Se a quantidade de dias restantes for menor do que este valor, os dias não serão exibidos.
-Defina como -1 para nunca exibir a quantidade de dias, ou como 0 para exibir sempre.</translation>
+        <translation type="unfinished">If remaining days count less than this value, days will not be shown.
+Set this to -1 to never show days count, or to 0 to always show.</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="120"/>
         <source>also hide hours</source>
-        <translation>ocultar também as horas</translation>
+        <translation type="unfinished">also hide hours</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="129"/>
         <source>restart on double click</source>
-        <translation>reiniciar em duplo-clique</translation>
+        <translation type="unfinished">restart on double click</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="136"/>
         <source>auto-restart countdown</source>
-        <translation>auto-reiniciar a contagem regressiva</translation>
+        <translation type="unfinished">auto-restart countdown</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="143"/>
         <source>hide timer when it is not active</source>
-        <translation>ocultar o cronômetro quando ele estiver inativo</translation>
+        <translation type="unfinished">hide timer when it is not active</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="150"/>
         <source>reverse counting</source>
-        <translation>contagem inversa</translation>
+        <translation type="unfinished">reverse counting</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="159"/>
         <source>chime when countdown finishes</source>
-        <translation>soar ao concluir a contagem regressiva</translation>
+        <translation type="unfinished">chime when countdown finishes</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="178"/>
         <source>show custom message on timeout</source>
-        <translation>exibir mensagem personalizada no tempo limite</translation>
+        <translation type="unfinished">show custom message on timeout</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.cpp" line="144"/>
         <source>Open File</source>
-        <translation>Abrir Arquivo</translation>
+        <translation type="unfinished">Open File</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.cpp" line="146"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
-        <translation>Sons (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
+        <translation type="unfinished">Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</translation>
     </message>
 </context>
 </TS>

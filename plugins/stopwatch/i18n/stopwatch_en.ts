@@ -29,7 +29,7 @@ Double click to reset/restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/hotkeys_settings_widget.ui" line="55"/>
+        <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
         <translation type="unfinished"></translation>
     </message>

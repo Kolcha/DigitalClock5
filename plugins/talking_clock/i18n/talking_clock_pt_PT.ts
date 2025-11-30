@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt-BR" sourcelanguage="en">
+<TS version="2.1" language="pt-PT" sourcelanguage="en">
 <context>
     <name>TalkingClockPluginFactory</name>
     <message>
         <location filename="../talking_clock_plugin.cpp" line="91"/>
         <source>Announces time with selected period.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anuncia o tempo num período determinado.</translation>
     </message>
     <message>
         <location filename="../talking_clock_plugin.hpp" line="52"/>
         <source>Talking clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Relógio falante</translation>
     </message>
 </context>
 <context>
@@ -19,22 +19,22 @@
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>
         <source>Talking Clock Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações do Relógio Falante</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="23"/>
         <source>every hour</source>
-        <translation type="unfinished"></translation>
+        <translation>a toda a hora</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="33"/>
         <source>voice configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>configuração da voz</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="50"/>
         <source>quarter hour</source>
-        <translation type="unfinished"></translation>
+        <translation>quartos de hora</translation>
     </message>
 </context>
 <context>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="14"/>
         <source>Voice Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração da Voz</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="26"/>
@@ -51,17 +51,21 @@
 List of available languages and voices  vary depending on platform. To get more languages/voices, search for it for your platform.
 
 This is example text, you can edit it to play with settings. No any chnages to this text will saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>QtSpeech é uma biblioteca que torna o texto para o discurso mais fácil com o Qt. Esta biblioteca utiliza a API de sintetização do discurso nativo.
+
+A lista de idiomas disponíveis e vozes depende da plataforma. Para obter mais idiomas/vozes, procure-as para a sua plataforma.
+
+Este texto é um exemplo. pode editá-lo para experimentar as configurações. As alterações a este texto não serão gravadas.</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="45"/>
         <source>Engine:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="61"/>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="77"/>
@@ -71,42 +75,42 @@ This is example text, you can edit it to play with settings. No any chnages to t
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="100"/>
         <source>Voice name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da voz:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="148"/>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="164"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="201"/>
         <source>Speak</source>
-        <translation type="unfinished"></translation>
+        <translation>Falar</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="211"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="221"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="228"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.cpp" line="21"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão</translation>
     </message>
 </context>
 </TS>

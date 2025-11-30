@@ -35,7 +35,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/hotkeys_settings_widget.ui" line="55"/>
+        <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -83,43 +83,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="109"/>
+        <location filename="../gui/timer_settings_widget.ui" line="106"/>
         <source>If remaining days count less than this value, days will not be shown.
 Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="123"/>
+        <location filename="../gui/timer_settings_widget.ui" line="120"/>
         <source>also hide hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="132"/>
+        <location filename="../gui/timer_settings_widget.ui" line="129"/>
         <source>restart on double click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="139"/>
+        <location filename="../gui/timer_settings_widget.ui" line="136"/>
         <source>auto-restart countdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="146"/>
+        <location filename="../gui/timer_settings_widget.ui" line="143"/>
         <source>hide timer when it is not active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="153"/>
+        <location filename="../gui/timer_settings_widget.ui" line="150"/>
         <source>reverse counting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="162"/>
+        <location filename="../gui/timer_settings_widget.ui" line="159"/>
         <source>chime when countdown finishes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="181"/>
+        <location filename="../gui/timer_settings_widget.ui" line="178"/>
         <source>show custom message on timeout</source>
         <translation type="unfinished"></translation>
     </message>

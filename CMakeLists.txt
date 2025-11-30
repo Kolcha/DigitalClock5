@@ -23,6 +23,7 @@ set(tr_langs
     zh_CN
     tr_TR
     pt_BR
+    pt_PT
 )
 
 qt_standard_project_setup(REQUIRES 6.7 I18N_TRANSLATED_LANGUAGES ${tr_langs})

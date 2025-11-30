@@ -31,7 +31,7 @@ Duplo-clique para redefinir/reiniciar.</translation>
         <translation>pausar o cronômetro</translation>
     </message>
     <message>
-        <location filename="../gui/hotkeys_settings_widget.ui" line="55"/>
+        <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
         <translation>reiniciar o cronômetro</translation>
     </message>
