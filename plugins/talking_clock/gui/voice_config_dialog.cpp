@@ -17,16 +17,18 @@ VoiceConfigDialog::VoiceConfigDialog(QWidget* parent)
   ui->setupUi(this);
 
   // Populate engine selection list
+  QSignalBlocker _(ui->engine);
   ui->engine->addItem(tr("Default"), QString("default"));
   const auto avail_engines = QTextToSpeech::availableEngines();
-  for (const auto& engine : avail_engines)
-    ui->engine->addItem(engine, engine);
+  for (const auto& engine : std::as_const(avail_engines))
+    ui->engine->addItem(engine, QVariant::fromValue(engine));
 
-  connect(ui->speakButton, &QPushButton::clicked, this, &VoiceConfigDialog::speak);
-  connect(ui->pitch, &QSlider::valueChanged, this, &VoiceConfigDialog::setPitch);
-  connect(ui->rate, &QSlider::valueChanged, this, &VoiceConfigDialog::setRate);
-  connect(ui->volume, &QSlider::valueChanged, this, &VoiceConfigDialog::setVolume);
-  connect(ui->engine, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &VoiceConfigDialog::engineSelected);
+  connect(ui->volume, &QSlider::valueChanged, this, &VoiceConfigDialog::setVolumeImpl);
+  connect(ui->rate, &QSlider::valueChanged, this, &VoiceConfigDialog::setRateImpl);
+  connect(ui->pitch, &QSlider::valueChanged, this, &VoiceConfigDialog::setPitchImpl);
+  connect(ui->engine, &QComboBox::currentIndexChanged, this, &VoiceConfigDialog::engineSelected);
+  connect(ui->language, &QComboBox::currentIndexChanged, this, &VoiceConfigDialog::languageSelected);
+  connect(ui->voice, &QComboBox::currentIndexChanged, this, &VoiceConfigDialog::voiceSelected);
 }
 
 VoiceConfigDialog::~VoiceConfigDialog()
@@ -67,22 +69,16 @@ int VoiceConfigDialog::voice() const
 void VoiceConfigDialog::setVolume(int volume)
 {
   ui->volume->setValue(volume);
-  ui->volume->setToolTip(QString::number(volume));
-  if (m_speech) m_speech->setVolume(volume / 100.0);
 }
 
 void VoiceConfigDialog::setRate(int rate)
 {
   ui->rate->setValue(rate);
-  ui->rate->setToolTip(QString::number(rate));
-  if (m_speech) m_speech->setRate(rate / 100.0);
 }
 
 void VoiceConfigDialog::setPitch(int pitch)
 {
   ui->pitch->setValue(pitch);
-  ui->pitch->setToolTip(QString::number(pitch));
-  if (m_speech) m_speech->setPitch(pitch / 100.0);
 }
 
 void VoiceConfigDialog::setEngine(const QString& engine)
@@ -91,28 +87,39 @@ void VoiceConfigDialog::setEngine(const QString& engine)
   if (eng_idx == -1) eng_idx = 0;
 
   ui->engine->setCurrentIndex(eng_idx);
-  // engineSelected(eng_idx);
+  engineSelected(eng_idx);
 }
 
 void VoiceConfigDialog::setLanguage(int lang_idx)
 {
+  Q_ASSERT(m_speech);
   if (lang_idx >= 0 && lang_idx < ui->language->count())
     ui->language->setCurrentIndex(lang_idx);
 }
 
 void VoiceConfigDialog::setVoice(int voice_idx)
 {
+  Q_ASSERT(m_speech);
   if (voice_idx >= 0 && voice_idx < ui->voice->count())
     ui->voice->setCurrentIndex(voice_idx);
 }
 
-void VoiceConfigDialog::speak()
+void VoiceConfigDialog::setVolumeImpl(int volume)
 {
-  m_speech->say(ui->plainTextEdit->toPlainText());
+  ui->volume->setToolTip(QString::number(volume));
+  if (m_speech) m_speech->setVolume(volume / 100.0);
 }
-void VoiceConfigDialog::stop()
+
+void VoiceConfigDialog::setRateImpl(int rate)
 {
-  m_speech->stop();
+  ui->rate->setToolTip(QString::number(rate));
+  if (m_speech) m_speech->setRate(rate / 100.0);
+}
+
+void VoiceConfigDialog::setPitchImpl(int pitch)
+{
+  ui->pitch->setToolTip(QString::number(pitch));
+  if (m_speech) m_speech->setPitch(pitch / 100.0);
 }
 
 void VoiceConfigDialog::stateChanged(QTextToSpeech::State state)
@@ -124,34 +131,33 @@ void VoiceConfigDialog::stateChanged(QTextToSpeech::State state)
 
 void VoiceConfigDialog::engineSelected(int index)
 {
-  QString engineName = ui->engine->itemData(index).toString();
   delete m_speech;
-  if (engineName == "default")
+
+  const auto engine_name = ui->engine->itemData(index).toString();
+  if (engine_name == "default")
     m_speech = new QTextToSpeech(this);
   else
-    m_speech = new QTextToSpeech(engineName, this);
+    m_speech = new QTextToSpeech(engine_name, this);
 
-  disconnect(ui->language, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &VoiceConfigDialog::languageSelected);
-
+  QSignalBlocker _(ui->language);
   ui->language->clear();
-  // Populate the languages combobox before connecting its signal.
-  QVector<QLocale> locales = m_speech->availableLocales();
+  // Populate the languages combobox
+  const auto locales = m_speech->availableLocales();
   QLocale current = m_speech->locale();
-  for (const QLocale& locale : std::as_const(locales)) {
-    QString name(QString("%1 (%2)")
-                 .arg(QLocale::languageToString(locale.language()))
-                 .arg(QLocale::territoryToString(locale.territory())));
-    QVariant localeVariant(locale);
-    ui->language->addItem(name, localeVariant);
+  for (const auto& locale : std::as_const(locales)) {
+    auto name = QString("%1 (%2)").arg(
+          QLocale::languageToString(locale.language()),
+          QLocale::territoryToString(locale.territory()));
+    ui->language->addItem(name, QVariant::fromValue(locale));
     if (locale.name() == current.name())
       current = locale;
   }
+
   m_speech->setVolume(volume() / 100.0);
   m_speech->setRate(rate() / 100.0);
   m_speech->setPitch(pitch() / 100.0);
-  m_speech->setLocale(ui->language->currentData().toLocale());
-  m_speech->setVoice(m_voices.at(ui->voice->currentIndex()));
 
+  connect(ui->speakButton, &QPushButton::clicked, m_speech, [this]() { m_speech->say(ui->plainTextEdit->toPlainText()); });
   connect(ui->stopButton, &QPushButton::clicked, m_speech, [this]() { m_speech->stop(); });
   connect(ui->pauseButton, &QPushButton::clicked, m_speech, [this]() { m_speech->pause(); });
   connect(ui->resumeButton, &QPushButton::clicked, m_speech, &QTextToSpeech::resume);
@@ -159,39 +165,36 @@ void VoiceConfigDialog::engineSelected(int index)
   connect(m_speech, &QTextToSpeech::stateChanged, this, &VoiceConfigDialog::stateChanged);
   connect(m_speech, &QTextToSpeech::localeChanged, this, &VoiceConfigDialog::localeChanged);
 
-  connect(ui->language, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &VoiceConfigDialog::languageSelected);
   localeChanged(current);
 }
 
 void VoiceConfigDialog::languageSelected(int language)
 {
-  QLocale locale = ui->language->itemData(language).toLocale();
-  if (m_speech) m_speech->setLocale(locale);
+  m_speech->setLocale(ui->language->itemData(language).toLocale());
 }
 
 void VoiceConfigDialog::voiceSelected(int index)
 {
-  if (m_speech) m_speech->setVoice(m_voices.at(index));
+  m_speech->setVoice(ui->voice->itemData(index).value<QVoice>());
 }
 
 void VoiceConfigDialog::localeChanged(const QLocale& locale)
 {
-  QVariant localeVariant(locale);
-  ui->language->setCurrentIndex(ui->language->findData(localeVariant));
+  ui->language->setCurrentIndex(ui->language->findData(QVariant::fromValue(locale)));
 
-  disconnect(ui->voice, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &VoiceConfigDialog::voiceSelected);
+  QSignalBlocker _(ui->voice);
   ui->voice->clear();
-
-  m_voices = m_speech->availableVoices();
-  QVoice currentVoice = m_speech->voice();
-  for (const QVoice& voice : std::as_const(m_voices)) {
-    ui->voice->addItem(QString("%1 - %2 - %3").arg(voice.name())
-                       .arg(QVoice::genderName(voice.gender()))
-                       .arg(QVoice::ageName(voice.age())));
-    if (voice.name() == currentVoice.name())
+  // Populate the voices combobox
+  const auto voices = m_speech->availableVoices();
+  QVoice current = m_speech->voice();
+  for (const auto& voice : std::as_const(voices)) {
+    auto name = QString("%1 - %2 - %3").arg(
+          voice.name(),
+          QVoice::genderName(voice.gender()),
+          QVoice::ageName(voice.age()));
+    ui->voice->addItem(name, QVariant::fromValue(voice));
+    if (voice.name() == current.name())
       ui->voice->setCurrentIndex(ui->voice->count() - 1);
   }
-  connect(ui->voice, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &VoiceConfigDialog::voiceSelected);
 }
-
 } // namespace talking_clock

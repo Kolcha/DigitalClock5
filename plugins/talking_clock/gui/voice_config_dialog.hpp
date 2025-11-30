@@ -40,8 +40,9 @@ public slots:
   void setVoice(int voice_idx);
 
 private slots:
-  void speak();
-  void stop();
+  void setVolumeImpl(int volume);
+  void setRateImpl(int rate);
+  void setPitchImpl(int pitch);
 
   void stateChanged(QTextToSpeech::State state);
   void engineSelected(int index);
@@ -53,7 +54,6 @@ private slots:
 private:
   Ui::VoiceConfigDialog* ui;
   QTextToSpeech* m_speech;
-  QVector<QVoice> m_voices;
 };
 
 } // namespace talking_clock
