@@ -17,6 +17,7 @@
 #include <gradient_dialog.h>
 
 #include "config/app_config.hpp"
+#include "config/app_state.hpp"
 #include "config/dc4_to_dc5.hpp"
 #include "config/serialization.hpp"
 #include "core/clock_application.hpp"
@@ -51,6 +52,9 @@ QString tz_name(const QTimeZone& tz)
 {
   return QString::fromLatin1(tz.id());
 }
+
+constexpr const char* const LAST_EXPORTED_FILE_KEY = "settings_dlg/last_exported";
+constexpr const char* const LAST_IMPORTED_FILE_KEY = "settings_dlg/last_imported";
 
 } // namespace
 
@@ -107,12 +111,16 @@ void SettingsDialog::reject()
 
 void SettingsDialog::on_import_btn_clicked()
 {
+  StateStorage state(*app->state()->global());
+  auto last_path = state.value(LAST_IMPORTED_FILE_KEY, QDir::homePath()).toString();
   // *INDENT-OFF*
   auto filename = QFileDialog::getOpenFileName(this, tr("Import settings from ..."),
-                                               QDir::homePath(),
+                                               last_path,
                                                tr("Digital Clock Settings (*.dc5 *.dcs)"));
   // *INDENT-ON*
   if (filename.isEmpty()) return;
+
+  state.setValue(LAST_IMPORTED_FILE_KEY, filename);
 
   auto ext = QFileInfo(filename).suffix().toLower();
 
@@ -133,12 +141,16 @@ void SettingsDialog::on_import_btn_clicked()
 
 void SettingsDialog::on_export_btn_clicked()
 {
+  StateStorage state(*app->state()->global());
+  auto def_filename = QDir::home().filePath("clock_settings.dc5");
+  auto last_path = state.value(LAST_EXPORTED_FILE_KEY, def_filename).toString();
   // *INDENT-OFF*
   auto filename = QFileDialog::getSaveFileName(this, tr("Export settings to ..."),
-                                               QDir::home().filePath("clock_settings.dc5"),
+                                               last_path,
                                                tr("Digital Clock 5 Settings (*.dc5)"));
   // *INDENT-ON*
   if (filename.isEmpty()) return;
+  state.setValue(LAST_EXPORTED_FILE_KEY, filename);
   QVariantHash settings;
   app->settings()->exportSettings(settings);
   dc5::exportToFile(settings, filename);

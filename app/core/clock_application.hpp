@@ -44,6 +44,7 @@ public:
   ClockWindow* window(size_t idx) const noexcept;
 
   AppConfig* config() const noexcept { return _cfg.get(); }
+  AppState* state() const noexcept { return _state.get(); }
   SettingsBackendImpl* settings() const noexcept { return _settings.get(); }
 
   QString activeLang() const { return _active_lang; }
