@@ -419,17 +419,17 @@ Click this message to download.</source>
         <translation>doku</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1105"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1117"/>
         <source>solid color</source>
         <translation>tek renk</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1106"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1118"/>
         <source>gradient</source>
         <translation>gradyan</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1107"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1119"/>
         <source>pattern</source>
         <translation>desen</translation>
     </message>
@@ -566,90 +566,90 @@ Click this message to download.</source>
         <translation>Dışa aktar</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1032"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1044"/>
         <source>window %1</source>
         <translation>pencere %1</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="111"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="117"/>
         <source>Import settings from ...</source>
         <translation>... dan ayarları içe aktar</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="113"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="119"/>
         <source>Digital Clock Settings (*.dc5 *.dcs)</source>
         <translation>Dijital Saat Ayarları (*.dc5 *.dcs)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="137"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="148"/>
         <source>Export settings to ...</source>
         <translation>Ayarları şuraya aktar ...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="139"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="150"/>
         <source>Digital Clock 5 Settings (*.dc5)</source>
         <translation>Dijital Saat 5 Ayarları (*.dc5)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="525"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="636"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="537"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="648"/>
         <source>follow system theme</source>
         <translation>sistem temasını izle</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="539"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="650"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="551"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="662"/>
         <source>stretch instead of tile</source>
         <translation>döşeme yerine uzat</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="588"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="699"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="600"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="711"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Resimler (*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1040"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
         <source>Automatic</source>
         <translation>Otomatik</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1051"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1063"/>
         <source>1 day</source>
         <translation>1 gün</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1064"/>
         <source>3 days</source>
         <translation>3 gün</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1065"/>
         <source>1 week</source>
         <translation>1 hafta</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1066"/>
         <source>2 weeks</source>
         <translation>2 hafta</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1055"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1067"/>
         <source>1 month</source>
         <translation>1 ay</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1061"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1073"/>
         <source>open settings</source>
         <translation>ayarları aç</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1062"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1074"/>
         <source>show/hide clock</source>
         <translation>saati göster/gizle</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1063"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1075"/>
         <source>toggle &quot;stay on top&quot;</source>
         <translation>“üstte kal” seçeneğini aç/kapat</translation>
     </message>

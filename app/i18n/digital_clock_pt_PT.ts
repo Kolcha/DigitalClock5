@@ -419,17 +419,17 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>textura</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1105"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1117"/>
         <source>solid color</source>
         <translation>cor sólida</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1106"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1118"/>
         <source>gradient</source>
         <translation type="unfinished">gradient</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1107"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1119"/>
         <source>pattern</source>
         <translation type="unfinished">pattern</translation>
     </message>
@@ -566,90 +566,90 @@ Clique nesta mensagem para descarregar.</translation>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1032"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1044"/>
         <source>window %1</source>
         <translation type="unfinished">window %1</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="111"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="117"/>
         <source>Import settings from ...</source>
         <translation>Importar configuração de...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="113"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="119"/>
         <source>Digital Clock Settings (*.dc5 *.dcs)</source>
         <translation>Ficheiros de configuração do Relógio Digital (*.dc5 *.dcs)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="137"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="148"/>
         <source>Export settings to ...</source>
         <translation>Exportar configurações para...</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="139"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="150"/>
         <source>Digital Clock 5 Settings (*.dc5)</source>
         <translation>Ficheiros de configuração do Relógio Digital 5 (*.dc5)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="525"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="636"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="537"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="648"/>
         <source>follow system theme</source>
         <translation type="unfinished">follow system theme</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="539"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="650"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="551"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="662"/>
         <source>stretch instead of tile</source>
         <translation type="unfinished">stretch instead of tile</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="588"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="699"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="600"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="711"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>Imagens (*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1040"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
         <source>Automatic</source>
         <translation type="unfinished">Automatic</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1051"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1063"/>
         <source>1 day</source>
         <translation>1 dia</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1052"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1064"/>
         <source>3 days</source>
         <translation>3 dias</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1053"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1065"/>
         <source>1 week</source>
         <translation>1 semana</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1054"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1066"/>
         <source>2 weeks</source>
         <translation>2 semanas</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1055"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1067"/>
         <source>1 month</source>
         <translation type="unfinished">1 month</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1061"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1073"/>
         <source>open settings</source>
         <translation type="unfinished">open settings</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1062"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1074"/>
         <source>show/hide clock</source>
         <translation type="unfinished">show/hide clock</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1063"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1075"/>
         <source>toggle &quot;stay on top&quot;</source>
         <translation type="unfinished">toggle &quot;stay on top&quot;</translation>
     </message>
