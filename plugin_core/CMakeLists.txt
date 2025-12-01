@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(PluginCore VERSION 2.2.5 LANGUAGES CXX)
+project(PluginCore VERSION 2.2.6 LANGUAGES CXX)
 
 qt_add_library(${PROJECT_NAME} SHARED
     plugin/text/impl/appearance_settings_widget.cpp

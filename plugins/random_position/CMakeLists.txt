@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(random_position VERSION 2.1.1 LANGUAGES CXX)
+project(random_position VERSION 2.1.2 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME RandomPositionPluginFactory
     random_position_plugin.cpp
