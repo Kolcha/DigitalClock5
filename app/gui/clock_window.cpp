@@ -358,6 +358,14 @@ void ClockWindow::moveEvent(QMoveEvent* event)
 
 void ClockWindow::resizeEvent(QResizeEvent* event)
 {
+  // ignore spontaneous resize events sent by the system
+  // they often have incorrect window geometry, which leads to strange
+  // effects when right or center alignment is used, especially on Linux
+  if (event->spontaneous()) {
+    event->ignore();
+    return;
+  }
+
   QWidget::resizeEvent(event);
   if (_overlay) {
     _overlay->resize(event->size());
