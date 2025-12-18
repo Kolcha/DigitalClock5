@@ -99,6 +99,21 @@ QRect smart_screen_geometry(const QScreen* screen, const QWidget* widget)
 static constexpr const char* const ORIGIN_POS_KEY = "origin_pos";
 static constexpr const char* const ANCHOR_POINT_KEY = "anchor_point";
 
+Qt::Alignment anchor2alignment(ClockWindow::AnchorPoint a)
+{
+  switch (a) {
+    case ClockWindow::AnchorLeft:
+      return Qt::AlignLeft;
+    case ClockWindow::AnchorCenter:
+      return Qt::AlignHCenter;
+    case ClockWindow::AnchorRight:
+      return Qt::AlignRight;
+  }
+
+  Q_UNREACHABLE();
+  return Qt::AlignLeft;
+}
+
 } // namespace
 
 ClockWindow::ClockWindow(QWidget* parent)
@@ -145,12 +160,14 @@ void ClockWindow::loadState(const StateStorage& st)
 {
   _last_origin = st.value(ORIGIN_POS_KEY, _last_origin).toPoint();
   _anchor_point = st.value(ANCHOR_POINT_KEY, _anchor_point).value<AnchorPoint>();
+  layout()->setAlignment(_clock, anchor2alignment(_anchor_point));
 }
 
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
 {
   _anchor_point = ap;
   _last_origin = anchoredOrigin();
+  layout()->setAlignment(_clock, anchor2alignment(_anchor_point));
   emit saveStateRequested();
 }
 
