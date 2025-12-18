@@ -34,6 +34,23 @@ void DoubleClickWidget::mouseDoubleClickEvent(QMouseEvent* event)
 }
 
 
+namespace {
+
+QString escape(const QString& str)
+{
+  auto s = str.trimmed();
+  return s.replace("\n", "\\n");
+}
+
+QString unescape(const QString& str)
+{
+  auto s = str;
+  return s.replace("\\n", "\n").trimmed();
+}
+
+} // namespace
+
+
 QuickNotePlugin::QuickNotePlugin(const PluginInstanceConfig& cfg, std::unique_ptr<SettingsStorage> st)
   : TextPluginInstanceBase(cfg)
   , _st(std::move(st))
@@ -43,7 +60,7 @@ QuickNotePlugin::QuickNotePlugin(const PluginInstanceConfig& cfg, std::unique_pt
 void QuickNotePlugin::startup()
 {
   const StateStorage st(*_st);
-  _last_text = st.value("last_text", tr("double click me!")).toString();
+  _last_text = unescape(st.value("last_text", tr("double click me!")).toString());
   TextPluginInstanceBase::startup();
 }
 
@@ -59,11 +76,11 @@ void QuickNotePlugin::onWidgetClicked()
   bool ok = false;
   auto str = QInputDialog::getText(nullptr, tr("Quick note"),
                                    tr("Enter the desired note"),
-                                   QLineEdit::Normal, _last_text, &ok);
+                                   QLineEdit::Normal, escape(_last_text), &ok);
   if (ok && !str.isEmpty()) {
-    _last_text = str;
+    _last_text = unescape(str);
     StateStorage st(*_st);
-    st.setValue("last_text", str);
+    st.setValue("last_text", escape(str));
     repaintWidget();
   }
 }
