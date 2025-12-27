@@ -57,6 +57,9 @@ public slots:
   void reconfigureWindow(size_t i);
   void reloadConfig();
 
+  void onScreenAdded(QScreen* screen);
+  void onScreenRemoved(QScreen* screen);
+
 protected:
   bool eventFilter(QObject* obj, QEvent* e) override;
 

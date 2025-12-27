@@ -30,5 +30,10 @@ int main(int argc, char* argv[])
   ClockApplication clock_app;
   app.installEventFilter(&clock_app);
 
+  QObject::connect(&app, &QGuiApplication::screenAdded,
+                   &clock_app, &ClockApplication::onScreenAdded);
+  QObject::connect(&app, &QGuiApplication::screenRemoved, &clock_app,
+                   &ClockApplication::onScreenRemoved);
+
   return app.exec();
 }

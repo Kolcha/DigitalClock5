@@ -174,6 +174,17 @@ void ClockApplication::reloadConfig()
   _pm->load(_cfg->global()->getPlugins());
 }
 
+void ClockApplication::onScreenAdded(QScreen* screen)
+{
+  Q_UNUSED(screen);
+  for (const auto& [i, w] : _windows) w->loadState(StateStorage(*_state->instance(i)));
+}
+
+void ClockApplication::onScreenRemoved(QScreen* screen)
+{
+  Q_UNUSED(screen);
+}
+
 bool ClockApplication::eventFilter(QObject* obj, QEvent* e)
 {
   if (e->type() == QEvent::ApplicationPaletteChange) {
