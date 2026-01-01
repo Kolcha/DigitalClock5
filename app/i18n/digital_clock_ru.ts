@@ -69,66 +69,66 @@ Click here to download.</source>
 <context>
     <name>ClockApplication</name>
     <message>
-        <location filename="../core/clock_application.cpp" line="272"/>
+        <location filename="../core/clock_application.cpp" line="283"/>
         <source>%1 Update</source>
         <translation>Обновление %1</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="273"/>
+        <location filename="../core/clock_application.cpp" line="284"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>Доступно обновление: %1 (%2).
 Щелкните здесь чтобы начать загрузку.</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="352"/>
+        <location filename="../core/clock_application.cpp" line="363"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="359"/>
+        <location filename="../core/clock_application.cpp" line="370"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="363"/>
+        <location filename="../core/clock_application.cpp" line="374"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="467"/>
+        <location filename="../core/clock_application.cpp" line="478"/>
         <source>Position</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="468"/>
+        <location filename="../core/clock_application.cpp" line="479"/>
         <source>Top</source>
         <translation>Верх</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="470"/>
-        <location filename="../core/clock_application.cpp" line="480"/>
-        <location filename="../core/clock_application.cpp" line="490"/>
+        <location filename="../core/clock_application.cpp" line="481"/>
+        <location filename="../core/clock_application.cpp" line="491"/>
+        <location filename="../core/clock_application.cpp" line="501"/>
         <source>Left</source>
         <translation>Лево</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="473"/>
-        <location filename="../core/clock_application.cpp" line="479"/>
-        <location filename="../core/clock_application.cpp" line="483"/>
-        <location filename="../core/clock_application.cpp" line="493"/>
+        <location filename="../core/clock_application.cpp" line="484"/>
+        <location filename="../core/clock_application.cpp" line="490"/>
+        <location filename="../core/clock_application.cpp" line="494"/>
+        <location filename="../core/clock_application.cpp" line="504"/>
         <source>Middle</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="476"/>
-        <location filename="../core/clock_application.cpp" line="486"/>
-        <location filename="../core/clock_application.cpp" line="496"/>
+        <location filename="../core/clock_application.cpp" line="487"/>
+        <location filename="../core/clock_application.cpp" line="497"/>
+        <location filename="../core/clock_application.cpp" line="507"/>
         <source>Right</source>
         <translation>Право</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="489"/>
+        <location filename="../core/clock_application.cpp" line="500"/>
         <source>Bottom</source>
         <translation>Низ</translation>
     </message>
@@ -136,54 +136,54 @@ Click this message to download.</source>
 <context>
     <name>ClockWindow</name>
     <message>
-        <location filename="../gui/clock_window.cpp" line="120"/>
+        <location filename="../gui/clock_window.cpp" line="135"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="124"/>
+        <location filename="../gui/clock_window.cpp" line="139"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="127"/>
+        <location filename="../gui/clock_window.cpp" line="142"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="378"/>
+        <location filename="../gui/clock_window.cpp" line="403"/>
         <source>Position</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="379"/>
+        <location filename="../gui/clock_window.cpp" line="404"/>
         <source>Top</source>
         <translation>Верх</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="380"/>
-        <location filename="../gui/clock_window.cpp" line="387"/>
-        <location filename="../gui/clock_window.cpp" line="394"/>
+        <location filename="../gui/clock_window.cpp" line="405"/>
+        <location filename="../gui/clock_window.cpp" line="412"/>
+        <location filename="../gui/clock_window.cpp" line="419"/>
         <source>Left</source>
         <translation>Лево</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="382"/>
-        <location filename="../gui/clock_window.cpp" line="386"/>
-        <location filename="../gui/clock_window.cpp" line="389"/>
-        <location filename="../gui/clock_window.cpp" line="396"/>
+        <location filename="../gui/clock_window.cpp" line="407"/>
+        <location filename="../gui/clock_window.cpp" line="411"/>
+        <location filename="../gui/clock_window.cpp" line="414"/>
+        <location filename="../gui/clock_window.cpp" line="421"/>
         <source>Middle</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="384"/>
-        <location filename="../gui/clock_window.cpp" line="391"/>
-        <location filename="../gui/clock_window.cpp" line="398"/>
+        <location filename="../gui/clock_window.cpp" line="409"/>
+        <location filename="../gui/clock_window.cpp" line="416"/>
+        <location filename="../gui/clock_window.cpp" line="423"/>
         <source>Right</source>
         <translation>Право</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="393"/>
+        <location filename="../gui/clock_window.cpp" line="418"/>
         <source>Bottom</source>
         <translation>Низ</translation>
     </message>

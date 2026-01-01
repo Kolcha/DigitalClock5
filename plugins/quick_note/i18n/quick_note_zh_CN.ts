@@ -4,17 +4,17 @@
 <context>
     <name>QuickNotePlugin</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="46"/>
+        <location filename="../quick_note_plugin.cpp" line="63"/>
         <source>double click me!</source>
         <translation>双击我！</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="60"/>
+        <location filename="../quick_note_plugin.cpp" line="77"/>
         <source>Quick note</source>
         <translation>便捷笔记</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="61"/>
+        <location filename="../quick_note_plugin.cpp" line="78"/>
         <source>Enter the desired note</source>
         <translation type="unfinished">Enter the desired note</translation>
     </message>
@@ -22,19 +22,19 @@
 <context>
     <name>QuickNotePluginFactory</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="74"/>
+        <location filename="../quick_note_plugin.cpp" line="91"/>
         <source>Allows to display any short message under the clock.</source>
         <translation>在时钟下显示一段简短的自定义内容。</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="79"/>
+        <location filename="../quick_note_plugin.cpp" line="96"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
         <translation type="unfinished">Nothing is here!
 Double click the widget to change the text.</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="81"/>
+        <location filename="../quick_note_plugin.cpp" line="98"/>
         <source>Note</source>
         <translation type="unfinished">Note</translation>
     </message>

@@ -4,17 +4,17 @@
 <context>
     <name>QuickNotePlugin</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="46"/>
+        <location filename="../quick_note_plugin.cpp" line="63"/>
         <source>double click me!</source>
         <translation>Beni çift tıklayın!</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="60"/>
+        <location filename="../quick_note_plugin.cpp" line="77"/>
         <source>Quick note</source>
         <translation>Hızlı not</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="61"/>
+        <location filename="../quick_note_plugin.cpp" line="78"/>
         <source>Enter the desired note</source>
         <translation>İstenilen notu girin</translation>
     </message>
@@ -22,19 +22,19 @@
 <context>
     <name>QuickNotePluginFactory</name>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="74"/>
+        <location filename="../quick_note_plugin.cpp" line="91"/>
         <source>Allows to display any short message under the clock.</source>
         <translation>Saatin altında herhangi bir kısa mesajın görüntülenmesini sağlar.</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="79"/>
+        <location filename="../quick_note_plugin.cpp" line="96"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
         <translation>Burada hiçbir şey yok!
 Metni değiştirmek için widget&apos;a çift tıklayın.</translation>
     </message>
     <message>
-        <location filename="../quick_note_plugin.cpp" line="81"/>
+        <location filename="../quick_note_plugin.cpp" line="98"/>
         <source>Note</source>
         <translation>Not</translation>
     </message>
