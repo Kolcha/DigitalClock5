@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(quick_note VERSION 2.1.2 LANGUAGES CXX)
+project(quick_note VERSION 2.1.3 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME QuickNotePluginFactory
     quick_note_plugin.cpp

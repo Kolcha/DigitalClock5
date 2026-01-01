@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.21.1)
 
-project(DigitalClock5 VERSION 5.1.8 LANGUAGES CXX)
+project(DigitalClock5 VERSION 5.1.9 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
