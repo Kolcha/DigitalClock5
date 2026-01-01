@@ -92,7 +92,7 @@
        <item>
         <widget class="QLabel" name="copyright_lbl">
          <property name="text">
-          <string notr="true">© 2013-2025 Nick Korotysh</string>
+          <string notr="true">© 2013-2026 Nick Korotysh</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignCenter</set>
