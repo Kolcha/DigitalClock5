@@ -26,9 +26,12 @@ endif()
 if (APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         mouse_tracker.hpp
-        mac/autostart_mac.cpp
+        mac/autostart.m
         mac/clock_native_window.hpp
         mac/clock_native_window.mm
         mac/mouse_tracker.mm
+    )
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        "-framework ServiceManagement"
     )
 endif()

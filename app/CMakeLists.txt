@@ -72,6 +72,11 @@ set(APP_IDENTIFIER "com.github.kolcha.DigitalClock5")
 add_subdirectory(dist)
 add_subdirectory(res)
 
+if (APPLE)
+    # unfortunately, this can't be in any other CMakeLists.txt in subdirectory :(
+    enable_language(OBJC OBJCXX)
+endif()
+
 add_subdirectory(platform)
 
 configure_file(version.hpp.in version.hpp @ONLY)
