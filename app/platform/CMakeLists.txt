@@ -27,6 +27,8 @@ if (APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         mouse_tracker.hpp
         mac/autostart.m
+        mac/autostart_mac_migration.cpp
+        mac/autostart_mac_migration.hpp
         mac/clock_native_window.hpp
         mac/clock_native_window.mm
         mac/mouse_tracker.mm

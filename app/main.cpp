@@ -8,6 +8,7 @@
 #include <QIcon>
 
 #include "core/clock_application.hpp"
+#include "core/compat.hpp"
 #include "version.hpp"
 
 int main(int argc, char* argv[])
@@ -26,6 +27,7 @@ int main(int argc, char* argv[])
   QApplication::setStyle("fusion");
 
   QApplication app(argc, argv);
+  compat::migrate();
 
   ClockApplication clock_app;
   app.installEventFilter(&clock_app);

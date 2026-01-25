@@ -23,6 +23,8 @@ qt_add_executable(${PROJECT_NAME}
     core/clock_application.cpp
     core/clock_application.hpp
     core/clock_application_settings.cpp
+    core/compat.cpp
+    core/compat.hpp
     core/dialog_manager.hpp
     core/plugin_manager_impl.cpp
     core/plugin_manager_impl.hpp
