@@ -1,8 +1,0 @@
-[submodule "GradientDialog"]
-	path = 3rdparty/GradientDialog
-	url = https://github.com/Kolcha/GradientDialog.git
-	branch = master
-[submodule "QHotkey"]
-	path = 3rdparty/QHotkey
-	url = https://github.com/Skycoder42/QHotkey.git
-	branch = master
