@@ -50,6 +50,8 @@ qt_standard_project_setup(REQUIRES 6.7 I18N_TRANSLATED_LANGUAGES ${tr_langs})
 
 include(cmake/clock_utils.cmake)
 
+# these CLOCK_* variables exist to propagate global project information
+# to other modules (libraries, plugins) that have their own information
 set(CLOCK_PROJECT_NAME ${PROJECT_NAME})
 set(CLOCK_VERSION ${PROJECT_VERSION})
 
@@ -57,7 +59,7 @@ set(CLOCK_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CLOCK_VERSION_MINOR ${PROJECT_VERSION_MINOR})
 set(CLOCK_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 
-# dist should be included first, as it defines some important variables
+# dist should be included first, as it defines some important functions
 add_subdirectory(dist)
 
 add_subdirectory(app)
