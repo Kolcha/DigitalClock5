@@ -15,7 +15,7 @@ FILESUBTYPE	0x0
 			VALUE "CompanyName", "Nick Korotysh"
 			VALUE "FileDescription", "Digital Clock Plugin"
 			VALUE "FileVersion", "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}.${BUILD_NUMBER}"
-			VALUE "InternalName", "${PROJECT_NAME}.dll"
+			VALUE "InternalName", "${PROJECT_NAME}"
 			VALUE "LegalCopyright", "(c) 2013-2026 Nick Korotysh"
 			VALUE "OriginalFilename", "${PROJECT_NAME}.dll"
 			VALUE "ProductName", "Digital Clock"
