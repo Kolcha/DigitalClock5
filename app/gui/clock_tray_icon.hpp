@@ -19,8 +19,15 @@ class ClockTrayIcon : public QSystemTrayIcon
 {
   Q_OBJECT
 public:
+  static constexpr const QColor def_icon_color = QColor(101, 99, 255);
+
   explicit ClockTrayIcon(QObject* parent = nullptr);
   ~ClockTrayIcon();
+
+  QColor currentColor() const { return m_icon_color; }
+
+  bool usesCustomColor() const noexcept { return m_use_custom_color; }
+  bool followsSystemTheme() const noexcept { return !usesCustomColor(); }
 
 public slots:
   // generally, these methods are not required,
@@ -30,6 +37,9 @@ public slots:
   // updates are enabled by default
   void stopUpdating();
   void resumeUpdating();
+
+  void useCustomColor(bool enable);
+  void setCustomColor(QColor color);
 
 private slots:
   void updateIcon();
@@ -46,5 +56,7 @@ private:
 #ifdef Q_OS_WINDOWS
   SystemThemeTracker m_sys_theme_tracker;
 #endif
-  QColor m_icon_color = QColor(101, 99, 255);
+  QColor m_icon_color = def_icon_color;
+  QColor m_last_custom_color = def_icon_color;
+  bool m_use_custom_color = false;
 };

@@ -71,6 +71,9 @@ QString GlobalConfig::key(opt::GlobalOptions o)
     case opt::UpdatePeriodDays:         return "updater/update_period_days";
 
     case opt::SkinBaseSize:             return "app_limits/skin_base_size";
+
+    case opt::UseCustomTrayIconColor:   return "app_global/use_custom_tray_icon_color";
+    case opt::CustomTrayIconColor:      return "app_global/custom_tray_icon_color";
   }
   Q_UNREACHABLE();
 }
@@ -107,6 +110,9 @@ QVariant GlobalConfig::def_value(opt::GlobalOptions o)
     case opt::UpdatePeriodDays:         return 7;
 
     case opt::SkinBaseSize:             return 96;
+
+    case opt::UseCustomTrayIconColor:   return false;
+    case opt::CustomTrayIconColor:      return QColor(112, 96, 240);
   }
   Q_UNREACHABLE();
 }

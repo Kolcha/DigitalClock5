@@ -11,6 +11,7 @@
 #include "config/app_config.hpp"
 #include "core/plugin_manager_impl.hpp"
 #include "core/update_checker.hpp"
+#include "gui/clock_tray_icon.hpp"
 #include "gui/clock_widget.hpp"
 #include "gui/clock_window.hpp"
 #include "renderer/font_skin.hpp"
@@ -79,6 +80,13 @@ void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVari
 
     case opt::SkinBaseSize:
       // hidden option, not supposed to be changed
+      break;
+
+    case opt::UseCustomTrayIconColor:
+      _tray_icon->useCustomColor(val.toBool());
+      break;
+    case opt::CustomTrayIconColor:
+      _tray_icon->setCustomColor(val.value<QColor>());
       break;
   }
 }

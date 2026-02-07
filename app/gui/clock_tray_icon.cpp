@@ -49,6 +49,29 @@ void ClockTrayIcon::resumeUpdating()
   m_timer.start(1000);
 }
 
+void ClockTrayIcon::useCustomColor(bool enable)
+{
+  m_use_custom_color = enable;
+  if (enable) {
+    m_icon_color = m_last_custom_color;
+  } else {
+#ifdef Q_OS_WINDOWS
+    onSystemThemeChanged(m_sys_theme_tracker.isLightTheme());
+#else
+    m_icon_color = def_icon_color;
+#endif
+  }
+  repaintIcon();
+}
+
+void ClockTrayIcon::setCustomColor(QColor color)
+{
+  m_last_custom_color = color;
+  if (m_use_custom_color)
+    m_icon_color = color;
+  repaintIcon();
+}
+
 void ClockTrayIcon::updateIcon()
 {
   auto now = QTime::currentTime();
@@ -67,6 +90,9 @@ void ClockTrayIcon::updateIcon()
 #ifdef Q_OS_WINDOWS
 void ClockTrayIcon::onSystemThemeChanged(bool is_light)
 {
+  if (m_use_custom_color)
+    return;
+
   m_icon_color = is_light ? QColor(24, 25, 26) : QColor(255, 255, 255);
   repaintIcon();
 }
@@ -75,7 +101,8 @@ void ClockTrayIcon::repaintIcon()
 {
   QIcon tray_icon(new ClockIconEngine(m_icon_color));
 #ifdef Q_OS_MACOS
-  tray_icon.setIsMask(true);
+  if (!m_use_custom_color)
+    tray_icon.setIsMask(true);
 #endif
   setIcon(tray_icon);
 }

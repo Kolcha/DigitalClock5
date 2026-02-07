@@ -165,6 +165,9 @@ void ClockApplication::reloadConfig()
   onGlobalOptionChanged(opt::ActiveInstances, QVariant::fromValue(_cfg->global()->getActiveInstancesList()));
   onGlobalOptionChanged(opt::OptionsSharing, _cfg->global()->getOptionsSharing());
 
+  onGlobalOptionChanged(opt::UseCustomTrayIconColor, _cfg->global()->getUseCustomTrayIconColor());
+  onGlobalOptionChanged(opt::CustomTrayIconColor, _cfg->global()->getCustomTrayIconColor());
+
   updateInstances();                // add/remove windows
 
   for (const auto i : _windows | std::views::keys) reconfigureWindow(i);

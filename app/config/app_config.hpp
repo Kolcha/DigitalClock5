@@ -57,6 +57,9 @@ public:
 
   GLOBAL_OPTION(int, SkinBaseSize)
 
+  GLOBAL_OPTION(bool, UseCustomTrayIconColor)
+  GLOBAL_OPTION(QColor, CustomTrayIconColor)
+
 public slots:
   inline void commit() { storage()->commit(); }
   inline void discard() { storage()->discard(); }

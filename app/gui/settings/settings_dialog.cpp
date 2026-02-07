@@ -295,6 +295,21 @@ void SettingsDialog::on_tray_icon_d_action_box_activated(int index)
   emit globalOptionChanged(opt::TrayIconDoubleClickAction, QVariant::fromValue(act));
 }
 
+void SettingsDialog::on_tray_icon_custom_color_cb_clicked(bool checked)
+{
+  app->config()->global()->setUseCustomTrayIconColor(checked);
+  emit globalOptionChanged(opt::UseCustomTrayIconColor, checked);
+}
+
+void SettingsDialog::on_tray_color_select_btn_clicked()
+{
+  auto& gcfg = *app->config()->global();
+  auto color = QColorDialog::getColor(gcfg.getCustomTrayIconColor(), this);
+  if (!color.isValid()) return;
+  gcfg.setCustomTrayIconColor(color);
+  emit globalOptionChanged(opt::CustomTrayIconColor, color);
+}
+
 void SettingsDialog::on_enable_autoupdate_clicked(bool checked)
 {
   app->config()->global()->setCheckForUpdates(checked);
@@ -845,6 +860,8 @@ void SettingsDialog::initAppGlobalTab()
   ui->tray_icon_d_action_enabled->setVisible(false);
   ui->tray_icon_d_action_box->setVisible(false);
 #endif
+
+  ui->tray_icon_custom_color_cb->setChecked(gs.getUseCustomTrayIconColor());
 }
 
 void SettingsDialog::initGeneralTab(size_t idx)

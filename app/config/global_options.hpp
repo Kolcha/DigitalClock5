@@ -54,6 +54,10 @@ enum GlobalOptions {
 
   // limits
   SkinBaseSize,
+
+  // Misc
+  UseCustomTrayIconColor,
+  CustomTrayIconColor,
 };
 
 Q_ENUM_NS(GlobalOptions)
