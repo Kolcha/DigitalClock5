@@ -75,6 +75,9 @@ initial file was generated with the next command:
       <Component Id="cmpEC3C1172609A94D290DE749ECA976CD8" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{AE5FFC2E-71E7-4574-A9C8-DAABFD13F0D7}">
         <File Id="filE8FAABDE8F28E1B2E79540F4C3B93658" KeyPath="yes" Source="$(var.MySource)\plugins\random_position.dll" />
       </Component>
+      <Component Id="cmp1C52148BDFC4570979CF0BFFE4D43B7D" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{157E644C-D744-4B8C-81D7-5A9ABA84144D}">
+        <File Id="fil3D3196F7BFA75A3B2A5613E8BC730CCE" KeyPath="yes" Source="$(var.MySource)\plugins\scheduled_color.dll" />
+      </Component>
       <Component Id="cmpB6F334CE4FC020D6ABDD917EB982807D" Directory="dir280A744A3793B4E73B0B13172DB8683E" Guid="{CCCDFCD3-59EC-48F5-A104-84AB8C753599}">
         <File Id="filA1E0F68524268B78C8B1FB86E1EE9071" KeyPath="yes" Source="$(var.MySource)\plugins\spectrum_clock.dll" />
       </Component>

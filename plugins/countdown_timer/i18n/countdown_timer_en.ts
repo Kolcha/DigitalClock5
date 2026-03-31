@@ -4,7 +4,7 @@
 <context>
     <name>CountdownTimerPlugin</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="282"/>
+        <location filename="../countdown_timer_plugin.cpp" line="285"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12,12 +12,12 @@
 <context>
     <name>CountdownTimerPluginFactory</name>
     <message>
-        <location filename="../countdown_timer_plugin.cpp" line="317"/>
+        <location filename="../countdown_timer_plugin.cpp" line="341"/>
         <source>Just a countdown timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../countdown_timer_plugin.hpp" line="86"/>
+        <location filename="../countdown_timer_plugin.hpp" line="87"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37,6 +37,44 @@
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>countdown_timer::TimerExpiredDialog</name>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="14"/>
+        <source>Timer Expired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="20"/>
+        <source>previous timer expired, you can set new timeout here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="27"/>
+        <source>use custom timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="37"/>
+        <source> h</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="44"/>
+        <source> m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="54"/>
+        <source> s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_expired_dialog.ui" line="76"/>
+        <source>note: pressing cancel button will stop the timer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -119,17 +157,22 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.ui" line="178"/>
+        <location filename="../gui/timer_settings_widget.ui" line="191"/>
         <source>show custom message on timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="144"/>
+        <location filename="../gui/timer_settings_widget.ui" line="201"/>
+        <source>customize interval on restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gui/timer_settings_widget.cpp" line="151"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/timer_settings_widget.cpp" line="146"/>
+        <location filename="../gui/timer_settings_widget.cpp" line="153"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a)</source>
         <translation type="unfinished"></translation>
     </message>

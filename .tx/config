@@ -82,6 +82,15 @@ resource_name          = random_position
 replace_edited_strings = false
 keep_translations      = false
 
+[o:nick-korotysh:p:digital-clock-5:r:plugin-scheduled-color]
+file_filter            = plugins/scheduled_color/i18n/scheduled_color_<lang>.ts
+source_file            = plugins/scheduled_color/i18n/scheduled_color_en.ts
+type                   = QT
+minimum_perc           = 0
+resource_name          = scheduled_color
+replace_edited_strings = false
+keep_translations      = false
+
 [o:nick-korotysh:p:digital-clock-5:r:plugin-spectrum-clock]
 file_filter            = plugins/spectrum_clock/i18n/spectrum_clock_<lang>.ts
 source_file            = plugins/spectrum_clock/i18n/spectrum_clock_en.ts
