@@ -434,7 +434,7 @@ void TextPluginBase::configure(QWidget* parent, size_t idx)
   });
   connect(d, &SettingsDialog::finished, d, &QObject::deleteLater);
 
-  for (auto i : _clock_insts)
+  for (auto i : std::as_const(_clock_insts))
     d->addInstance(i);
   d->setInstance(idx);
 
