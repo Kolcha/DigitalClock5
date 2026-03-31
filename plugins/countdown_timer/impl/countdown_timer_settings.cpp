@@ -38,6 +38,8 @@ QString CountdownTimerInstanceConfig::key(Options o)
 
     case ReverseCounting:       return "reverse_counting";
 
+    case CustomizeTimeoutOnRestart:     return "customize_timeout_on_restart";
+
     case PauseHotkey:           return "pause_hotkey";
     case RestartHotkey:         return "restart_hotkey";
   }
@@ -70,6 +72,8 @@ QVariant CountdownTimerInstanceConfig::def_value(Options o)
     case HideInactive:          return false;
 
     case ReverseCounting:       return false;
+
+    case CustomizeTimeoutOnRestart:     return false;
 
     case PauseHotkey:           return QString();
     case RestartHotkey:         return QString();

@@ -34,6 +34,7 @@ void TimerSettingsWidget::initControls(CountdownTimerInstanceConfig* icfg)
   ui->target_time_edit->setDateTime(cfg->getTargetDateTime());
 
   ui->interval_rbtn->setChecked(!cfg->getUseTargetDateTime());
+  on_interval_rbtn_toggled(!cfg->getUseTargetDateTime());
   ui->h_edit->setValue(cfg->getIntervalHours());
   ui->m_edit->setValue(cfg->getIntervalMinutes());
   ui->s_edit->setValue(cfg->getIntervalSeconds());
@@ -49,6 +50,7 @@ void TimerSettingsWidget::initControls(CountdownTimerInstanceConfig* icfg)
   ui->reverse_counting->setChecked(cfg->getReverseCounting());
 
   ui->chime_on_timeout->setChecked(cfg->getChimeOnTimeout());
+  ui->cust_int_on_restart->setChecked(cfg->getCustomizeTimeoutOnRestart());
   ui->show_msg->setChecked(cfg->getShowMessage());
   ui->msg_text_edit->setPlainText(cfg->getMessageText());
 }
@@ -57,6 +59,11 @@ void TimerSettingsWidget::on_target_time_rbtn_clicked()
 {
   cfg->setUseTargetDateTime(true);
   emit optionChanged(UseTargetDateTime, true);
+}
+
+void TimerSettingsWidget::on_interval_rbtn_toggled(bool checked)
+{
+  ui->cust_int_on_restart->setEnabled(checked && ui->restart_on_timeout->isChecked());
 }
 
 void TimerSettingsWidget::on_target_time_edit_dateTimeChanged(const QDateTime& dateTime)
@@ -161,6 +168,12 @@ void TimerSettingsWidget::on_msg_text_edit_textChanged()
 {
   cfg->setMessageText(ui->msg_text_edit->toPlainText());
   emit optionChanged(MessageText, cfg->getMessageText());
+}
+
+void TimerSettingsWidget::on_cust_int_on_restart_clicked(bool checked)
+{
+  cfg->setCustomizeTimeoutOnRestart(checked);
+  emit optionChanged(CustomizeTimeoutOnRestart, checked);
 }
 
 } // namespace countdown_timer

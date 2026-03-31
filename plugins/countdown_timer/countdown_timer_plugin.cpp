@@ -15,6 +15,7 @@
 #include <QMediaPlayer>
 
 #include "gui/hotkeys_settings_widget.hpp"
+#include "gui/timer_expired_dialog.hpp"
 #include "gui/timer_settings_widget.hpp"
 #include "impl/utilities.hpp"
 
@@ -57,9 +58,10 @@ void CountdownTimerWidget::mouseDoubleClickEvent(QMouseEvent* event)
 }
 
 
-CountdownTimerPlugin::CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg)
+CountdownTimerPlugin::CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg, std::unique_ptr<SettingsStorage> st)
   : TextPluginInstanceBase(*cfg)
   , _cfg(cfg)
+  , _state(std::move(st))
 {
 }
 
@@ -175,6 +177,7 @@ void CountdownTimerPlugin::applyTimerOption(countdown_timer::Options opt, const 
 
     case cd::RestartOnDblClick:
     case cd::RestartOnTimeout:
+    case cd::CustomizeTimeoutOnRestart:
       // implicitly handled
       break;
 
@@ -277,7 +280,7 @@ void CountdownTimerPlugin::onTimeout()
     _player->play();
   }
 
-  if (_cfg->getShowMessage()) {
+  if (_cfg->getShowMessage() && !(_cfg->getRestartOnTimeout() && _cfg->getCustomizeTimeoutOnRestart())) {
     QMessageBox mb(QMessageBox::Warning,
                    tr("Countdown timer"),
                    _cfg->getMessageText());
@@ -286,7 +289,28 @@ void CountdownTimerPlugin::onTimeout()
   }
 
   if (_cfg->getRestartOnTimeout()) {
-    initTimer();
+    if (_cfg->getCustomizeTimeoutOnRestart()) {
+      constexpr auto last_custom_timeout_key = "last_custom_timeout";
+      auto last_timeout = _state->value(last_custom_timeout_key, static_cast<qint64>(600)).value<qint64>();
+
+      countdown_timer::TimerExpiredDialog dlg;
+      dlg.setUseCustomTimeout(true);
+      dlg.setCustomTimeout(last_timeout);
+      if (_cfg->getShowMessage())
+        dlg.setMessage(_cfg->getMessageText());
+
+      if (dlg.exec() != QDialog::Accepted)
+        return;
+
+      auto curr_timeout = dlg.customTimeout();
+      if (curr_timeout != last_timeout) {
+        _state->setValue(last_custom_timeout_key, curr_timeout);
+        _state->commit();
+      }
+      dlg.useCustomTimeout() ? _timer->setInterval(curr_timeout) : initTimer();
+    } else {
+      initTimer();
+    }
     _timer->start();
   }
 }

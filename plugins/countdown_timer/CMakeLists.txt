@@ -8,6 +8,9 @@ qt_add_plugin(${PROJECT_NAME} CLASS_NAME CountdownTimerPluginFactory
     gui/hotkeys_settings_widget.cpp
     gui/hotkeys_settings_widget.hpp
     gui/hotkeys_settings_widget.ui
+    gui/timer_expired_dialog.cpp
+    gui/timer_expired_dialog.hpp
+    gui/timer_expired_dialog.ui
     gui/timer_settings_widget.cpp
     gui/timer_settings_widget.hpp
     gui/timer_settings_widget.ui

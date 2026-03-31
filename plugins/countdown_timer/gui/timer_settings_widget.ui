@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>498</width>
-    <height>332</height>
+    <height>336</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -172,13 +172,6 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      </item>
     </layout>
    </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QCheckBox" name="show_msg">
-     <property name="text">
-      <string>show custom message on timeout</string>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="0" colspan="2">
     <widget class="QTextEdit" name="msg_text_edit">
      <property name="enabled">
@@ -189,6 +182,23 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
        <width>16777215</width>
        <height>100</height>
       </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QCheckBox" name="show_msg">
+     <property name="text">
+      <string>show custom message on timeout</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="cust_int_on_restart">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>customize interval on restart</string>
      </property>
     </widget>
    </item>
@@ -207,8 +217,8 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      <y>34</y>
     </hint>
     <hint type="destinationlabel">
-     <x>287</x>
-     <y>34</y>
+     <x>472</x>
+     <y>45</y>
     </hint>
    </hints>
   </connection>
@@ -223,8 +233,8 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      <y>66</y>
     </hint>
     <hint type="destinationlabel">
-     <x>247</x>
-     <y>61</y>
+     <x>367</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
@@ -239,8 +249,8 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      <y>67</y>
     </hint>
     <hint type="destinationlabel">
-     <x>294</x>
-     <y>66</y>
+     <x>419</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
@@ -255,8 +265,8 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      <y>68</y>
     </hint>
     <hint type="destinationlabel">
-     <x>333</x>
-     <y>72</y>
+     <x>472</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
@@ -303,8 +313,8 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
      <y>202</y>
     </hint>
     <hint type="destinationlabel">
-     <x>360</x>
-     <y>200</y>
+     <x>484</x>
+     <y>212</y>
     </hint>
    </hints>
   </connection>
@@ -321,6 +331,22 @@ Set this to -1 to never show days count, or to 0 to always show.</string>
     <hint type="destinationlabel">
      <x>147</x>
      <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>restart_on_timeout</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cust_int_on_restart</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>234</y>
     </hint>
    </hints>
   </connection>

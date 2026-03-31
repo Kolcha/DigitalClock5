@@ -22,7 +22,7 @@ class CountdownTimerPlugin : public plugin::text::TextPluginInstanceBase
   Q_OBJECT
 
 public:
-  CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg);
+  CountdownTimerPlugin(const CountdownTimerInstanceConfig* cfg, std::unique_ptr<SettingsStorage> st);
   ~CountdownTimerPlugin();
 
   void init(const InstanceOptionsHash& settings) override;
@@ -64,6 +64,7 @@ private:
   std::unique_ptr<QMediaPlayer> _player;
 
   const CountdownTimerInstanceConfig* _cfg;
+  std::unique_ptr<SettingsStorage> _state;
   QString _last_text;
 
   bool _local_time = true;
@@ -91,7 +92,7 @@ protected:
   {
     auto cfg = qobject_cast<CountdownTimerInstanceConfig*>(instanceConfig(idx));
     Q_ASSERT(cfg);
-    return std::make_unique<CountdownTimerPlugin>(cfg);
+    return std::make_unique<CountdownTimerPlugin>(cfg, instanceState(idx));
   }
 
   std::unique_ptr<plugin::text::PluginConfig> createConfig(

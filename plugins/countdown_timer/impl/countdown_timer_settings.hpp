@@ -39,6 +39,8 @@ enum Options {
 
   ReverseCounting,
 
+  CustomizeTimeoutOnRestart,
+
   PauseHotkey,
   RestartHotkey,
 };
@@ -83,6 +85,8 @@ public:
   PLUGIN_CONFIG_OPTION(bool, HideInactive)
 
   PLUGIN_CONFIG_OPTION(bool, ReverseCounting)
+
+  PLUGIN_CONFIG_OPTION(bool, CustomizeTimeoutOnRestart)
 
   PLUGIN_CONFIG_OPTION(QString, PauseHotkey)
   PLUGIN_CONFIG_OPTION(QString, RestartHotkey)
