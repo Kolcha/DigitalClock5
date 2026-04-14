@@ -6,7 +6,7 @@
     <message>
         <location filename="../quick_note_plugin.cpp" line="63"/>
         <source>double click me!</source>
-        <translation type="unfinished">double click me!</translation>
+        <translation>faça duplo clique em mim!</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.cpp" line="77"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../quick_note_plugin.cpp" line="78"/>
         <source>Enter the desired note</source>
-        <translation type="unfinished">Enter the desired note</translation>
+        <translation>Introduza a nota pretendida</translation>
     </message>
 </context>
 <context>
@@ -30,8 +30,8 @@
         <location filename="../quick_note_plugin.cpp" line="96"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
-        <translation type="unfinished">Nothing is here!
-Double click the widget to change the text.</translation>
+        <translation>Não há nada aqui!
+Faça duplo clique no widget para alterar o texto.</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.cpp" line="98"/>

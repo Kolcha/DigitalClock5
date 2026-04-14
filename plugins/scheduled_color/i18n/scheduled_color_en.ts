@@ -37,12 +37,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gui/settings_dialog.ui" line="67"/>
-        <location filename="../gui/settings_dialog.ui" line="161"/>
-        <source>HH:mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gui/settings_dialog.ui" line="74"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>

@@ -164,7 +164,7 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="14"/>
         <source>Geometry</source>
-        <translation type="unfinished">Geometry</translation>
+        <translation>几何</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="20"/>
@@ -218,12 +218,12 @@
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="197"/>
         <source>horizontal</source>
-        <translation type="unfinished">horizontal</translation>
+        <translation>水平</translation>
     </message>
     <message>
         <location filename="../plugin/text/impl/geometry_settings_widget.ui" line="217"/>
         <source>vertical</source>
-        <translation type="unfinished">vertical</translation>
+        <translation>垂直</translation>
     </message>
 </context>
 <context>

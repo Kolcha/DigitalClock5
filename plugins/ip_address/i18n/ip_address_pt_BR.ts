@@ -47,7 +47,7 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="76"/>
         <source>External address detection service</source>
-        <translation type="unfinished"></translation>
+        <translation>Serviço de detecção de endereço externo</translation>
     </message>
 </context>
 </TS>

@@ -46,16 +46,16 @@
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="26"/>
-        <source>QtSpeech is a library that makes text to speech easy with Qt. This library uses  native speech synthesis API.
+        <source>QtSpeech is a library that makes text-to-speech easy with Qt. It uses the native speech synthesis API.
 
-List of available languages and voices  vary depending on platform. To get more languages/voices, search for it for your platform.
+Available languages and voices depend on the platform. To add more, check the documentation or accessibility settings for your system.
 
-This is example text, you can edit it to play with settings. No any chnages to this text will saved.</source>
-        <translation>QtSpeech é uma biblioteca que torna o texto para o discurso mais fácil com o Qt. Esta biblioteca utiliza a API de sintetização do discurso nativo.
+You can edit this sample text to try the settings. Changes are not saved.</source>
+        <translation>QtSpeech é uma biblioteca que facilita a conversão de texto em fala com o Qt e utiliza a API nativa de síntese de voz.
 
-A lista de idiomas disponíveis e vozes depende da plataforma. Para obter mais idiomas/vozes, procure-as para a sua plataforma.
+Os idiomas e vozes disponíveis dependem da plataforma. Para mais opções, consulte a documentação ou as definições de acessibilidade do sistema.
 
-Este texto é um exemplo. pode editá-lo para experimentar as configurações. As alterações a este texto não serão gravadas.</translation>
+Pode editar este texto de exemplo para experimentar as definições; as alterações não são guardadas.</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="45"/>
@@ -70,7 +70,7 @@ Este texto é um exemplo. pode editá-lo para experimentar as configurações. A
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="77"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma:</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="100"/>

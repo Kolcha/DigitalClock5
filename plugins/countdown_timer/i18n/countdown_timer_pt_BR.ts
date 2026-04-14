@@ -45,37 +45,37 @@
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="14"/>
         <source>Timer Expired</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporizador encerrado</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="20"/>
         <source>previous timer expired, you can set new timeout here</source>
-        <translation type="unfinished"></translation>
+        <translation>O temporizador anterior encerrou; defina um novo tempo limite aqui</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="27"/>
         <source>use custom timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>usar tempo limite personalizado</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="37"/>
         <source> h</source>
-        <translation type="unfinished"></translation>
+        <translation> h</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="44"/>
         <source> m</source>
-        <translation type="unfinished"></translation>
+        <translation> m</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="54"/>
         <source> s</source>
-        <translation type="unfinished"></translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="76"/>
         <source>note: pressing cancel button will stop the timer</source>
-        <translation type="unfinished"></translation>
+        <translation>nota: pressionar Cancelar interromperá o cronômetro</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@ Defina como -1 para nunca exibir a quantidade de dias, ou como 0 para exibir sem
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="201"/>
         <source>customize interval on restart</source>
-        <translation type="unfinished"></translation>
+        <translation>personalizar o intervalo ao reiniciar</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.cpp" line="151"/>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr-TR" sourcelanguage="en">
+<TS version="2.1" language="zh-TW" sourcelanguage="en">
 <context>
     <name>IpAddressPlugin</name>
     <message>
         <location filename="../ip_address_plugin.cpp" line="74"/>
         <source>&lt;no interfaces selected&gt;</source>
-        <translation>&lt;no interfaces selected&gt;</translation>
+        <translation>&lt;沒有接口被選擇&gt;</translation>
     </message>
     <message>
         <location filename="../ip_address_plugin.cpp" line="89"/>
         <source>waiting for an external address...</source>
-        <translation>harici adres bekleniyor...</translation>
+        <translation>正在等待外部地址…</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../ip_address_plugin.cpp" line="110"/>
         <source>Displays local IP address(es) under clock.</source>
-        <translation>Saatin altında yerel IP adres(ler)ini gösterir.</translation>
+        <translation>在時鐘下顯示本地IP位址。</translation>
     </message>
     <message>
         <location filename="../ip_address_plugin.hpp" line="55"/>
         <source>IP address</source>
-        <translation>IP adresi</translation>
+        <translation>IP位址</translation>
     </message>
 </context>
 <context>
@@ -32,22 +32,22 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="14"/>
         <source>Network</source>
-        <translation>Ağ</translation>
+        <translation>網絡</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="20"/>
         <source>Display internal address(es)</source>
-        <translation>Dahili adres(ler)i göster</translation>
+        <translation>顯示內部地址</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="37"/>
         <source>Display external address</source>
-        <translation>Harici adresi göster</translation>
+        <translation>顯示外部地址</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="76"/>
         <source>External address detection service</source>
-        <translation type="unfinished"></translation>
+        <translation>外部地址檢測服務</translation>
     </message>
 </context>
 </TS>

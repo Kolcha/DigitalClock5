@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ko" sourcelanguage="en">
+<context>
+    <name>TimeZonePluginFactory</name>
+    <message>
+        <location filename="../time_zone_plugin.cpp" line="154"/>
+        <source>Displays current time zone under the clock.</source>
+        <translation>시계 아래에 현재 시간대를 표시합니다.</translation>
+    </message>
+    <message>
+        <location filename="../time_zone_plugin.hpp" line="55"/>
+        <source>Time Zone</source>
+        <translation>시간대</translation>
+    </message>
+</context>
+<context>
+    <name>plugin::time_zone::SettingsWidget</name>
+    <message>
+        <location filename="../gui/settings_widget.ui" line="14"/>
+        <source>Time Zone</source>
+        <translation>시간대</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings_widget.ui" line="20"/>
+        <source>Time Zone Format</source>
+        <translation>시간대 형식</translation>
+    </message>
+</context>
+</TS>

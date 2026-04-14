@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="tr" sourcelanguage="en">
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="14"/>
+        <source>About</source>
+        <translation>Hakkında</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="27"/>
+        <source>Info</source>
+        <translation>Bilgi</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="106"/>
+        <source>Links</source>
+        <translation>Bağlantılar</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="112"/>
+        <source>Useful links</source>
+        <translation>Faydalı bağlantılar</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="118"/>
+        <source>&lt;a href=&quot;https://digitalclock4.sourceforge.io/&quot;&gt;project home page&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://digitalclock4.sourceforge.io/&quot;&gt;proje ana sayfası&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="131"/>
+        <source>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/issues&quot;&gt;bug report/feature request&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/issues&quot;&gt;&#xa0;hata raporu/özellik talebi&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="144"/>
+        <source>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;view full changelog&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/commits/master/&quot;&gt;tam değişiklik günlüğünü görüntüle&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="157"/>
+        <source>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki&quot;&gt;project Wiki home page&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;https://github.com/Kolcha/DigitalClock5/wiki&quot;&gt;proje Wiki ana sayfası&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.ui" line="173"/>
+        <source>More info</source>
+        <translation>Daha fazla bilgi</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.cpp" line="88"/>
+        <source>version: %1</source>
+        <translation>sürüm: %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.cpp" line="90"/>
+        <source>build date: %1</source>
+        <translation>yapım tarihi: %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/about/about_dialog.cpp" line="104"/>
+        <source>New version available.
+Click here to download.</source>
+        <translation>Yeni sürüm mevcut.
+İndirmek için buraya tıklayın.</translation>
+    </message>
+</context>
+<context>
+    <name>ClockApplication</name>
+    <message>
+        <location filename="../core/clock_application.cpp" line="286"/>
+        <source>%1 Update</source>
+        <translation>%1 Güncelleme</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="287"/>
+        <source>Update available: %1 (%2).
+Click this message to download.</source>
+        <translation>Güncelleme mevcut: %1 (%2).
+İndirmek için bu mesaja tıklayın.</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="366"/>
+        <source>Settings</source>
+        <translation>Ayarlar</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="373"/>
+        <source>About</source>
+        <translation>Hakkında</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="377"/>
+        <source>Quit</source>
+        <translation>Çıkış</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="481"/>
+        <source>Position</source>
+        <translation>Pozisyon</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="482"/>
+        <source>Top</source>
+        <translation>Üst</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="484"/>
+        <location filename="../core/clock_application.cpp" line="494"/>
+        <location filename="../core/clock_application.cpp" line="504"/>
+        <source>Left</source>
+        <translation>Sol</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="487"/>
+        <location filename="../core/clock_application.cpp" line="493"/>
+        <location filename="../core/clock_application.cpp" line="497"/>
+        <location filename="../core/clock_application.cpp" line="507"/>
+        <source>Middle</source>
+        <translation>Orta</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="490"/>
+        <location filename="../core/clock_application.cpp" line="500"/>
+        <location filename="../core/clock_application.cpp" line="510"/>
+        <source>Right</source>
+        <translation>Sağ</translation>
+    </message>
+    <message>
+        <location filename="../core/clock_application.cpp" line="503"/>
+        <source>Bottom</source>
+        <translation>Alt</translation>
+    </message>
+</context>
+<context>
+    <name>ClockWindow</name>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="135"/>
+        <source>Settings</source>
+        <translation>Ayarlar</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="139"/>
+        <source>About</source>
+        <translation>Hakkında</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="142"/>
+        <source>Quit</source>
+        <translation>Çıkış</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="403"/>
+        <source>Position</source>
+        <translation>Pozisyon</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="404"/>
+        <source>Top</source>
+        <translation>Üst</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="405"/>
+        <location filename="../gui/clock_window.cpp" line="412"/>
+        <location filename="../gui/clock_window.cpp" line="419"/>
+        <source>Left</source>
+        <translation>Sol</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="407"/>
+        <location filename="../gui/clock_window.cpp" line="411"/>
+        <location filename="../gui/clock_window.cpp" line="414"/>
+        <location filename="../gui/clock_window.cpp" line="421"/>
+        <source>Middle</source>
+        <translation>Orta</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="409"/>
+        <location filename="../gui/clock_window.cpp" line="416"/>
+        <location filename="../gui/clock_window.cpp" line="423"/>
+        <source>Right</source>
+        <translation>Sağ</translation>
+    </message>
+    <message>
+        <location filename="../gui/clock_window.cpp" line="418"/>
+        <source>Bottom</source>
+        <translation>Alt</translation>
+    </message>
+</context>
+<context>
+    <name>PluginInfoDialog</name>
+    <message>
+        <location filename="../gui/settings/plugin_info_dialog.ui" line="20"/>
+        <source>About plugin</source>
+        <translation>Eklenti hakkında</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/plugin_info_dialog.cpp" line="58"/>
+        <source>version: %1</source>
+        <translation>sürüm: %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/plugin_info_dialog.cpp" line="57"/>
+        <source>unknown</source>
+        <translation>bilinmeyen</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="14"/>
+        <source>Settings</source>
+        <translation>Ayarlar</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="24"/>
+        <source>App Global</source>
+        <translation>Uygulama Geneli</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="30"/>
+        <source>start on system startup</source>
+        <translation>sistem başlangıcında başlat</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="54"/>
+        <source>stay on top of other windows</source>
+        <translation>diğer pencerelerin üzerinde kal</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="74"/>
+        <source>transparent for mouse events</source>
+        <translation>fare olayları için şeffaf</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="141"/>
+        <source>become almost transparent on mouse hover</source>
+        <translation>fareyle üzerine gelindiğinde neredeyse şeffaf hale gelir</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="151"/>
+        <source>hide completely</source>
+        <translation>tamamen gizle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="158"/>
+        <source>enable multiple clocks</source>
+        <translation>birden fazla saati etkinleştir</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="178"/>
+        <source>same appearance</source>
+        <translation>aynı görünüm</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="185"/>
+        <source>check for updates every</source>
+        <translation>güncellemeleri kontrol et</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="198"/>
+        <source>include beta</source>
+        <translation>betayı ekle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="64"/>
+        <source>show clock in fullscreen mode (may not work for some apps)</source>
+        <translation>saati tam ekran modunda göster (bazı uygulamalarda çalışmayabilir)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="67"/>
+        <source>show in fullscreen mode</source>
+        <translation>tam ekran modunda göster</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="268"/>
+        <source>Format</source>
+        <translation>Biçim</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="375"/>
+        <source>custom format</source>
+        <translation>özel biçim</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="454"/>
+        <source>Apply</source>
+        <translation>Uygula</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="468"/>
+        <source>layout config string (useful only for multiline formats)</source>
+        <translation>düzen yapılandırma dizesi (yalnızca çok satırlı biçimler için kullanışlıdır)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="492"/>
+        <source>custom separators (will be used instead of &apos;:&apos;)</source>
+        <translation>özel ayırıcılar (&apos;:&apos; yerine kullanılacaktır)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="508"/>
+        <source>replacement characters for &apos;:&apos; in format</source>
+        <translation>format içindeki &apos;:&apos; karakterinin yerine kullanılacak karakterler</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="524"/>
+        <source>make seconds smaller,</source>
+        <translation>saniyeyi daha küçük hale getirin,</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="547"/>
+        <source>of clock&apos;s height</source>
+        <translation>saatin yüksekliğinin</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="281"/>
+        <source>12h</source>
+        <translation>12h</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="291"/>
+        <source>24h</source>
+        <translation>24h</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="311"/>
+        <source>leading zero</source>
+        <translation>baştaki sıfır</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="39"/>
+        <source>help to translate</source>
+        <translation>tercümeye yardım et</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="131"/>
+        <source>always keep clock visible on screen, prevent out of screen position</source>
+        <translation>saati her zaman ekranda görünür tut, ekran dışına çıkmasını önle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="134"/>
+        <source>prevent out of screen position</source>
+        <translation>ekran dışı konumunu önle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="90"/>
+        <source>snap to edges, threshold</source>
+        <translation>kenarlara yapıştır, eşik</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="81"/>
+        <source>change cursor on mouse hover</source>
+        <translation>fare üzerine geldiğinde imleci değiştir</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="205"/>
+        <source>tray icon single click action</source>
+        <translation>tepsi simgesi tek tıklama eylemi</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="219"/>
+        <source>tray icon double click action</source>
+        <translation>tepsi simgesi çift tıklama eylemi</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="558"/>
+        <source>display time in another time zone</source>
+        <translation>saati başka bir saat diliminde göster</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="318"/>
+        <source>show seconds</source>
+        <translation>saniyeyi göster</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="334"/>
+        <source>show AM/PM</source>
+        <translation>AM/PM göster</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="344"/>
+        <source>add space before AM/PM</source>
+        <translation>AM/PM den önce boşluk ekle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="351"/>
+        <source>uppercase</source>
+        <translation>büyük harf</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="361"/>
+        <source>lowercase</source>
+        <translation>küçük harf</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="619"/>
+        <source>Appearance</source>
+        <translation>Görünüm</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="628"/>
+        <source>font</source>
+        <translation>yazı tipi</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="661"/>
+        <source>skin</source>
+        <translation>kaplama</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="684"/>
+        <source>flashing separator</source>
+        <translation>yanıp sönen ayırıcı</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="691"/>
+        <source>texture</source>
+        <translation>doku</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1134"/>
+        <source>solid color</source>
+        <translation>tek renk</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1135"/>
+        <source>gradient</source>
+        <translation>gradyan</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1136"/>
+        <source>pattern</source>
+        <translation>desen</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="717"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="885"/>
+        <source>apply per element</source>
+        <translation>her bir öğe için uygula</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="769"/>
+        <source>opacity</source>
+        <translation>opaklık</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="730"/>
+        <source>scaling</source>
+        <translation>ölçeklendirme</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="235"/>
+        <source>tray icon color</source>
+        <translation>Tepsi simgesi rengi</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="808"/>
+        <source>colorize</source>
+        <translation>renklendirme</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="817"/>
+        <source>colorization color</source>
+        <translation>renklendirme rengi</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="859"/>
+        <source>background</source>
+        <translation>arka plan</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="895"/>
+        <source>alignment</source>
+        <translation>hizalama</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="901"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="985"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1069"/>
+        <source>left</source>
+        <translation>sol</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="911"/>
+        <source>center</source>
+        <translation>orta</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="918"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1017"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1107"/>
+        <source>right</source>
+        <translation>sağ</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="928"/>
+        <source>spacing</source>
+        <translation>boşluk</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="934"/>
+        <source>H:</source>
+        <translation>Y:</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="951"/>
+        <source>V:</source>
+        <translation>D:</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="972"/>
+        <source>Misc</source>
+        <translation>Çeşitli</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="978"/>
+        <source>extra space around characters</source>
+        <translation>karakterler etrafında ekstra boşluk</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1001"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1088"/>
+        <source>top</source>
+        <translation>üst</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1033"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1126"/>
+        <source>bottom</source>
+        <translation>alt</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1062"/>
+        <source>extra space around widget</source>
+        <translation>widget etrafında ekstra boşluk</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1145"/>
+        <source>character by character rendering</source>
+        <translation>karakter karakter görüntüleme</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1152"/>
+        <source>respect line spacing defined by skin/font</source>
+        <translation>kaplama/yazı tipi tarafından tanımlanan satır aralığına uy</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1161"/>
+        <source>layout spacing (space between widgets)</source>
+        <translation>düzen aralığı (widget&apos;lar arasındaki boşluk)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1199"/>
+        <source>hide clock widget, show only widgets added by plugins</source>
+        <translation>saat widget&apos;ını gizle, yalnızca eklentiler tarafından eklenen widget&apos;ları göster</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1220"/>
+        <source>Plugins</source>
+        <translation>Eklentiler</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1235"/>
+        <source>Import</source>
+        <translation>İçe aktar</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1242"/>
+        <source>Export</source>
+        <translation>Dışa aktar</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1061"/>
+        <source>window %1</source>
+        <translation>pencere %1</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="117"/>
+        <source>Import settings from ...</source>
+        <translation>... dan ayarları içe aktar</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="119"/>
+        <source>Digital Clock Settings (*.dc5 *.dcs)</source>
+        <translation>Dijital Saat Ayarları (*.dc5 *.dcs)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="148"/>
+        <source>Export settings to ...</source>
+        <translation>Ayarları şuraya aktar ...</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="150"/>
+        <source>Digital Clock 5 Settings (*.dc5)</source>
+        <translation>Dijital Saat 5 Ayarları (*.dc5)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="552"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="663"/>
+        <source>follow system theme</source>
+        <translation>sistem temasını izle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="566"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="677"/>
+        <source>stretch instead of tile</source>
+        <translation>döşeme yerine uzat</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="615"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="726"/>
+        <source>Images (*.png *.bmp *.jpg)</source>
+        <translation>Resimler (*.png *.bmp *.jpg)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1069"/>
+        <source>Automatic</source>
+        <translation>Otomatik</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1080"/>
+        <source>1 day</source>
+        <translation>1 gün</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1081"/>
+        <source>3 days</source>
+        <translation>3 gün</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1082"/>
+        <source>1 week</source>
+        <translation>1 hafta</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1083"/>
+        <source>2 weeks</source>
+        <translation>2 hafta</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1084"/>
+        <source>1 month</source>
+        <translation>1 ay</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1090"/>
+        <source>open settings</source>
+        <translation>ayarları aç</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1091"/>
+        <source>show/hide clock</source>
+        <translation>saati göster/gizle</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1092"/>
+        <source>toggle &quot;stay on top&quot;</source>
+        <translation>“üstte kal” seçeneğini aç/kapat</translation>
+    </message>
+</context>
+</TS>

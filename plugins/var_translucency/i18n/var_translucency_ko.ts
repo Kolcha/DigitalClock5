@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ko" sourcelanguage="en">
+<context>
+    <name>VarTranslucencyPluginFactory</name>
+    <message>
+        <location filename="../var_translucency_plugin.cpp" line="71"/>
+        <source>Changes clock opacity level with time.</source>
+        <translation>시간에 따라 시계 불투명도 수준을 변경합니다.</translation>
+    </message>
+    <message>
+        <location filename="../var_translucency_plugin.hpp" line="46"/>
+        <source>Variable translucency</source>
+        <translation>가변 반투명도</translation>
+    </message>
+</context>
+</TS>

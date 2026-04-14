@@ -45,37 +45,37 @@
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="14"/>
         <source>Timer Expired</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器已结束</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="20"/>
         <source>previous timer expired, you can set new timeout here</source>
-        <translation type="unfinished"></translation>
+        <translation>上一个计时器已结束，可在此设置新的时限</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="27"/>
         <source>use custom timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定义时限</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="37"/>
         <source> h</source>
-        <translation type="unfinished"></translation>
+        <translation> 时</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="44"/>
         <source> m</source>
-        <translation type="unfinished"></translation>
+        <translation> 分</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="54"/>
         <source> s</source>
-        <translation type="unfinished"></translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="76"/>
         <source>note: pressing cancel button will stop the timer</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：按“取消”将停止计时器</translation>
     </message>
 </context>
 <context>
@@ -130,17 +130,17 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="120"/>
         <source>also hide hours</source>
-        <translation type="unfinished">also hide hours</translation>
+        <translation>同时隐藏小时</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="129"/>
         <source>restart on double click</source>
-        <translation type="unfinished">restart on double click</translation>
+        <translation>双击重新启动</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="136"/>
         <source>auto-restart countdown</source>
-        <translation type="unfinished">auto-restart countdown</translation>
+        <translation>自动重新开始倒计时</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="143"/>
@@ -150,12 +150,12 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="150"/>
         <source>reverse counting</source>
-        <translation type="unfinished">reverse counting</translation>
+        <translation>反向计数</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="159"/>
         <source>chime when countdown finishes</source>
-        <translation type="unfinished">chime when countdown finishes</translation>
+        <translation>倒计时结束时响铃</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="191"/>
@@ -165,7 +165,7 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="201"/>
         <source>customize interval on restart</source>
-        <translation type="unfinished"></translation>
+        <translation>重新启动时自定义间隔</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.cpp" line="151"/>

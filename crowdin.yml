@@ -8,7 +8,7 @@
 files: [
   {
     "source": "**/*_en.ts",
-    "translation": "%original_path%/%file_name%_%two_letters_code%.ts",
+    "translation": "%original_path%/%file_name%_%osx_locale%.ts",
     "translation_replace": {
         "_en": "",
     },

@@ -83,12 +83,12 @@
     <message>
         <location filename="../gui/sound_dialog.ui" line="55"/>
         <source>custom</source>
-        <translation>parsonalizado</translation>
+        <translation>personalizado</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.ui" line="85"/>
         <source>Volume</source>
-        <translation type="unfinished">Volume</translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="24"/>

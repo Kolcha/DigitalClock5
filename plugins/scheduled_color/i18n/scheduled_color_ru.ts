@@ -6,12 +6,12 @@
     <message>
         <location filename="../scheduled_color_plugin.cpp" line="162"/>
         <source>Changes clock color at specified times with configurable durations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Меняет цвет часов в заданные моменты времени с настраиваемой длительностью.</translation>
     </message>
     <message>
         <location filename="../scheduled_color_plugin.hpp" line="61"/>
         <source>Scheduled Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Запланированный цвет</translation>
     </message>
 </context>
 <context>
@@ -19,93 +19,87 @@
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>
         <source>Scheduled Color Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки запланированного цвета</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="20"/>
         <source>Time Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Временные точки</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="54"/>
         <source>Time Point Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры точки</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="60"/>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gui/settings_dialog.ui" line="67"/>
-        <location filename="../gui/settings_dialog.ui" line="161"/>
-        <source>HH:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>Время:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="74"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="83"/>
         <source>Choose Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать цвет…</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="108"/>
         <source>Duration Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим длительности:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="116"/>
         <source>Fixed Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Фиксированная длительность</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="121"/>
         <source>Until Specific Time</source>
-        <translation type="unfinished"></translation>
+        <translation>До указанного времени</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="126"/>
         <source>Until Next Point</source>
-        <translation type="unfinished"></translation>
+        <translation>До следующей точки</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="134"/>
         <source>Duration (seconds):</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность (сек):</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="154"/>
         <source>Until Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>До времени:</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="184"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="191"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="150"/>
         <source>Confirm Removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтверждение удаления</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="151"/>
         <source>Are you sure you want to remove this time point?</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить эту временную точку?</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="262"/>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор цвета</translation>
     </message>
 </context>
 </TS>

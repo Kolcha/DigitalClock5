@@ -6,7 +6,7 @@
     <message>
         <location filename="../talking_clock_plugin.cpp" line="91"/>
         <source>Announces time with selected period.</source>
-        <translation>Произносят время через указанный период.</translation>
+        <translation>Озвучивает время с выбранным интервалом.</translation>
     </message>
     <message>
         <location filename="../talking_clock_plugin.hpp" line="52"/>
@@ -42,20 +42,20 @@
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="14"/>
         <source>Voice Configuration</source>
-        <translation>Настройкса голоса</translation>
+        <translation>Настройки голоса</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="26"/>
-        <source>QtSpeech is a library that makes text to speech easy with Qt. This library uses  native speech synthesis API.
+        <source>QtSpeech is a library that makes text-to-speech easy with Qt. It uses the native speech synthesis API.
 
-List of available languages and voices  vary depending on platform. To get more languages/voices, search for it for your platform.
+Available languages and voices depend on the platform. To add more, check the documentation or accessibility settings for your system.
 
-This is example text, you can edit it to play with settings. No any chnages to this text will saved.</source>
-        <translation>QtSpeech - библиотека, позвозяющая очень просто синтезировать речь на Qt. Данная библиотека использует API платформенного синтезатора речи.
+You can edit this sample text to try the settings. Changes are not saved.</source>
+        <translation>QtSpeech — библиотека для синтеза речи в приложениях на Qt; используется встроенный API синтеза речи.
 
-Список доступных языков и голосов варьируется в зависимости от платформы. Чтобы получить больше языков/голосов, поищите их под свою платформу.
+Доступные языки и голоса зависят от платформы. Чтобы добавить другие, см. документацию или настройки специальных возможностей.
 
-Данный текст является просто примером, его спокойно можно менять чтобы поиграть с настройками. Любые изменения данного текста сохранены не будут.</translation>
+Это пример текста: его можно менять, чтобы проверить параметры. Изменения не сохраняются.</translation>
     </message>
     <message>
         <location filename="../gui/voice_config_dialog.ui" line="45"/>

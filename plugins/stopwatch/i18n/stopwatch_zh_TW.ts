@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr-TR" sourcelanguage="en">
+<TS version="2.1" language="zh-TW" sourcelanguage="en">
 <context>
     <name>StopwatchPluginFactory</name>
     <message>
@@ -8,14 +8,14 @@
         <source>Very simple stopwatch.
 Single click to start/pause.
 Double click to reset/restart.</source>
-        <translation>Çok basit bir kronometre.
-Tek tıklama ile başlat/duraklat.
-Çift tıklama ile sıfırla/yeniden başlat.</translation>
+        <translation>非常簡單的秒表。
+單擊即可開始/暫停。
+雙擊即可重置/重新開始。</translation>
     </message>
     <message>
         <location filename="../stopwatch_plugin.hpp" line="69"/>
         <source>Stopwatch</source>
-        <translation>Kronometre</translation>
+        <translation>秒表</translation>
     </message>
 </context>
 <context>
@@ -23,17 +23,17 @@ Tek tıklama ile başlat/duraklat.
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="14"/>
         <source>Hotkeys</source>
-        <translation>Kısayollar</translation>
+        <translation>熱鍵</translation>
     </message>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="26"/>
         <source>pause timer</source>
-        <translation>zamanlayıcıyı duraklat</translation>
+        <translation>暫停計時器</translation>
     </message>
     <message>
         <location filename="../gui/hotkeys_settings_widget.ui" line="52"/>
         <source>restart timer</source>
-        <translation>zamanlayıcıyı yeniden başlat</translation>
+        <translation>重新開始計時器</translation>
     </message>
 </context>
 <context>
@@ -41,12 +41,12 @@ Tek tıklama ile başlat/duraklat.
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="14"/>
         <source>Timer</source>
-        <translation>Zamanlayıcı</translation>
+        <translation>計時器</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="20"/>
         <source>hide timer when it is not active</source>
-        <translation>Etkin olmadığında zamanlayıcıyı gizle</translation>
+        <translation>計時器不活動時隱藏</translation>
     </message>
 </context>
 </TS>

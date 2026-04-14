@@ -16,7 +16,7 @@
     <message>
         <location filename="../quick_note_plugin.cpp" line="78"/>
         <source>Enter the desired note</source>
-        <translation type="unfinished">Enter the desired note</translation>
+        <translation>输入所需备注</translation>
     </message>
 </context>
 <context>
@@ -30,13 +30,13 @@
         <location filename="../quick_note_plugin.cpp" line="96"/>
         <source>Nothing is here!
 Double click the widget to change the text.</source>
-        <translation type="unfinished">Nothing is here!
-Double click the widget to change the text.</translation>
+        <translation>此处尚无内容！
+双击部件可更改文字。</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.cpp" line="98"/>
         <source>Note</source>
-        <translation type="unfinished">Note</translation>
+        <translation>备注</translation>
     </message>
     <message>
         <location filename="../quick_note_plugin.hpp" line="45"/>

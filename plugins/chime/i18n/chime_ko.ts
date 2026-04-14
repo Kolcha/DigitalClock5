@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr-TR" sourcelanguage="en">
+<TS version="2.1" language="ko" sourcelanguage="en">
 <context>
     <name>ChimePluginFactory</name>
     <message>
         <location filename="../chime_plugin.cpp" line="111"/>
         <source>Chimes with selected period.</source>
-        <translation>Seçilen periyotta çan sesi çıkarır.</translation>
+        <translation>선택한 기간에 맞춰 차임벨이 울립니다.</translation>
     </message>
     <message>
         <location filename="../chime_plugin.hpp" line="50"/>
         <source>Chime</source>
-        <translation>Çan sesi</translation>
+        <translation>차임</translation>
     </message>
 </context>
 <context>
@@ -19,48 +19,48 @@
     <message>
         <location filename="../gui/settings_dialog.ui" line="14"/>
         <source>Chime Settings</source>
-        <translation>Çan sesi ayarları</translation>
+        <translation>차임벨 설정</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="26"/>
         <source>Sounds</source>
-        <translation>Sesler</translation>
+        <translation>소리</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="32"/>
         <source>Hour</source>
-        <translation>Saat</translation>
+        <translation>시간</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="63"/>
         <source>Quarter</source>
-        <translation>Çeyrek</translation>
+        <translation>분기</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="97"/>
         <source>Quiet time</source>
-        <translation>Sessiz zaman</translation>
+        <translation>조용한 시간</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.ui" line="103"/>
         <source>Enable</source>
-        <translation>Etkinleştir</translation>
+        <translation>활성화</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="39"/>
         <location filename="../gui/settings_dialog.cpp" line="42"/>
         <source>Once</source>
-        <translation>Bir kere</translation>
+        <translation>한 번</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="40"/>
         <source>1-12 times</source>
-        <translation>1-12 kere</translation>
+        <translation>1-12배</translation>
     </message>
     <message>
         <location filename="../gui/settings_dialog.cpp" line="43"/>
         <source>1-3 times</source>
-        <translation>1-3 kere</translation>
+        <translation>1-3배</translation>
     </message>
 </context>
 <context>
@@ -68,57 +68,57 @@
     <message>
         <location filename="../gui/sound_dialog.ui" line="14"/>
         <source>Sound Settings</source>
-        <translation>Ses ayarları</translation>
+        <translation>사운드 설정</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.ui" line="23"/>
         <source>Sound</source>
-        <translation>Ses</translation>
+        <translation>소리</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.ui" line="29"/>
         <source>default</source>
-        <translation>varsayılan</translation>
+        <translation>기본값</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.ui" line="55"/>
         <source>custom</source>
-        <translation>özel</translation>
+        <translation>관습</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.ui" line="85"/>
         <source>Volume</source>
-        <translation>ses kuvveti</translation>
+        <translation>볼륨</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="24"/>
         <source>sound 1</source>
-        <translation>ses 1</translation>
+        <translation>사운드 1</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="25"/>
         <source>sound 2</source>
-        <translation>ses 2</translation>
+        <translation>사운드 2</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="26"/>
         <source>sound 3</source>
-        <translation>ses 3</translation>
+        <translation>사운드 3</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="27"/>
         <source>sound 4</source>
-        <translation>ses 4</translation>
+        <translation>사운드 4</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="123"/>
         <source>Select sound</source>
-        <translation>Ses seçin</translation>
+        <translation>소리 선택</translation>
     </message>
     <message>
         <location filename="../gui/sound_dialog.cpp" line="125"/>
         <source>Sounds (*.wav *.mp3 *.ogg *.oga *.m4a);;All files (*.*)</source>
-        <translation>Sesler (*.wav *.mp3 *.ogg *.oga *.m4a);;Tüm dosyalar (*.*)</translation>
+        <translation>사운드(*.wav *.mp3 *.ogg *.oga *.m4a);;모든 파일(*.*)</translation>
     </message>
 </context>
 </TS>

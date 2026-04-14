@@ -6,12 +6,12 @@
     <message>
         <location filename="../random_position_plugin.cpp" line="46"/>
         <source>Randomly changes clock position with time.</source>
-        <translation type="unfinished">Randomly changes clock position with time.</translation>
+        <translation>Altera aleatoriamente a posição do relógio ao longo do tempo.</translation>
     </message>
     <message>
         <location filename="../random_position_plugin.hpp" line="42"/>
         <source>Random position</source>
-        <translation type="unfinished">Random position</translation>
+        <translation>Posição aleatória</translation>
     </message>
 </context>
 </TS>

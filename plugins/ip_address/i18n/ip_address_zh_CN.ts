@@ -11,7 +11,7 @@
     <message>
         <location filename="../ip_address_plugin.cpp" line="89"/>
         <source>waiting for an external address...</source>
-        <translation type="unfinished">waiting for an external address...</translation>
+        <translation>正在等待外部地址…</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="76"/>
         <source>External address detection service</source>
-        <translation type="unfinished"></translation>
+        <translation>外部地址检测服务</translation>
     </message>
 </context>
 </TS>

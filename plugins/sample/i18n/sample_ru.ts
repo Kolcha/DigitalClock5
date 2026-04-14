@@ -6,12 +6,12 @@
     <message>
         <location filename="../sample_plugin.cpp" line="35"/>
         <source>Test plugin just for debugging and testing purposes. Also can be used as minimal example. Does nothing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестовый плагин только для отладки и проверки. Также может служить минимальным примером. Ничего не делает.</translation>
     </message>
     <message>
         <location filename="../sample_plugin.hpp" line="37"/>
         <source>Sample Plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Демонстрационный плагин</translation>
     </message>
 </context>
 </TS>

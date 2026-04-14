@@ -77,7 +77,7 @@ Click here to download.</source>
         <location filename="../core/clock_application.cpp" line="287"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
-        <translation>有可用更新: %1 (%2)
+        <translation>有可用更新：%1（%2）。
 点击此消息下载。</translation>
     </message>
     <message>
@@ -356,12 +356,12 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="205"/>
         <source>tray icon single click action</source>
-        <translation type="unfinished">tray icon single click action</translation>
+        <translation>托盘图标单击操作</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="219"/>
         <source>tray icon double click action</source>
-        <translation type="unfinished">tray icon double click action</translation>
+        <translation>托盘图标双击操作</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="558"/>
@@ -452,7 +452,7 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="235"/>
         <source>tray icon color</source>
-        <translation type="unfinished"></translation>
+        <translation>托盘图标颜色</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="808"/>
@@ -501,12 +501,12 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="934"/>
         <source>H:</source>
-        <translation type="unfinished">H:</translation>
+        <translation>水平:</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="951"/>
         <source>V:</source>
-        <translation type="unfinished">V:</translation>
+        <translation>垂直:</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="972"/>
@@ -553,7 +553,7 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1199"/>
         <source>hide clock widget, show only widgets added by plugins</source>
-        <translation type="unfinished">hide clock widget, show only widgets added by plugins</translation>
+        <translation>隐藏时钟部件，仅显示插件添加的部件</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="1220"/>
@@ -646,17 +646,17 @@ Click this message to download.</source>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1090"/>
         <source>open settings</source>
-        <translation type="unfinished">open settings</translation>
+        <translation>打开设置</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1091"/>
         <source>show/hide clock</source>
-        <translation type="unfinished">show/hide clock</translation>
+        <translation>显示/隐藏时钟</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.cpp" line="1092"/>
         <source>toggle &quot;stay on top&quot;</source>
-        <translation type="unfinished">toggle &quot;stay on top&quot;</translation>
+        <translation>切换「置于顶层」</translation>
     </message>
 </context>
 </TS>

@@ -6,7 +6,7 @@
     <message>
         <location filename="../time_zone_plugin.cpp" line="154"/>
         <source>Displays current time zone under the clock.</source>
-        <translation type="unfinished">Displays current time zone under the clock.</translation>
+        <translation>在时钟下方显示当前时区。</translation>
     </message>
     <message>
         <location filename="../time_zone_plugin.hpp" line="55"/>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="20"/>
         <source>Time Zone Format</source>
-        <translation type="unfinished">Time Zone Format</translation>
+        <translation>时区格式</translation>
     </message>
 </context>
 </TS>

@@ -41,7 +41,9 @@ set(tr_langs
     en
     ru
     zh_CN
-    tr_TR
+    zh_TW
+    ko
+    tr
     pt_BR
     pt_PT
 )

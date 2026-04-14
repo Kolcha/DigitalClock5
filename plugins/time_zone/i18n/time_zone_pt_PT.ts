@@ -6,12 +6,12 @@
     <message>
         <location filename="../time_zone_plugin.cpp" line="154"/>
         <source>Displays current time zone under the clock.</source>
-        <translation type="unfinished">Displays current time zone under the clock.</translation>
+        <translation>Mostra o fuso horário atual por baixo do relógio.</translation>
     </message>
     <message>
         <location filename="../time_zone_plugin.hpp" line="55"/>
         <source>Time Zone</source>
-        <translation type="unfinished">Time Zone</translation>
+        <translation>Fuso horário</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../gui/settings_widget.ui" line="14"/>
         <source>Time Zone</source>
-        <translation type="unfinished">Time Zone</translation>
+        <translation>Fuso horário</translation>
     </message>
     <message>
         <location filename="../gui/settings_widget.ui" line="20"/>
         <source>Time Zone Format</source>
-        <translation type="unfinished">Time Zone Format</translation>
+        <translation>Formato do fuso horário</translation>
     </message>
 </context>
 </TS>

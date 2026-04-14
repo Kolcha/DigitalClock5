@@ -71,7 +71,7 @@ Clique aqui para baixar.</translation>
     <message>
         <location filename="../core/clock_application.cpp" line="286"/>
         <source>%1 Update</source>
-        <translation>Atualizar %1</translation>
+        <translation>Atualização do %1</translation>
     </message>
     <message>
         <location filename="../core/clock_application.cpp" line="287"/>
@@ -452,7 +452,7 @@ Clique nesta mensagem para baixar.</translation>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="235"/>
         <source>tray icon color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do ícone na bandeja</translation>
     </message>
     <message>
         <location filename="../gui/settings/settings_dialog.ui" line="808"/>

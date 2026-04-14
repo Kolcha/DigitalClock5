@@ -45,37 +45,37 @@
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="14"/>
         <source>Timer Expired</source>
-        <translation type="unfinished"></translation>
+        <translation>Время истекло</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="20"/>
         <source>previous timer expired, you can set new timeout here</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущий таймер истёк; здесь можно задать новое время</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="27"/>
         <source>use custom timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>задать своё время</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="37"/>
         <source> h</source>
-        <translation type="unfinished"></translation>
+        <translation> ч</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="44"/>
         <source> m</source>
-        <translation type="unfinished"></translation>
+        <translation> м</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="54"/>
         <source> s</source>
-        <translation type="unfinished"></translation>
+        <translation> с</translation>
     </message>
     <message>
         <location filename="../gui/timer_expired_dialog.ui" line="76"/>
         <source>note: pressing cancel button will stop the timer</source>
-        <translation type="unfinished"></translation>
+        <translation>примечание: кнопка «Отмена» остановит таймер</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@ Set this to -1 to never show days count, or to 0 to always show.</source>
     <message>
         <location filename="../gui/timer_settings_widget.ui" line="201"/>
         <source>customize interval on restart</source>
-        <translation type="unfinished"></translation>
+        <translation>настраивать интервал при перезапуске</translation>
     </message>
     <message>
         <location filename="../gui/timer_settings_widget.cpp" line="151"/>
