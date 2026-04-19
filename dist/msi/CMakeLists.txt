@@ -2,7 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-set(MSI_FILE "digital_clock_5-x64.msi")
+set(WIX_BUILD_ARCH "x64" CACHE STRING "architecture of the MSI package")
+set(MSI_FILE "digital_clock_5-${WIX_BUILD_ARCH}.msi")
 set(MSI_SRC_DIR "${CMAKE_BINARY_DIR}/installer_files" CACHE STRING "MSI source dir")
 
 set(WIX_SRC_FILES
@@ -14,7 +15,7 @@ set(WIX_SRC_FILES
 
 set_property(GLOBAL PROPERTY JOB_POOLS single_job=1)
 
-set(WIX_BUILD_FLAGS "-arch x64 -ext WixToolset.Util.wixext")
+set(WIX_BUILD_FLAGS "-arch ${WIX_BUILD_ARCH} -ext WixToolset.Util.wixext")
 string(APPEND WIX_BUILD_FLAGS " -d AppVersion=${PROJECT_VERSION}")
 string(APPEND WIX_BUILD_FLAGS " -d AppIcon=${CMAKE_SOURCE_DIR}/app/dist/digital_clock.ico")
 string(APPEND WIX_BUILD_FLAGS " -d MySource=${MSI_SRC_DIR}")
