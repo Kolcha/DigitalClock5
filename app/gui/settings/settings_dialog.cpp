@@ -312,6 +312,12 @@ void SettingsDialog::on_tray_color_select_btn_clicked()
   emit globalOptionChanged(opt::CustomTrayIconColor, color);
 }
 
+void SettingsDialog::on_screen_edge_distance_valueChanged(int arg1)
+{
+  app->config()->global()->setScreenEdgeDistance(arg1);
+  emit globalOptionChanged(opt::ScreenEdgeDistance, arg1);
+}
+
 void SettingsDialog::on_enable_autoupdate_clicked(bool checked)
 {
   app->config()->global()->setCheckForUpdates(checked);
@@ -875,6 +881,8 @@ void SettingsDialog::initAppGlobalTab()
 #endif
 
   ui->tray_icon_custom_color_cb->setChecked(gs.getUseCustomTrayIconColor());
+
+  ui->screen_edge_distance->setValue(gs.getScreenEdgeDistance());
 }
 
 void SettingsDialog::initGeneralTab(size_t idx)

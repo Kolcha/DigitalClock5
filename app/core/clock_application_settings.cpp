@@ -52,6 +52,8 @@ void ClockApplication::onGlobalOptionChanged(opt::GlobalOptions opt, const QVari
     case opt::SnapThreshold:
     case opt::PreventOutOfScreen:
 
+    case opt::ScreenEdgeDistance:
+
     case opt::ChangeCursorOnHover:
 
     case opt::TransparentOnHover:
@@ -314,6 +316,10 @@ void ClockApplication::applyWindowOption(size_t idx, opt::GlobalOptions opt, con
       break;
     case opt::PreventOutOfScreen:
       wnd->setPreventOutOfScreenEnabled(val.toBool());
+      break;
+
+    case opt::ScreenEdgeDistance:
+      wnd->setScreenEdgeDistance(val.toInt());
       break;
 
     case opt::ChangeCursorOnHover:

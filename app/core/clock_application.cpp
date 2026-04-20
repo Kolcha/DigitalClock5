@@ -132,6 +132,8 @@ void ClockApplication::reconfigureWindow(size_t i)
   applyWindowOption(i, opt::SnapThreshold, glob_cfg->getSnapThreshold());
   applyWindowOption(i, opt::PreventOutOfScreen, glob_cfg->getPreventOutOfScreen());
 
+  applyWindowOption(i, opt::ScreenEdgeDistance, glob_cfg->getScreenEdgeDistance());
+
   applyWindowOption(i, opt::ChangeCursorOnHover, glob_cfg->getChangeCursorOnHover());
 
   applyWindowOption(i, opt::TransparentOnHover, glob_cfg->getTransparentOnHover());

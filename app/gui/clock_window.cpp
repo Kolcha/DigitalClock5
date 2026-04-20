@@ -191,18 +191,18 @@ void ClockWindow::moveToPredefinedPos(Qt::Alignment a)
   auto wg = frameGeometry();
 
   if (a & Qt::AlignLeft)
-    tpos.setX(sg.left());
+    tpos.setX(sg.left() + _screen_edge_distance);
   if (a & Qt::AlignHCenter)
     tpos.setX(sg.center().x() - wg.width()/2);
   if (a & Qt::AlignRight)
-    tpos.setX(sg.x() + sg.width() - wg.width());
+    tpos.setX(sg.x() + sg.width() - wg.width() - _screen_edge_distance);
 
   if (a & Qt::AlignTop)
-    tpos.setY(sg.top());
+    tpos.setY(sg.top() + _screen_edge_distance);
   if (a & Qt::AlignVCenter)
     tpos.setY(sg.center().y() - wg.height()/2);
   if (a & Qt::AlignBottom)
-    tpos.setY(sg.y() + sg.height() - wg.height());
+    tpos.setY(sg.y() + sg.height() - wg.height() - _screen_edge_distance);
 
   move(tpos);
   emit saveStateRequested();
@@ -238,6 +238,11 @@ void ClockWindow::setPreventOutOfScreenEnabled(bool enabled)
 {
   _keep_visible = enabled;
   preventOutOfScreenPos();
+}
+
+void ClockWindow::setScreenEdgeDistance(int distance)
+{
+  _screen_edge_distance = distance;
 }
 
 void ClockWindow::setChangeCursorOnHoverEnabled(bool enabled)

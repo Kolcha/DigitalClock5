@@ -72,6 +72,8 @@ private slots:
   void on_tray_icon_custom_color_cb_clicked(bool checked);
   void on_tray_color_select_btn_clicked();
 
+  void on_screen_edge_distance_valueChanged(int arg1);
+
   void on_enable_autoupdate_clicked(bool checked);
   void on_update_period_edit_activated(int index);
   void on_check_for_beta_clicked(bool checked);

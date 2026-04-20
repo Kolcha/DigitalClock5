@@ -45,6 +45,8 @@ public slots:
   void setSnapThreshold(int threshold);
   void setPreventOutOfScreenEnabled(bool enabled);
 
+  void setScreenEdgeDistance(int distance);
+
   void setChangeCursorOnHoverEnabled(bool enabled);
 
   void setTransparentOnHoverEnabled(bool enabled);
@@ -113,6 +115,8 @@ private:
 
   bool _snap_to_edge = true;
   int _snap_threshold = 15;
+
+  int _screen_edge_distance = 0;
 
   bool _keep_visible = true;
 

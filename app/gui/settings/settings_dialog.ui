@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>525</width>
-    <height>398</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -245,6 +245,46 @@
             <string notr="true">...</string>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="9" column="2">
+        <layout class="QHBoxLayout" name="screen_edge_distance_layout">
+         <item>
+          <widget class="QLabel" name="screen_edge_dist_label">
+           <property name="text">
+            <string>screen edge distance</string>
+           </property>
+           <property name="buddy">
+            <cstring>screen_edge_distance</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="screen_edge_distance">
+           <property name="toolTip">
+            <string>affects only &quot;Position&quot; options in the context menu</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+           <property name="suffix">
+            <string notr="true"> px</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
