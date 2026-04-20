@@ -163,10 +163,22 @@ void ClockWindow::loadState(const StateStorage& st)
   layout()->setAlignment(_clock, anchor2alignment(_anchor_point));
 }
 
+void ClockWindow::setOrigin(const QPoint& p)
+{
+  if (_is_dragging)
+    return;
+  if (_last_origin == p)
+    return;
+  _last_origin = p;
+  move(desiredPosition());
+  emit saveStateRequested();
+}
+
 void ClockWindow::setAnchorPoint(AnchorPoint ap)
 {
   _anchor_point = ap;
   _last_origin = anchoredOrigin();
+  emit originChanged(_last_origin);
   layout()->setAlignment(_clock, anchor2alignment(_anchor_point));
   emit saveStateRequested();
 }
@@ -371,6 +383,7 @@ void ClockWindow::moveEvent(QMoveEvent* event)
   if (!isVisible()) return;
 
   _last_origin = anchoredOrigin();
+  emit originChanged(_last_origin);
 }
 
 void ClockWindow::resizeEvent(QResizeEvent* event)

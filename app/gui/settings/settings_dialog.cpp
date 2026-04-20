@@ -159,11 +159,13 @@ void SettingsDialog::on_export_btn_clicked()
 void SettingsDialog::on_windows_box_currentIndexChanged(int index)
 {
   if (index < 0) return;
+  disconnect(app->window(_curr_idx), &ClockWindow::originChanged, this, &SettingsDialog::updatePositionControls);
   app->window(_curr_idx)->disableFrame();
   _curr_idx = index;
   app->window(_curr_idx)->enableFrame();
   initGeneralTab(index);
   initAppearanceTab(index);
+  initMiscTab(index);
 }
 
 void SettingsDialog::on_lang_tr_btn_clicked()
@@ -784,6 +786,17 @@ void SettingsDialog::onTextMarginsChanged()
   emit instanceOptionChanged(_curr_idx, opt::WidgetMargins, QVariant::fromValue(m));
 }
 
+void SettingsDialog::updatePositionControls(const QPoint& pos)
+{
+  ui->pos_x_edit->setValue(pos.x());
+  ui->pos_y_edit->setValue(pos.y());
+}
+
+void SettingsDialog::applyClockPosition()
+{
+  app->window(_curr_idx)->setOrigin({ui->pos_x_edit->value(), ui->pos_y_edit->value()});
+}
+
 void SettingsDialog::on_true_per_char_clicked(bool checked)
 {
   app->config()->instance(_curr_idx)->setTruePerCharRendering(checked);
@@ -983,6 +996,11 @@ void SettingsDialog::initMiscTab(size_t idx)
   connect(ui->m_text_t, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
   connect(ui->m_text_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
   connect(ui->m_text_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
+
+  updatePositionControls(app->window(idx)->lastOrigin());
+  connect(app->window(idx), &ClockWindow::originChanged, this, &SettingsDialog::updatePositionControls);
+  connect(ui->pos_x_edit, &QSpinBox::valueChanged, this, &SettingsDialog::applyClockPosition);
+  connect(ui->pos_y_edit, &QSpinBox::valueChanged, this, &SettingsDialog::applyClockPosition);
 
   ui->true_per_char->setChecked(acfg.getTruePerCharRendering());
   ui->respect_line_spacing->setChecked(acfg.getRespectLineSpacing());

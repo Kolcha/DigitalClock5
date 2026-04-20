@@ -25,12 +25,14 @@ public:
 
   ClockWidget* clock() const noexcept { return _clock; }
 
+  QPoint lastOrigin() const noexcept { return _last_origin; }
   AnchorPoint anchorPoint() const noexcept { return _anchor_point; }
 
   void saveState(StateStorage& st) const;
   void loadState(const StateStorage& st);
 
 public slots:
+  void setOrigin(const QPoint& p);
   void setAnchorPoint(AnchorPoint ap);
 
   void moveToPredefinedPos(Qt::Alignment a);
@@ -67,6 +69,7 @@ public slots:
   void tick();
 
 signals:
+  void originChanged(const QPoint& origin);
   void saveStateRequested();
 
   void settingsDialogRequested();
