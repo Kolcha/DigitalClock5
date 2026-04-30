@@ -69,66 +69,66 @@ Click here to download.</source>
 <context>
     <name>ClockApplication</name>
     <message>
-        <location filename="../core/clock_application.cpp" line="286"/>
+        <location filename="../core/clock_application.cpp" line="288"/>
         <source>%1 Update</source>
         <translation>%1 업데이트</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="287"/>
+        <location filename="../core/clock_application.cpp" line="289"/>
         <source>Update available: %1 (%2).
 Click this message to download.</source>
         <translation>업데이트 가능: %1(%2).
 다운로드하려면 이 메시지를 클릭하세요.</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="366"/>
+        <location filename="../core/clock_application.cpp" line="368"/>
         <source>Settings</source>
         <translation>설정</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="373"/>
+        <location filename="../core/clock_application.cpp" line="375"/>
         <source>About</source>
         <translation>소개</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="377"/>
+        <location filename="../core/clock_application.cpp" line="379"/>
         <source>Quit</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="481"/>
+        <location filename="../core/clock_application.cpp" line="483"/>
         <source>Position</source>
         <translation>위치</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="482"/>
+        <location filename="../core/clock_application.cpp" line="484"/>
         <source>Top</source>
         <translation>상단</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="484"/>
-        <location filename="../core/clock_application.cpp" line="494"/>
-        <location filename="../core/clock_application.cpp" line="504"/>
+        <location filename="../core/clock_application.cpp" line="486"/>
+        <location filename="../core/clock_application.cpp" line="496"/>
+        <location filename="../core/clock_application.cpp" line="506"/>
         <source>Left</source>
         <translation>왼쪽</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="487"/>
-        <location filename="../core/clock_application.cpp" line="493"/>
-        <location filename="../core/clock_application.cpp" line="497"/>
-        <location filename="../core/clock_application.cpp" line="507"/>
+        <location filename="../core/clock_application.cpp" line="489"/>
+        <location filename="../core/clock_application.cpp" line="495"/>
+        <location filename="../core/clock_application.cpp" line="499"/>
+        <location filename="../core/clock_application.cpp" line="509"/>
         <source>Middle</source>
         <translation>중간</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="490"/>
-        <location filename="../core/clock_application.cpp" line="500"/>
-        <location filename="../core/clock_application.cpp" line="510"/>
+        <location filename="../core/clock_application.cpp" line="492"/>
+        <location filename="../core/clock_application.cpp" line="502"/>
+        <location filename="../core/clock_application.cpp" line="512"/>
         <source>Right</source>
         <translation>오른쪽</translation>
     </message>
     <message>
-        <location filename="../core/clock_application.cpp" line="503"/>
+        <location filename="../core/clock_application.cpp" line="505"/>
         <source>Bottom</source>
         <translation>하단</translation>
     </message>
@@ -151,39 +151,39 @@ Click this message to download.</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="403"/>
+        <location filename="../gui/clock_window.cpp" line="421"/>
         <source>Position</source>
         <translation>위치</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="404"/>
+        <location filename="../gui/clock_window.cpp" line="422"/>
         <source>Top</source>
         <translation>상단</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="405"/>
-        <location filename="../gui/clock_window.cpp" line="412"/>
-        <location filename="../gui/clock_window.cpp" line="419"/>
+        <location filename="../gui/clock_window.cpp" line="423"/>
+        <location filename="../gui/clock_window.cpp" line="430"/>
+        <location filename="../gui/clock_window.cpp" line="437"/>
         <source>Left</source>
         <translation>왼쪽</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="407"/>
-        <location filename="../gui/clock_window.cpp" line="411"/>
-        <location filename="../gui/clock_window.cpp" line="414"/>
-        <location filename="../gui/clock_window.cpp" line="421"/>
+        <location filename="../gui/clock_window.cpp" line="425"/>
+        <location filename="../gui/clock_window.cpp" line="429"/>
+        <location filename="../gui/clock_window.cpp" line="432"/>
+        <location filename="../gui/clock_window.cpp" line="439"/>
         <source>Middle</source>
         <translation>중간</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="409"/>
-        <location filename="../gui/clock_window.cpp" line="416"/>
-        <location filename="../gui/clock_window.cpp" line="423"/>
+        <location filename="../gui/clock_window.cpp" line="427"/>
+        <location filename="../gui/clock_window.cpp" line="434"/>
+        <location filename="../gui/clock_window.cpp" line="441"/>
         <source>Right</source>
         <translation>오른쪽</translation>
     </message>
     <message>
-        <location filename="../gui/clock_window.cpp" line="418"/>
+        <location filename="../gui/clock_window.cpp" line="436"/>
         <source>Bottom</source>
         <translation>하단</translation>
     </message>
@@ -314,244 +314,259 @@ Click this message to download.</source>
         <translation>트레이 아이콘 색상</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="268"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="256"/>
+        <source>screen edge distance</source>
+        <translation>화면 가장자리 거리</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="266"/>
+        <source>affects only &quot;Position&quot; options in the context menu</source>
+        <translation>컨텍스트 메뉴의 &quot;위치&quot; 옵션에만 영향을 줍니다</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="308"/>
         <source>Format</source>
         <translation>형식</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="281"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="321"/>
         <source>12h</source>
         <translation>12시간제</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="291"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="331"/>
         <source>24h</source>
         <translation>24시간제</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="311"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="351"/>
         <source>leading zero</source>
         <translation>선행 0</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="318"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="358"/>
         <source>show seconds</source>
         <translation>초 표시</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="334"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="374"/>
         <source>show AM/PM</source>
         <translation>오전/오후 표시</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="344"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="384"/>
         <source>add space before AM/PM</source>
         <translation>AM/PM 앞에 공간 추가</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="351"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="391"/>
         <source>uppercase</source>
         <translation>대문자</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="361"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="401"/>
         <source>lowercase</source>
         <translation>소문자</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="375"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="415"/>
         <source>custom format</source>
         <translation>맞춤 형식</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="454"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="494"/>
         <source>Apply</source>
         <translation>적용</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="468"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="508"/>
         <source>layout config string (useful only for multiline formats)</source>
         <translation>레이아웃 구성 문자열(여러 줄 형식에만 유용함)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="492"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="532"/>
         <source>custom separators (will be used instead of &apos;:&apos;)</source>
         <translation>맞춤 구분 기호(&apos;:&apos; 대신 사용됨)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="508"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="548"/>
         <source>replacement characters for &apos;:&apos; in format</source>
         <translation>형식에서 &apos;:&apos;에 대한 대체 문자</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="524"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="564"/>
         <source>make seconds smaller,</source>
         <translation>초를 더 작게 만들고,</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="547"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="587"/>
         <source>of clock&apos;s height</source>
         <translation>시계 높이</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="558"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="598"/>
         <source>display time in another time zone</source>
         <translation>다른 시간대의 시간 표시</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="619"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="659"/>
         <source>Appearance</source>
         <translation>외관</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="628"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="668"/>
         <source>font</source>
         <translation>글꼴</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="661"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="701"/>
         <source>skin</source>
         <translation>스킨</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="684"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="724"/>
         <source>flashing separator</source>
         <translation>깜박이는 구분 기호</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="691"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="731"/>
         <source>texture</source>
         <translation>텍스처</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="717"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="885"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="757"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="925"/>
         <source>apply per element</source>
         <translation>요소별로 적용</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="730"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="770"/>
         <source>scaling</source>
         <translation>스케일링</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="769"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="809"/>
         <source>opacity</source>
         <translation>불투명도</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="808"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="848"/>
         <source>colorize</source>
         <translation>색상화</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="817"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="857"/>
         <source>colorization color</source>
         <translation>색상화 색상</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="859"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="899"/>
         <source>background</source>
         <translation>배경</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="895"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="935"/>
         <source>alignment</source>
         <translation>정렬</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="901"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="985"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1069"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="941"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1025"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1109"/>
         <source>left</source>
         <translation>왼쪽</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="911"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="951"/>
         <source>center</source>
         <translation>센터</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="918"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1017"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1107"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="958"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1057"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1147"/>
         <source>right</source>
         <translation>오른쪽</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="928"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="968"/>
         <source>spacing</source>
         <translation>간격</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="934"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="974"/>
         <source>H:</source>
         <translation>H:</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="951"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="991"/>
         <source>V:</source>
         <translation>V:</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="972"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1012"/>
         <source>Misc</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="978"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1018"/>
         <source>extra space around characters</source>
         <translation>문자 주위에 추가 공간</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1001"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1088"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1041"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1128"/>
         <source>top</source>
         <translation>상단</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1033"/>
-        <location filename="../gui/settings/settings_dialog.ui" line="1126"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1073"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1166"/>
         <source>bottom</source>
         <translation>하단</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1062"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1102"/>
         <source>extra space around widget</source>
         <translation>위젯 주위에 추가 공간</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1145"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1185"/>
+        <source>clock widget position on the screen (x, y)</source>
+        <translation>화면에서 시계 위젯 위치 (x, y)</translation>
+    </message>
+    <message>
+        <location filename="../gui/settings/settings_dialog.ui" line="1212"/>
         <source>character by character rendering</source>
         <translation>문자별 렌더링</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1152"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1219"/>
         <source>respect line spacing defined by skin/font</source>
         <translation>스킨/글꼴로 정의된 줄 간격을 존중합니다.</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1161"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1228"/>
         <source>layout spacing (space between widgets)</source>
         <translation>레이아웃 간격(위젯 사이의 공간)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1199"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1266"/>
         <source>hide clock widget, show only widgets added by plugins</source>
         <translation>시계 위젯 숨기기, 플러그인으로 추가된 위젯만 표시</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1220"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1287"/>
         <source>Plugins</source>
         <translation>플러그인</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1235"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1302"/>
         <source>Import</source>
         <translation>가져오기</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.ui" line="1242"/>
+        <location filename="../gui/settings/settings_dialog.ui" line="1309"/>
         <source>Export</source>
         <translation>내보내기</translation>
     </message>
@@ -576,85 +591,85 @@ Click this message to download.</source>
         <translation>디지털 시계 5 설정(*.dc5)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="552"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="663"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="560"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="671"/>
         <source>follow system theme</source>
         <translation>시스템 테마 따르기</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="566"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="677"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="574"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="685"/>
         <source>stretch instead of tile</source>
         <translation>타일 대신 늘이기</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="615"/>
-        <location filename="../gui/settings/settings_dialog.cpp" line="726"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="623"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="734"/>
         <source>Images (*.png *.bmp *.jpg)</source>
         <translation>이미지(*.png *.bmp *.jpg)</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1061"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1087"/>
         <source>window %1</source>
         <translation>창% 1</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1069"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1095"/>
         <source>Automatic</source>
         <translation>자동</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1080"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1106"/>
         <source>1 day</source>
         <translation>1일</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1081"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1107"/>
         <source>3 days</source>
         <translation>3일</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1082"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1108"/>
         <source>1 week</source>
         <translation>1주</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1083"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1109"/>
         <source>2 weeks</source>
         <translation>2주</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1084"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1110"/>
         <source>1 month</source>
         <translation>1개월</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1090"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1116"/>
         <source>open settings</source>
         <translation>설정 열기</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1091"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1117"/>
         <source>show/hide clock</source>
         <translation>시계 표시/숨기기</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1092"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1118"/>
         <source>toggle &quot;stay on top&quot;</source>
         <translation>&quot;최상위 유지&quot; 전환</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1134"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1160"/>
         <source>solid color</source>
         <translation>단색</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1135"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1161"/>
         <source>gradient</source>
         <translation>그라데이션</translation>
     </message>
     <message>
-        <location filename="../gui/settings/settings_dialog.cpp" line="1136"/>
+        <location filename="../gui/settings/settings_dialog.cpp" line="1162"/>
         <source>pattern</source>
         <translation>패턴</translation>
     </message>
