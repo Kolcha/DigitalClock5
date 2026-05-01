@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-project(talking_clock VERSION 2.0.0 LANGUAGES CXX)
+project(talking_clock VERSION 2.0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTORCC ON)
 
