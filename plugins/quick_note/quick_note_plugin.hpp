@@ -8,29 +8,35 @@
 
 #include "plugin/text/skinned_text_plugin_base.hpp"
 
+#include "impl/quick_note_settings.hpp"
+
 using namespace plugin::text;
+using plugin::quick_note::QuickNotePluginInstanceConfig;
 
 class QuickNotePlugin : public TextPluginInstanceBase
 {
   Q_OBJECT
 
 public:
-  QuickNotePlugin(const PluginInstanceConfig& cfg, std::unique_ptr<SettingsStorage> st);
+  QuickNotePlugin(QuickNotePluginInstanceConfig* cfg, std::unique_ptr<SettingsStorage> st);
 
   void startup() override;
+
+  void onTextChanged(const QString& txt);
 
 protected:
   QString text() const override { return _last_text; }
 
   SkinnedTextWidget* createWidget(QWidget* parent) const override;
 
-  void pluginReloadConfig() override {}
+  void pluginReloadConfig() override;
 
 private slots:
   void onWidgetClicked();
 
 private:
   QString _last_text;
+  QuickNotePluginInstanceConfig* _cfg;
   std::unique_ptr<SettingsStorage> _st;
 };
 
@@ -48,7 +54,15 @@ public:
 protected:
   Instance createInstance(size_t idx) const override
   {
-    return std::make_unique<QuickNotePlugin>(*instanceConfig(idx), instanceState(idx));
+    auto cfg = qobject_cast<QuickNotePluginInstanceConfig*>(instanceConfig(idx));
+    Q_ASSERT(cfg);
+    return std::make_unique<QuickNotePlugin>(cfg, instanceState(idx));
+  }
+
+  std::unique_ptr<PluginConfig> createConfig(
+    std::unique_ptr<PluginSettingsBackend> b) const override
+  {
+    return std::make_unique<plugin::quick_note::QuickNotePluginConfig>(std::move(b));
   }
 
   QVector<QWidget*> configPagesBeforeCommonPages() override;

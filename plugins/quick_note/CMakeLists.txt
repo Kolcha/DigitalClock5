@@ -5,6 +5,10 @@
 project(quick_note VERSION 2.1.3 LANGUAGES CXX)
 
 qt_add_plugin(${PROJECT_NAME} CLASS_NAME QuickNotePluginFactory
+    gui/settings_widget.hpp
+    gui/settings_widget.cpp
+    gui/settings_widget.ui
+    impl/quick_note_settings.hpp
     quick_note_plugin.cpp
     quick_note_plugin.hpp
 )
