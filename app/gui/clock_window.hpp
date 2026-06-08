@@ -6,6 +6,8 @@
 
 #include <QWidget>
 
+#include <QTileRules>
+
 class ClockWidget;
 class OverlayWidget;
 class StateStorage;
@@ -68,6 +70,8 @@ public slots:
   void setColorizationColor(const QColor& color);
   void setColorizationStrength(qreal s);
 
+  void setBackground(QPixmap p, QTileRules t = {});
+
   void tick();
 
 signals:
@@ -87,6 +91,8 @@ protected:
 
   void moveEvent(QMoveEvent* event) override;
   void resizeEvent(QResizeEvent* event) override;
+
+  void paintEvent(QPaintEvent* event) override;
 
   void platformOneTimeFlags();
   void platformTick();
@@ -127,6 +133,9 @@ private:
 
   QColor _colorization_color = QColor(85, 0, 255);
   qreal _colorization_strength = 0.8;
+
+  QPixmap _background;
+  QTileRules _bg_rules;
 
   struct PlatformData;
   std::unique_ptr<PlatformData> _data;

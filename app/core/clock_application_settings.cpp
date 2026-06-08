@@ -174,7 +174,10 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
     case opt::BackgroundType:
       switch (val.value<tx::TextureType>()) {
         case tx::None:
-          wnd->clock()->setBackgroundCustomization(LinesRenderer::None);
+          if (icfg.getApplyBackgroundToWindow())
+            wnd->setBackground(QPixmap());
+          else
+            wnd->clock()->setBackgroundCustomization(LinesRenderer::None);
           break;
         case tx::Color:
           applyInstanceOption(idx, opt::BackgroundColorUseTheme, icfg.getBackgroundColorUseTheme());
@@ -186,14 +189,17 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
           applyInstanceOption(idx, opt::BackgroundPattern, icfg.getBackgroundPattern());
           break;
       }
-      if (val.value<tx::TextureType>() != tx::None)
+      if (val.value<tx::TextureType>() != tx::None && !icfg.getApplyBackgroundToWindow())
         wnd->clock()->setBackgroundCustomization(icfg.getBackgroundCustomization());
       break;
     case opt::BackgroundCustomization:
       wnd->clock()->setBackgroundCustomization(val.value<LinesRenderer::CustomizationType>());
       break;
     case opt::BackgroundColor:
-      wnd->clock()->setBackground(solid_color_texture(val.value<QColor>()));
+      if (icfg.getApplyBackgroundToWindow())
+        wnd->setBackground(solid_color_texture(val.value<QColor>()));
+      else
+        wnd->clock()->setBackground(solid_color_texture(val.value<QColor>()));
       break;
     case opt::BackgroundColorUseTheme:
       applyInstanceOption(idx, opt::BackgroundColor, val.toBool() ?
@@ -201,19 +207,35 @@ void ClockApplication::applyInstanceOption(size_t idx, opt::InstanceOptions opt,
                           icfg.getBackgroundColor());
       break;
     case opt::BackgroundGradient:
-      wnd->clock()->setBackground(gradient_texture(val.value<QGradient>()));
+      if (icfg.getApplyBackgroundToWindow())
+        wnd->setBackground(gradient_texture(val.value<QGradient>()));
+      else
+        wnd->clock()->setBackground(gradient_texture(val.value<QGradient>()));
       break;
     case opt::BackgroundPattern:
-      wnd->clock()->setBackground(pattern_from_file(val.toString()),
-                                  icfg.getBackgroundPatternTile() ? Qt::RepeatTile : Qt::StretchTile);
+      if (icfg.getApplyBackgroundToWindow())
+        wnd->setBackground(pattern_from_file(val.toString()),
+                           icfg.getBackgroundPatternTile() ? Qt::RepeatTile : Qt::StretchTile);
+      else
+        wnd->clock()->setBackground(pattern_from_file(val.toString()),
+                                    icfg.getBackgroundPatternTile() ? Qt::RepeatTile : Qt::StretchTile);
       break;
     case opt::BackgroundPatternTile:
-      wnd->clock()->setBackground(pattern_from_file(icfg.getBackgroundPattern()),
-                                  val.toBool() ? Qt::RepeatTile : Qt::StretchTile);
+      if (icfg.getApplyBackgroundToWindow())
+        wnd->setBackground(pattern_from_file(icfg.getBackgroundPattern()),
+                           val.toBool() ? Qt::RepeatTile : Qt::StretchTile);
+      else
+        wnd->clock()->setBackground(pattern_from_file(icfg.getBackgroundPattern()),
+                                    val.toBool() ? Qt::RepeatTile : Qt::StretchTile);
       break;
 
     case opt::ApplyBackgroundToWindow:
-      // not implemented
+      if (val.toBool())
+        wnd->clock()->setBackgroundCustomization(LinesRenderer::None);
+      else
+        wnd->setBackground(QPixmap());
+      // assumed that value already changed in the config object!
+      applyInstanceOption(idx, opt::BackgroundType, QVariant::fromValue(icfg.getBackgroundType()));
       break;
 
     case opt::TruePerCharRendering:

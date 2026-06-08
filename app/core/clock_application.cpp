@@ -96,6 +96,8 @@ void ClockApplication::reconfigureWindow(size_t i)
   applyInstanceOption(i, opt::TextureType, inst_cfg->getTextureType());
   applyInstanceOption(i, opt::BackgroundType, inst_cfg->getBackgroundType());
 
+  applyInstanceOption(i, opt::ApplyBackgroundToWindow, inst_cfg->getApplyBackgroundToWindow());
+
   applyInstanceOption(i, opt::TruePerCharRendering, inst_cfg->getTruePerCharRendering());
 
   applyInstanceOption(i, opt::ColorizationColor, inst_cfg->getColorizationColor());

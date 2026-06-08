@@ -9,6 +9,7 @@
 #include <QGraphicsColorizeEffect>
 #include <QGridLayout>
 #include <QMenu>
+#include <QPainter>
 #include <QScreen>
 
 #include <QContextMenuEvent>
@@ -329,6 +330,13 @@ void ClockWindow::setColorizationStrength(qreal s)
   _colorization_strength = s;
 }
 
+void ClockWindow::setBackground(QPixmap p, QTileRules t)
+{
+  _background = std::move(p);
+  _bg_rules = t;
+  update();
+}
+
 void ClockWindow::tick()
 {
   platformTick();
@@ -413,6 +421,17 @@ void ClockWindow::resizeEvent(QResizeEvent* event)
   // state restore must happen before the first resize event!
   // previous origin and correct anchor point must be known here
   move(desiredPosition());
+}
+
+void ClockWindow::paintEvent(QPaintEvent* event)
+{
+  if (!_background.isNull()) {
+    QPainter p(this);
+    qDrawBorderPixmap(&p, rect(), QMargins(),
+                      _background, _background.rect(), QMargins(),
+                      _bg_rules);
+  }
+  QWidget::paintEvent(event);
 }
 
 void ClockWindow::addPositionMenu()
