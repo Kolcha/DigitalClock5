@@ -1179,14 +1179,61 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="3">
+       <item row="2" column="0">
+        <widget class="QLabel" name="margins_wnd_lbl">
+         <property name="text">
+          <string>extra space around window</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="m_wnd_l">
+         <property name="toolTip">
+          <string>left</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QSpinBox" name="m_wnd_t">
+         <property name="toolTip">
+          <string>top</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QSpinBox" name="m_wnd_r">
+         <property name="toolTip">
+          <string>right</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QSpinBox" name="m_wnd_b">
+         <property name="toolTip">
+          <string>bottom</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="3">
         <widget class="QLabel" name="pos_label">
          <property name="text">
           <string>clock widget position on the screen (x, y)</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="3" column="3">
         <widget class="QSpinBox" name="pos_x_edit">
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -1196,7 +1243,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="3" column="4">
         <widget class="QSpinBox" name="pos_y_edit">
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -1206,21 +1253,21 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="5">
+       <item row="4" column="0" colspan="5">
         <widget class="QCheckBox" name="true_per_char">
          <property name="text">
           <string>character by character rendering</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" colspan="5">
+       <item row="5" column="0" colspan="5">
         <widget class="QCheckBox" name="respect_line_spacing">
          <property name="text">
           <string>respect line spacing defined by skin/font</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" colspan="5">
+       <item row="6" column="0" colspan="5">
         <layout class="QHBoxLayout" name="layout_spacing_layout">
          <item>
           <widget class="QLabel" name="layout_spacing_lbl">
@@ -1260,14 +1307,21 @@
          </item>
         </layout>
        </item>
-       <item row="6" column="0" colspan="5">
+       <item row="7" column="0" colspan="5">
+        <widget class="QCheckBox" name="window_bg">
+         <property name="text">
+          <string>apply background to the window instead of clock widget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="5">
         <widget class="QCheckBox" name="hide_clock_widget">
          <property name="text">
           <string>hide clock widget, show only widgets added by plugins</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="9" column="1">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>

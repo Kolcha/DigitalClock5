@@ -792,6 +792,13 @@ void SettingsDialog::onTextMarginsChanged()
   emit instanceOptionChanged(_curr_idx, opt::WidgetMargins, QVariant::fromValue(m));
 }
 
+void SettingsDialog::onCWndMarginsChanged()
+{
+  QMargins m(ui->m_wnd_l->value(), ui->m_wnd_t->value(), ui->m_wnd_r->value(), ui->m_wnd_b->value());
+  app->config()->instance(_curr_idx)->setLayoutMargins(m);
+  emit instanceOptionChanged(_curr_idx, opt::LayoutMargins, QVariant::fromValue(m));
+}
+
 void SettingsDialog::updatePositionControls(const QPoint& pos)
 {
   ui->pos_x_edit->setValue(pos.x());
@@ -819,6 +826,12 @@ void SettingsDialog::on_layout_spacing_edit_valueChanged(int arg1)
 {
   app->config()->instance(_curr_idx)->setLayoutSpacing(arg1);
   emit instanceOptionChanged(_curr_idx, opt::LayoutSpacing, arg1);
+}
+
+void SettingsDialog::on_window_bg_clicked(bool checked)
+{
+  app->config()->instance(_curr_idx)->setApplyBackgroundToWindow(checked);
+  emit instanceOptionChanged(_curr_idx, opt::ApplyBackgroundToWindow, checked);
 }
 
 void SettingsDialog::on_hide_clock_widget_clicked(bool checked)
@@ -1005,6 +1018,17 @@ void SettingsDialog::initMiscTab(size_t idx)
   connect(ui->m_text_r, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
   connect(ui->m_text_b, &QDoubleSpinBox::valueChanged, this, &SettingsDialog::onTextMarginsChanged);
 
+  const auto& lm = acfg.getLayoutMargins();
+  ui->m_wnd_l->setValue(lm.left());
+  ui->m_wnd_t->setValue(lm.top());
+  ui->m_wnd_r->setValue(lm.right());
+  ui->m_wnd_b->setValue(lm.bottom());
+
+  connect(ui->m_wnd_l, &QSpinBox::valueChanged, this, &SettingsDialog::onCWndMarginsChanged);
+  connect(ui->m_wnd_t, &QSpinBox::valueChanged, this, &SettingsDialog::onCWndMarginsChanged);
+  connect(ui->m_wnd_r, &QSpinBox::valueChanged, this, &SettingsDialog::onCWndMarginsChanged);
+  connect(ui->m_wnd_b, &QSpinBox::valueChanged, this, &SettingsDialog::onCWndMarginsChanged);
+
   updatePositionControls(app->window(idx)->lastOrigin());
   connect(app->window(idx), &ClockWindow::originChanged, this, &SettingsDialog::updatePositionControls);
   connect(ui->pos_x_edit, &QSpinBox::valueChanged, this, &SettingsDialog::applyClockPosition);
@@ -1014,6 +1038,8 @@ void SettingsDialog::initMiscTab(size_t idx)
   ui->respect_line_spacing->setChecked(acfg.getRespectLineSpacing());
 
   ui->layout_spacing_edit->setValue(acfg.getLayoutSpacing());
+
+  ui->window_bg->setChecked(acfg.getApplyBackgroundToWindow());
 
   ui->hide_clock_widget->setChecked(acfg.getHideClockWidget());
 }
