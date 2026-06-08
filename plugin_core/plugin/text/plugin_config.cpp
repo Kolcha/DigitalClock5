@@ -97,7 +97,7 @@ QVariant PluginInstanceConfig::def_value(opt::InstanceOptions o)
     case opt::TexturePatternTile:       return true;
 
     case opt::BackgroundType:           return QVariant::fromValue(tx::None);
-    case opt::BackgroundCustomization:  return QVariant::fromValue(LinesRenderer::PerLine);
+    case opt::BackgroundCustomization:  return QVariant::fromValue(LinesRenderer::AllText);
     case opt::BackgroundColor:          return QColor(0, 0, 0, 160);
     case opt::BackgroundColorUseTheme:  return false;
     case opt::BackgroundGradient:       return QVariant::fromValue(sample_linear_gradient());

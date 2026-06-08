@@ -162,10 +162,9 @@ std::unique_ptr<Renderable> LinesRenderer::draw(Lines&& lines, const Options& op
   for (auto&& i : items) {
     r->add(customize(std::move(i), _tx_ct == PerLine, _bg_ct == PerLine));
   }
-  auto cr = customize(std::move(r), _tx_ct == AllText, _bg_ct == AllText);
-  auto mr = std::make_unique<MarginsAddedRenderable>(std::move(cr));
+  auto mr = std::make_unique<MarginsAddedRenderable>(std::move(r));
   mr->setMargins(_text_margins);
-  return mr;
+  return customize(std::move(mr), _tx_ct == AllText, _bg_ct == AllText);
 }
 
 void LinesRenderer::setTextureCustomization(CustomizationType c)
